@@ -1,45 +1,53 @@
 # ==============================================================================
 # 01_import.R
-# Inladen van ruwe data: lijsten met chemische stoffen en bijbehorende requesten
+# Load raw source data: ECHA/EU chemical substance lists
 # ==============================================================================
 
 library(readxl)
-library(readr)
 library(here)
 
-# ------------------------------------------------------------------------------
-# Configuratie
-# ------------------------------------------------------------------------------
-
-DATA_RAW <- here("data", "raw")
+src <- here("data", "source")
 
 # ------------------------------------------------------------------------------
-# Inladen stoffenlijsten
+# Obligation lists (chem.echa.europa.eu/obligation-lists)
 # ------------------------------------------------------------------------------
 
-# Pas bestandsnamen aan naar de werkelijke bestanden
-substances_raw <- read_csv(
-  file.path(DATA_RAW, "substances.csv"),
-  col_types = cols(.default = "c")
+restriction_list    <- read_excel(file.path(src, "restriction_list_full.xlsx"),    sheet = "List_results")
+candidate_list      <- read_excel(file.path(src, "candidate_list_full.xlsx"),      sheet = "List_results")
+authorisation_list  <- read_excel(file.path(src, "authorisation_list_full.xlsx"),  sheet = "List_results")
+pops_list           <- read_excel(file.path(src, "pops_list_full.xlsx"),           sheet = "List_results")
+eu_positive_list    <- read_excel(file.path(src, "eu_positive_list_full.xlsx"),    sheet = "List_results")
+harmonised_list     <- read_excel(file.path(src, "Harmonised_List.xlsx"),          sheet = "List_results")
+
+# ------------------------------------------------------------------------------
+# Activity lists (chem.echa.europa.eu/activity-lists)
+# ------------------------------------------------------------------------------
+
+restriction_process    <- read_excel(file.path(src, "restriction_process_full.xlsx"),    sheet = "List_results")
+svhc_identification    <- read_excel(file.path(src, "svhc_identification_full.xlsx"),    sheet = "List_results")
+authorisation_process  <- read_excel(file.path(src, "authorisation_process_full.xlsx"),  sheet = "List_results")
+dossier_evaluation     <- read_excel(file.path(src, "dossier_evaluation_full.xlsx"),     sheet = "List_results")
+clh_process            <- read_excel(file.path(src, "clh_process_full.xlsx"),            sheet = "List_results")
+substance_evaluation   <- read_excel(file.path(src, "substance_evaluation_full.xlsx"),   sheet = "List_results")
+pops_process           <- read_excel(file.path(src, "pops_process_full.xlsx"),           sheet = "List_results")
+pbt_assessment         <- read_excel(file.path(src, "pbt_assessment.xlsx"),              sheet = "List_results")
+ed_assessment          <- read_excel(file.path(src, "ed_assessment.xlsx"),               sheet = "List_results")
+
+# ------------------------------------------------------------------------------
+# REACH registrations (chem.echa.europa.eu)
+# ------------------------------------------------------------------------------
+
+reach_registrations <- read_excel(file.path(src, "reach_registrations.xlsx"), sheet = "Substances list")
+
+# ------------------------------------------------------------------------------
+# EU Pesticides Database — Active Substances
+# Row 1-2: title/metadata; row 3: column headers; data from row 4 onward
+# ------------------------------------------------------------------------------
+
+pesticides <- read_excel(
+  file.path(src, "Pesticides_ActiveSubstanceExport.xlsx"),
+  sheet = "Active Substance Search export",
+  skip  = 2
 )
 
-# Inladen requesten (aanvragen waarbij stoffen voorkomen)
-requests_raw <- read_csv(
-  file.path(DATA_RAW, "requests.csv"),
-  col_types = cols(.default = "c")
-)
-
-# Optioneel: referentielijst (bv. REACH, SVHCs, gevaarlijke stoffen)
-reference_lists_raw <- read_excel(
-  file.path(DATA_RAW, "reference_lists.xlsx")
-)
-
-# ------------------------------------------------------------------------------
-# Opslaan als tussenliggende data
-# ------------------------------------------------------------------------------
-
-saveRDS(substances_raw,      file = here("data", "processed", "substances_raw.rds"))
-saveRDS(requests_raw,        file = here("data", "processed", "requests_raw.rds"))
-saveRDS(reference_lists_raw, file = here("data", "processed", "reference_lists_raw.rds"))
-
-message("01_import.R voltooid")
+message("01_import.R completed")
