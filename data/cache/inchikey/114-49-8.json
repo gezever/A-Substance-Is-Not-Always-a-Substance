@@ -1,0 +1,27 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 6603108,
+        "InChIKey": "WTGQALLALWYDJH-WYHSTMEOSA-N"
+      },
+      {
+        "CID": 517999,
+        "InChIKey": "WTGQALLALWYDJH-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 11957688,
+        "InChIKey": "WTGQALLALWYDJH-VTEZLSFDSA-N"
+      },
+      {
+        "CID": 22833499,
+        "InChIKey": "WTGQALLALWYDJH-AKTDCHNFSA-N"
+      },
+      {
+        "CID": 51051761,
+        "InChIKey": "WTGQALLALWYDJH-BKODDQECSA-N"
+      }
+    ]
+  }
+}
+

@@ -1,0 +1,27 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 16063837,
+        "InChIKey": "ZZMJTNMGPPBIOY-CLGWBQSRSA-N"
+      },
+      {
+        "CID": 56604927,
+        "InChIKey": "ZZMJTNMGPPBIOY-AKQZMSGPSA-N"
+      },
+      {
+        "CID": 169543924,
+        "InChIKey": "ZZMJTNMGPPBIOY-SLGODVNHSA-N"
+      },
+      {
+        "CID": 23358880,
+        "InChIKey": "ZZMJTNMGPPBIOY-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 119025368,
+        "InChIKey": "ZZMJTNMGPPBIOY-GYQSMGLTSA-N"
+      }
+    ]
+  }
+}
+

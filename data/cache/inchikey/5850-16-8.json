@@ -1,0 +1,27 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 22110,
+        "InChIKey": "UTIACSXEVKXHPT-UHFFFAOYSA-L"
+      },
+      {
+        "CID": 9570208,
+        "InChIKey": "UTIACSXEVKXHPT-XALLQCHJSA-L"
+      },
+      {
+        "CID": 20843820,
+        "InChIKey": "UTIACSXEVKXHPT-GXRBTFONSA-L"
+      },
+      {
+        "CID": 5360082,
+        "InChIKey": "UTIACSXEVKXHPT-YIDQSHOPSA-L"
+      },
+      {
+        "CID": 71773123,
+        "InChIKey": "UTIACSXEVKXHPT-NABDVCFESA-L"
+      }
+    ]
+  }
+}
+

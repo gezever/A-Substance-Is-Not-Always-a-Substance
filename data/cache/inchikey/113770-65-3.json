@@ -1,0 +1,27 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 22947738,
+        "InChIKey": "USLNGHIZGCHFQQ-OXJNMPFZSA-N"
+      },
+      {
+        "CID": 10672491,
+        "InChIKey": "USLNGHIZGCHFQQ-UZLBHIALSA-N"
+      },
+      {
+        "CID": 12016233,
+        "InChIKey": "USLNGHIZGCHFQQ-JXFKEZNVSA-N"
+      },
+      {
+        "CID": 11059961,
+        "InChIKey": "USLNGHIZGCHFQQ-FZCLLLDFSA-N"
+      },
+      {
+        "CID": 10005538,
+        "InChIKey": "USLNGHIZGCHFQQ-UHFFFAOYSA-N"
+      }
+    ]
+  }
+}
+

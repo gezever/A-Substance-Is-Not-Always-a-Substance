@@ -1,0 +1,27 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 20730394,
+        "InChIKey": "USGKHYXJISAYPE-CCEZHUSRSA-N"
+      },
+      {
+        "CID": 23583497,
+        "InChIKey": "USGKHYXJISAYPE-TYOAQRMGSA-N"
+      },
+      {
+        "CID": 10115940,
+        "InChIKey": "USGKHYXJISAYPE-UQECUQMJSA-N"
+      },
+      {
+        "CID": 53394872,
+        "InChIKey": "USGKHYXJISAYPE-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 66724313,
+        "InChIKey": "USGKHYXJISAYPE-FGZHOGPDSA-N"
+      }
+    ]
+  }
+}
+

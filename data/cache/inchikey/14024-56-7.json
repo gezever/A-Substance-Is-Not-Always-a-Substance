@@ -1,0 +1,31 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 5486776,
+        "InChIKey": "AKTIAGQCYPCKFX-FDGPNNRMSA-L"
+      },
+      {
+        "CID": 10857070,
+        "InChIKey": "AKTIAGQCYPCKFX-FDGPNNRMSA-L"
+      },
+      {
+        "CID": 19692283,
+        "InChIKey": "AKTIAGQCYPCKFX-SYWGCQIGSA-L"
+      },
+      {
+        "CID": 3035386,
+        "InChIKey": "AKTIAGQCYPCKFX-UHFFFAOYSA-L"
+      },
+      {
+        "CID": 25113476,
+        "InChIKey": "AKTIAGQCYPCKFX-SYWGCQIGSA-L"
+      },
+      {
+        "CID": 3592865,
+        "InChIKey": "AKTIAGQCYPCKFX-UHFFFAOYSA-L"
+      }
+    ]
+  }
+}
+

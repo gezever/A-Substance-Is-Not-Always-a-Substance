@@ -1,0 +1,43 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 3000322,
+        "InChIKey": "STECJAGHUSJQJN-USLFZFAMSA-N"
+      },
+      {
+        "CID": 5184,
+        "InChIKey": "STECJAGHUSJQJN-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 11968014,
+        "InChIKey": "STECJAGHUSJQJN-SFSMXDMGSA-N"
+      },
+      {
+        "CID": 153311,
+        "InChIKey": "STECJAGHUSJQJN-MKXJHAPZSA-N"
+      },
+      {
+        "CID": 6451257,
+        "InChIKey": "STECJAGHUSJQJN-QBMZJCKTSA-N"
+      },
+      {
+        "CID": 452977,
+        "InChIKey": "STECJAGHUSJQJN-YXPYLGEYSA-N"
+      },
+      {
+        "CID": 5284456,
+        "InChIKey": "STECJAGHUSJQJN-YXMSTPNBSA-N"
+      },
+      {
+        "CID": 9916237,
+        "InChIKey": "STECJAGHUSJQJN-XSZHVHBUSA-N"
+      },
+      {
+        "CID": 131632305,
+        "InChIKey": "STECJAGHUSJQJN-LPAMRVQJSA-N"
+      }
+    ]
+  }
+}
+

@@ -1,0 +1,27 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 9568808,
+        "InChIKey": "OGZPYBBKQGPQNU-DABLZPOSSA-N"
+      },
+      {
+        "CID": 90864,
+        "InChIKey": "OGZPYBBKQGPQNU-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 5706540,
+        "InChIKey": "OGZPYBBKQGPQNU-KHFPHUMUSA-N"
+      },
+      {
+        "CID": 6197816,
+        "InChIKey": "OGZPYBBKQGPQNU-STFOEXHGSA-N"
+      },
+      {
+        "CID": 177697169,
+        "InChIKey": "OGZPYBBKQGPQNU-YSZXQWDJSA-N"
+      }
+    ]
+  }
+}
+

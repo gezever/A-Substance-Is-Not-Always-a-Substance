@@ -1,0 +1,27 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 56847415,
+        "InChIKey": "MTXQTQXMTUTSMG-HSEONFRVSA-N"
+      },
+      {
+        "CID": 76420486,
+        "InChIKey": "MTXQTQXMTUTSMG-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 162343795,
+        "InChIKey": "MTXQTQXMTUTSMG-PUNGYALNSA-N"
+      },
+      {
+        "CID": 169548415,
+        "InChIKey": "MTXQTQXMTUTSMG-WTELGHNJSA-N"
+      },
+      {
+        "CID": 171703384,
+        "InChIKey": "MTXQTQXMTUTSMG-PYJNTKEZSA-N"
+      }
+    ]
+  }
+}
+

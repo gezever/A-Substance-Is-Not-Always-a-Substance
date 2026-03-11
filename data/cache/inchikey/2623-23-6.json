@@ -1,0 +1,23 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 220674,
+        "InChIKey": "XHXUANMFYXWVNG-ADEWGFFLSA-N"
+      },
+      {
+        "CID": 27867,
+        "InChIKey": "XHXUANMFYXWVNG-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 12732529,
+        "InChIKey": "XHXUANMFYXWVNG-OIKLOGQESA-N"
+      },
+      {
+        "CID": 12732530,
+        "InChIKey": "XHXUANMFYXWVNG-BVAQLPTGSA-N"
+      }
+    ]
+  }
+}
+

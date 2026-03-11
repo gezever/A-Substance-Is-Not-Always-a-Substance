@@ -1,0 +1,39 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 284577,
+        "InChIKey": "QEHCZULNFYDPPL-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 9845541,
+        "InChIKey": "QEHCZULNFYDPPL-BBWFWOEESA-N"
+      },
+      {
+        "CID": 9845542,
+        "InChIKey": "QEHCZULNFYDPPL-RTKIROINSA-N"
+      },
+      {
+        "CID": 71463756,
+        "InChIKey": "QEHCZULNFYDPPL-IKGGRYGDSA-N"
+      },
+      {
+        "CID": 27443695,
+        "InChIKey": "QEHCZULNFYDPPL-ZACQAIPSSA-N"
+      },
+      {
+        "CID": 40504708,
+        "InChIKey": "QEHCZULNFYDPPL-BRWVUGGUSA-N"
+      },
+      {
+        "CID": 40504710,
+        "InChIKey": "QEHCZULNFYDPPL-GVDBMIGSSA-N"
+      },
+      {
+        "CID": 134694092,
+        "InChIKey": "QEHCZULNFYDPPL-FGJGXXMFSA-N"
+      }
+    ]
+  }
+}
+

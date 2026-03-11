@@ -1,0 +1,31 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 9842110,
+        "InChIKey": "NYYBPASOTOAXQW-VQIMIIECSA-N"
+      },
+      {
+        "CID": 13281226,
+        "InChIKey": "NYYBPASOTOAXQW-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 53486295,
+        "InChIKey": "NYYBPASOTOAXQW-UCFFOFKASA-N"
+      },
+      {
+        "CID": 54137802,
+        "InChIKey": "NYYBPASOTOAXQW-APWZRJJASA-N"
+      },
+      {
+        "CID": 54137803,
+        "InChIKey": "NYYBPASOTOAXQW-CVMIBEPCSA-N"
+      },
+      {
+        "CID": 93477338,
+        "InChIKey": "NYYBPASOTOAXQW-LPHOPBHVSA-N"
+      }
+    ]
+  }
+}
+

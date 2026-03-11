@@ -1,0 +1,27 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 32600,
+        "InChIKey": "TWJZAIVFYJWAJC-UHFFFAOYSA-L"
+      },
+      {
+        "CID": 71942,
+        "InChIKey": "TWAWHTJKASJPEK-UHFFFAOYSA-J"
+      },
+      {
+        "CID": 154729585,
+        "InChIKey": "TWJZAIVFYJWAJC-UHFFFAOYSA-L"
+      },
+      {
+        "CID": 13956266,
+        "InChIKey": "TWJZAIVFYJWAJC-UHFFFAOYSA-L"
+      },
+      {
+        "CID": 156614051,
+        "InChIKey": "XVWFIMLHNWYMKY-UHFFFAOYSA-L"
+      }
+    ]
+  }
+}
+

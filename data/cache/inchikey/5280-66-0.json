@@ -1,0 +1,39 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 62503,
+        "InChIKey": "LZNMMJSXOXXHFD-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 172279,
+        "InChIKey": "FXKOYCHIRMCIOR-UHFFFAOYSA-L"
+      },
+      {
+        "CID": 156592331,
+        "InChIKey": "FXKOYCHIRMCIOR-UHFFFAOYSA-L"
+      },
+      {
+        "CID": 162642070,
+        "InChIKey": "FXKOYCHIRMCIOR-UHFFFAOYSA-L"
+      },
+      {
+        "CID": 135455995,
+        "InChIKey": "FXKOYCHIRMCIOR-UHFFFAOYSA-L"
+      },
+      {
+        "CID": 145802056,
+        "InChIKey": "OTIDRPCRVXIMKC-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 171041325,
+        "InChIKey": "FXKOYCHIRMCIOR-UHFFFAOYSA-K"
+      },
+      {
+        "CID": 177699768,
+        "InChIKey": "OTIDRPCRVXIMKC-UHFFFAOYSA-N"
+      }
+    ]
+  }
+}
+

@@ -1,0 +1,43 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 89012,
+        "InChIKey": "JWORPXLMBPOPPU-UHFFFAOYSA-K"
+      },
+      {
+        "CID": 5484009,
+        "InChIKey": "JWORPXLMBPOPPU-LNTINUHCSA-K"
+      },
+      {
+        "CID": 10991686,
+        "InChIKey": "MJSNUBOCVAKFIJ-MUCWUPSWSA-N"
+      },
+      {
+        "CID": 4066245,
+        "InChIKey": "MJSNUBOCVAKFIJ-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 11163893,
+        "InChIKey": "MJSNUBOCVAKFIJ-LNTINUHCSA-N"
+      },
+      {
+        "CID": 24884255,
+        "InChIKey": "JWORPXLMBPOPPU-MUCWUPSWSA-K"
+      },
+      {
+        "CID": 50911958,
+        "InChIKey": "MJSNUBOCVAKFIJ-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 71310363,
+        "InChIKey": "MJSNUBOCVAKFIJ-RKFKAVRRSA-N"
+      },
+      {
+        "CID": 159586874,
+        "InChIKey": "MJSNUBOCVAKFIJ-MUCWUPSWSA-N"
+      }
+    ]
+  }
+}
+

@@ -1,0 +1,43 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 5377225,
+        "InChIKey": "MFWFDRBPQDXFRC-LNTINUHCSA-N"
+      },
+      {
+        "CID": 5486773,
+        "InChIKey": "MFWFDRBPQDXFRC-LNTINUHCSA-K"
+      },
+      {
+        "CID": 3035379,
+        "InChIKey": "MFWFDRBPQDXFRC-UHFFFAOYSA-K"
+      },
+      {
+        "CID": 25113597,
+        "InChIKey": "MFWFDRBPQDXFRC-MUCWUPSWSA-K"
+      },
+      {
+        "CID": 518776,
+        "InChIKey": "MFWFDRBPQDXFRC-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 50930024,
+        "InChIKey": "MFWFDRBPQDXFRC-LNTINUHCSA-N"
+      },
+      {
+        "CID": 71311237,
+        "InChIKey": "MFWFDRBPQDXFRC-RKFKAVRRSA-N"
+      },
+      {
+        "CID": 50897079,
+        "InChIKey": "MFWFDRBPQDXFRC-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 73701238,
+        "InChIKey": "CZFPVTPZFRXJDT-UHFFFAOYSA-N"
+      }
+    ]
+  }
+}
+

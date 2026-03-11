@@ -1,0 +1,39 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 6101544,
+        "InChIKey": "AVPCPPOOQICIRJ-UHFFFAOYSA-L"
+      },
+      {
+        "CID": 86280308,
+        "InChIKey": "ZPAORKNCVQNMNT-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 2735049,
+        "InChIKey": "PEMUISUYOHQFQH-UHFFFAOYSA-L"
+      },
+      {
+        "CID": 16219387,
+        "InChIKey": "ROPZSVKNEIIIDE-UHFFFAOYSA-L"
+      },
+      {
+        "CID": 91658895,
+        "InChIKey": "LOEQYCCNMMIAAF-UHFFFAOYSA-L"
+      },
+      {
+        "CID": 87292851,
+        "InChIKey": "NJPFZFPDAJHSRV-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 131860121,
+        "InChIKey": "UQVSFONYLAZJDB-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 19940238,
+        "InChIKey": "BYTBRXJIOINRFR-UHFFFAOYSA-L"
+      }
+    ]
+  }
+}
+

@@ -1,0 +1,27 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 62388,
+        "InChIKey": "GEWDNTWNSAZUDX-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 6428089,
+        "InChIKey": "GEWDNTWNSAZUDX-XXJOZFEBSA-N"
+      },
+      {
+        "CID": 5281929,
+        "InChIKey": "GEWDNTWNSAZUDX-WQMVXFAESA-N"
+      },
+      {
+        "CID": 5319693,
+        "InChIKey": "GEWDNTWNSAZUDX-PLNGDYQASA-N"
+      },
+      {
+        "CID": 5367719,
+        "InChIKey": "GEWDNTWNSAZUDX-SNAWJCMRSA-N"
+      }
+    ]
+  }
+}
+
