@@ -1,0 +1,31 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 21116680,
+        "InChIKey": "VCOCESNMLNDPLX-BTXGZQJSSA-N"
+      },
+      {
+        "CID": 12217497,
+        "InChIKey": "VCOCESNMLNDPLX-IXPVHAAZSA-N"
+      },
+      {
+        "CID": 11287462,
+        "InChIKey": "VCOCESNMLNDPLX-WBIUFABUSA-N"
+      },
+      {
+        "CID": 70976419,
+        "InChIKey": "VCOCESNMLNDPLX-QHAMSDLMSA-N"
+      },
+      {
+        "CID": 90978,
+        "InChIKey": "VCOCESNMLNDPLX-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 53393558,
+        "InChIKey": "VCOCESNMLNDPLX-GGYMPCQUSA-N"
+      }
+    ]
+  }
+}
+

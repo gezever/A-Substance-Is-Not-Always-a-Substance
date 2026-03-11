@@ -1,0 +1,23 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 11587667,
+        "InChIKey": "OTSSACCOAAGLRY-WPVMNKCKSA-N"
+      },
+      {
+        "CID": 73021027,
+        "InChIKey": "OTSSACCOAAGLRY-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 67201372,
+        "InChIKey": "OTSSACCOAAGLRY-ZFZMKPAXSA-N"
+      },
+      {
+        "CID": 67201407,
+        "InChIKey": "OTSSACCOAAGLRY-SECBINFHSA-N"
+      }
+    ]
+  }
+}
+

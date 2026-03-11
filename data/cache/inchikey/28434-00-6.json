@@ -1,0 +1,27 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 62829,
+        "InChIKey": "ZCVAOQKBXKSDMS-PVAVHDDUSA-N"
+      },
+      {
+        "CID": 11442,
+        "InChIKey": "ZCVAOQKBXKSDMS-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 70481745,
+        "InChIKey": "ZCVAOQKBXKSDMS-WIHSUSGWSA-N"
+      },
+      {
+        "CID": 16403316,
+        "InChIKey": "ZCVAOQKBXKSDMS-ARWYELJZSA-N"
+      },
+      {
+        "CID": 908624,
+        "InChIKey": "ZCVAOQKBXKSDMS-BHYGNILZSA-N"
+      }
+    ]
+  }
+}
+

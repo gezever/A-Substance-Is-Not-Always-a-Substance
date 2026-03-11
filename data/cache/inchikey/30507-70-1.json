@@ -1,0 +1,27 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 5365642,
+        "InChIKey": "ZZGJZGSVLNSDPG-FDTUMDBZSA-N"
+      },
+      {
+        "CID": 92280,
+        "InChIKey": "ZZGJZGSVLNSDPG-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 6256685,
+        "InChIKey": "ZZGJZGSVLNSDPG-FZWLCVONSA-N"
+      },
+      {
+        "CID": 6436633,
+        "InChIKey": "ZZGJZGSVLNSDPG-WWVFNRLHSA-N"
+      },
+      {
+        "CID": 134689001,
+        "InChIKey": "ZZGJZGSVLNSDPG-PKKPSLABSA-N"
+      }
+    ]
+  }
+}
+

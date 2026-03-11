@@ -6,6 +6,7 @@
 library(here)
 
 scripts <- c(
+  "00_download.R",
   "01_import.R",
   "02_clean.R",
   "03_analysis.R",

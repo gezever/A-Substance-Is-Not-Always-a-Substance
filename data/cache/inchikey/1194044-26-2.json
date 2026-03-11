@@ -1,0 +1,27 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 86660404,
+        "InChIKey": "WOADMISSFZLHGL-QGZVFWFLSA-N"
+      },
+      {
+        "CID": 58304215,
+        "InChIKey": "WOADMISSFZLHGL-OVCLIPMQSA-N"
+      },
+      {
+        "CID": 87126877,
+        "InChIKey": "WOADMISSFZLHGL-YBYKNVHQSA-N"
+      },
+      {
+        "CID": 123725529,
+        "InChIKey": "WOADMISSFZLHGL-KRWDZBQOSA-N"
+      },
+      {
+        "CID": 88063648,
+        "InChIKey": "WOADMISSFZLHGL-BXUGYJKXSA-N"
+      }
+    ]
+  }
+}
+

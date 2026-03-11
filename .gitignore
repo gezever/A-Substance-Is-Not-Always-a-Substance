@@ -17,3 +17,4 @@ paper/*.blg
 paper/*.synctex.gz
 paper/*.fls
 paper/*.fdb_latexmk
+.Rproj.user

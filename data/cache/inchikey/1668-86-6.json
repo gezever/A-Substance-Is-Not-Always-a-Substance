@@ -1,0 +1,31 @@
+{
+  "PropertyTable": {
+    "Properties": [
+      {
+        "CID": 10356588,
+        "InChIKey": "QENVUHCAYXAROT-YOEHRIQHSA-N"
+      },
+      {
+        "CID": 441596,
+        "InChIKey": "QENVUHCAYXAROT-RHSMWYFYSA-N"
+      },
+      {
+        "CID": 625124,
+        "InChIKey": "QENVUHCAYXAROT-UHFFFAOYSA-N"
+      },
+      {
+        "CID": 54223935,
+        "InChIKey": "QENVUHCAYXAROT-JRZJBTRGSA-N"
+      },
+      {
+        "CID": 5320021,
+        "InChIKey": "QENVUHCAYXAROT-XPCCGILXSA-N"
+      },
+      {
+        "CID": 124396492,
+        "InChIKey": "QENVUHCAYXAROT-PBHICJAKSA-N"
+      }
+    ]
+  }
+}
+

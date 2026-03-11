@@ -6,6 +6,8 @@
 library(readxl)
 library(dplyr)
 library(here)
+library(httr)
+library(jsonlite)
 
 src <- here("data", "source")
 
@@ -89,5 +91,46 @@ unique_substances <- all_substances |>
   ) |>
   distinct(ec_number, cas_number, .keep_all = TRUE) |>
   arrange(substance_name)
+
+# ------------------------------------------------------------------------------
+# InChIKey opzoeken via PubChem op basis van CAS-nummer
+# JSON-responses worden gecached in data/cache/inchikey/ om herhaalde requests
+# te voorkomen. Ongeldige CAS-nummers ("-" of NA) worden overgeslagen.
+# PubChem rate limit: max 5 req/s → Sys.sleep(0.2) tussen requests.
+# ------------------------------------------------------------------------------
+
+inchikey_cache_dir <- here("data", "cache", "inchikey")
+dir.create(inchikey_cache_dir, recursive = TRUE, showWarnings = FALSE)
+
+get_inchikey <- function(cas) {
+  if (is.na(cas) || cas == "-" || !nzchar(trimws(cas))) return(NA_character_)
+
+  cache_file <- file.path(inchikey_cache_dir, paste0(cas, ".json"))
+
+  if (file.exists(cache_file)) {
+    json <- fromJSON(cache_file)
+    return(json$PropertyTable$Properties$InChIKey[1])
+  }
+
+  url <- paste0(
+    "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/",
+    URLencode(cas, reserved = TRUE),
+    "/property/InChIKey/JSON"
+  )
+
+  res <- GET(url)
+  Sys.sleep(0.2)
+
+  if (status_code(res) == 200) {
+    raw <- content(res, "text", encoding = "UTF-8")
+    writeLines(raw, cache_file)
+    json <- fromJSON(raw)
+    return(json$PropertyTable$Properties$InChIKey[1])
+  } else {
+    return(NA_character_)
+  }
+}
+
+unique_substances$inchikey <- sapply(unique_substances$cas_number, get_inchikey)
 
 message("01_import.R completed")
