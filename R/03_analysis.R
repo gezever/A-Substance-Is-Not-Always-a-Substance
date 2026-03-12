@@ -11,18 +11,15 @@ library(here)
 # Inladen schone data
 # ------------------------------------------------------------------------------
 
-substances           <- readRDS(here("data", "processed", "substances.rds"))
-requests             <- readRDS(here("data", "processed", "requests.rds"))
-reference_lists      <- readRDS(here("data", "processed", "reference_lists.rds"))
-substances_annotated <- readRDS(here("data", "processed", "substances_annotated.rds"))
-requests_substances  <- readRDS(here("data", "processed", "requests_substances.rds"))
+all_substances <- readRDS(here("data", "processed", "all_substances.rds"))
+
 
 # ------------------------------------------------------------------------------
 # Analyse 1: Frequentie van stoffen in requesten
 # ------------------------------------------------------------------------------
 
-substance_freq <- requests_substances |>
-  count(cas_number, name, sort = TRUE) |>
+substance_freq <- all_substances |>
+  count(cas_number, source, sort = TRUE) |>
   rename(n_requests = n)
 
 # ------------------------------------------------------------------------------

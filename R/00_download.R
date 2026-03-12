@@ -336,3 +336,11 @@ request("https://ec.europa.eu/food/plant/pesticides/eu-pesticides-database/backe
   ) |>
   req_body_json(pesticide_ids) |>
   download_to(file.path(dest, "Pesticides_ActiveSubstanceExport.xlsx"))
+
+
+sommatie_stoffen <- read.csv(
+  "https://datasets.omgeving.vlaanderen.be/be.vlaanderen.omgeving.data.id.distribution.codelijst-sommatie_stoffen.3.0.8.sommatie_stoffen.csv"
+)
+saveRDS(sommatie_stoffen, file.path(dest, "sommatie_stoffen.rds"))
+
+

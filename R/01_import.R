@@ -1,3 +1,4 @@
+
 # ==============================================================================
 # 01_import.R
 # Load raw source data: ECHA/EU chemical substance lists
@@ -5,57 +6,101 @@
 
 library(readxl)
 library(dplyr)
+library(tidyr)
 library(here)
 library(httr)
 library(jsonlite)
 
 src <- here("data", "source")
 
-# ------------------------------------------------------------------------------
-# Obligation lists (chem.echa.europa.eu/obligation-lists)
-# ------------------------------------------------------------------------------
-
-restriction_list    <- read_excel(file.path(src, "restriction_list_full.xlsx"),    sheet = "List_results") |> mutate(source = "restriction_list")
-candidate_list      <- read_excel(file.path(src, "candidate_list_full.xlsx"),      sheet = "List_results") |> mutate(source = "candidate_list")
-authorisation_list  <- read_excel(file.path(src, "authorisation_list_full.xlsx"),  sheet = "List_results") |> mutate(source = "authorisation_list")
-pops_list           <- read_excel(file.path(src, "pops_list_full.xlsx"),           sheet = "List_results") |> mutate(source = "pops_list")
-eu_positive_list    <- read_excel(file.path(src, "eu_positive_list_full.xlsx"),    sheet = "List_results") |> mutate(source = "eu_positive_list")
-harmonised_list     <- read_excel(file.path(src, "Harmonised_List.xlsx"),          sheet = "List_results") |> mutate(source = "harmonised_list")
 
 # ------------------------------------------------------------------------------
-# Activity lists (chem.echa.europa.eu/activity-lists)
+# Helper function: multiple numbers in one cell are split
 # ------------------------------------------------------------------------------
 
-restriction_process    <- read_excel(file.path(src, "restriction_process_full.xlsx"),    sheet = "List_results") |> mutate(source = "restriction_process")
-svhc_identification    <- read_excel(file.path(src, "svhc_identification_full.xlsx"),    sheet = "List_results") |> mutate(source = "svhc_identification")
-authorisation_process  <- read_excel(file.path(src, "authorisation_process_full.xlsx"),  sheet = "List_results") |> mutate(source = "authorisation_process")
-dossier_evaluation     <- read_excel(file.path(src, "dossier_evaluation_full.xlsx"),     sheet = "List_results") |> mutate(source = "dossier_evaluation")
-clh_process            <- read_excel(file.path(src, "clh_process_full.xlsx"),            sheet = "List_results") |> mutate(source = "clh_process")
-substance_evaluation   <- read_excel(file.path(src, "substance_evaluation_full.xlsx"),   sheet = "List_results") |> mutate(source = "substance_evaluation")
-pops_process           <- read_excel(file.path(src, "pops_process_full.xlsx"),           sheet = "List_results") |> mutate(source = "pops_process")
-pbt_assessment         <- read_excel(file.path(src, "pbt_assessment.xlsx"),              sheet = "List_results") |> mutate(source = "pbt_assessment")
-ed_assessment          <- read_excel(file.path(src, "ed_assessment.xlsx"),               sheet = "List_results") |> mutate(source = "ed_assessment")
+expand_df_on_whitespace <- function(df) {
+  for (col in c("ec_number", "cas_number")) {
+    df <- df %>%
+      separate_rows(all_of(col), sep = "\\s+") %>%
+      distinct()
+  }
+  return(df)
+}
 
 # ------------------------------------------------------------------------------
-# REACH registrations (chem.echa.europa.eu)
+# Helper function: read list and standardise column names
 # ------------------------------------------------------------------------------
 
-reach_registrations <- read_excel(file.path(src, "reach_registrations.xlsx"), sheet = "Substances list") |> mutate(source = "reach_registrations")
+read_list <- function(file, sheet = "List_results", source_name, skip = 0) {
+  
+  read_excel(file.path(src, file), sheet = sheet, skip = skip) |>
+    rename(
+      substance_name = any_of(c("Substance name", "Name", "Substance")),
+      cas_number     = any_of(c("CAS number", "CAS Number")),
+      ec_number      = any_of(c("EC number", "EC Number"))
+    ) |>
+    mutate(source = source_name)
+}
+# ------------------------------------------------------------------------------
+# VMM lists
+# ------------------------------------------------------------------------------
+
+sommatie_stoffen <- readRDS(here("data", "source", "sommatie_stoffen.rds"))  |>
+  rename(
+    substance_name = any_of(c("altLabel_en")),
+    cas_number     = any_of(c("casNumber")),
+    ec_number      = any_of(c("ecNumber"))
+  ) |>
+  mutate(source = 'sommatie_stoffen')|>
+  subset(inScheme == 'https://data.omgeving.vlaanderen.be/id/conceptscheme/sommatie_stoffen')
+# ------------------------------------------------------------------------------
+# Obligation lists
+# ------------------------------------------------------------------------------
+
+restriction_list    <- read_list("restriction_list_full.xlsx",    source_name = "restriction_list")
+candidate_list      <- read_list("candidate_list_full.xlsx",      source_name = "candidate_list")
+authorisation_list  <- read_list("authorisation_list_full.xlsx",  source_name = "authorisation_list")
+pops_list           <- read_list("pops_list_full.xlsx",           source_name = "pops_list")
+eu_positive_list    <- read_list("eu_positive_list_full.xlsx",    source_name = "eu_positive_list")
+harmonised_list     <- read_list("Harmonised_List.xlsx",          source_name = "harmonised_list")
 
 # ------------------------------------------------------------------------------
-# EU Pesticides Database — Active Substances
-# Row 1-2: title/metadata; row 3: column headers; data from row 4 onward
+# Activity lists
 # ------------------------------------------------------------------------------
 
-pesticides <- read_excel(
-  file.path(src, "Pesticides_ActiveSubstanceExport.xlsx"),
+restriction_process    <- read_list("restriction_process_full.xlsx",    source_name = "restriction_process")
+svhc_identification    <- read_list("svhc_identification_full.xlsx",    source_name = "svhc_identification")
+authorisation_process  <- read_list("authorisation_process_full.xlsx",  source_name = "authorisation_process")
+dossier_evaluation     <- read_list("dossier_evaluation_full.xlsx",     source_name = "dossier_evaluation")
+clh_process            <- read_list("clh_process_full.xlsx",            source_name = "clh_process")
+substance_evaluation   <- read_list("substance_evaluation_full.xlsx",   source_name = "substance_evaluation")
+pops_process           <- read_list("pops_process_full.xlsx",           source_name = "pops_process")
+pbt_assessment         <- read_list("pbt_assessment.xlsx",              source_name = "pbt_assessment")
+ed_assessment          <- read_list("ed_assessment.xlsx",               source_name = "ed_assessment")
+
+# ------------------------------------------------------------------------------
+# REACH registrations
+# ------------------------------------------------------------------------------
+
+reach_registrations <- read_list(
+  "reach_registrations.xlsx",
+  sheet = "Substances list",
+  source_name = "reach_registrations"
+)
+
+# ------------------------------------------------------------------------------
+# EU Pesticides Database
+# ------------------------------------------------------------------------------
+
+pesticides <- read_list(
+  "Pesticides_ActiveSubstanceExport.xlsx",
   sheet = "Active Substance Search export",
-  skip  = 2
-) |> mutate(source = "pesticides")
+  skip  = 2,
+  source_name = "pesticides"
+)
 
 # ------------------------------------------------------------------------------
-# Gecombineerde dataframe (alle bronnen samengevoegd)
-# Kolommen die niet in een bron voorkomen worden gevuld met NA
+# Combine all sources
 # ------------------------------------------------------------------------------
 
 all_substances <- bind_rows(
@@ -75,62 +120,91 @@ all_substances <- bind_rows(
   pbt_assessment,
   ed_assessment,
   reach_registrations,
-  pesticides
-)
+  pesticides,
+  sommatie_stoffen
+)|>
+  select(substance_name, ec_number, cas_number, source) |> distinct()
+
+all_substances <- expand_df_on_whitespace(all_substances)
 
 # ------------------------------------------------------------------------------
-# Unieke stoffen op basis van CAS- en EC-nummer
-# Bronnen gebruiken wisselende kolomnamen; coalesce tot één waarde per rij
+# Unique substances (CAS + EC)
 # ------------------------------------------------------------------------------
 
 unique_substances <- all_substances |>
-  transmute(
-    substance_name = coalesce(`Substance name`, Name, Substance),
-    ec_number      = coalesce(`EC number`, `EC Number`),
-    cas_number     = coalesce(`CAS number`, `CAS Number`)
-  ) |>
-  distinct(ec_number, cas_number, .keep_all = TRUE) |>
-  arrange(substance_name)
+  select(cas_number) |> distinct()
+
+#unique_substances <- all_substances |>
+#  distinct(ec_number, cas_number, .keep_all = TRUE) |>
+#  arrange(substance_name)
 
 # ------------------------------------------------------------------------------
-# InChIKey opzoeken via PubChem op basis van CAS-nummer
-# JSON-responses worden gecached in data/cache/inchikey/ om herhaalde requests
-# te voorkomen. Ongeldige CAS-nummers ("-" of NA) worden overgeslagen.
-# PubChem rate limit: max 5 req/s → Sys.sleep(0.2) tussen requests.
+# PubChem InChIKey lookup with caching
 # ------------------------------------------------------------------------------
 
 inchikey_cache_dir <- here("data", "cache", "inchikey")
 dir.create(inchikey_cache_dir, recursive = TRUE, showWarnings = FALSE)
 
 get_inchikey <- function(cas) {
-  if (is.na(cas) || cas == "-" || !nzchar(trimws(cas))) return(NA_character_)
-
+  
+  if (is.na(cas) || cas == "-" || !nzchar(trimws(cas)))
+    return(NA_character_)
+  
   cache_file <- file.path(inchikey_cache_dir, paste0(cas, ".json"))
-
+  
   if (file.exists(cache_file)) {
-    json <- fromJSON(cache_file)
+    json <- fromJSON(paste(readLines(cache_file, warn = FALSE), collapse = "\n"))
     return(json$PropertyTable$Properties$InChIKey[1])
-  }
-
+  } #else {    return(NA_character_)  }
+  
   url <- paste0(
     "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/",
     URLencode(cas, reserved = TRUE),
     "/property/InChIKey/JSON"
   )
-
+  
+  message(paste('handling ',cas))
+  
   res <- GET(url)
   Sys.sleep(0.2)
-
+  
   if (status_code(res) == 200) {
+    
     raw <- content(res, "text", encoding = "UTF-8")
     writeLines(raw, cache_file)
+    
     json <- fromJSON(raw)
     return(json$PropertyTable$Properties$InChIKey[1])
+    
   } else {
     return(NA_character_)
   }
 }
 
 unique_substances$inchikey <- sapply(unique_substances$cas_number, get_inchikey)
+
+
+
+# ------------------------------------------------------------------------------
+# Add InChIKey back to all substances
+# ------------------------------------------------------------------------------
+
+lookup <- unique_substances |>
+  distinct(cas_number, inchikey)
+
+all_substances$inchikey <- lookup$inchikey[
+  match(all_substances$cas_number, lookup$cas_number)
+]
+
+all_substances <- all_substances |>
+  select(substance_name, ec_number, cas_number, inchikey, source) |> distinct()
+
+# ------------------------------------------------------------------------------
+# Write all substances 
+# ------------------------------------------------------------------------------
+
+saveRDS(all_substances, here("data", "processed", "all_substances.rds"))
+write.csv(all_substances, here("data", "processed", "all_substances.csv"))
+#colnames(all_substances)
 
 message("01_import.R completed")

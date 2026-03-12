@@ -5,7 +5,7 @@
 *.Rproj.user/
 
 # Data (verwijder regels als data wél gecommit mag worden)
-data/processed/
+#data/processed/
 
 # LaTeX hulpbestanden
 paper/*.aux
