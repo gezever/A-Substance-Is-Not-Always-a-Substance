@@ -26,12 +26,12 @@ substance_freq <- all_substances |>
 # Analyse 2: Aanwezigheid op referentielijsten per stof
 # ------------------------------------------------------------------------------
 
-substance_list_presence <- substances_annotated |>
-  filter(!is.na(list_name)) |>
-  group_by(cas_number, name) |>
+substance_list_presence <- all_substances |>
+  filter(!is.na(source)) |>
+  group_by(cas_number, substance_name) |>
   summarise(
-    n_lists     = n_distinct(list_name),
-    lists       = paste(sort(unique(list_name)), collapse = "; "),
+    n_lists     = n_distinct(source),
+    source       = paste(sort(unique(source)), collapse = "; "),
     .groups     = "drop"
   )
 
@@ -42,9 +42,9 @@ substance_list_presence <- substances_annotated |>
 # verschillende namen/CAS-nummers worden aangevraagd.
 
 combined <- substance_freq |>
-  left_join(substance_list_presence, by = c("cas_number", "name")) |>
+  left_join(substance_list_presence, by = c("cas_number", "source")) |>
   mutate(
-    on_reference_list = !is.na(lists),
+    on_reference_list = !is.na(source),
     n_lists           = replace_na(n_lists, 0L)
   ) |>
   arrange(desc(n_requests), desc(n_lists))

@@ -10,6 +10,7 @@ library(tidyr)
 library(here)
 library(httr)
 library(jsonlite)
+library(stringr)
 
 src <- here("data", "source")
 
@@ -123,9 +124,27 @@ all_substances <- bind_rows(
   pesticides,
   sommatie_stoffen
 )|>
-  select(substance_name, ec_number, cas_number, source) |> distinct()
+  select(substance_name, ec_number, cas_number, source) |> 
+  distinct()|>
+  mutate(
+    cas_number = str_trim(cas_number),
+    ec_number = str_trim(ec_number)
+  )
+
+# ------------------------------------------------------------------------------
+# Cleaning
+# ------------------------------------------------------------------------------
+
+pattern <- "^[0-9]+-[0-9]+-[0-9]+.*$"
+
+all_substances$ec_number[!grepl(pattern, all_substances$ec_number)] <- NA
+all_substances$cas_number[!grepl(pattern, all_substances$cas_number)] <- NA
 
 all_substances <- expand_df_on_whitespace(all_substances)
+
+all_substances$ec_number[!grepl(pattern, all_substances$ec_number)] <- NA
+all_substances$cas_number[!grepl(pattern, all_substances$cas_number)] <- NA
+
 
 # ------------------------------------------------------------------------------
 # Unique substances (CAS + EC)
@@ -146,42 +165,44 @@ inchikey_cache_dir <- here("data", "cache", "inchikey")
 dir.create(inchikey_cache_dir, recursive = TRUE, showWarnings = FALSE)
 
 get_inchikey <- function(cas) {
-  
+
   if (is.na(cas) || cas == "-" || !nzchar(trimws(cas)))
     return(NA_character_)
-  
+
   cache_file <- file.path(inchikey_cache_dir, paste0(cas, ".json"))
-  
+
   if (file.exists(cache_file)) {
     json <- fromJSON(paste(readLines(cache_file, warn = FALSE), collapse = "\n"))
-    return(json$PropertyTable$Properties$InChIKey[1])
+    return(json$PropertyTable$Properties$InChIKey)
   } #else {    return(NA_character_)  }
-  
+
   url <- paste0(
     "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/",
     URLencode(cas, reserved = TRUE),
     "/property/InChIKey/JSON"
   )
-  
+
   message(paste('handling ',cas))
-  
+
   res <- GET(url)
   Sys.sleep(0.2)
-  
+
   if (status_code(res) == 200) {
-    
+
     raw <- content(res, "text", encoding = "UTF-8")
     writeLines(raw, cache_file)
-    
+
     json <- fromJSON(raw)
-    return(json$PropertyTable$Properties$InChIKey[1])
-    
+    return(json$PropertyTable$Properties$InChIKey)
+
   } else {
     return(NA_character_)
   }
 }
 
-unique_substances$inchikey <- sapply(unique_substances$cas_number, get_inchikey)
+unique_substances <- unique_substances |>
+  mutate(inchikey = lapply(cas_number, get_inchikey)) |>
+  unnest(inchikey)
 
 
 
