@@ -1,0 +1,14 @@
+prefix skos:  <http://www.w3.org/2004/02/skos/core#>
+prefix dbo:   <http://dbpedia.org/ontology/>
+construct
+{
+    ?s ?p ?o .
+    ?broader ?p2 ?o2 .
+}
+where
+{
+     ?s a dbo:ChemicalSubstance ;
+         ?p ?o ;
+         skos:broader ?broader .
+     ?broader ?p2 ?o2 .
+}

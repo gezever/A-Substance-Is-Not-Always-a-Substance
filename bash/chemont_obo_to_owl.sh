@@ -19,3 +19,4 @@ echo "convert ttl to csv"
 
 sparql --results=CSV --data=../data/source/chemont/ChemOnt_2_1.ttl  --query chemont_to_table.rq  > '../data/source/chemont/ChemOnt_2_1.csv'
 
+sparql --results=TURTLE --data=../data/source/chemont/ChemOnt_2_1.ttl  --query chemont_to_skos.rq > '../data/source/chemont/ChemOnt_2_1_skos.ttl'

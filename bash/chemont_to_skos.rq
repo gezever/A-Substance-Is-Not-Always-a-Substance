@@ -1,0 +1,54 @@
+prefix skos:  <http://www.w3.org/2004/02/skos/core#>
+prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+prefix dbo:   <http://dbpedia.org/ontology/>
+prefix cs:    <https://data.vlaanderen.be/ns/chemical_substance#>
+prefix dbp:   <http://dbpedia.org/property/>
+prefix owl: <http://www.w3.org/2002/07/owl#>
+prefix csc: <http://purl.obolibrary.org/obo/>
+prefix concept: <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/>
+prefix conceptscheme:  <https://data.omgeving.vlaanderen.be/id/conceptscheme/>
+prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+construct
+{
+    ?stof a skos:Concept ;
+    skos:broader ?broader ;
+    skos:prefLabel ?label ;
+    skos:altLabel    ?altLabel ;
+    skos:definition  ?definition ;
+    skos:notation    ?notation ;
+    skos:inScheme   conceptscheme:chemical_substance .
+    conceptscheme:chemical_substance a skos:ConceptScheme .
+    ?stof2 skos:topConceptOf conceptscheme:chemical_substance ;
+    skos:broader ?broader ;
+    skos:prefLabel ?label ;
+    skos:altLabel    ?altLabel ;
+    skos:definition  ?definition ;
+    skos:notation    ?notation ;
+    skos:inScheme   conceptscheme:chemical_substance .
+    conceptscheme:chemical_substance skos:hasTopConcept ?stof2 .}
+where
+{{
+    ?s a owl:Class ;
+    rdfs:subClassOf ?b ;
+    rdfs:label ?la .
+    optional {?s <http://purl.obolibrary.org/obo/IAO_0000115> ?definition .}
+    optional {?s <http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym> ?altLabel .}
+    optional {?s <http://www.geneontology.org/formats/oboInOwl#id> ?notation .}
+    BIND(STRLANG(?la, "en") AS ?label)
+    #FILTER( ?b != <http://purl.obolibrary.org/obo/CHEMONTID_9999999> )
+    #FILTER( ?s != <http://purl.obolibrary.org/obo/CHEMONTID_9999999> )
+    BIND(IRI(REPLACE(STR(?s), "http://purl.obolibrary.org/obo/CHEMONTID_", "https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/", "i")) AS ?stof)
+    BIND(IRI(REPLACE(STR(?b), "http://purl.obolibrary.org/obo/CHEMONTID_", "https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/", "i")) AS ?broader)
+}
+UNION
+{
+    ?s a owl:Class ;
+    rdfs:label ?la .
+    optional {?s <http://purl.obolibrary.org/obo/IAO_0000115> ?definition .}
+    optional {?s <http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym> ?altLabel .}
+    optional {?s <http://www.geneontology.org/formats/oboInOwl#id> ?notation .}
+    BIND(STRLANG(?la, "en") AS ?label)
+    FILTER( ?s = <http://purl.obolibrary.org/obo/CHEMONTID_9999999> )
+    BIND(IRI(REPLACE(STR(?s), "http://purl.obolibrary.org/obo/CHEMONTID_", "https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/", "i")) AS ?stof2)
+}
+}

@@ -1,0 +1,35 @@
+prefix chemische_stof: <https://data.omgeving.vlaanderen.be/id/classificationlevel/chemische_stof/>
+prefix list:           <https://data.omgeving.vlaanderen.be/id/list/chemische_stof/>
+prefix conceptscheme:            <https://data.omgeving.vlaanderen.be/id/conceptscheme/>
+prefix rdf:            <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix skos:           <http://www.w3.org/2004/02/skos/core#>
+prefix xkos:           <http://rdf-vocabulary.ddialliance.org/xkos#>
+
+construct
+{
+    conceptscheme:chemische_stof xkos:levels list:kingdom .
+    list:superclass  rdf:type  rdf:List;  rdf:first  chemische_stof:superclass;  rdf:rest list:class; skos:prefLabel  "Niveau superklasse"@nl .
+    list:kingdom  rdf:type  rdf:List;  rdf:first chemische_stof:kingdom; rdf:rest  list:superclass; skos:prefLabel  "Niveau rijk"@nl .
+    list:subclass  rdf:type  rdf:List; rdf:first chemische_stof:subclass;  rdf:rest  ();  skos:prefLabel  "Niveau subklasse"@nl .
+    list:class  rdf:type    rdf:List; rdf:first  chemische_stof:class; rdf:rest  list:subclass; skos:prefLabel  "Niveau klasse"@nl .
+    chemische_stof:kingdom  skos:member ?s ; rdf:type xkos:ClassificationLevel; xkos:depth 1 ;  skos:definition  "The top level (Kingdom) partitions chemicals into two dis-joint categories: organic compounds versus inorganic compounds. "@en; skos:inScheme    conceptscheme:chemische_stof;  skos:prefLabel   "Rijk"@nl .
+    chemische_stof:superclass  skos:member ?s2 ; rdf:type         xkos:ClassificationLevel; xkos:depth  2; skos:definition  "SuperClasses (which includes 26 organic and 5 inorganic categories) consist of generic categories of compounds with general structural identifiers (e.g. organic acids and derivatives, phenylpropanoids and polyketides, organometallic compounds, homogeneous metal compounds), each of which covers millions of known compounds."@en; skos:inScheme    conceptscheme:chemische_stof; skos:prefLabel   "Superklasse"@nl .
+    chemische_stof:class  skos:member ?s3 ;  rdf:type  xkos:ClassificationLevel;     xkos:depth 3; skos:definition  "Classes typically consist of more spe-cific chemical categories with more specific and recogniz-able structural features (pyrimidine nucleosides, flavanols, benzazepines, actinide salts). Chemical Classes usually contain >100,000 known compounds."@en;  skos:inScheme  conceptscheme:chemische_stof; skos:prefLabel   "Klasse"@nl .
+    chemische_stof:subclass  skos:member ?s4 ; rdf:type         xkos:ClassificationLevel; xkos:depth  4 ; skos:definition  "SubClasses, which typically consist of >10,000 known compounds. There are 1729 SubClasses in the current taxonomy. Additionally, there are 2296 additional categories below the SubClass level covering taxonomic levels 5–11."@en; skos:inScheme    conceptscheme:chemische_stof; skos:prefLabel   "Subklasse"@nl .
+    #?x ?y ?z .
+}
+where
+{
+
+
+    { FILTER ( ?c = 1 ) {select distinct ?s (count(?o) as ?c) where {?s skos:inScheme conceptscheme:chemische_stof; skos:broader+ ?o . } GROUP BY ?s}}
+    UNION
+    { FILTER ( ?c = 2 ) {select distinct ?s2 (count(?o) as ?c) where {?s2 skos:inScheme conceptscheme:chemische_stof; skos:broader+ ?o . } GROUP BY ?s2}}
+    UNION
+    { FILTER ( ?c = 3 ) {select distinct ?s3 (count(?o) as ?c) where {?s3 skos:inScheme conceptscheme:chemische_stof; skos:broader+ ?o . } GROUP BY ?s3}}
+    UNION
+    { FILTER ( ?c = 4 ) {select distinct ?s4 (count(?o) as ?c) where {?s4 skos:inScheme conceptscheme:chemische_stof; skos:broader+ ?o . } GROUP BY ?s4}}
+
+    #UNION
+    #{?x ?y ?z .}
+}

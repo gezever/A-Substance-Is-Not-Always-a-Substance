@@ -1,0 +1,12 @@
+prefix skos:  <http://www.w3.org/2004/02/skos/core#>
+prefix dbo:   <http://dbpedia.org/ontology/>
+construct
+{
+    ?broad skos:narrower ?narrow .
+
+}
+where
+{
+     ?narrow skos:broader+ ?broad .
+
+}

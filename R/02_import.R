@@ -11,6 +11,7 @@ library(here)
 library(httr)
 library(jsonlite)
 library(stringr)
+library(digest)
 
 src <- here("data", "source")
 
@@ -49,6 +50,7 @@ read_list <- function(file, sheet = "List_results", source_name, skip = 0) {
 sommatie_stoffen <- readRDS(here("data", "source", "sommatie_stoffen.rds"))  |>
   rename(
     substance_name = any_of(c("altLabel_en")),
+    #substance_name = any_of(c("prefLabel")),
     cas_number     = any_of(c("casNumber")),
     ec_number      = any_of(c("ecNumber"))
   ) |>
@@ -169,7 +171,9 @@ get_inchikey <- function(cas) {
   if (is.na(cas) || cas == "-" || !nzchar(trimws(cas)))
     return(NA_character_)
 
-  cache_file <- file.path(inchikey_cache_dir, paste0(cas, ".json"))
+  safe_key   <- gsub("[/\\\\:*?\"<>|]", "_", cas)
+  if (nchar(safe_key) > 200) safe_key <- digest::digest(cas, algo = "md5")
+  cache_file <- file.path(inchikey_cache_dir, paste0(safe_key, ".json"))
 
   if (file.exists(cache_file)) {
     json <- fromJSON(paste(readLines(cache_file, warn = FALSE), collapse = "\n"))
@@ -219,6 +223,41 @@ all_substances$inchikey <- lookup$inchikey[
 
 all_substances <- all_substances |>
   select(substance_name, ec_number, cas_number, inchikey, source) |> distinct()
+
+# Propagate known InChIKeys to rows with the same substance_name but missing inchikey
+is_placeholder_name <- function(x) grepl("^\\s*\\[", x)
+
+name_inchikey_known <- all_substances |>
+  filter(!is.na(inchikey), !is.na(substance_name), !is_placeholder_name(substance_name)) |>
+  distinct(substance_name, inchikey) |>
+  group_by(substance_name) |>
+  filter(n() == 1) |>
+  ungroup()
+
+all_substances <- all_substances |>
+  left_join(name_inchikey_known, by = "substance_name", suffix = c("", "_from_name")) |>
+  mutate(inchikey = coalesce(inchikey, inchikey_from_name)) |>
+  select(-inchikey_from_name) |>
+  distinct()
+
+# ------------------------------------------------------------------------------
+# Fallback: PubChem lookup by substance_name for rows still missing InChIKey
+# ------------------------------------------------------------------------------
+
+substances_missing_inchikey <- all_substances |>
+  filter(is.na(inchikey), !is.na(substance_name), nzchar(trimws(substance_name)),
+         !is_placeholder_name(substance_name)) |>
+  distinct(substance_name)
+
+name_inchikey_lookup <- substances_missing_inchikey |>
+  mutate(inchikey_by_name = lapply(substance_name, get_inchikey)) |>
+  unnest(inchikey_by_name)
+
+all_substances <- all_substances |>
+  left_join(name_inchikey_lookup, by = "substance_name") |>
+  mutate(inchikey = coalesce(inchikey, inchikey_by_name)) |>
+  select(-inchikey_by_name) |>
+  distinct()
 
 # ------------------------------------------------------------------------------
 # Write all substances 

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 pushd ../data/source
 # https://echa.europa.eu/nl/candidate-list-table

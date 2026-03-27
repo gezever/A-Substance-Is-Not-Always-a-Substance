@@ -18,6 +18,8 @@ library(ggrepel)
 library(stringr)
 library(cluster)
 library(purrr)
+library(httr)
+library(jsonlite)
 
 # ------------------------------------------------------------------------------
 # Load clean data
@@ -54,7 +56,10 @@ p1 <- ggplot(df1, aes(x = label, y = n, fill = has_inchikey)) +
   theme(plot.subtitle = element_text(colour = "grey40"))
 
 print(p1)
-
+ggsave(p1, 
+       filename = here("output", "figures", "Analysis_1_What_is_a_substance.pdf"),
+       device = "pdf",
+       height = 5, width = 10, units = "in")
 
 # ==============================================================================
 # Analysis 2: Per source — interoperability differs by regulation
@@ -98,6 +103,10 @@ p2 <- ggplot(df2, aes(x = source, y = n, fill = type)) +
   )
 
 print(p2)
+ggsave(p2, 
+       filename = here("output", "figures", "Analysis_2_interoperability_differs_by_regulation.pdf"),
+       device = "pdf",
+       height = 5, width = 10, units = "in")
 
 
 # ==============================================================================
@@ -123,6 +132,10 @@ p3a <- ggplot(cas_to_inchi, aes(x = n_inchikeys)) +
   theme(plot.subtitle = element_text(colour = "grey40"))
 
 print(p3a)
+ggsave(p3a, 
+       filename = here("output", "figures", "Analysis_3a_CAS↔InChIKey_inconsistencies_multiple_INCHIKEYS.pdf"),
+       device = "pdf",
+       height = 5, width = 10, units = "in")
 
 # One InChIKey → multiple CAS numbers
 inchi_to_cas <- all_substances |>
@@ -143,6 +156,10 @@ p3b <- ggplot(inchi_to_cas, aes(x = n_cas)) +
   theme(plot.subtitle = element_text(colour = "grey40"))
 
 print(p3b)
+ggsave(p3b, 
+       filename = here("output", "figures", "Analysis_3b_CAS↔InChIKey_inconsistencies_multiple_CAS_numbers.pdf"),
+       device = "pdf",
+       height = 5, width = 10, units = "in")
 
 message(sprintf(
   "Analysis 3: %d CAS numbers map to >1 InChIKey; %d InChIKeys have >1 CAS",
@@ -257,6 +274,10 @@ p4a <- ggplot(df4, aes(x = reorder(entity_type, n), y = n, fill = entity_type)) 
   theme(plot.subtitle = element_text(colour = "grey40"))
 
 print(p4a)
+ggsave(p4a, 
+       filename = here("output", "figures", "Analysis_4a_Overall_distribution_of_entity_types.pdf"),
+       device = "pdf",
+       height = 5, width = 10, units = "in")
 
 # ------------------------------------------------------------------------------
 # 4b: Entity type breakdown per source
@@ -292,7 +313,140 @@ p4b <- ggplot(df4b, aes(x = source, y = pct, fill = entity_type)) +
   guides(fill = guide_legend(nrow = 2))
 
 print(p4b)
+ggsave(p4b, 
+       filename = here("output", "figures", "Analysis_4b_Entity_type_breakdown_per_source.pdf"),
+       device = "pdf",
+       height = 5, width = 10, units = "in")
 
+# ==============================================================================
+# Analysis 4c: Parent compound extraction for Substance groups
+# Goal: for "X and its compounds" entries, extract the parent compound and
+#       look up an InChIKey via PubChem → linkable via ClassyFire
+# ==============================================================================
+
+extract_parent <- function(name) {
+  m <- regmatches(name, regexpr(
+    "^(.+?)\\s+(and its\\b|,\\s*(?:compounds?|salts?|esters?|isomers?)\\s*$)",
+    name, perl = TRUE, ignore.case = TRUE
+  ))
+  if (length(m) == 0) return(NA_character_)
+  trimws(gsub(
+    "\\s+(and its\\b|,\\s*(?:compounds?|salts?|esters?|isomers?)\\s*)$",
+    "", m, perl = TRUE, ignore.case = TRUE
+  ))
+}
+
+lookup_parent_inchikey <- function(name) {
+  if (is.na(name) || !nzchar(trimws(name))) return(NA_character_)
+
+  cache_file <- file.path(here("data", "cache", "inchikey"), paste0(name, ".json"))
+
+  if (file.exists(cache_file)) {
+    json <- fromJSON(paste(readLines(cache_file, warn = FALSE), collapse = "\n"))
+    return(json$PropertyTable$Properties$InChIKey)
+  }
+
+  url <- paste0(
+    "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/",
+    URLencode(name, reserved = TRUE),
+    "/property/InChIKey/JSON"
+  )
+
+  res <- GET(url)
+  Sys.sleep(0.2)
+
+  if (status_code(res) == 200) {
+    raw <- content(res, "text", encoding = "UTF-8")
+    writeLines(raw, cache_file)
+    json <- fromJSON(raw)
+    return(json$PropertyTable$Properties$InChIKey)
+  } else {
+    return(NA_character_)
+  }
+}
+
+substance_groups <- all_substances |>
+  filter(entity_type == "Substance group") |>
+  distinct(substance_name) |>
+  mutate(
+    base_compound   = sapply(substance_name, extract_parent),
+    base_resolvable = !is.na(base_compound)
+  )
+
+substance_groups <- substance_groups |>
+  mutate(
+    base_inchikey = sapply(base_compound, lookup_parent_inchikey)
+  )
+
+# ------------------------------------------------------------------------------
+# 4d: Linkability taxonomy — general overview of the complete ECHA dataset
+# ------------------------------------------------------------------------------
+
+linkability <- all_substances |>
+  distinct(substance_name, entity_type, inchikey) |>
+  left_join(
+    substance_groups |> select(substance_name, base_inchikey),
+    by = "substance_name"
+  ) |>
+  mutate(
+    linkability = case_when(
+      !is.na(inchikey)                                        ~ "Structure (InChIKey)",
+      entity_type == "Substance group" & !is.na(base_inchikey) ~ "Group — base compound resolvable",
+      entity_type == "Substance group"                        ~ "Group — base compound not resolvable",
+      entity_type == "CAS without structure"                    ~ "CAS without structure",
+      entity_type %in% c("Analytical parameter", "Mixture")    ~ "UVCB / Mixture",
+      entity_type == "Regulatory entry"                        ~ "Regulatory entry",
+      TRUE                                                      ~ "Unidentified"
+    ),
+    linkability = factor(linkability, levels = c(
+      "Structure (InChIKey)",
+      "Group — base compound resolvable",
+      "Group — base compound not resolvable",
+      "CAS without structure",
+      "UVCB / Mixture",
+      "Regulatory entry",
+      "Unidentified"
+    ))
+  )
+
+df4d <- linkability |>
+  count(linkability) |>
+  mutate(pct = round(n / sum(n) * 100, 1))
+
+print(df4d)
+
+linkability_colours <- c(
+  "Structure (InChIKey)"                  = "#4a90d9",
+  "Group — base compound resolvable"      = "#7bc67e",
+  "Group — base compound not resolvable"  = "#b5e5a0",
+  "CAS without structure"             = "#aaaaaa",
+  "UVCB / Mixture"                    = "#9b59b6",
+  "Regulatory entry"                  = "#e05c5c",
+  "Unidentified"                      = "#dddddd"
+)
+
+p4d <- ggplot(df4d, aes(x = reorder(linkability, n), y = n, fill = linkability)) +
+  geom_col(width = 0.6, show.legend = FALSE) +
+  geom_text(aes(label = paste0(n, " (", pct, "%)")),
+            hjust = -0.05, size = 3.5) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.25)), labels = comma) +
+  scale_fill_manual(values = linkability_colours) +
+  coord_flip() +
+  labs(
+    title    = "Analysis 4d: Linkability taxonomy of ECHA substances",
+    subtitle = "What proportion can be unambiguously linked to a chemical structure?",
+    x        = NULL,
+    y        = "Number of unique substance names"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(plot.subtitle = element_text(colour = "grey40"))
+
+print(p4d)
+
+ggsave(p4d, 
+       filename = here("output", "figures", "Analysis_4d_Linkable-taxonomie—general_overview_of_the_complete_ECHA-dataset.pdf"),
+       device = "pdf",
+       height = 5, width = 10, units = "in")
 
 # ==============================================================================
 # Analysis 5: Overlap between lists (UpSet plot)
@@ -315,6 +469,10 @@ upset_input <- inchi_per_source |>
   select(-inchikey) |>
   as.data.frame()
 
+pdf(
+  here("output", "figures", "Analysis_5_Overlap_between_lists_UpSet.pdf"),
+  width = 14, height = 7
+)
 upset(
   upset_input,
   nsets       = ncol(upset_input),
@@ -327,8 +485,12 @@ upset(
   mainbar.y.label = "Overlap (number of shared InChIKeys)",
   sets.x.label    = "InChIKeys per list"
 )
-title("Analysis 5: Overlap of structure-defined substances across lists",
-      line = 3, cex.main = 1)
+grid::grid.text(
+  "Analysis 5: Overlap of structure-defined substances across lists",
+  x = 0.65, y = 0.97,
+  gp = grid::gpar(fontsize = 12, fontface = "bold")
+)
+dev.off()
 
 
 # ==============================================================================
@@ -360,6 +522,10 @@ p6 <- ggplot(df6, aes(x = n_records, y = n_unique_inchikeys, label = source)) +
 
 print(p6)
 
+ggsave(p6, 
+       filename = here("output", "figures", "Analysis_6_Coverage_of_structure-based_linking.pdf"),
+       device = "pdf",
+       height = 5, width = 10, units = "in")
 
 # ==============================================================================
 # Analysis 7: Network visualisation — bipartite graph (substance ↔ list)
@@ -419,6 +585,11 @@ p7 <- ggraph(g, layout = "fr") +
 
 print(p7)
 
+ggsave(p7, 
+       filename = here("output", "figures", "Analysis_7_Network_visualisation—bipartite_graph.pdf"),
+       device = "pdf",
+       height = 5, width = 10, units = "in")
+
 
 # ==============================================================================
 # Analysis 8: Embedding + clustering of "non_structure" substance names
@@ -436,14 +607,15 @@ print(p7)
 
 embeddings_file <- here("data", "processed", "embeddings_echa.rds")
 
+
+  
+non_structure <- all_substances |>
+  filter(is.na(inchikey)) |>
+  filter(!entity_type %in% c("Regulatory entry")) |>  # not chemical entities
+  distinct(substance_name) |>
+  filter(!is.na(substance_name), nzchar(substance_name))
+  
 if (!file.exists(embeddings_file)) {
-  
-  non_structure <- all_substances |>
-    #filter(entity_type == "non_structure") |>
-    filter(is.na(inchikey)) |>
-    distinct(substance_name) |>
-    filter(!is.na(substance_name), nzchar(substance_name)) 
-  
   message(sprintf("Analysis 8: embedding %d non_structure substance names", nrow(non_structure)))
   
   st <- reticulate::import("sentence_transformers")
@@ -567,7 +739,7 @@ cluster_map <- data.frame(
   manual_label = cluster_labels_manual
 )
 
-plot_data_umap <- plot_data_umap |>
+plot_data_umap <- non_structure |>
   left_join(cluster_map, by = "cluster")
 
 
@@ -647,14 +819,15 @@ p8_tsne <- ggplot(non_structure, aes(x = tsne1, y = tsne2, colour = cluster)) +
   )
 
 print(p8_tsne)
-
+ggsave(p8_tsne, 
+       filename = here("output", "figures", "Analysis_8e_tsne.pdf"),
+       device = "pdf",
+       height = 25, width = 50, units = "cm")
   
 
-unclassified2 <- merge(unclassified,cluster_map,by="cluster") |> 
-  select('substance_name', 'manual_label') |>
-  rename(cluster = manual_label)
 
-all_substances <- merge(unclassified2,all_substances,by="substance_name") 
+
+all_substances2 <- merge(all_substances,plot_data_umap,by="substance_name", all.x = TRUE) 
 
 # ------------------------------------------------------------------------------
 # 8f: Top terms per cluster (most central substance names)
@@ -681,12 +854,12 @@ chemont_rds <- here("data", "source", "ChemOnt_2_1.rds")
 
 chemont <- readRDS(chemont_rds)
 
-chemont$substance_name <- paste(
-  chemont$label,
-  chemont$definition,
-  chemont$altLabel
-) 
-
+# chemont$substance_name <- paste(
+#   chemont$label,
+#   chemont$definition,
+#   chemont$altLabel
+# )
+chemont$substance_name <- chemont$label
 chemont <- chemont |> select('substance', 'substance_name')
 
 
@@ -694,7 +867,7 @@ chemont <- chemont |> select('substance', 'substance_name')
 # 9a: Embed substance names with sentence-transformers
 # ------------------------------------------------------------------------------
 
-chemont_embeddings_file <- here("data", "processed", "embeddings_chemont.rds")
+chemont_embeddings_file <- here("data", "processed", "embeddings_chemont_only_label.rds")
 
 if (!file.exists(chemont_embeddings_file)) {
   
@@ -766,10 +939,17 @@ matches <- matches %>%
 # 9e:  Score distribution
 # ------------------------------------------------------------------------------
 
-ggplot(matches, aes(score)) +
+p9e <- ggplot(matches, aes(score)) +
   geom_histogram(bins = 60) +
   theme_minimal() +
   labs(title = "Similarity score distribution")
+print(p9e)
+
+ggsave(p9e, 
+       filename = here("output", "figures", "Analysis_9e_distribution_only_label.pdf"),
+       device = "pdf",
+       height = 25, width = 50, units = "cm")
+
 
 # ------------------------------------------------------------------------------
 # 9f: Threshold tuning (coverage)
@@ -787,7 +967,7 @@ coverage <- map_df(thresholds, function(t) {
 )
 
 
-ggplot(coverage, aes(threshold, coverage)) +
+p9f <- ggplot(coverage, aes(threshold, coverage)) +
   geom_line() +
   geom_point() +
   theme_minimal() +
@@ -796,15 +976,26 @@ ggplot(coverage, aes(threshold, coverage)) +
     x = "Similarity threshold",
     y = "Fraction matched"
   )
+print(p9f)
+
+ggsave(p9f, 
+       filename = here("output", "figures", "Analysis_9f_coverage_threshold.pdf"),
+       device = "pdf",
+       height = 25, width = 50, units = "cm")
 
 # ------------------------------------------------------------------------------
 # 9g: Precision estimation
 # ------------------------------------------------------------------------------
 
-ggplot(matches, aes(x = score)) +
+p9g <- ggplot(matches, aes(x = score)) +
   stat_ecdf() +
   theme_minimal() +
   labs(title = "ECDF of similarity scores")
+print(p9g)
+ggsave(p9f, 
+       filename = here("output", "figures", "Analysis_9g_precision_estimation.pdf"),
+       device = "pdf",
+       height = 25, width = 50, units = "cm")
 
 # ------------------------------------------------------------------------------
 # 9h: Final output with threshold
@@ -839,7 +1030,7 @@ top_matches <- map_dfr(1:nrow(top_idx), function(i) {
   )
 })
 
-threshold <- 0.65
+threshold <- 0.8
 
 final_top_matches <- top_matches %>%
   filter(score >= threshold)
@@ -848,6 +1039,7 @@ best_matches <- top_matches %>%
   group_by(substance_name) %>%
   slice_max(score, n = 1) %>%
   ungroup()
+
 
 # ------------------------------------------------------------------------------
 # 9j: Ranking per substance
@@ -893,7 +1085,7 @@ top_wide <- top_wide %>%
 # ------------------------------------------------------------------------------
 filtered <- top_wide %>%
   filter(
-    score_1 > 0.6,     # minimale kwaliteit
+    score_1 > 0.8,     # minimale kwaliteit
     gap_12 > 0.05      # duidelijk verschil
   )
 
@@ -901,7 +1093,7 @@ filtered <- top_wide %>%
 # 9n: Visualisation
 # ------------------------------------------------------------------------------
 
-ggplot(top_wide, aes(x = gap_12, y = score_1)) +
+p9n <- ggplot(top_wide, aes(x = gap_12, y = score_1)) +
   geom_point(alpha = 0.4) +
   theme_minimal() +
   labs(
@@ -909,6 +1101,29 @@ ggplot(top_wide, aes(x = gap_12, y = score_1)) +
     x = "Gap between top 1 and 2",
     y = "Top score"
   )
+print(p9n)
+ggsave(p9n, 
+       filename = here("output", "figures", "Analysis_9n_quality_landscape.pdf"),
+       device = "pdf",
+       height = 25, width = 50, units = "cm")
+
+# ------------------------------------------------------------------------------
+# 9o: final matches
+# ------------------------------------------------------------------------------
+final_matches <- filtered %>%
+  select(
+    substance_name,
+    best_match = chemont_label_1,
+    score = score_1,
+    confidence
+  )
+
+write.csv(
+  final_matches,
+  file = here("output", "tables", "final_matches.csv"),
+  row.names = FALSE
+)
+
 # ------------------------------------------------------------------------------
 # 9: join
 # ------------------------------------------------------------------------------
