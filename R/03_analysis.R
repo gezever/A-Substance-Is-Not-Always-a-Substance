@@ -744,8 +744,8 @@ plot_data_umap <- non_structure |>
 
 
 
-p8_umap <- ggplot(plot_data_umap, aes(x = umap1, y = umap2, colour = cluster)) +
-  geom_point(size = 1.2, alpha = 0.6) +
+p8_umap <- ggplot(plot_data_umap, aes(x = umap1, y = umap2, shape = cluster)) +
+  geom_point(size = 1.2, alpha = 0.6, colour = "grey30") +
   geom_label_repel(
     data = plot_data_umap |>
       group_by(cluster, manual_label) |>
@@ -758,19 +758,19 @@ p8_umap <- ggplot(plot_data_umap, aes(x = umap1, y = umap2, colour = cluster)) +
     size = 3,
     show.legend = FALSE
   ) +
-  scale_colour_brewer(
-    palette = "Set1",
+  scale_shape_manual(
+    values = c(15L, 16L, 17L, 18L, 3L, 8L),
     labels = cluster_labels_manual
   ) +
   labs(
-    title    = "UMAP of substance names without inchikey (sentence embeddings)",
+    title    = "UMAP of substance names without InChIKey (sentence embeddings)",
     subtitle = paste0(
       nrow(non_structure), " substance names \u2192 all-MiniLM-L6-v2 embeddings \u2192 ",
       k, " k-means clusters"
     ),
-    x        = "UMAP 1",
-    y        = "UMAP 2",
-    colour   = "Cluster"
+    x     = "UMAP 1",
+    y     = "UMAP 2",
+    shape = "Cluster"
   ) +
   theme_minimal(base_size = 12) +
   theme(
@@ -806,7 +806,7 @@ p8_tsne <- ggplot(non_structure, aes(x = tsne1, y = tsne2, colour = cluster)) +
   geom_point(size = 1.2, alpha = 0.6) +
   scale_colour_brewer(palette = "Set1") +
   labs(
-    title    = "Analysis 8e: t-SNE of non_structure substance names (sentence embeddings)",
+    title    = "t-SNE of non_structure substance names (sentence embeddings)",
     subtitle = "Same clusters as UMAP — t-SNE preserves local neighbourhood structure",
     x        = "t-SNE 1",
     y        = "t-SNE 2",
@@ -844,6 +844,14 @@ for (i in seq_len(nrow(top_per_cluster))) {
                   top_per_cluster$cluster[i],
                   top_per_cluster$examples[i]))
 }
+
+# ------------------------------------------------------------------------------
+# 8g: Save cluster assignments for use in 06_create_scheme.R
+# ------------------------------------------------------------------------------
+
+saveRDS(plot_data_umap, here("data", "processed", "non_structure_clusters.rds"))
+message("Analysis 8g: cluster assignments saved to data/processed/non_structure_clusters.rds")
+
 
 
 # ==============================================================================
@@ -1124,11 +1132,286 @@ write.csv(
   row.names = FALSE
 )
 
-# ------------------------------------------------------------------------------
-# 9: join
-# ------------------------------------------------------------------------------
 
-#unclassified2 <- merge(final_matches,chemont,by=c("chemont")
+message("03_analysis.R: analyses 1–9 completed")
 
 
-message("02_analysis.R completed")
+# ==============================================================================
+# Analysis 10: Workload — pairwise group-relation matching in sommatie_stoffen
+# How many person-days are needed to determine all pairwise set relations?
+# ==============================================================================
+
+n_groups          <- all_substances |>
+  filter(source == "sommatie_stoffen") |>
+  distinct(substance_name) |>
+  nrow()
+
+relations_per_day <- 100L  # assumed throughput: group relations assessed per day
+
+days_required <- function(n, y) ceiling(n * (n - 1L) / 2L / y)
+marginal_days <- function(n, y) if (n <= 1L) 0L else ceiling((n - 1L) / y)
+
+n_pairs     <- n_groups * (n_groups - 1L) / 2L
+total_days  <- days_required(n_groups, relations_per_day)
+
+message(sprintf(
+  "Analysis 10: %d groups → %d unique pairs → %d person-days (@ %d relations/day)",
+  n_groups, n_pairs, total_days, relations_per_day
+))
+
+# 10a: Cumulative days required as a function of n
+p10a_data <- data.frame(
+  n    = seq_len(n_groups),
+  days = sapply(seq_len(n_groups), days_required, y = relations_per_day)
+)
+
+p10a <- ggplot(p10a_data, aes(x = n, y = days)) +
+  geom_line(colour = "steelblue", linewidth = 1) +
+  geom_vline(xintercept = n_groups, linetype = "dashed", colour = "#e05c5c") +
+  annotate("label",
+           x = n_groups, y = max(p10a_data$days) * 0.5,
+           label = paste0("n = ", n_groups, "\n", total_days, " days"),
+           colour = "#e05c5c", size = 3.5, label.size = 0.3) +
+  labs(
+    title    = paste("Analysis 10a: Days required at", relations_per_day, "relations per day"),
+    subtitle = "Quadratic growth: n\u00d7(n\u22121)/2 pairs",
+    x        = "Number of groups (n)",
+    y        = "Days required"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(plot.subtitle = element_text(colour = "grey40"))
+
+print(p10a)
+ggsave(p10a,
+       filename = here("output", "figures", "Analysis_10a_workload_curve.pdf"),
+       device = "pdf", height = 5, width = 10, units = "in")
+
+# 10b: Marginal days per additional group
+p10b_data <- data.frame(
+  n         = 2L:n_groups,
+  marg_days = sapply(2L:n_groups, marginal_days, y = relations_per_day)
+)
+
+p10b <- ggplot(p10b_data, aes(x = n, y = marg_days)) +
+  geom_line(colour = "firebrick", linewidth = 1) +
+  labs(
+    title    = paste("Analysis 10b: Marginal days per additional group at", relations_per_day, "relations/day"),
+    subtitle = paste0(
+      "Adding 1 group to the existing ", n_groups,
+      " groups costs ", marginal_days(n_groups, relations_per_day), " person-day(s)"
+    ),
+    x        = "Number of groups (n)",
+    y        = "Marginal days"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(plot.subtitle = element_text(colour = "grey40"))
+
+print(p10b)
+ggsave(p10b,
+       filename = here("output", "figures", "Analysis_10b_workload_marginal.pdf"),
+       device = "pdf", height = 5, width = 10, units = "in")
+
+
+# ==============================================================================
+# Analysis 11: Ambition vs. FTE — how many FTE are needed to meet the 2030 target?
+# ==============================================================================
+
+end_date             <- as.Date("2030-01-01")
+start_date           <- Sys.Date()
+remaining_years      <- as.numeric(difftime(end_date, start_date, units = "days")) / 365.25
+working_days_to_2030 <- ceiling(remaining_years * 200)  # 200 working days per year
+
+fte_required <- ceiling(total_days / working_days_to_2030)
+
+message(sprintf(
+  "Analysis 11: %d working days until 2030 | %d days of work | %d FTE required",
+  working_days_to_2030, total_days, fte_required
+))
+
+
+# ==============================================================================
+# Analysis 12: Pairwise source overlap — Jaccard heatmap + UpSet plot
+# ==============================================================================
+
+inchi_src <- all_substances |>
+  filter(!is.na(inchikey)) |>
+  distinct(source, inchikey)
+
+sources_vec <- sort(unique(inchi_src$source))
+
+# Build pairwise Jaccard matrix
+jaccard_mat <- outer(sources_vec, sources_vec, FUN = Vectorize(function(a, b) {
+  set_a <- inchi_src$inchikey[inchi_src$source == a]
+  set_b <- inchi_src$inchikey[inchi_src$source == b]
+  n_int <- length(intersect(set_a, set_b))
+  n_uni <- length(union(set_a, set_b))
+  if (n_uni == 0L) 0 else n_int / n_uni
+}))
+rownames(jaccard_mat) <- sources_vec
+colnames(jaccard_mat) <- sources_vec
+
+# Hierarchical clustering on dissimilarity (1 - Jaccard)
+hc        <- hclust(as.dist(1 - jaccard_mat), method = "average")
+src_order <- sources_vec[hc$order]
+
+jaccard_long <- as.data.frame(jaccard_mat) |>
+  tibble::rownames_to_column("source_a") |>
+  tidyr::pivot_longer(-source_a, names_to = "source_b", values_to = "jaccard") |>
+  mutate(
+    source_a = factor(source_a, levels = src_order),
+    source_b = factor(source_b, levels = src_order)
+  )
+
+p12a <- ggplot(jaccard_long, aes(x = source_a, y = source_b, fill = jaccard)) +
+  geom_tile(colour = "white", linewidth = 0.3) +
+  geom_text(aes(label = ifelse(jaccard > 0.02, sprintf("%.2f", jaccard), "")),
+            size = 2.5, colour = "grey20") +
+  scale_fill_gradient(low = "white", high = "#084594", limits = c(0, 1),
+                      name = "Jaccard") +
+  coord_fixed() +
+  labs(
+    title    = "Analysis 12a: Pairwise Jaccard index between sources (on InChIKey)",
+    subtitle = "Hierarchically clustered; 1 = complete overlap, 0 = no overlap",
+    x        = NULL,
+    y        = NULL
+  ) +
+  theme_minimal(base_size = 10) +
+  theme(
+    axis.text.x     = element_text(angle = 45, hjust = 1),
+    plot.subtitle   = element_text(colour = "grey40"),
+    legend.position = "right"
+  )
+
+print(p12a)
+ggsave(p12a,
+       filename = here("output", "figures", "Analysis_12a_Jaccard_heatmap.pdf"),
+       device = "pdf", height = 10, width = 11, units = "in")
+
+# 12b: UpSet plot restricted to obligation lists
+obligation_sources <- c(
+  "restriction_list", "candidate_list", "authorisation_list",
+  "pops_list", "eu_positive_list", "harmonised_list", "svhc_identification"
+)
+
+upset_obl <- inchi_src |>
+  filter(source %in% obligation_sources) |>
+  mutate(present = 1L) |>
+  tidyr::pivot_wider(names_from = source, values_from = present, values_fill = 0L) |>
+  select(-inchikey) |>
+  as.data.frame()
+
+pdf(here("output", "figures", "Analysis_12b_UpSet_obligation_lists.pdf"),
+    width = 14, height = 7)
+UpSetR::upset(
+  upset_obl,
+  nsets           = ncol(upset_obl),
+  nintersects     = 25,
+  order.by        = "freq",
+  mb.ratio        = c(0.55, 0.45),
+  main.bar.color  = "#4a90d9",
+  sets.bar.color  = "#e07b3a",
+  text.scale      = c(1.2, 1.1, 1, 1, 1.1, 1),
+  mainbar.y.label = "Overlap (shared InChIKeys)",
+  sets.x.label    = "InChIKeys per list"
+)
+grid::grid.text(
+  "Analysis 12b: Overlap of obligation lists (InChIKey)",
+  x = 0.65, y = 0.97,
+  gp = grid::gpar(fontsize = 12, fontface = "bold")
+)
+dev.off()
+
+
+# ==============================================================================
+# Analysis 13: Prioritisation via ClassyFire cache
+# Which ChemOnt classes cover the most regulatory substances?
+# ==============================================================================
+
+# NULL-safe fallback operator
+`%||%` <- function(a, b) if (is.null(a) || length(a) == 0L) b else a
+
+# Read direct_parent per InChIKey from the local ClassyFire cache
+classyfire_cache_dir <- here("data", "cache", "classyfire")
+cf_files <- list.files(classyfire_cache_dir, pattern = "\\.json$", full.names = TRUE)
+
+cf_lookup <- purrr::map_dfr(cf_files, function(f) {
+  parsed <- tryCatch(jsonlite::read_json(f), error = function(e) NULL)
+  if (is.null(parsed) || is.null(parsed[["inchikey"]]) || is.null(parsed[["direct_parent"]]))
+    return(NULL)
+  tibble::tibble(
+    inchikey          = sub("^InChIKey=", "", parsed[["inchikey"]]),
+    direct_parent_id  = parsed[["direct_parent"]][["chemont_id"]] %||% NA_character_,
+    direct_parent_lbl = parsed[["direct_parent"]][["name"]]       %||% NA_character_
+  )
+})
+
+# Join with all_substances to determine which sources contain each substance
+substance_class <- all_substances |>
+  filter(!is.na(inchikey)) |>
+  distinct(inchikey, source) |>
+  inner_join(cf_lookup, by = "inchikey")
+
+# Count unique substances and sources per ChemOnt class
+class_coverage <- substance_class |>
+  filter(!is.na(direct_parent_id)) |>
+  group_by(direct_parent_id, direct_parent_lbl) |>
+  summarise(
+    n_inchikeys = n_distinct(inchikey),
+    n_sources   = n_distinct(source),
+    .groups     = "drop"
+  ) |>
+  arrange(desc(n_inchikeys))
+
+saveRDS(class_coverage, here("output", "tables", "class_coverage.rds"))
+
+# 13a: Top 30 ChemOnt classes by regulatory substance coverage
+top30_classes <- class_coverage |> slice_head(n = 30)
+
+p13a <- ggplot(top30_classes,
+               aes(x = reorder(direct_parent_lbl, n_inchikeys),
+                   y = n_inchikeys, fill = n_sources)) +
+  geom_col(width = 0.7) +
+  geom_text(aes(label = n_inchikeys), hjust = -0.1, size = 3) +
+  scale_fill_gradient(low = "#b3cde3", high = "#084594", name = "Number of\nsources") +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.15))) +
+  coord_flip() +
+  labs(
+    title    = "Analysis 13a: Top 30 ChemOnt classes by regulatory substance coverage",
+    subtitle = "Colour = number of sources; bar length = number of unique InChIKeys",
+    x        = NULL,
+    y        = "Number of unique substances (InChIKey)"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(plot.subtitle = element_text(colour = "grey40"))
+
+print(p13a)
+ggsave(p13a,
+       filename = here("output", "figures", "Analysis_13a_ChemOnt_prioritisation_top30.pdf"),
+       device = "pdf", height = 8, width = 12, units = "in")
+
+# 13b: Histogram — distribution of substance coverage across ChemOnt classes
+p13b <- ggplot(class_coverage, aes(x = n_inchikeys)) +
+  geom_histogram(binwidth = 5, fill = "#4a90d9", colour = "white") +
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    title    = "Analysis 13b: Distribution of substance coverage across ChemOnt classes",
+    subtitle = "How many classes cover 1, 5, 10 \u2026 substances?",
+    x        = "Number of unique substances per ChemOnt class",
+    y        = "Number of ChemOnt classes"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(plot.subtitle = element_text(colour = "grey40"))
+
+print(p13b)
+ggsave(p13b,
+       filename = here("output", "figures", "Analysis_13b_ChemOnt_coverage_histogram.pdf"),
+       device = "pdf", height = 5, width = 10, units = "in")
+
+message(sprintf(
+  "Analysis 13: %d ChemOnt classes with coverage; top class '%s' covers %d substances",
+  nrow(class_coverage),
+  class_coverage$direct_parent_lbl[1],
+  class_coverage$n_inchikeys[1]
+))
+
+message("03_analysis.R completed")
