@@ -90,7 +90,7 @@ p2 <- ggplot(df2, aes(x = source, y = n, fill = type)) +
   scale_fill_manual(values = c("InChIKey present" = "#4a90d9", "InChIKey absent" = "#e05c5c")) +
   coord_flip() +
   labs(
-    title    = "Analysis 2: Interoperability by source",
+    title    = "Interoperability by source",
     subtitle = "Regulation determines whether substances are chemically identifiable",
     x        = NULL,
     y        = "Share of records",
@@ -121,12 +121,12 @@ cas_to_inchi <- all_substances |>
 
 p3a <- ggplot(cas_to_inchi, aes(x = n_inchikeys)) +
   geom_histogram(binwidth = 1, fill = "#4a90d9", colour = "white") +
-  scale_y_continuous(labels = comma) +
+  scale_y_log10(labels = comma) +
   labs(
-    title    = "Analysis 3a: CAS → InChIKey (one CAS, how many InChIKeys?)",
+    title    = "CAS → InChIKey (one CAS, how many InChIKeys?)",
     subtitle = "A CAS number should uniquely refer to a single structure",
     x        = "Number of distinct InChIKeys per CAS",
-    y        = "Number of CAS numbers"
+    y        = "Number of CAS numbers (log\u2081\u2080)"
   ) +
   theme_minimal(base_size = 12) +
   theme(plot.subtitle = element_text(colour = "grey40"))
@@ -145,12 +145,12 @@ inchi_to_cas <- all_substances |>
 
 p3b <- ggplot(inchi_to_cas, aes(x = n_cas)) +
   geom_histogram(binwidth = 1, fill = "#e07b3a", colour = "white") +
-  scale_y_continuous(labels = comma) +
+  scale_y_log10(labels = comma) +
   labs(
-    title    = "Analysis 3b: InChIKey → CAS (one structure, how many CAS numbers?)",
+    title    = "InChIKey → CAS (one structure, how many CAS numbers?)",
     subtitle = "The same chemical structure can carry multiple CAS numbers",
     x        = "Number of distinct CAS numbers per InChIKey",
-    y        = "Number of InChIKeys"
+    y        = "Number of InChIKeys (log\u2081\u2080)"
   ) +
   theme_minimal(base_size = 12) +
   theme(plot.subtitle = element_text(colour = "grey40"))
@@ -265,7 +265,7 @@ p4a <- ggplot(df4, aes(x = reorder(entity_type, n), y = n, fill = entity_type)) 
   scale_fill_manual(values = entity_colours) +
   coord_flip() +
   labs(
-    title    = "Analysis 4a: What kind of entity is a regulatory 'substance'?",
+    title    = "What kind of entity is a regulatory 'substance'?",
     subtitle = "Most non-molecule entries are groups, analytical parameters, mixtures, or administrative placeholders",
     x        = NULL,
     y        = "Number of records"
@@ -299,7 +299,7 @@ p4b <- ggplot(df4b, aes(x = source, y = pct, fill = entity_type)) +
   scale_fill_manual(values = entity_colours) +
   coord_flip() +
   labs(
-    title    = "Analysis 4b: Entity type composition per source",
+    title    = "Entity type composition per source",
     subtitle = "Each regulatory list has a different mix of molecules, groups, and administrative entries",
     x        = NULL,
     y        = "Share of records",
@@ -409,6 +409,8 @@ linkability <- all_substances |>
     ))
   )
 
+saveRDS(linkability, here("data", "processed", "linkability_taxonomy.rds"))
+
 df4d <- linkability |>
   count(linkability) |>
   mutate(pct = round(n / sum(n) * 100, 1))
@@ -433,7 +435,7 @@ p4d <- ggplot(df4d, aes(x = reorder(linkability, n), y = n, fill = linkability))
   scale_fill_manual(values = linkability_colours) +
   coord_flip() +
   labs(
-    title    = "Analysis 4d: Linkability taxonomy of ECHA substances",
+    title    = "Linkability taxonomy of ECHA substances",
     subtitle = "What proportion can be unambiguously linked to a chemical structure?",
     x        = NULL,
     y        = "Number of unique substance names"
@@ -447,6 +449,8 @@ ggsave(p4d,
        filename = here("output", "figures", "Analysis_4d_Linkable-taxonomie—general_overview_of_the_complete_ECHA-dataset.pdf"),
        device = "pdf",
        height = 5, width = 10, units = "in")
+
+saveRDS(linkability, here("data", "processed", "linkability_taxonomy.rds"))
 
 # ==============================================================================
 # Analysis 5: Overlap between lists (UpSet plot)
@@ -512,7 +516,7 @@ p6 <- ggplot(df6, aes(x = n_records, y = n_unique_inchikeys, label = source)) +
   scale_x_continuous(labels = comma, trans = "log10") +
   scale_y_continuous(labels = comma, trans = "log10") +
   labs(
-    title    = "Analysis 6: Coverage of structure-based linking per source",
+    title    = "Coverage of structure-based linking per source",
     subtitle = "Points below the diagonal = more records than unique structures (duplication / ambiguity)",
     x        = "Number of records (log)",
     y        = "Number of unique InChIKeys (log)"
@@ -569,7 +573,7 @@ p7 <- ggraph(g, layout = "fr") +
   scale_colour_manual(values = c("substance" = "#4a90d9", "list" = "#e05c5c")) +
   scale_size_manual(values  = c("substance" = 1.5,        "list" = 5)) +
   labs(
-    title    = "Analysis 7: Bipartite network substance ↔ regulatory list",
+    title    = "Bipartite network substance ↔ regulatory list",
     subtitle = paste0(
       "Only substances present in \u2265 2 lists shown (n = ",
       nrow(node_substances), " substances, ", nrow(node_sources), " lists)"
@@ -744,8 +748,8 @@ plot_data_umap <- non_structure |>
 
 
 
-p8_umap <- ggplot(plot_data_umap, aes(x = umap1, y = umap2, shape = cluster)) +
-  geom_point(size = 1.2, alpha = 0.6, colour = "grey30") +
+p8_umap <- ggplot(plot_data_umap, aes(x = umap1, y = umap2, colour = cluster)) +
+  geom_point(size = 1.2, alpha = 0.6) +
   geom_label_repel(
     data = plot_data_umap |>
       group_by(cluster, manual_label) |>
@@ -758,8 +762,8 @@ p8_umap <- ggplot(plot_data_umap, aes(x = umap1, y = umap2, shape = cluster)) +
     size = 3,
     show.legend = FALSE
   ) +
-  scale_shape_manual(
-    values = c(15L, 16L, 17L, 18L, 3L, 8L),
+  scale_colour_manual(
+    values = c("#e05c5c", "#4a90d9", "#7bc67e", "#9b59b6", "#e07b3a", "#2ec4b6"),
     labels = cluster_labels_manual
   ) +
   labs(
@@ -768,9 +772,9 @@ p8_umap <- ggplot(plot_data_umap, aes(x = umap1, y = umap2, shape = cluster)) +
       nrow(non_structure), " substance names \u2192 all-MiniLM-L6-v2 embeddings \u2192 ",
       k, " k-means clusters"
     ),
-    x     = "UMAP 1",
-    y     = "UMAP 2",
-    shape = "Cluster"
+    x      = "UMAP 1",
+    y      = "UMAP 2",
+    colour = "Cluster"
   ) +
   theme_minimal(base_size = 12) +
   theme(

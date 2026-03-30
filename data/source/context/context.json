@@ -157,5 +157,17 @@
   "omg_dataset" : "https://data.omgeving.vlaanderen.be/id/dataset/",
   "co" : "https://data.omgeving.vlaanderen.be/id/concept/observatieprocedure/",
   "xkos" : "http://rdf-vocabulary.ddialliance.org/xkos#",
-  "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+  "entity_type" : {
+    "@id" : "https://data.omgeving.vlaanderen.be/ns/wk#entityType",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  },
+  "linkability" : {
+    "@id" : "https://data.omgeving.vlaanderen.be/ns/wk#linkability",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  },
+  "base_inchikey" : {
+    "@id" : "https://data.omgeving.vlaanderen.be/ns/wk#baseInChIKey",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  }
 }

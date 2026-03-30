@@ -1,37 +1,31 @@
-PREFIX rdfs:        <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX oa: <http://www.w3.org/ns/oa#>
-PREFIX skos:  <http://www.w3.org/2004/02/skos/core#>
-prefix dbo:         <http://dbpedia.org/ontology/>
-PREFIX owl:            <http://www.w3.org/2002/07/owl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
 
 SELECT ?substance ?substance_name
     (GROUP_CONCAT(DISTINCT ?bio_activity_label; separator="|") AS ?bio_activity_labels)
-    (GROUP_CONCAT(DISTINCT ?collection; separator="|") AS ?groups)
     (GROUP_CONCAT(DISTINCT ?echa_list; separator="|") AS ?echa_lists)
 WHERE {
-    {
-    ?substance a dbo:ChemicalSubstance ;
-        skos:prefLabel ?substance_name.
-    ?c skos:member ?substance ;
-        skos:prefLabel ?collection.
-    ?annotation skos:prefLabel ?bio_activity_label ;
-        oa:hasTarget ?substance ;
-        oa:hasBody ?b .
-    ?b a owl:Class .
 
-    }
-    UNION
-    {
-        ?substance a dbo:ChemicalSubstance ;
-            skos:prefLabel ?substance_name;.
-        ?c skos:member ?substance ;
-            skos:prefLabel ?collection.
-        ?annotation  skos:prefLabel ?echa_list;
+    ?substance a dbo:ChemicalSubstance ;
+        skos:prefLabel ?substance_name .
+
+    OPTIONAL {
+        ?annotation skos:prefLabel ?bio_activity_label ;
             oa:hasTarget ?substance ;
             oa:hasBody ?b .
-        ?b a skos:Concept .
-
+        ?b a owl:Class .
     }
+
+    OPTIONAL {
+        ?annotation2 skos:prefLabel ?echa_list ;
+            oa:hasTarget ?substance ;
+            oa:hasBody ?b2 .
+        ?b2 a skos:Concept .
+    }
+
+
 
 }
 GROUP BY ?substance ?substance_name
