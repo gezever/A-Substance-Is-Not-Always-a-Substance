@@ -1,0 +1,5 @@
+has_inchikey,n,label,pct
+FALSE,15432,"Non-structure entity
+(InChIKey absent)",0.369381013930777
+TRUE,26346,"Structure-defined
+(InChIKey present)",0.6306189860692231

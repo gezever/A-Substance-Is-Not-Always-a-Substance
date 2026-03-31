@@ -1,3 +1,83 @@
+# ==============================================================================
+# 13b_before_prioritisation_create_scheme.R
+# Pre-prioritisation step: build RDF/SKOS knowledge graph from analysis outputs
+#
+# PURPOSE
+# -------
+# This script assembles the outputs of earlier analyses into a linked-data
+# knowledge graph (Turtle / JSON-LD) that can be loaded into a SPARQL
+# triplestore or used for graph-based reasoning.  Specifically, it:
+#   1. Fetches ClassyFire `direct_parent` classifications for each unique
+#      InChIKey via the ClassyFire REST API, caching results locally.
+#   2. Serialises `all_substances` (with MD5-based hash URIs) to JSON-LD.
+#   3. Builds SKOS collections for the linkability taxonomy (Analysis 4d).
+#   4. Builds SKOS collections for the k-means clusters (Analysis 8).
+#   5. Generates OA Annotation triples linking each substance to its
+#      regulatory source(s).
+#   6. Merges all Turtle fragments and the ChEBI annotation graph via
+#      companion bash scripts.
+#
+# This script must run after: 04_entity_classification.R,
+# 08_embedding_clustering.R.  It is a prerequisite for
+# 14_prioritization.R which reads `chebi.csv` (produced by `bash/chebi.sh`).
+#
+# DATA PROVENANCE
+# ---------------
+# Input 1: `data/processed/all_substances.rds` — substance–source table
+# Input 2: `data/processed/linkability_taxonomy.rds` — produced by 04
+# Input 3: `data/processed/non_structure_clusters.rds` — produced by 08
+# Input 4: `data/source/context/context.json` — JSON-LD @context
+# Cache:   `data/cache/classyfire/*.json` — ClassyFire REST responses
+#          (https://cfb.fiehnlab.ucdavis.edu/entities/{inchikey})
+# Output:  `data/processed/rdf/substances.jsonld`
+#          `data/processed/rdf/classyfire.jsonld`
+#          `data/processed/rdf/linkability_taxonomy.ttl`
+#          `data/processed/rdf/clusters.ttl`
+#          `data/processed/rdf/annotations.ttl`
+#          `data/processed/chebi.csv` (via bash/chebi.sh)
+#          `data/processed/all_substances_inchikey.rds`
+#
+# METHODOLOGY
+# -----------
+# ## Established frameworks used as anchors
+#
+# | Framework | Role in methodology |
+# |---|---|
+# | **SKOS Simple Knowledge Organization System** (W3C Recommendation 2009, https://www.w3.org/TR/skos-reference/) | Vocabulary for concept collections; `skos:Collection` and `skos:member` encode the linkability taxonomy and cluster groupings as navigable concept hierarchies. |
+# | **Web Annotation (OA) Ontology** (W3C Recommendation 2017, https://www.w3.org/TR/annotation-ontology/) | `oa:Annotation` triples link each substance concept to its regulatory source(s), encoding provenance without modifying the substance concept itself. |
+# | **JSON-LD 1.1** (W3C Recommendation 2020, https://www.w3.org/TR/json-ld11/) | Serialisation format for RDF graphs; enables direct import into triplestores and compatibility with linked-data tooling. |
+# | **ClassyFire REST API** (Djoumbou Feunang et al. 2016, DOI: 10.1186/s13321-016-0174-y) | Structure-based chemical classification; provides `direct_parent.chemont_id` for each InChIKey via `GET https://cfb.fiehnlab.ucdavis.edu/entities/{inchikey}`. |
+#
+# ## Own methodological additions
+#
+# | Choice | Justification |
+# |---|---|
+# | MD5 hash of InChIKey (or name) as URI fragment | Produces stable, opaque, collision-resistant identifiers for substance concept URIs without encoding the InChIKey string directly (which contains characters that require URL encoding). |
+# | Separate Turtle files per graph component | Modular approach allows individual components (clusters, annotations, linkability) to be updated independently without rebuilding the full graph. |
+# | `skos:narrower` triples for group → base compound | Encodes the parent-compound relationship from Analysis 4c in a machine-readable form; enables SPARQL queries to navigate from substance group to its resolved parent. |
+#
+# INTERPRETATION
+# --------------
+# This script does not produce analytical figures; its outputs are
+# machine-readable knowledge graph fragments.  The assembled graph enables:
+# - SPARQL-based queries over the full regulatory substance dataset
+# - Navigation from substance to source, chemical class, and cluster
+# - Integration with external linked-data endpoints (ChEBI, PubChem)
+#
+# Verify correctness by checking the terminal messages: the number of
+# collections, triples, and annotations written should match the expected
+# counts from the upstream analyses.
+#
+# OUTPUTS
+# -------
+# data/processed/rdf/substances.jsonld
+# data/processed/rdf/classyfire.jsonld
+# data/processed/rdf/linkability_taxonomy.ttl
+# data/processed/rdf/clusters.ttl
+# data/processed/rdf/annotations.ttl
+# data/processed/all_substances_inchikey.rds
+# ==============================================================================
+
 library(here)
 library(tidyr)
 library(dplyr)
@@ -5,6 +85,7 @@ library(jsonlite)
 library(stringr)
 library(digest)
 library(httr)
+library(purrr)
 
 
 
@@ -38,16 +119,16 @@ get_classyfire_direct_parent <- function(inchikey) {
 
 all_substances <- readRDS(here("data", "processed", "all_substances.rds"))
 
-all_substances <- all_substances %>%
+all_substances <- all_substances |>
   mutate(hash = ifelse(
     !is.na(inchikey) & inchikey != "",
     sapply(inchikey, function(x) digest::digest(x, algo = "md5")),
     sapply(substance_name, function(x) digest::digest(x, algo = "md5"))
-  )) %>%
+  )) |>
   mutate(direct_parent_chemont_id = sapply(inchikey, function(x) {
     if (is.na(x) || x == "") NA_character_
     else get_classyfire_direct_parent(x)
-  })) %>% 
+  })) |>
   mutate(type = ifelse(!is.na(inchikey) & inchikey != "", "dbo:ChemicalSubstance", NA_character_))
 
 # merge all classyfire cache JSON files into a single JSON-LD document
@@ -172,6 +253,13 @@ all_substances <- readRDS(here("data", "processed", "all_substances_inchikey.rds
 # ==============================================================================
 # Add k-means clusters from Analysis 8 as skos:Collection to the TTL
 # ==============================================================================
+# INTENT
+# The k-means cluster labels from Analysis 8 group non-structure substance
+# names by semantic similarity.  Encoding these clusters as SKOS Collections
+# allows downstream graph queries to retrieve all members of a given chemical
+# name cluster (e.g., "organohalogen-like names") without re-running the
+# clustering algorithm.
+# ==============================================================================
 
 clusters_rds <- here("data", "processed", "non_structure_clusters.rds")
 
@@ -232,6 +320,13 @@ if (file.exists(clusters_rds)) {
 # ==============================================================================
 # OA Annotations: substance → source tagging
 # ==============================================================================
+# INTENT
+# Each substance concept must be linked to the regulatory source(s) it
+# appears in.  Using OA Annotation triples (oa:Annotation with oa:hasTarget
+# and oa:hasBody) keeps the provenance information separate from the substance
+# concept itself, which allows sources to be added or removed without
+# modifying the core substance graph.
+# ==============================================================================
 
 annotation_prefix <- "https://data.omgeving.vlaanderen.be/id/annotation/chemical_substance/"
 concept_prefix_ann <- "https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/"
@@ -291,11 +386,22 @@ message(sprintf(
 system("bash bash/merge.bash")
 
 # ==============================================================================
-# add chebi
+# Add ChEBI biological activity annotations
+# ==============================================================================
+# INTENT
+# The ChEBI biological role annotations (produced by bash/chebi.sh via SPARQL)
+# are merged into the graph here.  This step is the bridge between the
+# regulatory substance dataset and the ChEBI ontology, enabling bio-hazard
+# scoring in Analysis 14.
 # ==============================================================================
 
 system("bash bash/chebi.sh")
 
 chebi <- read.csv(here("data", "processed", "chebi.csv"), stringsAsFactors = FALSE)
 
-
+message(sprintf(
+  "13b_before_prioritisation_create_scheme.R: graph build complete — %d substances, %d sources, %d ChEBI rows",
+  nrow(all_substances),
+  n_distinct(all_substances$source),
+  nrow(chebi)
+))

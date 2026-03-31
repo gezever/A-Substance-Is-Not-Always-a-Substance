@@ -37,8 +37,32 @@
 # activity labels (~21.5 % of rows).  Substances without a ChEBI match are
 # scored on regulatory list membership alone, which is correct behaviour.
 #
-# SCORING METHODOLOGY
-# -------------------
+# METHODOLOGY
+# -----------
+# ## Established frameworks used as anchors
+#
+# | Framework | Role in methodology |
+# |---|---|
+# | **ToxPi** (Reif et al. 2010, *Environ Health Perspect* 118(12):1714–1720. DOI: 10.1289/ehp.1002180) | Conceptual basis for multi-domain weighted integration: heterogeneous evidence streams (regulatory listing + biological hazard) are combined into a single score through transparent, domain-specific weights. |
+# | **REACH Regulation (EC) No 1907/2006, Arts. 57–73** | Legal hierarchy for list weights (0–5): SVHC identification (Art. 57–59) → authorisation/restriction (Art. 60–73).  The weight ranking is derived directly from the legal consequences each instrument triggers. |
+# | **CLP Regulation (EC) No 1272/2008, Annex VI** | Basis for harmonised classification weights (weight 2) and CMR hazard weights (weight 3): carcinogenic, mutagenic, and reprotoxic properties are Tier-1 SVHC criteria under Art. 57(a)–(c). |
+# | **EU POPs Regulation (EU) 2019/1021** | Basis for POPs list weight (4) and POP bio-hazard weight (3): elimination obligation for persistent organic pollutants is the strongest regulatory signal in the dataset. |
+# | **EU Chemicals Strategy for Sustainability, COM(2020) 667 final** | Basis for including neurotoxicity and endocrine disruption as priority hazard classes (bio-hazard weight 2) even though they are not explicit SVHC criteria under Art. 57. |
+# | **Regulation (EC) No 1107/2009** | Basis for pesticide approval list weight (2): positive safety determination required before approval. |
+#
+# ## Own methodological additions
+#
+# | Choice | Justification |
+# |---|---|
+# | Numerical scale 0–5 (lists) and 1–3 (bio-hazard) | Not prescribed by any framework; reflects the ordinal REACH hierarchy while remaining interpretable.  ToxPi uses normalised [0,1] domain scores; this project uses raw integers to preserve additivity without normalisation. |
+# | Additive summation instead of ToxPi weighted average | The two domains are complementary and largely independent; additive summation avoids normalisation suppressing one domain when the other is zero.  The consequence is an unbounded score interpreted in relative, not absolute, terms. |
+# | Neurotoxin and ecotoxin = weight 2 | EU CSS COM(2020) 667 identifies neurotoxicity as a priority hazard class; ecotoxicity is a PBT-adjacent concern (REACH Annex XIII).  Neither is an explicit Art. 57 criterion, so weight 2 (below CMR/POP weight 3) is justified. |
+# | Allergen Cat 1A = weight 2; sensitiser Cat 1B = weight 1 | Harmonised CLH endpoint with serious health consequences; weight distinction between confirmed (1A) and probable (1B) sensitisation follows the CLP hazard category structure. |
+# | `eu_positive_list` = weight 1 | Administrative oversight signal, not a hazard determination; weight 1 acknowledges regulatory scrutiny without implying concern. |
+#
+# ## Detailed scoring rationale
+# (See the full narrative below for per-instrument legal citations.)
+#
 # The composite priority score combines two independent evidence domains:
 # (1) regulatory list membership and (2) intrinsic biological hazard.
 # The multi-domain structure is inspired by the ToxPi (Toxicological Priority
@@ -154,6 +178,75 @@
 # relative rather than absolute terms.
 #
 # Priority score = sum(list weights) + sum(bio-hazard weights)
+#
+# INTERPRETATION
+# --------------
+# **Fig 14a — Top-50 priority bar chart**
+# The ranked bar chart answers: "which substances are most urgent?"  A high
+# score reflects broad multi-list membership AND/OR strong hazard evidence.
+# Substances near the top that are well-known SVHCs (BPA, acrylamide, phthalates)
+# validate the scoring model; unexpected entries near the top warrant manual
+# review to check whether the score is driven by data artefacts (e.g., a CAS
+# number mapped to many InChIKeys).
+#
+# **Fig 14b — ECHA list presence heatmap (top 50)**
+# Reveals which instruments drive each substance's priority score.  A row with
+# many red cells = broad multi-list substance.  A row with one red cell = score
+# driven by a single high-weight instrument; if that instrument is authorisation
+# or restriction, the substance is a genuine concern; if it is registration,
+# the weight contribution is minimal and the high rank is likely driven by
+# bio-hazard evidence.
+#
+# **Fig 14c — UpSet plot (concern lists)**
+# Shows how substances distribute across the concern-level lists only.
+# Tall multi-list intersection bars = a chemical core that multiple binding
+# instruments converge on — these are the highest regulatory priority.
+# Source-specific bars identify substances that have fallen through gaps in
+# cross-list harmonisation.
+#
+# **Fig 14d — Hazard profile bar chart**
+# Answers: "what hazard types are most prevalent?"  A dominant CMR bar means
+# that carcinogenic/mutagenic/reprotoxic properties drive most bio-hazard
+# scores.  A large "no bio evidence" share confirms the ~79 % non-InChIKey
+# problem: most substances cannot receive a bio-hazard score at all.
+#
+# **Fig 14e — Bubble chart (list score × bio score)**
+# The four quadrants (SKILL.md §10) identify: Q1 = urgent (both dimensions
+# high); Q2 = regulatory gap (high bio, low lists); Q3 = administrative breadth
+# (high lists, no bio evidence); Q4 = low concern.  Q2 substances are the most
+# actionable finding: hazard is confirmed but regulatory coverage is weak.
+#
+# **Fig 14f — Alluvial / Sankey diagram**
+# Traces which hazard types flow to which regulatory instruments.  A wide band
+# from "carcinogenic agent" to "candidate_list" confirms the CMR → SVHC
+# pathway.  Hazard types without a wide band to any high-weight instrument
+# indicate that the regulatory system has not fully captured that hazard class.
+#
+# **Fig 14g — Treemap (hazard classes)**
+# Tile area = number of substances in the class; colour = mean priority score.
+# Large tiles with low colour intensity = common but under-prioritised classes
+# (regulatory gap candidates).  Small tiles with high colour intensity = rare
+# but highly regulated classes.
+#
+# OUTPUTS
+# -------
+# output/figures/Analysis_14a_Top50_priority.pdf
+# output/figures/Analysis_14b_List_heatmap.pdf
+# output/figures/Analysis_14c_UpSet_concern_lists.pdf
+# output/figures/Analysis_14d_Bio_hazard_profile.pdf
+# output/figures/Analysis_14e_Bubble_priority.pdf
+# output/figures/Analysis_14f_Sankey_activity_list.pdf
+# output/figures/Analysis_14g_Treemap_priority.pdf
+# output/tables/Analysis_14a_top50.csv
+# output/tables/Analysis_14b_heatmap_matrix.csv
+# output/tables/Analysis_14c_set_sizes.csv
+# output/tables/Analysis_14c_intersections.csv
+# output/tables/Analysis_14d_hazard_profile.csv
+# output/tables/Analysis_14e_bubble_data.csv
+# output/tables/Analysis_14f_flow_long.csv
+# output/tables/Analysis_14f_flow_matrix.csv
+# output/tables/Analysis_14g_treemap_stats.csv
+# output/tables/prioritization.csv
 # ==============================================================================
 
 library(dplyr)

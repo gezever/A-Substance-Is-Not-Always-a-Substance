@@ -1,8 +1,8 @@
-source,n_inchikeys
-harmonised_list,3258
-eu_positive_list,1111
-svhc_identification,216
-candidate_list,206
-authorisation_list,45
-restriction_list,31
-pops_list,18
+source,n_inchikeys,n_non_structured,n_total
+harmonised_list,3258,1406,4755
+eu_positive_list,1111,819,2016
+svhc_identification,216,56,273
+candidate_list,206,50,258
+authorisation_list,45,14,59
+restriction_list,31,47,78
+pops_list,18,15,33

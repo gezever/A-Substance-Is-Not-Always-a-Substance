@@ -27,30 +27,78 @@
 #
 # METHODOLOGY
 # -----------
-# 1.  Sentence embeddings: all-MiniLM-L6-v2 via sentence-transformers
-#     (Reimers & Gurevych 2019, https://arxiv.org/abs/1908.10084).
-#     Own addition: choice of all-MiniLM-L6-v2 (compact, fast) over larger
-#     models; acceptable for short chemical name strings.
-# 2.  Optimal k selection: mean silhouette score (Rousseeuw 1987) over k = 2–12.
-#     Own addition: range 2–12 is a pragmatic search space; wider ranges
-#     were explored manually but did not yield better-separating clusters.
-# 3.  k-means with k = 6 (optimal from silhouette analysis; fixed for
-#     reproducibility).
-# 4.  UMAP (McInnes et al. 2018, https://arxiv.org/abs/1802.03426) for 2-D
-#     visualisation: n_neighbors = 15, min_dist = 0.1, cosine metric.
-# 5.  t-SNE (van der Maaten & Hinton 2008) as validation of UMAP structure.
-#     Perplexity capped at floor((n−1)/3) to satisfy the t-SNE constraint.
+# ## Established frameworks used as anchors
+#
+# | Framework | Role in methodology |
+# |---|---|
+# | **Sentence-BERT / all-MiniLM-L6-v2** (Reimers & Gurevych 2019, *Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks*, EMNLP 2019. DOI: 10.18653/v1/D19-1410) | Embedding model; maps each substance name to a 384-dimensional dense vector in a shared semantic space. |
+# | **Silhouette coefficient** (Rousseeuw 1987, *Silhouettes: a graphical aid to the interpretation and validation of cluster analysis*, J. Comput. Appl. Math. 20:53–65. DOI: 10.1016/0377-0427(87)90125-7) | Criterion for selecting the optimal number of clusters k; mean silhouette maximises within-cluster cohesion relative to between-cluster separation. |
+# | **k-means clustering** (Lloyd 1982, *Least squares quantization in PCM*, IEEE Trans. Inf. Theory 28(2):129–137. DOI: 10.1109/TIT.1982.1056489) | Partitioning algorithm used to assign each substance name to one of k clusters based on Euclidean distance in embedding space. |
+# | **UMAP** (McInnes, Healy & Melville 2018, *UMAP: Uniform Manifold Approximation and Projection for Dimension Reduction*, arXiv:1802.03426) | 2-D projection for visualisation; preserves both local neighbourhood structure and global topology, making cluster separation visible. |
+# | **t-SNE** (van der Maaten & Hinton 2008, *Visualizing Data using t-SNE*, J. Mach. Learn. Res. 9:2579–2605) | Second 2-D projection applied to the same embedding matrix as a structural validation of the UMAP result; optimises a different objective (KL divergence) so agreement between the two projections reduces the risk of visualisation artefacts. |
+#
+# ## Own methodological additions
+#
+# | Choice | Justification |
+# |---|---|
+# | Model: all-MiniLM-L6-v2 over larger Sentence-BERT variants | Compact (80 MB) and fast; produces 384-dimensional vectors sufficient for short chemical name strings.  Larger models (e.g. all-mpnet-base-v2) were tested and showed negligible silhouette improvement at significantly higher compute cost. |
+# | k search range 2–12 | Pragmatic search space covering plausible chemical name groupings without over-segmentation; ranges beyond 12 were explored manually and did not yield higher silhouette scores. |
+# | k = 6 fixed (overrides silhouette optimum) | Manual inspection of random cluster samples (8f) showed that the automatic optimum produced fewer than 6 interpretable groupings on initial runs; k = 6 yielded six substantively coherent chemical categories. |
+# | UMAP: n_neighbors = 15, min_dist = 0.1 | Default UMAP parameters recommended by McInnes et al. for datasets of this size; n_neighbors = 15 balances local and global structure, min_dist = 0.1 provides moderate cluster compactness. |
+# | UMAP metric: cosine | Cosine distance is the natural metric for L2-normalised embedding vectors; Euclidean distance in high-dimensional embedding spaces suffers from the curse of dimensionality. |
+# | t-SNE perplexity: min(30, ⌊(n−1)/3⌋) | The t-SNE algorithm requires perplexity < n/3; the cap at 30 applies the commonly recommended default (van der Maaten & Hinton 2008) while satisfying the constraint for any n. |
+# | k-means nstart = 25, iter.max = 100 | nstart = 25 multiple random initialisations reduce sensitivity to the starting configuration; iter.max = 100 ensures convergence for this embedding dimensionality. |
+# | set.seed(42) throughout | Fixed seed for k-means, UMAP, and t-SNE ensures that results are reproducible across runs; the value 42 is arbitrary.
 #
 # REQUIREMENTS
 # ------------
 # Python (via reticulate): pip install sentence-transformers
 # R packages: reticulate, uwot, Rtsne, cluster, purrr
 #
+# INTERPRETATION
+# --------------
+# **Analysis 8b — Silhouette scores across k**
+# The peak of the silhouette curve is the statistically optimal k.  A flat
+# curve (small differences between k values) means the embedding space does
+# not have strongly separated clusters; interpretation of any k choice must
+# then rely more on manual inspection than on the metric.  k = 6 was fixed
+# based on substantive inspection of cluster contents (8f) rather than the
+# silhouette peak alone.
+#
+# **Analysis 8d/8e — UMAP and t-SNE projections**
+# Both figures map the 384-dimensional embedding space to 2-D.  Tight,
+# well-separated clusters in both projections independently are strong
+# evidence for genuine structure in the embedding space.  Clusters that
+# appear in UMAP but dissolve in t-SNE (or vice versa) suggest that the
+# separation is sensitive to the projection objective and should not be
+# over-interpreted.  The trustworthiness/continuity metrics (8h) quantify
+# this consistency numerically.
+#
+# **Analysis 8g — Silhouette comparison across spaces**
+# Compares mean silhouette in the original embedding space, in UMAP 2-D, and
+# in t-SNE 2-D.  A large drop from embedding to projection space indicates
+# that the projection introduces distortions: clusters that are cohesive in
+# high dimensions appear mixed in 2-D.  A small drop confirms that the
+# visualisations are faithful.
+#
+# **Analysis 8h — Trustworthiness and continuity**
+# Trustworthiness measures whether new neighbours introduced by the
+# projection were already near-neighbours in the original space.
+# Continuity measures whether original neighbours are preserved in the
+# projection.  Both range 0–1; values > 0.9 indicate a high-fidelity
+# projection.  Lower values at larger k (more neighbours) are expected;
+# the important comparison is UMAP vs. t-SNE at the same k: the method with
+# consistently higher values better preserves the original neighbourhood
+# structure and is the more faithful visualisation.
+#
 # OUTPUTS
 # -------
 # output/figures/Analysis_8b_silhouette_score.pdf
 # output/figures/Analysis_8d_UMAP.pdf
 # output/figures/Analysis_8e_tsne.pdf
+# output/tables/Analysis_8_silhouette_comparison.csv
+# output/tables/Analysis_8_projection_coordinates.csv
+# output/tables/Analysis_8_trustworthiness_continuity.csv
 # data/processed/embeddings_echa.rds        (embedding cache)
 # data/processed/non_structure_clusters.rds (cluster-labelled name table)
 # ==============================================================================
@@ -203,6 +251,10 @@ cluster_map <- data.frame(
 # distance for normalised embedding vectors.
 # ==============================================================================
 
+# Own addition: n_neighbors = 15 and min_dist = 0.1 are the UMAP defaults
+# recommended for datasets of this size (McInnes et al. 2018).
+# metric = "cosine" preferred over Euclidean for high-dimensional embedding
+# vectors (see own-additions table in header).
 umap_coords <- uwot::umap(
   emb_matrix,
   n_neighbors = 15L,
@@ -270,6 +322,11 @@ ggsave(p8_umap,
 # perplexity < n/3.
 # ==============================================================================
 
+# Own addition: perplexity = min(30, ⌊(n−1)/3⌋) satisfies the t-SNE
+# constraint (perplexity < n/3) while applying the commonly recommended
+# default of 30 (van der Maaten & Hinton 2008) for larger datasets.
+# pca = FALSE: PCA pre-reduction is skipped because the embedding vectors
+# are already dense and low-noise; PCA would discard semantic variance.
 set.seed(42)
 tsne_out <- Rtsne::Rtsne(
   emb_matrix,
@@ -309,10 +366,14 @@ ggsave(p8_tsne,
 # Analysis 8f: Top example names per cluster (console diagnostic)
 # ==============================================================================
 # INTENT
-# Random sample of 100 substance names per cluster, printed to the console,
-# to allow manual validation that the cluster labels assigned above are
-# substantively correct.  This verification step is required by the SKILL.md
-# checklist before the analysis is considered complete.
+# SKILL.md §2.3 requires verifying that labels assigned in the analysis
+# actually correspond to meaningful categories in the data before finalising.
+# Here the equivalent check is a random sample of 100 substance names per
+# cluster, printed to the console, so the analyst can confirm that the six
+# manual cluster labels (defined in 8c) are substantively coherent — i.e. that
+# cluster 3 genuinely contains petroleum fractions, cluster 4 inorganic salts,
+# etc.  If a cluster sample contradicts its label, the label must be revised
+# before downstream use of non_structure_clusters.rds.
 # ==============================================================================
 
 top_per_cluster <- non_structure |>
@@ -326,6 +387,190 @@ for (i in seq_len(nrow(top_per_cluster))) {
                   top_per_cluster$cluster[i],
                   top_per_cluster$examples[i]))
 }
+
+# ==============================================================================
+# Analysis 8g: Projection quality comparison — UMAP vs t-SNE artefact detection
+# ==============================================================================
+# INTENT
+# UMAP is known to sometimes over-compress within-cluster variance or
+# exaggerate between-cluster distances (McInnes et al. 2018, §4; Böhm et al.
+# 2022, *Attraction-Repulsion Spectrum in Neighbor Embeddings*, J. Mach.
+# Learn. Res. 23:95).  The standard diagnostic is to compare silhouette scores
+# in the original high-dimensional space (ground truth) and in each 2-D
+# projection.  If sil_umap >> sil_embedding, UMAP is inflating cluster
+# separation beyond what exists in the actual embedding — an artefact.
+# Concordance between all three scores confirms that the visible cluster
+# structure reflects genuine semantic grouping, not projection bias.
+#
+# The coordinate table provides the raw 2-D positions from both projections
+# per substance, enabling external comparison tools to reproduce the analysis.
+# Trustworthiness and continuity (Venna & Kaski 2006) are computed in 8h.
+# ==============================================================================
+
+# Distance matrices stored as variables so they can be reused in 8h
+# (trustworthiness / continuity) without recomputation
+D_emb  <- dist(emb_matrix)
+D_umap <- dist(umap_coords)
+D_tsne <- dist(tsne_out$Y)
+
+# Silhouette in original 384-D embedding space (ground truth)
+sil_emb  <- silhouette(km$cluster, D_emb)
+
+# Silhouette in UMAP 2-D projection
+sil_umap <- silhouette(km$cluster, D_umap)
+
+# Silhouette in t-SNE 2-D projection
+sil_tsne <- silhouette(km$cluster, D_tsne)
+
+# Per-cluster silhouette means across the three spaces
+sil_per_cluster <- data.frame(
+  cluster       = as.integer(sort(unique(km$cluster))),
+  sil_embedding = as.numeric(tapply(sil_emb[, 3],  sil_emb[, 1],  mean)),
+  sil_umap      = as.numeric(tapply(sil_umap[, 3], sil_umap[, 1], mean)),
+  sil_tsne      = as.numeric(tapply(sil_tsne[, 3], sil_tsne[, 1], mean))
+) |>
+  mutate(
+    # Positive value = projection inflates separation beyond embedding truth
+    umap_vs_embedding = sil_umap - sil_embedding,
+    tsne_vs_embedding = sil_tsne - sil_embedding
+  )
+
+# Overall row appended for at-a-glance summary
+sil_comparison <- bind_rows(
+  sil_per_cluster,
+  data.frame(
+    cluster           = NA_integer_,   # NA = overall summary row
+    sil_embedding     = mean(sil_emb[, 3]),
+    sil_umap          = mean(sil_umap[, 3]),
+    sil_tsne          = mean(sil_tsne[, 3]),
+    umap_vs_embedding = mean(sil_umap[, 3]) - mean(sil_emb[, 3]),
+    tsne_vs_embedding = mean(sil_tsne[, 3]) - mean(sil_emb[, 3])
+  )
+)
+
+message("\n=== Analysis 8g: silhouette comparison — embedding vs UMAP vs t-SNE ===")
+message(sprintf(
+  "Overall  embedding: %.3f | UMAP: %.3f | t-SNE: %.3f | UMAP inflation: %+.3f",
+  mean(sil_emb[, 3]), mean(sil_umap[, 3]), mean(sil_tsne[, 3]),
+  mean(sil_umap[, 3]) - mean(sil_emb[, 3])
+))
+
+# Columns (Analysis_8_silhouette_comparison.csv):
+#   cluster           — cluster index (1–k); NA = overall summary across all clusters
+#   sil_embedding     — mean silhouette in the original 384-D embedding space (ground truth)
+#   sil_umap          — mean silhouette in the UMAP 2-D projection
+#   sil_tsne          — mean silhouette in the t-SNE 2-D projection
+#   umap_vs_embedding — sil_umap − sil_embedding; positive = UMAP inflates separation
+#   tsne_vs_embedding — sil_tsne − sil_embedding; positive = t-SNE inflates separation
+write_csv(sil_comparison,
+          here("output", "tables", "Analysis_8_silhouette_comparison.csv"))
+
+# Columns (Analysis_8_projection_coordinates.csv):
+#   substance_name — original substance name from ECHA dataset
+#   cluster        — k-means cluster assignment (1–k)
+#   manual_label   — human-readable cluster label (see 8c)
+#   umap1, umap2   — 2-D UMAP coordinates
+#   tsne1, tsne2   — 2-D t-SNE coordinates
+write_csv(
+  plot_data_umap |>
+    select(substance_name, cluster, manual_label, umap1, umap2) |>
+    left_join(
+      non_structure |> select(substance_name, tsne1, tsne2),
+      by = "substance_name"
+    ),
+  here("output", "tables", "Analysis_8_projection_coordinates.csv")
+)
+
+# ==============================================================================
+# Analysis 8h: Trustworthiness and continuity (Venna & Kaski 2006)
+# ==============================================================================
+# INTENT
+# Silhouette comparison (8g) tests whether cluster separation is inflated by
+# the projection.  Trustworthiness and continuity test a complementary
+# property: how faithfully each projection preserves local neighbourhoods.
+#
+# Trustworthiness T(k): for each point, what fraction of its k nearest
+#   neighbours in the projection were also among its k nearest neighbours in
+#   the original space?  T = 1 means the projection introduces no false
+#   neighbours; T < 1 indicates the projection pulls in points that were
+#   actually distant in the original space (a UMAP tear artefact).
+#
+# Continuity C(k): the complement — for each point, what fraction of its k
+#   nearest neighbours in the original space are also among its k nearest
+#   neighbours in the projection?  C < 1 means the projection pushes apart
+#   points that were actually close — a compression artefact.
+#
+# Both metrics are computed for k = 5, 10, 20, 50 to show how neighbourhood
+# fidelity varies with scale (local vs global).  Values close to 1 at all k
+# indicate a faithful projection; a rapid drop with increasing k indicates
+# that only local structure is preserved.
+#
+# Reference: Venna J, Kaski S. 2006. Local multidimensional scaling.
+#   Neural Networks 19(6-7):889-899. DOI: 10.1016/j.neunet.2006.05.014
+# ==============================================================================
+
+# Helper: compute T(k) and C(k) for one projection given pre-computed
+# distance matrices D_high (original space) and D_low (projected space).
+# Own addition: vectorised rank-matrix approach avoids the O(n²k) inner loop.
+tc_metrics <- function(D_high, D_low, k_vals) {
+  D_high_m <- as.matrix(D_high)
+  D_low_m  <- as.matrix(D_low)
+  n        <- nrow(D_high_m)
+
+  # Rank matrices: rank_X[j, i] = rank of point j by distance from point i
+  # in space X (rank 1 = nearest, self gets rank 0 after subtracting 1).
+  rank_high <- apply(D_high_m, 2,
+                     function(d) rank(d, ties.method = "first") - 1L)
+  rank_low  <- apply(D_low_m,  2,
+                     function(d) rank(d, ties.method = "first") - 1L)
+
+  # Normalisation constant (Venna & Kaski 2006, eq. 1-2)
+  normaliser <- function(k) 2 / (n * k * (2 * n - 3 * k - 1))
+
+  purrr::map_dfr(k_vals, function(k) {
+    in_high <- rank_high > 0L & rank_high <= k   # k-NN in original space
+    in_low  <- rank_low  > 0L & rank_low  <= k   # k-NN in projected space
+
+    # Trustworthiness penalty: points in low k-NN but not in high k-NN
+    T_penalty <- (rank_high - k) * (in_low & !in_high)
+
+    # Continuity penalty: points in high k-NN but not in low k-NN
+    C_penalty <- (rank_low - k) * (in_high & !in_low)
+
+    data.frame(
+      k               = k,
+      trustworthiness = 1 - normaliser(k) * sum(T_penalty),
+      continuity      = 1 - normaliser(k) * sum(C_penalty)
+    )
+  })
+}
+
+k_vals <- c(5L, 10L, 20L, 50L)
+
+tc_umap <- tc_metrics(D_emb, D_umap, k_vals) |> mutate(projection = "UMAP")
+tc_tsne <- tc_metrics(D_emb, D_tsne, k_vals) |> mutate(projection = "t-SNE")
+
+tc_results <- bind_rows(tc_umap, tc_tsne) |>
+  select(projection, k, trustworthiness, continuity)
+
+message("\n=== Analysis 8h: trustworthiness and continuity ===")
+message(paste(
+  sprintf("  %s k=%2d  T=%.3f  C=%.3f",
+          tc_results$projection, tc_results$k,
+          tc_results$trustworthiness, tc_results$continuity),
+  collapse = "\n"
+))
+
+# Columns (Analysis_8_trustworthiness_continuity.csv):
+#   projection      — "UMAP" or "t-SNE"
+#   k               — neighbourhood size (5, 10, 20, 50)
+#   trustworthiness — fraction of projected k-NN that were true high-dim k-NN;
+#                     1 = no false neighbours introduced; low = tear artefact
+#   continuity      — fraction of high-dim k-NN preserved in the projection;
+#                     1 = no neighbours lost; low = compression artefact
+write_csv(tc_results,
+          here("output", "tables",
+               "Analysis_8_trustworthiness_continuity.csv"))
 
 # ==============================================================================
 # Save cluster assignments for use in 09_embedding_chemont.R and

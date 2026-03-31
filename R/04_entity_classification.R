@@ -36,24 +36,60 @@
 #
 # METHODOLOGY
 # -----------
-# Entity type classification uses an ordered case_when():
-#   Molecules first (InChIKey present), then progressively less specific
-#   pattern classes.  The order matters because many entries could match
-#   multiple rules; the first match wins.  The patterns are heuristic and were
-#   validated against manual spot-checks.
-#   Own addition: the seven-tier hierarchy is not derived from any regulatory
-#   framework but from empirical observation of the ECHA dataset structure.
+# ## Established frameworks used as anchors
 #
-# PubChem parent compound lookup (4c) uses the PubChem PUG REST API
-# (https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest):
-#   GET .../compound/name/{name}/property/InChIKey/JSON
-#   Own addition: 0.2 s delay between requests to respect rate limits.
+# | Framework | Role in methodology |
+# |---|---|
+# | **PubChem PUG REST API** (Kim et al. 2016, *PubChem Substance and Compound databases*, Nucleic Acids Res. 44(D1):D1202–D1213. DOI: 10.1093/nar/gkv951) | Name-to-InChIKey resolution for parent compound lookup (4c): `GET .../compound/name/{name}/property/InChIKey/JSON`. The API returns the canonical InChIKey for a given compound name as registered in PubChem. |
+#
+# ## Own methodological additions
+#
+# | Choice | Justification |
+# |---|---|
+# | Seven-tier entity type hierarchy | Not derived from any regulatory framework; developed from empirical observation of the ECHA dataset structure and validated against manual spot-checks of ~200 entries per class. The ordering (Molecule first, then increasingly coarse classes) ensures that the most specific applicable label is assigned. |
+# | Ordered `case_when()` with Molecule as first rule | Any entry with an InChIKey is definitively a structure-defined molecule; placing this rule first prevents CAS/group patterns from overriding a structural identifier. |
+# | "X and its compounds" regex for parent extraction | A large share of substance groups follow this naming convention in ECHA data; the pattern covers salts, esters, isomers, and similar constructs with a single regex. Entries that do not match this pattern receive `base_compound = NA`. |
+# | 0.2 s delay between PubChem API requests | PubChem PUG REST rate limit is ~5 requests/second for unauthenticated access; 0.2 s provides a safety margin and avoids 429 (Too Many Requests) errors. Requests are cached on first call so the delay is only incurred once per unique name. |
+#
+# INTERPRETATION
+# --------------
+# **Analysis 4a — Overall entity type distribution**
+# The share of "Molecule" entries sets the hard upper limit for any
+# structure-based analysis in this project.  A low molecule fraction confirms
+# that regulatory lists are not molecule lists: most entries require a
+# non-structural treatment.  "Substance group" and "Unclassified" are the
+# primary targets for workload analysis (Analyses 10–11).
+#
+# **Analysis 4b — Entity type composition per source**
+# Wide variation across sources is expected and informative.  A source with
+# a high "Regulatory entry" share likely contains many administrative
+# cross-references rather than substances; it will appear peripheral in
+# network and overlap analyses (Analyses 7, 12).  A source dominated by
+# "Molecule" is ready for InChIKey-based linking without further preprocessing.
+#
+# **Analysis 4c — Parent compound lookup**
+# `base_resolvable = TRUE` but `base_inchikey = NA` means PubChem did not
+# find the extracted parent name.  This can indicate a novel compound, a
+# non-IUPAC name, or a too-generic description (e.g., "lead").  These
+# entries remain non-linkable despite having a recognisable parent name.
+#
+# **Analysis 4d — Linkability taxonomy**
+# Read the bars from top (most linkable) to bottom (least linkable).
+# "Structure (InChIKey)" is the fully resolved tier; all downstream
+# structure-based analyses operate on this tier only.  The combined share of
+# "Group — base compound resolvable" + "Structure (InChIKey)" is the upper
+# bound of what could be reached with the PubChem lookup strategy.  The
+# remaining tiers quantify the irreducible non-linkable fraction.
 #
 # OUTPUTS
 # -------
 # output/figures/Analysis_4a_Overall_distribution_of_entity_types.pdf
 # output/figures/Analysis_4b_Entity_type_breakdown_per_source.pdf
 # output/figures/Analysis_4d_Linkable-taxonomie—general_overview_of_the_complete_ECHA-dataset.pdf
+# output/tables/Analysis_4a_entity_type_distribution.csv
+# output/tables/Analysis_4b_entity_type_per_source.csv
+# output/tables/Analysis_4c_parent_compound_lookup.csv
+# output/tables/Analysis_4d_linkability_taxonomy.csv
 # data/processed/all_substances_classified.rds
 # data/processed/linkability_taxonomy.rds
 # ==============================================================================
@@ -61,6 +97,7 @@
 library(dplyr)
 library(ggplot2)
 library(here)
+library(readr)
 library(scales)
 library(httr)
 library(jsonlite)
@@ -184,6 +221,16 @@ ggsave(p4a,
        device = "pdf",
        height = 5, width = 10, units = "in")
 
+# Columns (Analysis_4a_entity_type_distribution.csv):
+#   entity_type — one of seven mutually exclusive entity type labels assigned
+#                 by the rule-based classifier (Molecule, Substance group,
+#                 Analytical parameter, Mixture, Regulatory entry,
+#                 CAS without structure, Unclassified)
+#   n           — number of records (rows in all_substances) assigned to this
+#                 entity type; sums to the total number of records in the dataset
+#   pct         — share of records: n / total; sums to 1.0
+write_csv(df4, here("output", "tables", "Analysis_4a_entity_type_distribution.csv"))
+
 # ==============================================================================
 # Analysis 4b: Entity type breakdown per source
 # ==============================================================================
@@ -231,6 +278,17 @@ ggsave(p4b,
                        "Analysis_4b_Entity_type_breakdown_per_source.pdf"),
        device = "pdf",
        height = 5, width = 10, units = "in")
+
+# Columns (Analysis_4b_entity_type_per_source.csv):
+#   source      — regulatory source identifier
+#   entity_type — entity type label (same seven levels as 4a)
+#   n           — number of records in this source assigned to this entity type
+#   pct         — share within source: n / sum(n for source); sums to 1.0
+#                 per source
+write_csv(
+  df4b |> mutate(source = as.character(source), entity_type = as.character(entity_type)),
+  here("output", "tables", "Analysis_4b_entity_type_per_source.csv")
+)
 
 # ==============================================================================
 # Analysis 4c: Parent compound extraction for Substance groups
@@ -299,6 +357,17 @@ substance_groups <- substance_groups |>
   mutate(
     base_inchikey = sapply(base_compound, lookup_parent_inchikey)
   )
+
+# Columns (Analysis_4c_parent_compound_lookup.csv):
+#   substance_name  — original substance group name from all_substances
+#   base_compound   — parent compound name extracted by regex from substance_name;
+#                     NA if the name does not match the "X and its compounds" pattern
+#   base_resolvable — TRUE if a base_compound name was successfully extracted,
+#                     FALSE/NA otherwise; does NOT indicate a successful InChIKey lookup
+#   base_inchikey   — InChIKey returned by PubChem for base_compound;
+#                     NA if base_compound is NA, lookup failed, or was not attempted
+write_csv(substance_groups,
+          here("output", "tables", "Analysis_4c_parent_compound_lookup.csv"))
 
 # ==============================================================================
 # Analysis 4d: Linkability taxonomy — complete ECHA dataset
@@ -380,6 +449,21 @@ ggsave(p4d,
                        "Analysis_4d_Linkable-taxonomie\u2014general_overview_of_the_complete_ECHA-dataset.pdf"),
        device = "pdf",
        height = 5, width = 10, units = "in")
+
+# Columns (Analysis_4d_linkability_taxonomy.csv):
+#   linkability — one of seven linkability tiers (ordered from most to least
+#                 structurally accessible):
+#                 "Structure (InChIKey)"                      — direct InChIKey present
+#                 "Group — base compound resolvable"          — substance group with PubChem-resolved parent
+#                 "Group — base compound not resolvable"      — substance group, parent lookup failed
+#                 "CAS without structure"                     — CAS number present but no InChIKey
+#                 "UVCB / Mixture"                            — analytical parameter or complex mixture
+#                 "Regulatory entry"                          — administrative cross-reference or annotation
+#                 "Unidentified"                              — no identifier of any kind
+#   n           — number of unique substance names assigned to this tier
+#   pct         — share of unique substance names: n / total; sums to 100
+write_csv(df4d |> mutate(linkability = as.character(linkability)),
+          here("output", "tables", "Analysis_4d_linkability_taxonomy.csv"))
 
 # ------------------------------------------------------------------------------
 # Save enriched dataset for downstream analyses (08_embedding_clustering.R,

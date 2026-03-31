@@ -19,12 +19,39 @@
 #
 # METHODOLOGY
 # -----------
-# Remaining working days until 2030-01-01 = remaining_years × 200 days/year.
-# Own addition: 200 working days per year is a standard European approximation
-# (52 weeks × 5 days minus ~60 days leave/public holidays); adjust if
-# organisation-specific norms apply.
-# FTE = ⌈total_days / working_days_to_2030⌉
-# One FTE corresponds to one full-time analyst working exclusively on this task.
+# ## Established frameworks used as anchors
+#
+# | Framework | Role in methodology |
+# |---|---|
+# | **FTE definition (Eurostat / EU labour statistics)** | One FTE = one person working full-time (100 %) on the task for the full period; fractional FTE = part-time or shared allocation. Used here to express the staffing requirement in a unit that is directly actionable for resource planning. |
+#
+# ## Own methodological additions
+#
+# | Choice | Justification |
+# |---|---|
+# | 200 working days/year | Standard European approximation: 52 weeks × 5 days = 260 days, minus ~60 days for leave and public holidays.  Adjust if organisation-specific norms (e.g., shorter leave entitlements) apply. |
+# | Deadline = 2030-01-01 | Notional policy target; the actual deadline should be substituted when known.  The FTE figure is sensitive to this choice: a nearer deadline produces a higher FTE requirement. |
+# | Ceiling function for FTE | A fractional FTE below 1.0 still requires at least one dedicated analyst; ceiling prevents under-reporting the staffing need. |
+# | Throughput = 100 relations/day | Inherited from Analysis 10; same calibration caveat applies. |
+#
+# INTERPRETATION
+# --------------
+# The output is a single number: the FTE required to complete all pairwise
+# group-relation assessments by the 2030 deadline, given the current group
+# count and throughput assumption.
+#
+# **Sensitivity:** the FTE figure is proportional to n² (through `total_days`)
+# and inversely proportional to remaining time.  Both drivers move in an
+# unfavourable direction over time: the group list may grow (more groups →
+# more pairs), and every day that passes reduces the remaining capacity.
+# Re-running this script closer to 2030 will produce a higher FTE estimate.
+#
+# **Actionable reading:** an FTE > 1 means one analyst cannot complete the
+# work alone by the deadline at the assumed throughput.  An FTE of, say, 3
+# means the task requires three full-time analysts, or a combination of more
+# analysts at lower throughput.  If the estimated FTE is implausibly high,
+# the conclusion is that exhaustive pairwise assessment is infeasible and a
+# prioritised or automated approach is needed (see Analysis 14).
 #
 # OUTPUTS
 # -------

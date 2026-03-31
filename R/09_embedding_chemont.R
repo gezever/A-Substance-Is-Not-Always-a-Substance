@@ -24,20 +24,64 @@
 #
 # METHODOLOGY
 # -----------
-# 1.  ChemOnt class labels are embedded with the same all-MiniLM-L6-v2 model
-#     used for substance names (ensuring compatible vector spaces).
-# 2.  Cosine similarity matrix is computed as the matrix product of L2-
-#     normalised embedding matrices: sim(i,j) = ê_i · ĉ_j.
-# 3.  For each substance, the top-3 ChemOnt matches by cosine score are
-#     retained.
-# 4.  A composite confidence score is derived from the absolute top-1 score,
-#     the gap between ranks 1 and 2, and the gap between ranks 2 and 3.
-#     Own addition: the 0.6/0.3/0.1 weight allocation is not mandated by any
-#     framework; it reflects the empirical observation that score_1 is the
-#     dominant signal and the gap_12 a secondary discriminator.
-# 5.  Quality filters: score_1 > 0.8 and gap_12 > 0.05 retain only
-#     high-confidence, unambiguous matches.  Own addition: thresholds chosen
-#     after visual inspection of the score and gap distributions (9e, 9n).
+# ## Established frameworks used as anchors
+#
+# | Framework | Role in methodology |
+# |---|---|
+# | **Sentence-BERT / all-MiniLM-L6-v2** (Reimers & Gurevych 2019, *Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks*, EMNLP 2019. DOI: 10.18653/v1/D19-1410) | Embedding model for both substance names and ChemOnt labels; produces 384-dimensional dense vectors in a shared semantic space suitable for cosine similarity ranking. |
+# | **ChemOnt 2.1 / ClassyFire** (Djoumbou Feunang et al. 2016, *ClassyFire: automated chemical classification with a comprehensive, computable taxonomy*, J. Cheminform. 8:61. DOI: 10.1186/s13321-016-0174-y) | Target ontology; provides a hierarchical, computable chemical classification system against which substance names are matched.  The `label` field of each ChemOnt class node is used as the text to embed. |
+# | **Cosine similarity** (Manning, Raghavan & Schütze 2008, *Introduction to Information Retrieval*, Cambridge UP, §6.3) | Standard similarity metric for dense embedding spaces; computed as the dot product of L2-normalised vectors, which is equivalent to the angle between them and invariant to vector magnitude. |
+#
+# ## Own methodological additions
+#
+# | Choice | Justification |
+# |---|---|
+# | ChemOnt `label` only (not definition or altLabel) | Definitions contain longer prose that shifts the embedding centroid; using labels keeps the ChemOnt vector space parallel to the short substance-name vectors.  Own addition: no framework prescribes which ChemOnt field to embed. |
+# | Top-k = 3 candidates retained per substance | k = 3 is the minimum needed to compute both gap_12 and gap_23 for the confidence score.  k = 1 would prevent confidence scoring; k > 3 adds computational cost without improving the two-gap signal. |
+# | Confidence weights 0.6 / 0.3 / 0.1 (score_1 / gap_12 / gap_23) | Weights reflect the empirical dominance of absolute score strength over gap terms; validated by visual inspection of the match quality landscape (Fig. 9n).  Analogous to margin-based confidence in nearest-neighbour classifiers. |
+# | Quality filters: score_1 > 0.8 and gap_12 > 0.05 | Thresholds selected after visual inspection of the joint distribution of score_1 and gap_12 (Fig. 9n); they correspond to the upper-right region where matches are both strong and unambiguous. |
+# | Threshold exploration range 0.3–0.9 step 0.02 | Pragmatic exploratory range covering plausible cosine similarity values; the coverage curve (Fig. 9f) makes the coverage–precision trade-off at any threshold explicit. |
+# | Unmatchable exclusion regex (reaction mass / petroleum / UVCB) | These name patterns denote substance classes or complex mixtures whose names do not correspond to single chemical classes; matching them to ChemOnt labels would produce spurious high-similarity results via incidental word overlap. |
+#
+# INTERPRETATION
+# --------------
+# **Analysis 9e — Distribution of top-1 cosine similarity scores**
+# The score distribution shows how well substance names align with the
+# nearest ChemOnt label in embedding space.  A distribution concentrated
+# above 0.8 indicates that most names have a clear semantic match in the
+# ontology.  A heavy left tail (many scores below 0.5) suggests that many
+# non-structure names describe things the ChemOnt vocabulary does not
+# cover (industrial formulations, trade names, regulatory placeholders).
+#
+# **Analysis 9f — Coverage vs. threshold curve**
+# As the similarity threshold increases, fewer matches pass the quality
+# filter (coverage decreases) but the retained matches are more reliable
+# (precision increases).  The curve makes the coverage–precision trade-off
+# explicit.  The selected threshold (score_1 > 0.8) is marked; readers can
+# identify what fraction of names would be matched at a lower or higher
+# threshold.
+#
+# **Analysis 9g — Precision estimation**
+# Manual inspection of a random sample of matches at different thresholds
+# gives an empirical precision estimate.  A match is considered correct if
+# the assigned ChemOnt class is a plausible chemical family for the
+# substance name.  Use this figure to calibrate confidence before using
+# `final_matches.csv` in downstream analyses.
+#
+# **Analysis 9n — Quality landscape (score_1 vs. gap_12)**
+# The scatter plot shows every substance in the (score_1, gap_12) space.
+# The dashed lines mark the selected quality filters.  Substances in the
+# upper-right quadrant (high score, large gap) are the most reliable
+# matches; those in the lower-left are ambiguous.  If many substances
+# cluster near the threshold boundaries, the filters may be sensitive to
+# small parameter changes and should be validated by manual inspection.
+#
+# **final_matches.csv**
+# Contains only the high-confidence subset.  A substance absent from this
+# file either (a) scored below the threshold, (b) matched with insufficient
+# gap between top-1 and top-2, or (c) was excluded by the unmatchable regex.
+# It does NOT mean the substance has no chemical class — only that the
+# embedding-based match did not meet the quality criteria.
 #
 # OUTPUTS
 # -------
@@ -265,6 +309,9 @@ ggsave(p9g,
 # ==============================================================================
 
 # 9i: Retrieve top-3 matches per substance
+# Own addition: k = 3 is the minimum required to compute gap_12 and gap_23
+# for confidence scoring; k = 1 would reduce the match to a bare score with
+# no measure of ambiguity.  See own-additions table in the header.
 top_k <- 3L
 
 top_idx <- t(apply(sim_matrix, 1, function(x)
@@ -296,6 +343,12 @@ top_wide <- top_ranked |>
   )
 
 # 9k: Consistency metrics
+# Own addition: gap_12 = score_1 − score_2 measures separation between the
+# best and second-best match (high = unambiguous); gap_23 = score_2 − score_3
+# measures stability further down the ranking (high = well-ordered top-3).
+# mean_top3 is a secondary quality indicator; the confidence score (9l) uses
+# only gap_12 and gap_23 directly.  This pattern is analogous to the
+# classification margin in nearest-neighbour methods.
 top_wide <- top_wide |>
   mutate(
     gap_12    = score_1 - score_2,
@@ -360,11 +413,6 @@ ggsave(p9n,
 # INTENT
 # Export the filtered, high-confidence substance → ChemOnt assignments for
 # use in downstream classification and prioritisation steps.
-# Columns:
-#   substance_name — original substance name from ECHA dataset
-#   best_match     — top-1 ChemOnt class label (label text, not CHEMONT ID)
-#   score          — cosine similarity of the top-1 match (0–1)
-#   confidence     — composite confidence score (0.6·score + 0.3·gap12 + 0.1·gap23)
 # ==============================================================================
 
 final_matches <- filtered |>
@@ -375,15 +423,46 @@ final_matches <- filtered |>
     confidence
   )
 
-write.csv(
+# Columns (final_matches.csv):
+#   substance_name — original substance name from ECHA dataset (non-structure
+#                    entries only); primary key for joining with all_substances
+#   best_match     — top-1 ChemOnt class label (label text, not CHEMONT ID);
+#                    the chemical family most similar to the substance name in
+#                    embedding space
+#   score          — cosine similarity of the top-1 match (0–1); only rows
+#                    with score > 0.8 are included
+#   confidence     — composite confidence score: 0.6·score_1 + 0.3·gap_12 +
+#                    0.1·gap_23; ranges 0–1; higher = more reliable assignment
+write_csv(
   final_matches,
-  file      = here("output", "tables", "final_matches.csv"),
-  row.names = FALSE
+  here("output", "tables", "final_matches.csv")
 )
 
 message(sprintf(
   "Analysis 9: %d substance names matched to ChemOnt with score > 0.8 and gap > 0.05",
   nrow(final_matches)
+))
+
+# ==============================================================================
+# SKILL.md §2.3 — Verify matched ChemOnt labels actually occur and are
+# substantively meaningful (equivalent of the bio-label frequency check)
+# ==============================================================================
+# INTENT
+# Before treating the final_matches as valid, confirm that the most frequently
+# assigned ChemOnt classes are recognisable chemical families (e.g. organohalogen
+# compounds, fatty acids) rather than generic or artefactual labels produced by
+# the embedding space.  A concentration of matches on implausible classes would
+# indicate that the model is exploiting spurious surface-form similarity.
+# ==============================================================================
+
+top_chemont_labels <- final_matches |>
+  count(best_match, sort = TRUE) |>
+  head(10)
+
+message("\n=== Analysis 9: top-10 matched ChemOnt classes (SKILL.md §2.3 verification) ===")
+message(paste(
+  sprintf("  %d\t%s", top_chemont_labels$n, top_chemont_labels$best_match),
+  collapse = "\n"
 ))
 
 message("09_embedding_chemont.R: analysis 9 completed")

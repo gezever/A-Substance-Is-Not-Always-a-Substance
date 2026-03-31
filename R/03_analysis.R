@@ -23,18 +23,70 @@
 # a substance may appear across multiple regulatory sources.
 # An absent `inchikey` means the entry has no resolvable chemical structure.
 #
+# METHODOLOGY
+# -----------
+# ## Established frameworks used as anchors
+#
+# | Framework | Role in methodology |
+# |---|---|
+# | **Cleveland (1993)** *Visualizing Data* (Hobart Press, Summit NJ) | Log₁₀ y-axis transformation in analyses 3a and 3b: counts of CAS/InChIKey mappings are strongly right-skewed; log scaling makes the long tail visible without compressing the dominant mode. |
+#
+# ## Own methodological additions
+#
+# | Choice | Justification |
+# |---|---|
+# | Binary split (InChIKey present / absent) for Analysis 1 | The InChIKey is the only unambiguous structural identifier in the dataset; the split directly measures what fraction is accessible to structure-based analyses. No finer taxonomy is needed at this stage (see Analysis 4 for the full entity-type taxonomy). |
+# | Per-source stacked bar sorted by `pct_with` (Analysis 2) | Sorting by descending InChIKey coverage makes the gradient from structure-rich to structure-poor instruments immediately visible; alphabetical ordering would hide this pattern. |
+# | Separate histograms for CAS→InChIKey and InChIKey→CAS (Analyses 3a/3b) | The two inconsistency directions have different causes and different remediation strategies; combining them into one plot would obscure which direction drives which substances. |
+#
+# INTERPRETATION
+# --------------
+# **Analysis 1 — Structure-defined vs non-structure entities**
+# The bar heights establish the baseline constraint for all downstream analyses.
+# The non-structure fraction (~79 %) is not a data quality problem — it reflects
+# how regulations define "substance" (groups, mixtures, parameters).  Any
+# approach that claims to cover "all regulatory substances" must address this
+# fraction explicitly.
+#
+# **Analysis 2 — Interoperability by source**
+# A strong gradient (some sources near 100 %, others near 0 %) means that
+# cross-list linking is feasible for some instruments but structurally
+# impossible for others.  Sources with low `pct_with` cannot meaningfully
+# participate in InChIKey-based overlap analyses (7, 12); they appear in
+# workload analyses (10) instead.
+#
+# **Analysis 3a — CAS → multiple InChIKeys**
+# Most CAS numbers map to exactly one InChIKey (mode at x = 1).  CAS numbers
+# with n_inchikeys > 1 are ambiguous: the same registry number has been
+# associated with structurally different entries across sources.  These are
+# candidates for manual review before using CAS as a linking key.
+#
+# **Analysis 3b — InChIKey → multiple CAS numbers**
+# The same structure legitimately carries multiple CAS numbers (historical
+# assignments, stereoisomers grouped under one entry).  A high n_cas is not
+# necessarily an error, but it means CAS-based deduplication will
+# under-collapse the dataset relative to InChIKey-based deduplication.
+#
+# **Combined reading for 3a + 3b:** motivates using InChIKey (not CAS) as the
+# primary linking key in all subsequent cross-list analyses.
+#
 # OUTPUTS
 # -------
 # output/figures/Analysis_1_What_is_a_substance.pdf
 # output/figures/Analysis_2_interoperability_differs_by_regulation.pdf
 # output/figures/Analysis_3a_CAS↔InChIKey_inconsistencies_multiple_INCHIKEYS.pdf
 # output/figures/Analysis_3b_CAS↔InChIKey_inconsistencies_multiple_CAS_numbers.pdf
+# output/tables/Analysis_1_structure_vs_nonstructure.csv
+# output/tables/Analysis_2_interoperability_per_source.csv
+# output/tables/Analysis_3a_cas_to_inchikey.csv
+# output/tables/Analysis_3b_inchikey_to_cas.csv
 # ==============================================================================
 
 library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(here)
+library(readr)
 library(scales)
 
 # ------------------------------------------------------------------------------
@@ -86,6 +138,15 @@ ggsave(p1,
        device = "pdf",
        height = 5, width = 10, units = "in")
 
+# Columns (Analysis_1_structure_vs_nonstructure.csv):
+#   has_inchikey — TRUE = record has a resolvable InChIKey (structure-defined);
+#                  FALSE = record has no InChIKey (non-structure entity)
+#   label        — human-readable category label used in the figure
+#   n            — number of records in this category; the two rows sum to the
+#                  total number of records in all_substances
+#   pct          — share of total records: n / sum(n); the two rows sum to 1.0
+write_csv(df1, here("output", "tables", "Analysis_1_structure_vs_nonstructure.csv"))
+
 # ==============================================================================
 # Analysis 2: Per source — interoperability differs by regulation
 # ==============================================================================
@@ -98,7 +159,7 @@ ggsave(p1,
 # consequence of how different regulations define "substance".
 # ==============================================================================
 
-df2 <- all_substances |>
+df2_wide <- all_substances |>
   group_by(source) |>
   summarise(
     with_inchikey    = sum(!is.na(inchikey)),
@@ -107,7 +168,9 @@ df2 <- all_substances |>
     .groups = "drop"
   ) |>
   mutate(pct_with = with_inchikey / total) |>
-  arrange(desc(pct_with)) |>
+  arrange(desc(pct_with))
+
+df2 <- df2_wide |>
   pivot_longer(c(with_inchikey, without_inchikey),
                names_to = "type", values_to = "n") |>
   mutate(
@@ -142,6 +205,15 @@ ggsave(p2,
                        "Analysis_2_interoperability_differs_by_regulation.pdf"),
        device = "pdf",
        height = 5, width = 10, units = "in")
+
+# Columns (Analysis_2_interoperability_per_source.csv):
+#   source           — regulatory source identifier
+#   with_inchikey    — number of records in this source that have an InChIKey
+#   without_inchikey — number of records in this source without an InChIKey
+#   total            — with_inchikey + without_inchikey; total records in source
+#   pct_with         — with_inchikey / total; share of structure-defined entries;
+#                      1.0 = fully structure-defined, 0.0 = no linkable entries
+write_csv(df2_wide, here("output", "tables", "Analysis_2_interoperability_per_source.csv"))
 
 # ==============================================================================
 # Analysis 3: CAS ↔ InChIKey inconsistencies
@@ -184,6 +256,14 @@ ggsave(p3a,
        device = "pdf",
        height = 5, width = 10, units = "in")
 
+# Columns (Analysis_3a_cas_to_inchikey.csv):
+#   cas_number  — CAS registry number (only rows where both CAS and InChIKey are
+#                 present in all_substances are included)
+#   n_inchikeys — number of distinct InChIKeys observed for this CAS number across
+#                 all regulatory sources; 1 = consistent (one structure per CAS),
+#                 > 1 = inconsistency (same CAS mapped to multiple structures)
+write_csv(cas_to_inchi, here("output", "tables", "Analysis_3a_cas_to_inchikey.csv"))
+
 # 3b: One InChIKey → multiple CAS numbers
 inchi_to_cas <- all_substances |>
   filter(!is.na(cas_number), !is.na(inchikey)) |>
@@ -208,6 +288,14 @@ ggsave(p3b,
                        "Analysis_3b_CAS\u2194InChIKey_inconsistencies_multiple_CAS_numbers.pdf"),
        device = "pdf",
        height = 5, width = 10, units = "in")
+
+# Columns (Analysis_3b_inchikey_to_cas.csv):
+#   inchikey — InChIKey of the substance (only rows where both InChIKey and CAS
+#              are present in all_substances are included)
+#   n_cas    — number of distinct CAS numbers observed for this InChIKey across
+#              all regulatory sources; 1 = consistent (one CAS per structure),
+#              > 1 = the same structure has been assigned multiple CAS numbers
+write_csv(inchi_to_cas, here("output", "tables", "Analysis_3b_inchikey_to_cas.csv"))
 
 message(sprintf(
   "Analysis 3: %d CAS numbers map to >1 InChIKey; %d InChIKeys have >1 CAS",

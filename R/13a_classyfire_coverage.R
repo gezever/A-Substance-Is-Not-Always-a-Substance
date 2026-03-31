@@ -28,20 +28,49 @@
 #
 # METHODOLOGY
 # -----------
-# The `direct_parent` class (one level below the kingdom in ChemOnt) is used
-# as the classification unit because it offers sufficient specificity to
-# discriminate between chemical families while remaining broadly interpretable.
-# Higher-level classes (kingdom, superclass) are too coarse; lower-level
-# classes (class, subclass) fragment the data into many small groups.
-# Own addition: choice of direct_parent as the aggregation level is a
-# pragmatic balance; validated by checking that the top classes correspond to
-# well-known regulatory chemical families (e.g., organohalogens, steroids).
+# ## Established frameworks used as anchors
+#
+# | Framework | Role in methodology |
+# |---|---|
+# | **ChemOnt 2.1 / ClassyFire** (Djoumbou Feunang et al. 2016, *ClassyFire: automated chemical classification with a comprehensive, computable taxonomy*, J. Cheminform. 8:61. DOI: 10.1186/s13321-016-0174-y) | Hierarchical chemical ontology providing a `direct_parent` class for each InChIKey via structure-based rules.  The cache contains JSON responses from the ClassyFire REST API (https://cfb.fiehnlab.ucdavis.edu). |
+#
+# ## Own methodological additions
+#
+# | Choice | Justification |
+# |---|---|
+# | `direct_parent` as the aggregation level | One level below the kingdom in ChemOnt; offers sufficient specificity to discriminate chemical families while remaining broadly interpretable.  Superclass/kingdom are too coarse (groups all organic acids together); subclass/class fragment data into hundreds of near-empty bins.  Validated by confirming that the top classes correspond to well-known regulatory families (organohalogens, fatty acids, steroids). |
+# | Coverage counted on unique InChIKeys (not records) | Avoids double-counting a substance that appears in multiple regulatory sources; the metric measures chemical family breadth, not administrative repetition. |
+# | Top-30 bar chart with colour = n_sources | Bar length captures the absolute size of each class in the regulatory dataset; colour adds a second dimension (regulatory breadth) without requiring a separate plot. |
+#
+# INTERPRETATION
+# --------------
+# **Analysis 13a — Top 30 ChemOnt classes by substance coverage**
+# Long bars indicate chemical families that are heavily regulated in absolute
+# terms.  Dark colour (high n_sources) means the family is regulated across
+# many different instruments simultaneously; light colour (low n_sources)
+# means regulation is concentrated in one or two instruments.
+#
+# A family with a long bar but light colour may be an opportunity for
+# cross-instrument harmonisation: many substances in the same chemical class
+# but regulated by only one instrument.  A family with a short bar but dark
+# colour is a small but broadly regulated class — likely a legacy or
+# high-concern family.
+#
+# **Analysis 13b — Distribution of substance coverage across classes**
+# A highly right-skewed histogram (many classes with 1–5 substances, a few
+# with hundreds) is expected and reflects the power-law structure of
+# chemical space.  The long right tail consists of the dominant families
+# shown in 13a.  If the histogram is approximately uniform, the ChemOnt
+# cache is likely incomplete (few InChIKeys resolved) and coverage should
+# be increased before drawing conclusions.
 #
 # OUTPUTS
 # -------
 # output/figures/Analysis_13a_ChemOnt_prioritisation_top30.pdf
 # output/figures/Analysis_13b_ChemOnt_coverage_histogram.pdf
-# output/tables/class_coverage.rds
+# output/tables/Analysis_13_class_coverage.csv
+# output/tables/Analysis_13a_top30.csv
+# data/processed/class_coverage.rds  (consumed by 14_prioritization.R)
 # ==============================================================================
 
 library(dplyr)
@@ -49,6 +78,7 @@ library(ggplot2)
 library(here)
 library(purrr)
 library(jsonlite)
+library(readr)
 library(scales)
 
 # Null-safe fallback operator — returns b when a is NULL or length-0
@@ -108,7 +138,19 @@ class_coverage <- substance_class |>
   arrange(desc(n_inchikeys))
 
 # Save coverage table (used by 14_prioritization.R and reporting)
-saveRDS(class_coverage, here("output", "tables", "class_coverage.rds"))
+saveRDS(class_coverage, here("data", "processed", "class_coverage.rds"))
+
+# Columns (Analysis_13_class_coverage.csv):
+#   direct_parent_id  — ChemOnt identifier for the direct_parent class
+#                       (e.g., CHEMONTID:0000000); primary key
+#   direct_parent_lbl — human-readable class name (e.g., "Organochlorides")
+#   n_inchikeys       — number of unique InChIKeys in all_substances assigned
+#                       to this class; a substance appearing in multiple sources
+#                       is counted only once
+#   n_sources         — number of distinct regulatory sources containing at
+#                       least one InChIKey from this class; ranges 1–n_sources
+write_csv(class_coverage,
+          here("output", "tables", "Analysis_13_class_coverage.csv"))
 
 # ==============================================================================
 # Analysis 13a: Top 30 ChemOnt classes by regulatory substance coverage
@@ -150,6 +192,14 @@ ggsave(p13a,
                        "Analysis_13a_ChemOnt_prioritisation_top30.pdf"),
        device = "pdf",
        height = 8, width = 12, units = "in")
+
+# Columns (Analysis_13a_top30.csv):
+#   direct_parent_id  — ChemOnt identifier (same as in Analysis_13_class_coverage.csv)
+#   direct_parent_lbl — class name; the 30 entries with the highest n_inchikeys
+#   n_inchikeys       — unique substances in this class (bar length in the figure)
+#   n_sources         — regulatory breadth (colour encoding in the figure)
+write_csv(top30_classes,
+          here("output", "tables", "Analysis_13a_top30.csv"))
 
 # ==============================================================================
 # Analysis 13b: Distribution of substance coverage across ChemOnt classes

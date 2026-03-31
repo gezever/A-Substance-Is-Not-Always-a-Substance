@@ -26,13 +26,53 @@
 #
 # METHODOLOGY
 # -----------
-# Jaccard(A, B) = |A ∩ B| / |A ∪ B|
-# Hierarchical clustering (average linkage on Jaccard dissimilarity 1−J) orders
-# the heatmap rows/columns so that similar sources appear adjacent.
-# Own addition: hclust method "average" chosen for its balance between complete
-# and single linkage; no framework mandates a specific linkage method.
-# The obligation_sources vector follows the legal hierarchy of REACH and
-# related EU law (see also `14_prioritization.R` header for framework details).
+# ## Established frameworks used as anchors
+#
+# | Framework | Role in methodology |
+# |---|---|
+# | **Jaccard similarity index** (Jaccard 1912, *Bull. Soc. Vaud. Sci. Nat.* 37:547–579) | Pairwise overlap metric: J(A,B) = \|A∩B\| / \|A∪B\|; 1 = identical sets, 0 = no overlap.  Chosen because it normalises for set size, making sources of different lengths comparable. |
+# | **Hierarchical agglomerative clustering** (Ward 1963; Murtagh & Legendre 2014, *J. Classif.* 31(3):274–295) | Orders heatmap rows/columns by Jaccard dissimilarity (1−J) so that similar sources appear adjacent, making cluster structure visible as diagonal blocks. |
+# | **REACH Regulation (EC) No 1907/2006, Arts. 57–73; CLP Regulation (EC) No 1272/2008; EU POPs Regulation (EU) 2019/1021** | Legal basis for the `obligation_sources` selection in Analysis 12b: only instruments that impose binding legal consequences are included. |
+#
+# ## Own methodological additions
+#
+# | Choice | Justification |
+# |---|---|
+# | Average linkage (`hclust(method = "average")`) | No framework mandates a specific linkage method; "average" (UPGMA) balances the extremes of complete linkage (sensitive to outliers) and single linkage (chaining tendency), making it a robust default for exploratory clustering. |
+# | Jaccard computed on unique InChIKeys (not records) | Duplicate records for the same structure within a source would inflate the intersection count; deduplication ensures the index measures structural overlap, not administrative repetition. |
+# | Text annotations suppressed for Jaccard < 0.02 | Values below 0.02 are visually indistinguishable from zero and clutter the heatmap; the threshold is aesthetic, not analytical. |
+#
+# INTERPRETATION
+# --------------
+# **Analysis 12a — Jaccard heatmap**
+# The heatmap is symmetric; the diagonal is always 1.0 (a source is identical
+# to itself).  Read the off-diagonal values:
+#
+# - **High Jaccard (> 0.5, dark blue):** two sources regulate largely the same
+#   chemicals.  This may reflect legal cross-referencing (one instrument
+#   explicitly references another), shared scope, or both.  Substances in this
+#   cell appear on both lists and will accumulate high `list_score` in
+#   Analysis 14.
+# - **Moderate Jaccard (0.1–0.5):** partial overlap; both instruments share a
+#   common core but each also contains source-specific substances.
+# - **Near-zero Jaccard (< 0.05, white):** the instruments regulate largely
+#   distinct chemical pools.  Cross-list harmonisation is irrelevant for these
+#   pairs; each must be handled independently.
+#
+# Cluster blocks along the diagonal indicate groups of instruments with
+# similar regulatory scope.  Sources that fall outside any cluster are
+# structurally peripheral.
+#
+# **Analysis 12b — UpSet plot (obligation lists)**
+# The intersection bars show how many InChIKeys appear in exactly the
+# combination of obligation lists indicated below.  The tallest bar is the
+# most common membership pattern.  Substances appearing in only one obligation
+# list are in source-specific single-set bars; substances in multiple bars
+# represent the regulatory core that multiple binding instruments converge on.
+#
+# An empty intersection (no bar) for a combination means no InChIKey is
+# simultaneously on all those lists — either a regulatory gap or a structural
+# coverage issue.
 #
 # OUTPUTS
 # -------
@@ -197,13 +237,23 @@ grid.text(
 dev.off()
 
 # Columns (Analysis_12b_set_sizes.csv):
-#   source      — regulatory source identifier
-#   n_inchikeys — number of unique InChIKeys in that obligation list;
-#                 corresponds to the bar lengths on the left side of the UpSet plot
+#   source           — regulatory source identifier
+#   n_inchikeys      — number of unique InChIKeys in that obligation list;
+#                      corresponds to the bar lengths on the left side of the UpSet plot
+#   n_non_structured — number of records in that obligation list without an InChIKey
+#                      (no resolvable chemical structure); these entries are excluded
+#                      from the UpSet plot but represent real regulatory scope
+#   n_total          — n_inchikeys + n_non_structured; total records in the list
 write_csv(
-  inchi_src |>
+  all_substances |>
     filter(source %in% obligation_sources) |>
-    count(source, name = "n_inchikeys") |>
+    group_by(source) |>
+    summarise(
+      n_inchikeys      = n_distinct(inchikey[!is.na(inchikey)]),
+      n_non_structured = sum(is.na(inchikey)),
+      n_total          = n(),
+      .groups = "drop"
+    ) |>
     arrange(desc(n_inchikeys)),
   here("output", "tables", "Analysis_12b_set_sizes.csv")
 )
