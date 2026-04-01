@@ -2,14 +2,29 @@ PREFIX oa: <http://www.w3.org/ns/oa#>
 PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
 PREFIX dbo: <http://dbpedia.org/ontology/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dbp:            <http://dbpedia.org/property/>
 
-SELECT ?substance ?substance_name
+SELECT ?substance ?substance_name ?inchikey
     (GROUP_CONCAT(DISTINCT ?bio_activity_label; separator="|") AS ?bio_activity_labels)
     (GROUP_CONCAT(DISTINCT ?echa_list; separator="|") AS ?echa_lists)
+    (GROUP_CONCAT(DISTINCT ?casNumber; separator="|") AS ?casNumbers)
+    (GROUP_CONCAT(DISTINCT ?ecNumber; separator="|") AS ?ecNumbers)
 WHERE {
 
     ?substance a dbo:ChemicalSubstance ;
         skos:prefLabel ?substance_name .
+
+    OPTIONAL {
+        ?substance dbp:inchikey  ?inchikey .
+    }
+
+    OPTIONAL {
+        ?substance dbo:casNumber ?casNumber .
+    }
+
+    OPTIONAL {
+        ?substance dbo:ecNumber ?ecNumber .
+    }
 
     OPTIONAL {
         ?annotation skos:prefLabel ?bio_activity_label ;
@@ -28,5 +43,5 @@ WHERE {
 
 
 }
-GROUP BY ?substance ?substance_name
+GROUP BY ?substance ?substance_name ?inchikey
 ORDER BY ?substance
