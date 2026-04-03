@@ -7,6 +7,8 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage[section]{placeins}
+\usepackage{tabularx}
 \graphicspath{{../output/figures/}}
 %\usepackage{times}
 %\normalfont
@@ -19,12 +21,13 @@
 
 \begin{document}
 
-\input{sections/00_frontmatter}
-\input{sections/10_introduction}
-\input{sections/20_methods}
-\input{sections/30_results}
+\input{sections/01_frontmatter}
+\input{sections/11_introduction}
+\input{sections/21_methods}
+\input{sections/31_results}
 \input{sections/40_discussion}
 \input{sections/50_conclusion}
+\clearpage
 \input{sections/90_bibliography}
 
 \end{document}

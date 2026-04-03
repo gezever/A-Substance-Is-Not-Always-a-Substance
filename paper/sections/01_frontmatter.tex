@@ -1,0 +1,36 @@
+\begin{frontmatter}              % The preamble begins here.
+
+
+%\pretitle{Pretitle}
+\title{Chemical Identity Lost in Regulation: A Study of Semantic Interoperability in European Chemical Substance Data}
+\runningtitle{Chemical Identity Lost in Regulation}
+%\subtitle{Subtitle}
+
+\author[A]{\fnms{Geert} \snm{Van Haute}\orcid{0009-0002-9836-8139}%
+\thanks{Corresponding Author: Geert Van Haute, contact details.}},
+\author[A]{\fnms{Pieter} \snm{Fannes}\orcid{....-....-....-....}}
+and
+\author[A]{\fnms{Stijn} \snm{Goedertier}\orcid{....-....-....-....}}
+
+\runningauthor{G. Van Haute et al.}
+\address[A]{Department of Environment and Spatial Development, Flemish Government, 1000 Brussels, Belgium}
+
+
+\begin{abstract}
+    Chemical substances are fundamental entities in environmental regulation, yet their representation in regulatory data systems diverges significantly from established practices in chemistry and cheminformatics. While chemical identity can be unambiguously defined using structure-based identifiers such as the International Chemical Identifier (InChI) and InChIKey, European regulatory datasets rely on heterogeneous identifiers including CAS numbers, EC numbers, textual names, and loosely defined group descriptions.
+
+    This paper analyses the resulting interoperability challenges across European regulatory frameworks, based on a case study spanning 18 datasets from the European Chemicals Agency (ECHA) and related sources. We show that regulatory “substances” frequently represent heterogeneous semantic entities, including individual molecules, mixtures, analytical parameters, and substance groups, for which formal relationships are not explicitly defined.
+
+    Our results demonstrate that (i) a substantial fraction of regulatory entries cannot be linked to a defined chemical structure, (ii) CAS numbers do not provide a reliable unique identifier, and (iii) semantic and embedding-based approaches fail to recover chemical identity for non-structure substances. We further show that resolving these inconsistencies retrospectively leads to combinatorial complexity that is infeasible at scale.
+
+    In contrast, structure-based identifiers and ontology-driven approaches, as used in cheminformatics resources such as PubChem and ChEBI, enable scalable integration through linked data principles. We argue that interoperability of chemical substance data must be addressed at the level of legislation and data modelling, by adopting structure-based identifiers, formal ontologies, and machine-readable representations.
+\end{abstract}
+
+
+
+\begin{keyword}
+chemical substance identification\sep semantic interoperability\sep regulatory interoperability\sep REACH\sep
+InChIKey\sep cheminformatics\sep FAIR data\sep knowledge graph\sep
+European environmental legislation
+\end{keyword}
+\end{frontmatter}

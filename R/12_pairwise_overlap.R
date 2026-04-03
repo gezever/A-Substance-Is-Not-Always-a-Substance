@@ -230,7 +230,7 @@ UpSetR::upset(
   sets.x.label    = "InChIKeys per list"
 )
 grid.text(
-  "Analysis 12b: Overlap of obligation lists (InChIKey)",
+  "Overlap of obligation lists (InChIKey)",
   x = 0.65, y = 0.97,
   gp = gpar(fontsize = 12, fontface = "bold")
 )

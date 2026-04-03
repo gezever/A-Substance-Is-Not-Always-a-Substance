@@ -170,34 +170,9 @@ score~\cite{Rousseeuw1987} for k-means solutions with $k \in \{2, \ldots, 12\}$
 solution ($k = 6$) was applied using Lloyd's algorithm~\cite{Lloyd1982} to
 partition the substance names into six semantically coherent groups.
 
-For visualisation, the embeddings were projected to two dimensions using both
+For visualisation, the embeddings were projected to two dimensions using
 UMAP~\cite{McInnes2018} (15 nearest neighbours, minimum distance~0.1, cosine
-metric, seed~42) and t-SNE~\cite{vanderMaaten2008} (perplexity $= \min(30,
-\lfloor(n-1)/3\rfloor)$, cosine metric).  A cosine metric was used for both
-projection methods because it is the natural similarity measure for
-L2-normalised sentence-transformer embeddings.  Two complementary diagnostics were applied to assess whether the visible
-cluster structure reflects genuine semantic grouping or projection artefact.
-
-\textit{Silhouette comparison} (Analysis~8g): the mean silhouette
-score~\cite{Rousseeuw1987} was computed for the $k = 6$ cluster assignment in
-three spaces: the original 384-dimensional embedding (ground truth), the UMAP
-2-D projection, and the t-SNE 2-D projection.  If the silhouette score in a
-projection substantially exceeds that in the embedding space, the projection is
-inflating cluster separation beyond what exists in the original data — a
-visualisation artefact~\cite{McInnes2018}.  Concordance of all three scores
-confirms that the cluster structure is genuine.
-
-\textit{Trustworthiness and continuity} (Analysis~8h): following Venna and
-Kaski~\cite{Venna2006}, trustworthiness $T(k)$ measures the fraction of a
-point's $k$ nearest neighbours in the projection that were also among its $k$
-nearest neighbours in the original space; continuity $C(k)$ measures the
-complementary fraction — how many true high-dimensional neighbours are
-preserved in the projection.  Values close to~1 indicate a faithful
-projection; $T < 1$ signals false neighbours (tear artefact) and $C < 1$
-signals lost neighbours (compression artefact).  Both metrics were computed for
-$k \in \{5, 10, 20, 50\}$ for each of the UMAP and t-SNE projections using the
-vectorised rank-matrix implementation described by Venna and
-Kaski~\cite{Venna2006}.
+metric, seed~42).
 
 The six resulting clusters were labelled manually upon visual inspection of the
 projections:
@@ -280,29 +255,27 @@ stored at \texttt{data/processed/rdf/substances\_taxonomy.ttl}.
 \subsection{Workload Estimation for Manual Curation}
 \label{sec:workload}
 
-The Flemish \textit{sommatie\_stoffen} list contains $N$ substance-group entries
-whose pairwise semantic relationships --- such as subset, overlap, or equivalence
---- require manual expert assessment to establish formally.  Because every unique
-pair must be evaluated independently, the total number of assessments scales
-quadratically as $\binom{N}{2} = N(N-1)/2$.  At an assumed throughput of
-100 pair assessments per person-day, the total workload in person-days is
+Regulatory entries that cannot be resolved to a chemical structure must be
+related to one another through manual expert assessment.  For each pair of
+non-structure entries, an expert must determine which of four mutually exclusive
+semantic relations holds: (1)~\textit{equivalence} --- both entries refer to the
+same set of substances; (2)~\textit{subset} --- one entry is fully contained
+within the other; (3)~\textit{overlap} --- the entries share some but not all
+substances; or (4)~\textit{disjoint} --- the entries share no substances.  Only
+by establishing these relations explicitly can the semantic alignment required
+for cross-list interoperability be achieved.
+
+Because every unique pair must be evaluated independently, the total number of
+assessments scales quadratically as $\binom{N}{2} = N(N-1)/2$.  At an assumed
+throughput of 100 pair assessments per person-day, the total workload in
+person-days is
 \begin{equation}
   D(N) = \left\lceil \frac{N(N-1)}{200} \right\rceil,
   \label{eq:workload}
 \end{equation}
-and the marginal cost of adding one additional group to the list is approximately
-$\lceil(N-1)/100\rceil$ person-days.  Combining the total workload with a target
-completion date of 2030-01-01 and an assumption of 200 productive working days
-per year (a standard European approximation), the minimum staffing requirement is
-\begin{equation}
-  \mathrm{FTE} = \left\lceil \frac{D(N)}{D_{\text{available}}} \right\rceil,
-  \label{eq:fte}
-\end{equation}
-where $D_{\text{available}}$ is the number of working days remaining before the
-target date.  Ceiling functions are used throughout to avoid under-estimating
-the workload: a fraction of a person-day still requires at least one
-analyst-day, and a fraction of an FTE still requires at least one additional
-analyst.
+where $N$ is the number of non-structure entries under consideration.  The
+ceiling function avoids under-estimating the workload: a fraction of a
+person-day still requires at least one analyst-day.
 
 \subsection{Composite Priority Scoring}
 \label{sec:prioritisation}
@@ -327,27 +300,6 @@ REACH~\cite{REACH2006}, CLP~\cite{CLP2008}, and the POPs
 Regulation~\cite{POPs2019}.  Table~\ref{tab:list-weights} summarises the
 assignments.
 
-\begin{table}[htbp]
-\caption{\textbf{Table 2.} Regulatory list weights used in Domain~1 of the
-composite priority score.  The weight hierarchy reflects the legal consequence
-of each instrument under REACH (Arts.\ 57--73), CLP (Annex~VI), and the EU
-POPs Regulation.}
-\label{tab:list-weights}
-\centering
-\small
-\begin{tabular}{clp{7cm}}
-\hline
-\textbf{Weight} & \textbf{List or instrument} & \textbf{Legal basis} \\
-\hline
-5 & Candidate list; SVHC identification & Formal SVHC identification, REACH Arts.\ 57--59; triggers communication obligations (Art.\ 33) \\
-4 & Restriction list; authorisation list; POPs list & Binding restrictions or use prohibition, REACH Arts.\ 60--73; elimination obligation, POPs Reg.\ (EU) 2019/1021 \\
-3 & Restriction/authorisation/POPs process; PBT assessment; ED assessment & Active regulatory scrutiny; PBT/ED assessments correspond directly to SVHC criteria, REACH Arts.\ 57(d)--(f) and Annex~XIII \\
-2 & Harmonised CLP list; CLH process; pesticide approval & Legally binding hazard classifications, CLP Annex~VI; positive safety determination required, Reg.\ (EC) No 1107/2009 \\
-1 & Substance evaluation; dossier evaluation; EU positive list & Regulatory scrutiny without a final hazard determination \\
-0 & REACH registration; \textit{sommatie\_stoffen}; anhydrous & Baseline administrative requirement; no inherent hazard determination, REACH Title~II \\
-\hline
-\end{tabular}
-\end{table}
 
 The list score for a given substance is the sum of the weights of all lists on
 which it appears:
@@ -361,6 +313,28 @@ by any regulatory framework; it was chosen to reflect the ordinal REACH
 hierarchy while remaining interpretable, with the ratio 5:0 (SVHC candidate
 list : REACH registration) mirroring the qualitative difference in legal
 consequence.
+
+\begin{table}[!ht]
+	\caption{\textbf{} Regulatory list weights used in Domain~1 of the
+		composite priority score.  The weight hierarchy reflects the legal consequence
+		of each instrument under REACH (Arts.\ 57--73), CLP (Annex~VI), and the EU
+		POPs Regulation.}
+	\label{tab:list-weights}
+	\centering
+	\footnotesize
+	\begin{tabularx}{\linewidth}{@{}c p{3.8cm} X@{}}
+		\hline
+		\textbf{Weight} & \textbf{List or instrument} & \textbf{Legal basis} \\
+		\hline
+		5 & Candidate list; SVHC identification & Formal SVHC identification, REACH Arts.\ 57--59; triggers communication obligations (Art.\ 33) \\
+		4 & Restriction list; authorisation list; POPs list & Binding restrictions or use prohibition, REACH Arts.\ 60--73; elimination obligation, POPs Reg.\ (EU) 2019/1021 \\
+		3 & Restriction/authorisation/POPs process; PBT assessment; ED assessment & Active regulatory scrutiny; PBT/ED assessments correspond directly to SVHC criteria, REACH Arts.\ 57(d)--(f) and Annex~XIII \\
+		2 & Harmonised CLP list; CLH process; pesticide approval & Legally binding hazard classifications, CLP Annex~VI; positive safety determination required, Reg.\ (EC) No 1107/2009 \\
+		1 & Substance evaluation; dossier evaluation; EU positive list & Regulatory scrutiny without a final hazard determination \\
+		0 & REACH registration; anhydrous forms & Baseline administrative requirement; no inherent hazard determination, REACH Title~II \\
+		\hline
+	\end{tabularx}
+\end{table}
 
 \subsubsection{Domain 2: Biological Hazard Weights}
 \label{sec:bio-weights}

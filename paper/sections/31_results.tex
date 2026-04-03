@@ -1,0 +1,66 @@
+\section{Results}
+\label{sec:results}
+
+\subsection{Dataset Overview}
+
+Integration of 18 regulatory sources yielded 41,813 records. Of these,
+63\% could be linked to a defined molecular structure via InChIKey.
+
+\subsection{Heterogeneity of Substance Definitions}
+
+A substantial fraction of regulatory entries does not correspond to a
+well-defined chemical structure. Approximately 37\% of entries are
+non-structure substances, including mixtures (UVCBs), substance groups,
+analytical parameters, or entries lacking usable identifiers.
+
+This heterogeneity varies strongly between regulatory instruments:
+some lists are largely structure-based, while others are dominated by
+group or mixture definitions.
+
+\subsection{Limitations of CAS Numbers}
+
+Although CAS numbers are widely used, they do not provide a reliable
+unique identifier. Multiple CAS numbers may refer to the same structure,
+and conversely, a single CAS number may correspond to multiple structures.
+This confirms that CAS-based linking is insufficient for interoperability.
+
+\subsection{Limited Interoperability Across Regulatory Lists}
+
+Cross-list analysis shows that most substances are unique to a single
+regulatory source. Overlap between lists is limited, reflecting the
+domain-specific design of regulatory instruments rather than a shared
+chemical reference framework.
+
+\subsection{Failure of Semantic Approaches for Non-Structure Substances}
+
+Embedding-based clustering of non-structure substance names yields
+semantically coherent groups, but does not resolve chemical identity.
+Matching to chemical taxonomies (ChemOnt) succeeds for less than 1\%
+of cases with high confidence.
+
+These results indicate that semantic methods cannot compensate for the
+absence of structure-based identifiers.
+
+\subsection{Knowledge Graph Integration}
+
+Structure-defined substances can be successfully integrated across
+regulatory lists, chemical taxonomies (ChemOnt), and biological
+annotations (ChEBI) using InChIKey as a linking key. This demonstrates
+the feasibility of a linked-data approach when structure information is
+available.
+
+\subsection{Scale of the Interoperability Problem}
+
+For the 15,000+ non-structure entries, full manual reconciliation would
+require on the order of one million pairwise comparisons, corresponding
+to several thousand person-years of expert effort.
+
+This makes retrospective harmonisation infeasible at scale.
+
+\subsection{Priority Patterns}
+
+Combining regulatory presence with biological hazard annotations enables
+identification of high-priority substances and chemical classes.
+A small number of chemical classes accounts for a large fraction of
+regulated substances, suggesting that class-level approaches can support
+regulatory alignment.

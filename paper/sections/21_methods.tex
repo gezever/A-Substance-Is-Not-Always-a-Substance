@@ -1,0 +1,63 @@
+\section{Methods}
+\label{sec:methods}
+
+\subsection{Data Integration}
+
+Substance records were compiled from 18 European regulatory sources, including
+REACH-related lists (candidate, authorisation, restriction, POPs, CLP),
+the EU Pesticides Database, and a Flemish administrative list. For each entry,
+available identifiers (CAS number, EC number, substance name) were collected.
+
+Where possible, substances were linked to structure-based identifiers
+(InChIKey) via PubChem. The resulting dataset links each regulatory entry to
+its identifiers and source list.
+
+\subsection{Chemical Identity and Linkability}
+
+Each substance entry was classified into one of several types reflecting its
+degree of chemical specificity: structure-defined molecule, substance group,
+mixture/UVCB, analytical parameter, or administrative entry.
+
+Based on this classification, a linkability taxonomy was defined, ranging from
+fully structure-resolvable entries (InChIKey) to non-identifiable entries.
+This taxonomy expresses the extent to which regulatory substances can be
+unambiguously linked across datasets.
+
+\subsection{Identifier Consistency Analysis}
+
+For entries with both CAS numbers and InChIKeys, bidirectional mappings were
+analysed to assess identifier consistency. This analysis evaluates whether CAS
+numbers uniquely map to structures and vice versa.
+
+\subsection{Structure Coverage and Cross-List Overlap}
+
+For each regulatory source, the proportion of structure-defined substances was
+calculated. Overlap between sources was analysed using structure-based matching
+(InChIKey) and set similarity measures.
+
+\subsection{Analysis of Non-Structure Substances}
+
+Substances without structure identifiers were analysed using text-based
+methods, including embedding-based clustering and similarity matching to
+chemical taxonomies (ChemOnt), to assess whether semantic techniques can
+recover meaningful structure or classification.
+
+\subsection{Knowledge Graph Construction}
+
+All data were integrated into an RDF knowledge graph using SKOS for taxonomy
+representation. Structure-defined substances were linked to ChemOnt classes and
+to ChEBI entities via InChIKey, enabling integration of biological hazard
+annotations.
+
+\subsection{Workload Estimation}
+
+For non-structure substances, interoperability requires manual assessment of
+pairwise relationships (equivalence, subset, overlap, disjoint). The required
+effort scales quadratically with the number of such entries.
+
+\subsection{Priority Scoring}
+
+A composite priority score was defined by combining regulatory presence
+(across ECHA lists) with biological hazard annotations derived from ChEBI.
+This score is used to identify substances and chemical classes most relevant
+for regulatory alignment.

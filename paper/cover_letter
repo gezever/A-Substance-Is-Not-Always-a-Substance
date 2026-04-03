@@ -1,0 +1,25 @@
+Dear Program Committee,
+
+Please find attached our submission entitled *“Chemical Identity Lost in Regulation: A Study of Semantic Interoperability in European Chemical Substance Data”* for consideration in the Research Track of the SEMANTiCS 2026 conference.
+
+This paper addresses a fundamental but underexplored challenge in semantic interoperability: the mismatch between domain-specific scientific representations and their counterparts in regulatory data systems. Focusing on chemical substances in European environmental legislation, we analyse 18 datasets derived from the European Chemicals Agency (ECHA) and related sources.
+
+Our results show that regulatory “substances” are not homogeneous entities but encompass a mixture of semantic types, including individual molecules, mixtures, substance groups, and analytical parameters. We demonstrate that:
+
+* a substantial fraction of regulatory entries cannot be linked to a defined chemical structure,
+* widely used identifiers such as CAS numbers do not provide a reliable basis for interoperability, and
+* data-driven approaches, including semantic embeddings, are insufficient to recover chemical identity in the absence of structure-based representations.
+
+We further show that retrospective harmonisation leads to combinatorial complexity that is infeasible at scale. In contrast, we demonstrate that structure-based identifiers (InChIKey) combined with ontology-driven approaches enable scalable integration through knowledge graph principles.
+
+The main contribution of this work is to show that interoperability challenges in this domain are not merely technical but originate in the conceptual and legal definition of “substances”. As such, the paper contributes to the SEMANTiCS community by highlighting the limits of post hoc data integration and by arguing for the integration of semantic and linked data principles directly into regulatory data models and legislation.
+
+We believe this work is particularly relevant to the SEMANTiCS audience, as it connects knowledge graph engineering, FAIR data principles, and real-world data governance challenges in a high-impact regulatory domain.
+
+This manuscript is original, has not been published elsewhere, and is not under consideration by any other conference or journal.
+
+Thank you for your consideration.
+
+Kind regards,
+Geert Van Haute
+(on behalf of all authors)
