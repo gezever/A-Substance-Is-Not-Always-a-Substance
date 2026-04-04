@@ -4,12 +4,12 @@
 \subsection{Data Integration}
 
 Substance records were compiled from 18 European regulatory sources, including
-REACH-related lists (candidate, authorisation, restriction, POPs, CLP),
+REACH-related lists (candidate, authorisation, restriction, POPs~\cite{POPs2019}, CLP),
 the EU Pesticides Database, and a Flemish administrative list. For each entry,
 available identifiers (CAS number, EC number, substance name) were collected.
 
 Where possible, substances were linked to structure-based identifiers
-(InChIKey) via PubChem. The resulting dataset links each regulatory entry to
+(InChIKey) via PubChem~\cite{Kim2015}. The resulting dataset links each regulatory entry to
 its identifiers and source list.
 
 \subsection{Chemical Identity and Linkability}
@@ -38,26 +38,26 @@ calculated. Overlap between sources was analysed using structure-based matching
 \subsection{Analysis of Non-Structure Substances}
 
 Substances without structure identifiers were analysed using text-based
-methods, including embedding-based clustering and similarity matching to
-chemical taxonomies (ChemOnt), to assess whether semantic techniques can
-recover meaningful structure or classification.
+methods, including embedding-based clustering~\cite{Reimers2019,Wang2020MiniLM,Rousseeuw1987,Lloyd1982,McInnes2018} 
+and similarity matching to chemical taxonomies (ChemOnt), to assess whether 
+semantic techniques can recover meaningful structure or classification~\cite{Manning2008,DjoumbouFeunang2016} .
 
 \subsection{Knowledge Graph Construction}
 
-All data were integrated into an RDF knowledge graph using SKOS for taxonomy
+All data were integrated into an RDF knowledge graph using SKOS~\cite{W3C2009SKOS} for taxonomy
 representation. Structure-defined substances were linked to ChemOnt classes and
 to ChEBI entities via InChIKey, enabling integration of biological hazard
-annotations.
+annotations~\cite{W3C2017OA}.
 
 \subsection{Workload Estimation}
 
 For non-structure substances, interoperability requires manual assessment of
 pairwise relationships (equivalence, subset, overlap, disjoint). The required
-effort scales quadratically with the number of such entries.
+effort scales quadratically with the number of such entries as $\binom{N}{2} = N(N-1)/2$ where $N$ is the number of non-structure entries under consideration.
 
 \subsection{Priority Scoring}
 
-A composite priority score was defined by combining regulatory presence
-(across ECHA lists) with biological hazard annotations derived from ChEBI.
+A composite priority score~\cite{Reif2010} was defined by combining regulatory presence
+(across ECHA lists~\cite{CLP2008,EUCSS2020,POPs2019}) with biological hazard annotations derived from ChEBI~\cite{Degtyarenko2008}.
 This score is used to identify substances and chemical classes most relevant
 for regulatory alignment.

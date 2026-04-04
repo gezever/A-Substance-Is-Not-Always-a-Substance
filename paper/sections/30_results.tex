@@ -180,6 +180,7 @@ Figure~\ref{fig:analysis13b} reveals the long-tail character of ChemOnt class co
 \subsection{Knowledge Graph Construction}
 \label{sec:results-kg}
 
+
 All processed data — linkability taxonomy assignments, k-means cluster labels, ClassyFire direct-parent annotations, and ChEBI role annotations — were serialised to a unified RDF Turtle knowledge graph as described in Section~\ref{sec:kg}. The graph integrates substance-level nodes (one per unique InChIKey or substance name), their regulatory source memberships, chemical taxonomy classifications, and biological role annotations. Semantic enrichment via SPARQL CONSTRUCT queries over the merged ChemOnt 2.1 SKOS ontology and ChEBI OWL graph enables downstream SPARQL-based queries across the regulatory, structural, and biological dimensions of the dataset. The output file \texttt{data/processed/rdf/substances\_taxonomy.ttl} constitutes the machine-readable foundation for the priority scoring analysis described in the following subsection.
 
 \subsection{Workload Estimation for Manual Curation}

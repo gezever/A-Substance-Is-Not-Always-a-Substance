@@ -391,7 +391,7 @@ p9n <- ggplot(top_wide, aes(x = gap_12, y = score_1)) +
   geom_point(alpha = 0.4, colour = "#4a90d9", size = 1) +
   geom_vline(xintercept = 0.05, linetype = "dashed", colour = "#e05c5c") +
   geom_hline(yintercept = 0.80, linetype = "dashed", colour = "#e05c5c") +
-  theme_minimal(base_size = 12) +
+  theme_minimal(base_size = 16) +
   labs(
     title    = "Match quality landscape",
     subtitle = "Dashed lines show applied filters: score_1 > 0.8 and gap_12 > 0.05",

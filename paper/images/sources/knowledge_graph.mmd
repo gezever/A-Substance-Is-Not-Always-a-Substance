@@ -1,0 +1,29 @@
+graph LR
+%% Input layer
+    A["Regulatory datasets\n(18 sources)"]
+
+%% Core layer
+    B["Regulatory substances\n~17,500 entities\n(SKOS concepts)"]
+
+%% Linking layers
+    C["Structure-based identity\n(InChIKey)"]
+    D["Chemical classification\n(ChemOnt hierarchy\n~4,800 classes)"]
+    E["Biological roles\n(ChEBI roles\n~1,400 classes)"]
+
+%% Derived layers
+    F["Linkability tiers\n(7 categories)"]
+    G["Semantic clusters\n(embedding-based\nk = 6)"]
+    H["Annotations\n~46,600 links"]
+
+%% Relations
+    A --> B
+
+    B --> C
+    B --> D
+    B --> E
+
+    B --> F
+    B --> G
+
+    E --> H
+    B --> H

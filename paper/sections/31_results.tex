@@ -1,21 +1,66 @@
 \section{Results}
 \label{sec:results}
 
+
+\subsection{Overview of the integrated knowledge graph}
+\label{sec:knowledge_graph}
+
+We constructed an integrated knowledge graph to analyse the representation 
+and interoperability of regulatory substances across datasets. 
+Figure~\ref{fig:knowledge_graph} provides an overview of the resulting 
+graph structure and its main semantic layers.
+
+\begin{figure}[!ht]
+	\centering                                                             
+	\includemermaid[width=1\linewidth]{images/sources/knowledge_graph.mmd}                                                                              
+	\caption{
+		Overview of the integrated knowledge graph constructed from 18 regulatory datasets. 
+		Regulatory substances (~17,500 entities) are represented as SKOS concepts 
+		and form the core layer of the graph. 
+		Where possible, substances are linked to structure-based identifiers (InChIKey), 
+		enabling alignment with chemical classification systems (ChemOnt) 
+		and biological roles (ChEBI). 
+		In addition, substances are organised into linkability tiers 
+		reflecting their degree of chemical specificity, and into 
+		semantic clusters derived from embedding-based similarity. 
+		The graph is further enriched with annotations (~46,600 links) 
+		connecting substances to regulatory sources and functional roles. 
+		The figure highlights the multiple semantic layers 
+		required to represent and integrate heterogeneous regulatory substance definitions.
+	}\label{fig:knowledge_graph}
+\end{figure} 
+
 \subsection{Dataset Overview}
 
 Integration of 18 regulatory sources yielded 41,813 records. Of these,
 63\% could be linked to a defined molecular structure via InChIKey.
 
+
 \subsection{Heterogeneity of Substance Definitions}
+\label{sec:semantic_mismatch}
 
-A substantial fraction of regulatory entries does not correspond to a
-well-defined chemical structure. Approximately 37\% of entries are
-non-structure substances, including mixtures (UVCBs), substance groups,
-analytical parameters, or entries lacking usable identifiers.
+A substantial fraction of regulatory entries does not correspond to a well-defined chemical structure. Approximately 37\% of entries are non-structure substances, including mixtures (UVCBs), substance groups, analytical parameters, or entries lacking usable identifiers. This heterogeneity reflects fundamental differences in how “substances” are defined across regulatory contexts (cf.\ Figure~\ref{fig:regulatory_groups}).
 
-This heterogeneity varies strongly between regulatory instruments:
-some lists are largely structure-based, while others are dominated by
-group or mixture definitions.
+The degree of heterogeneity varies strongly between regulatory instruments: some lists are largely structure-based, while others are dominated by group or mixture definitions, limiting their interoperability.
+
+Application of the seven-tier linkability taxonomy (Section~\ref{sec:linkability}) to the full dataset reveals that 20,909 entries (62.5\%) are fully addressable via a direct InChIKey (tier 1; Figure~\ref{fig:analysis4d}). A further 60 entries correspond to substance groups that can be partially resolved: 15 entries (${<}0.1$\%) belong to tier 2 (group with resolvable base compound) and 45 (0.1\%) to tier 3 (group with unresolvable base compound). Together, these tiers represent the structure-addressable portion of the dataset.
+
+The remaining 37.5\% of entries are not directly addressable by structure. Among these, 3,865 entries (11.6\%) carry a CAS number but cannot be resolved to a unique InChIKey (tier 4), demonstrating that CAS identifiers do not guarantee structural identity. A further 3,622 entries (10.8\%) correspond to UVCB substances, undefined mixtures, or analytical parameters (tier 5), for which no single molecular representation exists. Additionally, 15 entries (${<}0.1$\%) represent administrative or regulatory constructs (tier 6), and 4,981 entries (14.9\%) lack any actionable identifier (tier 7). This final group — nearly one in six regulatory records — constitutes the most significant barrier to automated cross-dataset substance matching.
+
+These results show that more than one-third of regulatory substance entries cannot be linked to a well-defined chemical structure, and that even commonly used identifiers such as CAS numbers fail to ensure unambiguous identification. As a result, structure-based integration approaches can only be applied to a subset of regulatory data, while the remainder requires fundamentally different modelling strategies.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Analysis_4d_Linkability_taxonomy_general_overview.pdf}
+	\caption{
+		Seven-tier linkability taxonomy applied to all 33,452 unique regulatory substance entries. 
+		Tier 1 (62.5\%) corresponds to substances that can be directly linked to a defined chemical structure via InChIKey. 
+		The remaining tiers represent decreasing levels of structural specificity, including group definitions, mixtures, and entries lacking actionable identifiers. 
+		Overall, 37.5\% of regulatory substances cannot be resolved to a unique chemical structure.
+	}
+	\label{fig:analysis4d}
+\end{figure}
+
 
 \subsection{Limitations of CAS Numbers}
 
@@ -33,13 +78,21 @@ chemical reference framework.
 
 \subsection{Failure of Semantic Approaches for Non-Structure Substances}
 
-Embedding-based clustering of non-structure substance names yields
-semantically coherent groups, but does not resolve chemical identity.
-Matching to chemical taxonomies (ChemOnt) succeeds for less than 1\%
-of cases with high confidence.
+Embedding-based clustering of non-structure substance names yields semantically coherent groups, but does not resolve chemical identity. While clusters reflect lexical or contextual similarity between substance descriptions, they do not correspond to well-defined molecular entities.
 
-These results indicate that semantic methods cannot compensate for the
-absence of structure-based identifiers.
+To assess whether semantic similarity can be used to recover chemical meaning, we attempted to match non-structure substances to chemical taxonomy classes (ChemOnt). High-confidence matches were obtained for less than 1\% of cases, indicating that semantic approaches are largely insufficient for reconstructing chemical identity.
+
+The match quality landscape (Figure~\ref{fig:analysis9n}) plots the score gap $\Delta_{12}$ between the best and second-best matches against the best match score $s_1$ for all substance--class pairs. Entries in the upper-right region (high $s_1$, high $\Delta_{12}$) correspond to unambiguous matches and represent the 107 high-confidence mappings retained in our analysis. In contrast, entries with high $s_1$ but low $\Delta_{12}$ indicate genuine ambiguity between multiple candidate classes, reflecting the underspecified nature of the original substance definitions.
+
+The predominance of low-confidence and ambiguous matches demonstrates that semantic and embedding-based methods cannot compensate for the absence of structure-based identifiers. In particular, these approaches fail systematically for substance groups, mixtures, and analytical parameters, where no single underlying chemical structure exists.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{Analysis_9n_quality_landscape.pdf}
+	\caption{Match quality landscape: score gap $\Delta_{12}$ versus best match score $s_1$ for all non-structure substance--ChemOnt class pairs. Entries in the upper-right region satisfy both quality thresholds and are retained as high-confidence matches.}
+	\label{fig:analysis9n}
+\end{figure}
+
 
 \subsection{Knowledge Graph Integration}
 
@@ -50,12 +103,27 @@ the feasibility of a linked-data approach when structure information is
 available.
 
 \subsection{Scale of the Interoperability Problem}
+\label{sec:workload}
 
-For the 15,000+ non-structure entries, full manual reconciliation would
-require on the order of one million pairwise comparisons, corresponding
-to several thousand person-years of expert effort.
+For the more than 15,000 non-structure entries, full manual reconciliation would require on the order of hundreds of millions of pairwise comparisons. Under conservative assumptions, this corresponds to several thousand person-years of expert effort.
 
-This makes retrospective harmonisation infeasible at scale.
+Figure~\ref{fig:analysis10c} quantifies this workload across all regulatory sources, illustrating both the absolute scale and the quadratic growth that makes each additional non-structure entry disproportionately costly. Even moderate increases in the number of unresolved entries lead to a rapidly escalating curation burden.
+
+Manual pairwise reconciliation at this scale is not operationally feasible. This result highlights a fundamental constraint: interoperability cannot be achieved through retrospective harmonisation of heterogeneous substance definitions.
+
+Instead, the only scalable strategy is to address the problem at its source. By requiring structure-resolvable identifiers and ontology-based representations in regulatory definitions wherever chemically applicable, the number of entries requiring manual reconciliation can be structurally reduced rather than managed post hoc.
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=\linewidth]{Analysis_10c_workload_non_structured.pdf}
+	\caption{
+		Estimated pairwise curation workload for 15,432 non-structure entries across the combined regulatory dataset, broken down by source. 
+		The total corresponds to approximately 1.2 million person-days (nearly 6,000 person-years) under an assumed throughput of 100 pair assessments per person-day. 
+		The quadratic growth of the workload illustrates that manual reconciliation is not scalable, reinforcing the need for structure-based and ontology-driven representations at the source.
+	}
+	\label{fig:analysis10c}
+\end{figure}
+
 
 \subsection{Priority Patterns}
 
@@ -64,3 +132,5 @@ identification of high-priority substances and chemical classes.
 A small number of chemical classes accounts for a large fraction of
 regulated substances, suggesting that class-level approaches can support
 regulatory alignment.
+
+
