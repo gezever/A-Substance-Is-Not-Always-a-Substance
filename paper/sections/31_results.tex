@@ -77,14 +77,7 @@ domain-specific design of regulatory instruments rather than a shared
 chemical reference framework.
 
 \subsection{Failure of Semantic Approaches for Non-Structure Substances}
-
 Embedding-based clustering of non-structure substance names yields semantically coherent groups, but does not resolve chemical identity. While clusters reflect lexical or contextual similarity between substance descriptions, they do not correspond to well-defined molecular entities.
-
-To assess whether semantic similarity can be used to recover chemical meaning, we attempted to match non-structure substances to chemical taxonomy classes (ChemOnt). High-confidence matches were obtained for less than 1\% of cases, indicating that semantic approaches are largely insufficient for reconstructing chemical identity.
-
-The match quality landscape (Figure~\ref{fig:analysis9n}) plots the score gap $\Delta_{12}$ between the best and second-best matches against the best match score $s_1$ for all substance--class pairs. Entries in the upper-right region (high $s_1$, high $\Delta_{12}$) correspond to unambiguous matches and represent the 107 high-confidence mappings retained in our analysis. In contrast, entries with high $s_1$ but low $\Delta_{12}$ indicate genuine ambiguity between multiple candidate classes, reflecting the underspecified nature of the original substance definitions.
-
-The predominance of low-confidence and ambiguous matches demonstrates that semantic and embedding-based methods cannot compensate for the absence of structure-based identifiers. In particular, these approaches fail systematically for substance groups, mixtures, and analytical parameters, where no single underlying chemical structure exists.
 
 \begin{figure}[H]
 	\centering
@@ -94,25 +87,22 @@ The predominance of low-confidence and ambiguous matches demonstrates that seman
 \end{figure}
 
 
-\subsection{Knowledge Graph Integration}
 
-Structure-defined substances can be successfully integrated across
-regulatory lists, chemical taxonomies (ChemOnt), and biological
-annotations (ChEBI) using InChIKey as a linking key. This demonstrates
-the feasibility of a linked-data approach when structure information is
-available.
+
+To assess whether semantic similarity can be used to recover chemical meaning, we attempted to match non-structure substances to chemical taxonomy classes (ChemOnt). High-confidence matches were obtained for less than 1\% of cases, indicating that semantic approaches are largely insufficient for reconstructing chemical identity.
+
+The match quality landscape (Figure~\ref{fig:analysis9n}) plots the score gap $\Delta_{12}$ between the best and second-best matches against the best match score $s_1$ for all substance--class pairs. Entries in the upper-right region (high $s_1$, high $\Delta_{12}$) correspond to unambiguous matches and represent the 107 high-confidence mappings retained in our analysis. In contrast, entries with high $s_1$ but low $\Delta_{12}$ indicate genuine ambiguity between multiple candidate classes, reflecting the underspecified nature of the original substance definitions.
+
+The predominance of low-confidence and ambiguous matches demonstrates that semantic and embedding-based methods cannot compensate for the absence of structure-based identifiers. In particular, these approaches fail systematically for substance groups, mixtures, and analytical parameters, where no single underlying chemical structure exists.
+
+
+
+
 
 \subsection{Scale of the Interoperability Problem}
-\label{sec:workload}
-
 For the more than 15,000 non-structure entries, full manual reconciliation would require on the order of hundreds of millions of pairwise comparisons. Under conservative assumptions, this corresponds to several thousand person-years of expert effort.
 
-Figure~\ref{fig:analysis10c} quantifies this workload across all regulatory sources, illustrating both the absolute scale and the quadratic growth that makes each additional non-structure entry disproportionately costly. Even moderate increases in the number of unresolved entries lead to a rapidly escalating curation burden.
-
-Manual pairwise reconciliation at this scale is not operationally feasible. This result highlights a fundamental constraint: interoperability cannot be achieved through retrospective harmonisation of heterogeneous substance definitions.
-
-Instead, the only scalable strategy is to address the problem at its source. By requiring structure-resolvable identifiers and ontology-based representations in regulatory definitions wherever chemically applicable, the number of entries requiring manual reconciliation can be structurally reduced rather than managed post hoc.
-
+\label{sec:workload}
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=\linewidth]{Analysis_10c_workload_non_structured.pdf}
@@ -125,12 +115,37 @@ Instead, the only scalable strategy is to address the problem at its source. By 
 \end{figure}
 
 
+
+Figure~\ref{fig:analysis10c} quantifies this workload across all regulatory sources, illustrating both the absolute scale and the quadratic growth that makes each additional non-structure entry disproportionately costly. Even moderate increases in the number of unresolved entries lead to a rapidly escalating curation burden.
+
+Manual pairwise reconciliation at this scale is not operationally feasible. This result highlights a fundamental constraint: interoperability cannot be achieved through retrospective harmonisation of heterogeneous substance definitions.
+
+Instead, the only scalable strategy is to address the problem at its source. By requiring structure-resolvable identifiers and ontology-based representations in regulatory definitions wherever chemically applicable, the number of entries requiring manual reconciliation can be structurally reduced rather than managed post hoc.
+
+
+\subsection{Knowledge Graph Integration}
+
+Structure-defined substances can be successfully integrated across
+regulatory lists, chemical taxonomies (ChemOnt), and biological
+annotations (ChEBI) using InChIKey as a linking key. This demonstrates
+the feasibility of a linked-data approach when structure information is
+available.
+
+
+
 \subsection{Priority Patterns}
 
-Combining regulatory presence with biological hazard annotations enables
-identification of high-priority substances and chemical classes.
+The integrated knowledge graph enables the combination of regulatory 
+and biological annotations into a shared analytical space. 
+Using the composite priority score defined in Section~\ref{sec:priority_score}, 
+we identify substances and chemical classes that are prominent across 
+both regulatory presence and biological role annotations.
 
-The bubble chart (Figure~\ref{fig:analysis14e}) maps the full priority space, plotting $\text{list\_score}$ against $\text{bio\_score}$ for all scored substances. The upper-right quadrant (high list score, high bio score) identifies the substances of greatest combined regulatory and biological concern; BPA and Dibutyl phthalate occupy prominent positions in this quadrant.
+The bubble chart (Figure~\ref{fig:analysis14e}) visualises this 
+priority space by plotting $\text{list\_score}$ against 
+$\text{bio\_score}$ for all scored substances. 
+Bubble size is proportional to the number of regulatory source memberships. 
+
 
 \begin{figure}[!ht]
 	\centering
@@ -139,10 +154,23 @@ The bubble chart (Figure~\ref{fig:analysis14e}) maps the full priority space, pl
 	\label{fig:analysis14e}
 \end{figure}
 
+Substances located in the upper-right quadrant combine high regulatory 
+coverage with multiple biological role annotations, reflecting their 
+prominence across heterogeneous data sources. 
+Examples include bisphenol~A (BPA) and dibutyl phthalate, which appear 
+consistently across regulatory lists and are associated with multiple 
+biological roles in ChEBI.
 
-A small number of chemical classes accounts for a large fraction of
-regulated substances, suggesting that class-level approaches can support
-regulatory alignment.
+Importantly, this analysis does not constitute a toxicological ranking, 
+but demonstrates how interoperable data representations enable the 
+integration of regulatory and ontology-based information within a 
+single analytical framework.
+
+At the class level, a small number of chemical classes accounts for 
+a large fraction of regulated substances. This concentration suggests 
+that class-based representations can provide a scalable bridge between 
+individual substances and regulatory group definitions, supporting 
+alignment across regulatory contexts.
 
 
 

@@ -56,8 +56,22 @@ pairwise relationships (equivalence, subset, overlap, disjoint). The required
 effort scales quadratically with the number of such entries as $\binom{N}{2} = N(N-1)/2$ where $N$ is the number of non-structure entries under consideration.
 
 \subsection{Priority Scoring}
+\label{sec:priority_score}
 
-A composite priority score~\cite{Reif2010} was defined by combining regulatory presence
-(across ECHA lists~\cite{CLP2008,EUCSS2020,POPs2019}) with biological hazard annotations derived from ChEBI~\cite{Degtyarenko2008}.
-This score is used to identify substances and chemical classes most relevant
-for regulatory alignment.
+To illustrate the analytical potential enabled by the integrated knowledge graph, 
+a composite priority score was defined by combining two independent dimensions: 
+(i) regulatory presence across multiple European substance lists 
+(e.g.\ CLP~\cite{CLP2008}, EU Chemicals Strategy for Sustainability~\cite{EUCSS2020}, 
+and POPs~\cite{POPs2019}), and 
+(ii) biological role annotations derived from ChEBI~\cite{Degtyarenko2008}.
+
+The resulting score does not represent a formal risk assessment, 
+but serves as an illustrative aggregation of heterogeneous regulatory 
+and biological information within a unified semantic framework. 
+Its purpose is to demonstrate how interoperable, structure-linked data 
+enables cross-domain queries and comparative analyses that are not 
+feasible in fragmented regulatory datasets.
+
+This approach highlights how combining regulatory metadata with 
+ontology-based annotations can support the identification of substances 
+and chemical classes that are prominent across multiple dimensions of interest.
