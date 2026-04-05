@@ -84,14 +84,14 @@ The `bash/` directory contains shell scripts that build and enrich the RDF knowl
 
 SPARQL query files (`.rq`) in `bash/` are used by the scripts above:
 
-| Query | Description |
-|---|---|
-| `merge.rq` | Assign ChemOnt classes to substances via InChIKey |
-| `chemont_to_xkos.rq` | Express ChemOnt hierarchy as XKOS broader/narrower relations |
-| `chemont_to_skos.rq` / `chemont_to_table.rq` | Export ChemOnt as SKOS / flat CSV |
-| `exact_match_chebi.rq` | Match substances to ChEBI entities via `skos:exactMatch` |
-| `chebi_annotaties.rq` / `chebi_to_table.rq` | Extract ChEBI hazard annotations |
-| `inverse.rq` | Add inverse SKOS relations |
+| Query | Description                                                                                                         |
+|---|---------------------------------------------------------------------------------------------------------------------|
+| `merge.rq` | Assign ChemOnt classes to substances via InChIKey                                                                   |
+| `chemont_to_xkos.rq` | Express ChemOnt hierarchy as XKOS classification levels                                                             |
+| `chemont_to_skos.rq` / `chemont_to_table.rq` | Express ChemOnt subClass hierarchy as SKOS broader/narrower relations, filter on relevant parent groups  / flat CSV |
+| `exact_match_chebi.rq` | Match substances to ChEBI entities via `skos:exactMatch`                                                            |
+| `chebi_annotaties.rq` / `chebi_to_table.rq` | Express ChEBI hazard annotations, as W3C oa:Annotations                                                             |
+| `inverse.rq` | Add inverse SKOS relations                                                                                          |
 
 ### Knowledge Graph
 
