@@ -63,12 +63,42 @@ Or run individual scripts:
 
 ## Data Sources
 
-Regulatory datasets included:
+Regulatory datasets downloaded by `R/01_download.R`:
 
-- **ECHA**: Candidate List (SVHC), Authorisation List, Restriction List, CLH list, Substance Evaluation, Dossier Evaluation, PBT Assessment, ED Assessment, POPs list
-- **EU Pesticides Database**: Active substances
-- **OSPAR**: List of chemicals for priority action
-- **Flemish Government**: Administrative substance list
+### ECHA — Obligation Lists (`chem.echa.europa.eu/obligation-lists/`)
+
+| List | URL | Source file |
+|---|---|---|
+| Candidate List of SVHCs for Authorisation (legacy portal) | https://echa.europa.eu/nl/candidate-list-table | `candidate-list-of-svhc-for-authorisation-export.csv` |
+| Candidate List | https://chem.echa.europa.eu/obligation-lists/candidateList | `candidate_list_full.xlsx` |
+| Authorisation List | https://chem.echa.europa.eu/obligation-lists/authorisationList | `authorisation_list_full.xlsx` |
+| Restriction List | https://chem.echa.europa.eu/obligation-lists/restrictionList | `restriction_list_full.xlsx` |
+| POPs List | https://chem.echa.europa.eu/obligation-lists/popsList | `pops_list_full.xlsx` |
+| EU Positive List | https://chem.echa.europa.eu/obligation-lists/euPositiveList | `eu_positive_list_full.xlsx` |
+| CLH List (Harmonised Classification and Labelling) | https://chem.echa.europa.eu/obligation-lists/clhList | `Harmonised_List.xlsx` |
+
+### ECHA — Activity Lists (`chem.echa.europa.eu/activity-lists/`)
+
+| List | URL | Source file |
+|---|---|---|
+| Restriction Process | https://chem.echa.europa.eu/activity-lists/restrictionProcess | `restriction_process_full.xlsx` |
+| SVHC Identification | https://chem.echa.europa.eu/activity-lists/svhcIdentification | `svhc_identification_full.xlsx` |
+| Authorisation Process | https://chem.echa.europa.eu/activity-lists/authorisationProcess | `authorisation_process_full.xlsx` |
+| Dossier Evaluation | https://chem.echa.europa.eu/activity-lists/dossierEvaluation | `dossier_evaluation_full.xlsx` |
+| CLH Process | https://chem.echa.europa.eu/activity-lists/clhProcess | `clh_process_full.xlsx` |
+| Substance Evaluation | https://chem.echa.europa.eu/activity-lists/substanceEvaluation | `substance_evaluation_full.xlsx` |
+| POPs Process | https://chem.echa.europa.eu/activity-lists/popsProcess | `pops_process_full.xlsx` |
+| PBT Assessment | https://chem.echa.europa.eu/activity-lists/pbtAssessment | `pbt_assessment.xlsx` |
+| ED Assessment | https://chem.echa.europa.eu/activity-lists/edAssessment | `ed_assessment.xlsx` |
+
+### Other Sources
+
+| Source | List                                                                              | URL | Source file |
+|---|-----------------------------------------------------------------------------------|---|---|
+| ECHA | REACH Registrations                                                               | https://chem.echa.europa.eu/ | `reach_registrations.xlsx` |
+| EU Pesticides Database | Active Substances                                                                 | https://ec.europa.eu/food/plant/pesticides/eu-pesticides-database/start/screen/active-substances | `Pesticides_ActiveSubstanceExport.xlsx` |
+| OSPAR | List of Chemicals for Priority Action                                             | https://www.ospar.org/work-areas/hasec/hazardous-substances/priority-action | `04-12e_agreement_list_of_chemicals_for_priority_action_update_2023-24.pdf` |
+| Flemish Government | Substance list (sommatie stoffen) created in the context of a water quality model | https://datasets.omgeving.vlaanderen.be/be.vlaanderen.omgeving.data.id.distribution.codelijst-sommatie_stoffen.3.0.8.sommatie_stoffen.csv | `sommatie_stoffen.rds` |
 
 ## Bash Scripts (RDF/SPARQL Pipeline)
 

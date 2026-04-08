@@ -254,7 +254,7 @@ p10c <- ggplot(p10c_data,
   coord_flip() +
   labs(
     title    = paste("Total days required at", relations_per_day,
-                     "relations per day \u2014 non-structured substances per ECHA list"),
+                     "relations per day for achieving unambiguous identification\nof non-structured substances in each list"),
     subtitle = "Bar = days for within-list pairwise assessment; dashed line = aggregate if all lists treated as one pool",
     x        = NULL,
     y        = "Person-days required"
