@@ -2,7 +2,7 @@
 \label{sec:results}
 
 
-\subsection{Overview of the integrated knowledge graph}
+\paragraph{Overview of the integrated knowledge graph}
 \label{sec:knowledge_graph}
 
 We constructed an integrated knowledge graph to analyse the representation 
@@ -30,24 +30,24 @@ graph structure and its main semantic layers.
 	}\label{fig:knowledge_graph}
 \end{figure} 
 
-\subsection{Dataset Overview}
+\paragraph{Dataset Overview}
 
 Integration of 18 regulatory sources yielded 41,813 records. Of these,
 63\% could be linked to a defined molecular structure via InChIKey.
 
 
-\subsection{Heterogeneity of Substance Definitions}
+\paragraph{Heterogeneity of Substance Definitions}
 \label{sec:semantic_mismatch}
 
-A substantial fraction of regulatory entries does not correspond to a well-defined chemical structure. Approximately 37\% of entries are non-structure substances, including mixtures (UVCBs), substance groups, analytical parameters, or entries lacking usable identifiers. This heterogeneity reflects fundamental differences in how “substances” are defined across regulatory contexts (cf.\ Figure~\ref{fig:regulatory_groups}).
+A significant share of regulatory entries (37\%) does not correspond to a defined chemical structure, consistent with Kutsarova et al.~\cite{Kutsarova2019}. These include mixtures (UVCBs), substance groups, analytical parameters, or entries without usable identifiers, reflecting differences in how “substances” are defined across regulatory contexts (Figure~\ref{fig:regulatory_groups}).
 
-The degree of heterogeneity varies strongly between regulatory instruments: some lists are largely structure-based, while others are dominated by group or mixture definitions, limiting their interoperability.
+Heterogeneity varies widely between regulatory lists: some are mostly structure-based, while others rely heavily on group or mixture definitions, limiting interoperability.
 
-Application of the seven-tier linkability taxonomy (Section~\ref{sec:linkability}) to the full dataset reveals that 20,909 entries (62.5\%) are fully addressable via a direct InChIKey (tier 1; Figure~\ref{fig:analysis4d}). A further 60 entries correspond to substance groups that can be partially resolved: 15 entries (${<}0.1$\%) belong to tier 2 (group with resolvable base compound) and 45 (0.1\%) to tier 3 (group with unresolvable base compound). Together, these tiers represent the structure-addressable portion of the dataset.
+Applying the seven-tier linkability taxonomy (Section~\ref{sec:linkability}) shows that 62.5\% of entries (20,909) are directly linkable via InChIKey (tier 1). Only a small fraction consists of partially resolvable groups (tiers 2–3; ${<}0.2$\%).
 
-The remaining 37.5\% of entries are not directly addressable by structure. Among these, 3,865 entries (11.6\%) carry a CAS number but cannot be resolved to a unique InChIKey (tier 4), demonstrating that CAS identifiers do not guarantee structural identity. A further 3,622 entries (10.8\%) correspond to UVCB substances, undefined mixtures, or analytical parameters (tier 5), for which no single molecular representation exists. Additionally, 15 entries (${<}0.1$\%) represent administrative or regulatory constructs (tier 6), and 4,981 entries (14.9\%) lack any actionable identifier (tier 7). This final group — nearly one in six regulatory records — constitutes the most significant barrier to automated cross-dataset substance matching.
+The remaining 37.5\% cannot be directly linked to a structure: 11.6\% have unresolved CAS numbers (tier 4), 10.8\% are mixtures or UVCBs (tier 5), ${<}0.1$\% are administrative entries (tier 6), and 14.9\% lack any usable identifier (tier 7).
 
-These results show that more than one-third of regulatory substance entries cannot be linked to a well-defined chemical structure, and that even commonly used identifiers such as CAS numbers fail to ensure unambiguous identification. As a result, structure-based integration approaches can only be applied to a subset of regulatory data, while the remainder requires fundamentally different modelling strategies.
+Overall, more than one-third of regulatory entries cannot be mapped to a unique chemical structure, and even CAS numbers do not guarantee unambiguous identification. Consequently, structure-based integration applies only to part of the data, requiring alternative approaches for the remainder.
 
 \begin{figure}[H]
 	\centering
@@ -62,34 +62,34 @@ These results show that more than one-third of regulatory substance entries cann
 \end{figure}
 
 
-\subsection{Limitations of CAS Numbers}
+\paragraph{Limitations of CAS Numbers}~\ref{sec:question1}
 
 Although CAS numbers are widely used, they do not provide a reliable
 unique identifier. Multiple CAS numbers may refer to the same structure,
 and conversely, a single CAS number may correspond to multiple structures.
 This confirms that CAS-based linking is insufficient for interoperability.
 
-\subsection{Limited Interoperability Across Regulatory Lists}
+\paragraph{Limited Interoperability Across Regulatory Lists}~\ref{sec:question2}
 
 Cross-list analysis shows that most substances are unique to a single
 regulatory source. Overlap between lists is limited, reflecting the
 domain-specific design of regulatory instruments rather than a shared
 chemical reference framework.
 
-\subsection{Failure of Semantic Approaches for Non-Structure Substances}
-Embedding-based clustering of non-structure substance names yields semantically coherent groups, but does not resolve chemical identity. While clusters reflect lexical or contextual similarity between substance descriptions, they do not correspond to well-defined molecular entities.
+\paragraph{Failure of Semantic Approaches for Non-Structure Substances}~\ref{sec:question3}
+Embedding-based clustering of non-structure substance names yields semantically coherent groups, but does not resolve chemical identity. While clusters reflect lexical or contextual similarity between substance descriptions, they do not correspond to well-defined molecular entities. 
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{Analysis_9n_quality_landscape.pdf}
-	\caption{Match quality landscape: score gap $\Delta_{12}$ versus best match score $s_1$ for all non-structure substance--ChemOnt class pairs. Entries in the upper-right region satisfy both quality thresholds and are retained as high-confidence matches.}
+	\caption{Match quality landscape: score gap $\Delta_{12}$ versus best match score $s_1$ for all non-structure substance--ChemOnt class label pairs. Entries in the upper-right region satisfy both quality thresholds and are retained as high-confidence matches.}
 	\label{fig:analysis9n}
 \end{figure}
 
 
 
 
-To assess whether semantic similarity can be used to recover chemical meaning, we attempted to match non-structure substances to chemical taxonomy classes (ChemOnt). High-confidence matches were obtained for less than 1\% of cases, indicating that semantic approaches are largely insufficient for reconstructing chemical identity.
+To evaluate whether semantic similarity can recover chemical meaning, we attempted to map non-structure substances to ChemOnt taxonomy classes. Fewer than 1\% yielded high-confidence matches. Among the top 100 ranked results, the average confidence was 0.55, and manual inspection showed that only five exactly matched ChemOnt classes. This indicates that semantic approaches are largely insufficient for reconstructing chemical identity.
 
 The match quality landscape (Figure~\ref{fig:analysis9n}) plots the score gap $\Delta_{12}$ between the best and second-best matches against the best match score $s_1$ for all substance--class pairs. Entries in the upper-right region (high $s_1$, high $\Delta_{12}$) correspond to unambiguous matches and represent the 107 high-confidence mappings retained in our analysis. In contrast, entries with high $s_1$ but low $\Delta_{12}$ indicate genuine ambiguity between multiple candidate classes, reflecting the underspecified nature of the original substance definitions.
 
@@ -99,7 +99,7 @@ The predominance of low-confidence and ambiguous matches demonstrates that seman
 
 
 
-\subsection{Scale of the Interoperability Problem}
+\paragraph{Scale of the Interoperability Problem}
 For the more than 15,000 non-structure entries, full manual reconciliation would require on the order of hundreds of millions of pairwise comparisons. Under conservative assumptions, this corresponds to several thousand person-years of expert effort.
 
 \label{sec:workload}
@@ -123,7 +123,7 @@ Manual pairwise reconciliation at this scale is not operationally feasible. This
 Instead, the only scalable strategy is to address the problem at its source. By requiring structure-resolvable identifiers and ontology-based representations in regulatory definitions wherever chemically applicable, the number of entries requiring manual reconciliation can be structurally reduced rather than managed post hoc.
 
 
-\subsection{Knowledge Graph Integration}
+\paragraph{Knowledge Graph Integration}
 
 Structure-defined substances can be successfully integrated across
 regulatory lists, chemical taxonomies (ChemOnt), and biological
@@ -133,7 +133,7 @@ available.
 
 
 
-\subsection{Priority Patterns}
+\paragraph{Priority Patterns}
 
 The integrated knowledge graph enables the combination of regulatory 
 and biological annotations into a shared analytical space. 

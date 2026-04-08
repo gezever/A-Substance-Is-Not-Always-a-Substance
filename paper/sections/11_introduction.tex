@@ -1,11 +1,11 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Chemical substances are central entities in environmental, health, and product regulation. Across European legislation, substances are used to define obligations, assess risks, and communicate hazards in frameworks such as REACH~\cite{REACH2006}, CLP~\cite{CLP2008}, and sector-specific regulations including pesticides and water quality directives. Effective governance of these substances increasingly depends on the ability to integrate and reuse data across regulatory domains.
+Chemical substances are central entities in environmental, health, and product regulation. Across European legislation, substances are used to define obligations, assess risks, and communicate hazards in frameworks such as the Registration, Evaluation, Authorisation and Restriction of Chemicals~(REACH)~\cite{REACH2006}, the Classification, Labelling and Packaging of chemicals~(CLP)~\cite{CLP2008}, and sector-specific regulations including pesticides and water quality directives. Effective governance of these substances increasingly depends on the ability to integrate and reuse data across regulatory domains.
 
-In chemistry and cheminformatics, chemical identity is well-defined and operationalised through structure-based representations. Molecular structures can be uniquely encoded using standards such as the International Chemical Identifier (InChI) and its hashed representation, the InChIKey, enabling unambiguous identification, comparison, and linking of substances across databases. Large-scale infrastructures such as PubChem and ChEBI build on these identifiers to provide machine-readable, ontology-based knowledge graphs that support interoperability and automated reasoning.
+In chemistry and cheminformatics, chemical identity is well-defined and operationalised through algorithmically defined, structure-based, representations. Molecular structures can be uniquely encoded using standards such as SMILES notations~\cite{Weininger1988}, IUPAC names~\cite{Koppenol2016}, the International Chemical Identifier (InChI)~\cite{Heller2015} and its hashed representation, the InChIKey, enabling unambiguous identification, comparison, and linking of substances across databases~\cite{Akhondi2012}. Large-scale infrastructures such as PubChem~\cite{Kim2015} and ChEBI~\cite{Degtyarenko2008} build on these identifiers to provide machine-readable, ontology-based knowledge graphs that support interoperability and automated reasoning.
 
-In contrast, regulatory data systems adopt a fundamentally different approach. Substances are typically identified using heterogeneous and often ambiguous identifiers, including CAS registry numbers, EC numbers, textual names, and informal group descriptions. Moreover, the concept of a “substance” in regulation is not uniform: it may refer to a single molecule, a mixture of unknown or variable composition (UVCB), a group of related compounds (e.g.\ PFAS), or even an analytical parameter defined as a function over multiple substances. As illustrated in Figure~\ref{fig:mismatch}, these entities correspond to fundamentally different semantic types.
+In contrast, regulatory data systems adopt a fundamentally different approach. Substances are typically identified using heterogeneous and often ambiguous identifiers, including Chemical Abstracts Service~(CAS) registry numbers~\cite{CAS,Dittmar1976}, European Community numbers~(EC numbers)~\cite{ECHA_EC_numbers}, textual names, and informal group descriptions. Moreover, the concept of a \emph{substance} in regulation is not uniform: it may refer to a single molecule, a mixture of unknown or variable composition (UVCB)~\cite{Kutsarova2019}, a group of related compounds (e.g.,~PFAS), or even an analytical parameter defined as a function over multiple substances. As illustrated in Figure~\ref{fig:mismatch}, these entities correspond to fundamentally different semantic types.
 
 \begin{figure}[!ht]
 	\centering                 
@@ -15,49 +15,63 @@ In contrast, regulatory data systems adopt a fundamentally different approach. S
 		This conceptual mismatch is reflected empirically in Section~\ref{sec:semantic_mismatch}, where a large fraction of regulatory entries cannot be linked to a defined molecular structure.} \label{fig:mismatch}
 \end{figure}   
 
-This mismatch has profound implications for interoperability. Because regulatory substance definitions lack formal semantics and structure-based identifiers, the relationships between substances across datasets—such as equivalence, subset relations, or partial overlap—are rarely explicit, in particular for group- and parameter-based substances as illustrated in Figure~\ref{fig:regulatory_groups}. As a result, integrating substance information across regulatory frameworks becomes a complex and largely manual task, hindering data reuse, policy alignment, and the implementation of FAIR data principles.
+This mismatch has profound implications for interoperability. Regulatory substance definitions often lack formal semantics and structure-based identifiers, meaning that relationships such as equivalence, subset relations, or partial overlap remain implicit. This is particularly evident for group- and parameter-based substances (Figure~\ref{fig:regulatory_groups}), which are better understood as sets of molecules or functions defined over such sets. For instance, regulatory groups like PFAS represent collections of structurally related compounds, while analytical parameters such as “Sum PFOS + PFBA” correspond to measurements derived from subsets of these groups. Without an explicit, formal representation of these set-theoretic relationships, the semantic connections between substances remain undefined, complicating interoperability and automated reasoning.
+
+As a result, integrating substance information across regulatory frameworks becomes a complex and largely manual task, hindering data reuse, policy alignment, and the implementation of FAIR~\cite{Wilkinson2016} data principles.
 
 \begin{figure}[!ht]
-	\centering                                                             
-	\includemermaid[width=1\linewidth]{images/sources/regulatory_groups.mmd}                                                                              
-	\caption{Set-theoretic interpretation of regulatory substances.
-		Many regulatory “substances” correspond not to individual molecules but to sets of molecules or analytical functions defined over such sets. For example, regulatory groups such as PFAS represent collections of structurally related molecules, while analytical parameters such as “Sum PFOS + PFBA” represent measurements derived from subsets of these molecules. Without an explicit formal representation of these set relationships, the semantic relations between regulatory entities remain undefined, complicating interoperability and automated reasoning across datasets.
-		The absence of explicit set-based semantics for such entities explains the combinatorial complexity observed in Section~\ref{sec:workload}.} \label{fig:regulatory_groups}
-\end{figure}  
+	\centering
+	\includemermaid[width=1\linewidth]{images/sources/regulatory_groups.mmd}
+	\caption{Set-theoretic view of regulatory substances. The lack of explicit set-based semantics leads to unclear relationships between entities and contributes to combinatorial complexity.}
+	\label{fig:regulatory_groups}
+\end{figure}
 
-The problem is further exacerbated by the scale and diversity of European regulatory data. Multiple overlapping lists of substances of concern exist, each developed within a specific legal and domain context. Without a shared representation of chemical identity, these lists cannot be reliably linked or compared. Attempts to resolve these inconsistencies post hoc—whether through manual curation or data-driven methods such as text embeddings—face fundamental limitations.
+The problem is further exacerbated by the scale and diversity of European regulatory data. Multiple overlapping lists of substances of concern exist, each developed within a specific legal and domain context. Without a shared representation of chemical identity, these lists cannot be reliably linked or compared. Attempts to resolve these inconsistencies post hoc, whether through manual curation or data-driven methods such as text embeddings, face fundamental limitations.
 
-This paper investigates the extent and consequences of this interoperability problem using a comprehensive analysis of 18 regulatory datasets from the European Chemicals Agency (ECHA) and related sources. We focus on three research questions:
+This paper investigates the extent and consequences of this interoperability problem using a comprehensive analysis of 18 regulatory datasets from the European Chemicals Agency (ECHA) and related sources. We focus on three main research questions:
 
 \begin{itemize}
+	
 	\item To what extent can regulatory substances be linked to unambiguous chemical structures?
+	\label{sec:question1}
 	\item How consistent and reliable are commonly used identifiers such as CAS numbers for cross-dataset linking?
+	\label{sec:question2}
 	\item Can semantic or data-driven methods compensate for the absence of structure-based identifiers?
+	\label{sec:question3}
 \end{itemize}
 
 Based on this analysis, we make the following contributions:
 \begin{enumerate}
 	\item We quantify the heterogeneity of regulatory substance definitions and introduce a taxonomy of linkability reflecting their degree of chemical specificity.
+	\label{sec:contribution1}
 	\item We demonstrate the limitations of CAS-based identification and show that a substantial fraction of regulatory substances cannot be resolved to a defined structure.
+	\label{sec:contribution2}
 	\item We evaluate semantic embedding approaches and show that they fail to recover chemical identity for non-structure substances.
+	\label{sec:contribution3}
 	\item We estimate the scale of the manual effort required for retrospective harmonisation, demonstrating its infeasibility.
+	\label{sec:contribution4}
 	\item We show that structure-based identifiers combined with ontology-driven approaches enable scalable integration through knowledge graphs.
+	\label{sec:contribution5}
 \end{enumerate}
 
 Our findings indicate that interoperability of chemical substance data cannot be achieved solely through technical post-processing. Instead, it must be addressed at the level of data modelling and legislation, by adopting structure-based identifiers, formal ontologies, and linked data principles from the outset.
 
-\subsection{Related Work}
+\section{Related Work}
 \label{sec:related_work}
 
-Interoperability of scientific data has been extensively studied in the context of FAIR principles~\cite{Wilkinson2016} and knowledge graph infrastructures. In the life sciences, large-scale resources such as PubChem~\cite{Kim2015} and the Chemical Entities of Biological Interest (ChEBI) ontology~\cite{Degtyarenko2008} demonstrate how chemical entities can be represented using structure-based identifiers, ontology-driven classifications, and machine-readable knowledge graphs. The most extensive work on rule-based chemical classification has been undertaken by ClassyFire~\cite{DjoumbouFeunang2016}. In this framework, a structure-based taxonomy (ChemOnt) has been established, where each class is characterised by precise and unambiguous formal rules. These infrastructures enable consistent integration, querying, and reuse of chemical information across domains.
+Interoperability of scientific data has been extensively studied in the context of FAIR principles~\cite{Wilkinson2016} and knowledge graph infrastructures. In the life sciences, large-scale resources such as PubChem~\cite{Kim2015} and the Chemical Entities of Biological Interest (ChEBI) ontology~\cite{Degtyarenko2008} demonstrate how chemical entities can be represented using structure-based identifiers, ontology-driven classifications, and machine-readable knowledge graphs. Extensive work on rule-based chemical classification has been undertaken by ClassyFire~\cite{DjoumbouFeunang2016}. In this framework, a structure-based taxonomy (ChemOnt) has been established, where each class is characterised by precise and unambiguous formal rules. These infrastructures enable consistent integration, querying, and reuse of chemical information across domains.
 
 Within the Semantic Web community, numerous approaches have been proposed for data integration based on linked data principles, ontology alignment, and entity resolution~\cite{DjoumbouFeunang2016}. Techniques such as identifier mapping, schema matching, and, more recently, embedding-based similarity methods~\cite{Reimers2019} have been applied to address heterogeneity across datasets. However, these approaches typically assume that entities correspond to well-defined and comparable concepts.
 
+In cheminformatics and regulatory science, considerable effort has focused on handling substances without precise structural definitions, such as UVCBs. Methods like those of Kutsarova et al.~\cite{Kutsarova2019} use generic structural encodings (e.g., G SMILES) and statistical sampling to generate representative constituent structures, reducing combinatorial complexity while preserving structural diversity.
+
+These approaches operate at the level of individual substances and do not address broader semantic inconsistencies across regulatory datasets. Many entries still lack structure-resolvable identifiers or rely on heterogeneous definitions, limiting interoperability between data sources.
+
 In the regulatory domain, previous work has highlighted challenges related to data fragmentation, heterogeneity of identifiers, and limited machine-readability of legal data~\cite{Filtz2021}. In particular, chemical regulation introduces additional complexity due to the use of substance groups, mixtures, and analytical parameters that do not correspond to single chemical structures. While prior studies have focused on improving data accessibility or applying FAIR principles to regulatory datasets, the fundamental mismatch between chemical identity and regulatory substance definitions has received limited attention.
 
-This paper builds on these strands of work by showing that interoperability challenges in regulatory chemical data cannot be resolved solely through technical integration methods. Instead, they arise from the absence of a shared, structure-based representation of chemical identity, requiring alignment between domain semantics, data models, and regulatory definitions.
-
 The remainder of this paper is structured as follows. Section~\ref{sec:methods} describes the data sources and analytical methods. Section~\ref{sec:results} presents the empirical findings. Section~\ref{sec:discussion} discusses the implications for regulatory data infrastructures and semantic interoperability. Section~\ref{sec:conclusion} concludes with recommendations for future work.
+
+
 
 
 

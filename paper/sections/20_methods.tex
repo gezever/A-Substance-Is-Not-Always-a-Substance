@@ -223,9 +223,8 @@ All processed substance data --- including the linkability taxonomy
 URIs were minted using MD5 hashes of InChIKeys for structure-defined entries, or
 of substance names otherwise, to ensure stable and opaque identifiers.  The
 linkability taxonomy and cluster assignments were represented as
-\texttt{skos:Collection} instances~\cite{W3C2009SKOS}, with \texttt{skos:narrower}
-triples encoding group-to-base-compound parent relationships.  Provenance
-annotations were recorded using the OA Annotation Ontology~\cite{W3C2017OA}.
+\texttt{skos:Collection} instances~\cite{W3C2009SKOS}, with \texttt{skos:member}
+triples encoding group-to-base-compound parent relationships.  Annotations were recorded using the OA Annotation Ontology~\cite{W3C2017OA}.
 
 All component graphs were merged with the ChemOnt~2.1 SKOS ontology using
 Apache Jena~5.6.0 \texttt{riot}, with semantic enrichment performed via SPARQL

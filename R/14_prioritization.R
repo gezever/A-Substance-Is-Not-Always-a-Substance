@@ -738,7 +738,10 @@ p14e <- ggplot(plot_data_e,
   geom_text_repel(
     data = plot_data_e |> filter(substance %in% top20_ids),
     aes(label = str_trunc(substance_name, 35)),
-    size = 2.5, max.overlaps = 20, show.legend = FALSE
+    size = 4, max.overlaps = 10, show.legend = FALSE,
+    point.padding = 2.5, box.padding = 0.8,
+    force = 3, force_pull = 0.4,
+    segment.colour = "grey50", segment.size = 0.3
   ) +
   scale_colour_manual(values = cat_colors, name = "Highest\nECHA list") +
   scale_size_continuous(range = c(1, 12), name = "Priority\nscore") +
@@ -751,8 +754,11 @@ p14e <- ggplot(plot_data_e,
   ) +
   theme_minimal(base_size = 12) +
   theme(
-    plot.subtitle   = element_text(colour = "grey40"),
-    legend.position = "right"
+    plot.subtitle        = element_text(colour = "grey40"),
+    legend.position      = "right",
+    legend.title         = element_text(size = 13),
+    legend.text          = element_text(size = 12),
+    legend.key.size      = unit(1.2, "lines")
   )
 
 print(p14e)
