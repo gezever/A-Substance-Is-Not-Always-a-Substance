@@ -1,0 +1,19 @@
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX dbp: <http://dbpedia.org/property/>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?inchikey ?substance_name ?chemont_label (GROUP_CONCAT(DISTINCT ?chemont_l ; separator="|") AS ?chemont_labels)
+WHERE {
+    ?substance a dbo:ChemicalSubstance ;
+        dbp:inchikey ?inchikey ;
+        skos:prefLabel ?substance_name ;
+        skos:broader  ?chemont_class ;
+        skos:broader+ ?chemont_classes .
+    FILTER(LANG(?substance_name) = "en" || LANG(?substance_name) = "")
+    ?chemont_class   skos:prefLabel ?chemont_label .
+    FILTER(LANG(?chemont_label) = "en" || LANG(?chemont_label) = "")
+    ?chemont_classes skos:prefLabel ?chemont_l .
+    FILTER(LANG(?chemont_l) = "en" || LANG(?chemont_l) = "")
+}
+GROUP BY ?inchikey ?substance_name ?chemont_label
+ORDER BY ?inchikey

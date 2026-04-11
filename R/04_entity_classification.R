@@ -101,6 +101,7 @@ library(readr)
 library(scales)
 library(httr)
 library(jsonlite)
+library(patchwork)
 
 # ------------------------------------------------------------------------------
 # Load clean data
@@ -188,14 +189,21 @@ df4 <- all_substances |>
   mutate(pct = n / sum(n)) |>
   arrange(desc(n))
 
+# Colour palette — families align with linkability tiers in panel 4d:
+#   blue   → Molecule        / Structure (InChIKey)
+#   green  → Substance group / Group tiers (dark = resolvable, light = not)
+#   purple → Mixture + Analytical parameter / UVCB / Mixture
+#   grey   → CAS without structure (both panels)
+#   red    → Regulatory entry (both panels)
+#   silver → Unclassified / Unidentified
 entity_colours <- c(
-  "Molecule"              = "#4a90d9",
-  "Substance group"       = "#7bc67e",
-  "Analytical parameter"  = "#f5a623",
-  "Mixture"               = "#9b59b6",
+  "Molecule"              = "#2171b5",
+  "Substance group"       = "#41ab5d",
+  "Analytical parameter"  = "#bcbddc",
+  "Mixture"               = "#756bb1",
   "Regulatory entry"      = "#e05c5c",
-  "CAS without structure" = "#aaaaaa",
-  "Unclassified"          = "#dddddd"
+  "CAS without structure" = "#969696",
+  "Unclassified"          = "#d9d9d9"
 )
 
 p4a <- ggplot(df4, aes(x = reorder(entity_type, n), y = n, fill = entity_type)) +
@@ -417,13 +425,13 @@ df4d <- linkability |>
 print(df4d)
 
 linkability_colours <- c(
-  "Structure (InChIKey)"                      = "#4a90d9",
-  "Group \u2014 base compound resolvable"     = "#7bc67e",
-  "Group \u2014 base compound not resolvable" = "#b5e5a0",
-  "CAS without structure"                     = "#aaaaaa",
-  "UVCB / Mixture"                            = "#9b59b6",
-  "Regulatory entry"                          = "#e05c5c",
-  "Unidentified"                              = "#dddddd"
+  "Structure (InChIKey)"                      = "#2171b5",  # blue  — Molecule
+  "Group \u2014 base compound resolvable"     = "#41ab5d",  # green — Substance group (resolved)
+  "Group \u2014 base compound not resolvable" = "#a1d99b",  # green light — Substance group (unresolved)
+  "CAS without structure"                     = "#969696",  # grey  — CAS without structure
+  "UVCB / Mixture"                            = "#756bb1",  # purple — Mixture / Analytical parameter
+  "Regulatory entry"                          = "#e05c5c",  # red   — Regulatory entry
+  "Unidentified"                              = "#d9d9d9"   # silver — Unclassified
 )
 
 p4d <- ggplot(df4d,
@@ -472,4 +480,142 @@ write_csv(df4d |> mutate(linkability = as.character(linkability)),
 saveRDS(all_substances,
         here("data", "processed", "all_substances_classified.rds"))
 
-message("04_entity_classification.R: analysis 4 (4a, 4b, 4c, 4d) completed")
+# ==============================================================================
+# Analysis 4bd: Combined figure — entity type breakdown (4b) + linkability (4d)
+# ==============================================================================
+
+p4b_clean <- p4b +
+  labs(title = NULL, subtitle = NULL)
+
+p4d_clean <- p4d +
+  labs(title = NULL, subtitle = NULL)
+
+p4bd <- (p4b_clean / p4d_clean) +
+  plot_annotation(
+    title    = "Entity type composition and linkability across regulatory sources",
+    subtitle = "Top: share of entity types per source; bottom: linkability taxonomy across all unique substances",
+    theme    = theme(
+      plot.title    = element_text(size = 13, face = "bold"),
+      plot.subtitle = element_text(size = 10, colour = "grey40")
+    )
+  ) +
+  plot_layout(guides = "collect") &
+  theme(legend.position = "bottom")
+
+ggsave(p4bd,
+       filename = here("output", "figures",
+                       "Analysis_4bd_Entity_type_and_linkability.pdf"),
+       device = "pdf",
+       height = 10, width = 12, units = "in")
+
+# ------------------------------------------------------------------------------
+# Caption for combined figure 4bd (printed to stdout)
+# ------------------------------------------------------------------------------
+n_sources        <- n_distinct(df4b$source)
+n_total          <- sum(df4d$n)
+n_structured     <- df4d |> filter(linkability == "Structure (InChIKey)") |> pull(n)
+pct_structured   <- df4d |> filter(linkability == "Structure (InChIKey)") |> pull(pct)
+n_unidentified   <- df4d |> filter(linkability == "Unidentified") |> pull(n)
+pct_unidentified <- df4d |> filter(linkability == "Unidentified") |> pull(pct)
+
+caption_4bd <- sprintf(
+  paste0(
+    "(A) Entity type composition across %d regulatory sources. ",
+    "Each bar shows the proportional breakdown of substance entries into seven mutually exclusive types ",
+    "(Molecule, Substance group, Analytical parameter, Mixture, Regulatory entry, ",
+    "CAS without structure, Unclassified), ",
+    "illustrating that the mix of entity types differs substantially between regulatory instruments. ",
+    "(B) Linkability taxonomy applied to all %s unique regulatory substance entries. ",
+    "A total of %s entries (%.1f%%) can be directly linked to a chemical structure via InChIKey (tier 1), ",
+    "while %s entries (%.1f%%) lack any usable identifier. ",
+    "Together, the panels show that structural linkability is unevenly distributed across sources ",
+    "and that more than one-third of all entries cannot be resolved to a unique chemical structure."
+  ),
+  n_sources,
+  format(n_total, big.mark = ","),
+  format(n_structured, big.mark = ","),
+  pct_structured,
+  format(n_unidentified, big.mark = ","),
+  pct_unidentified
+)
+
+cat("Figure caption (4bd):\n", caption_4bd, "\n")
+
+# ==============================================================================
+# Analysis 4bd_v: Combined figure — vertical bar plots side by side
+# ==============================================================================
+
+p4b_vert <- ggplot(df4b, aes(x = source, y = pct, fill = entity_type)) +
+  geom_col(width = 0.7) +
+  scale_y_continuous(labels = percent_format()) +
+  scale_fill_manual(values = entity_colours) +
+  labs(
+    tag  = "(A)",
+    x    = NULL,
+    y    = "Share of records",
+    fill = NULL
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(
+    axis.text.x     = element_text(angle = 45, hjust = 1, size = 11),
+    legend.position = "none"
+  )
+
+p4d_vert <- ggplot(df4d,
+                   aes(x = reorder(linkability, n), y = n, fill = linkability)) +
+  geom_col(width = 0.7, show.legend = FALSE) +
+  geom_text(aes(label = paste0(pct, "%")),
+            vjust = -0.4, size = 3) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.12)), labels = comma) +
+  scale_fill_manual(values = linkability_colours) +
+  labs(
+    tag = "(B)",
+    x   = NULL,
+    y   = "Number of unique substance names"
+  ) +
+  theme_minimal(base_size = 11) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11))
+
+# Legend panel A: entity types
+legend_entity <- cowplot::get_legend(
+  ggplot(df4b, aes(x = source, y = pct, fill = entity_type)) +
+    geom_col() +
+    scale_fill_manual(values = entity_colours, name = "(A) Entity type") +
+    guides(fill = guide_legend(nrow = 4)) +
+    theme_minimal() +
+    theme(legend.position = "right",
+          legend.title = element_text(face = "bold"))
+)
+
+# Legend panel B: linkability tiers
+legend_linkability <- cowplot::get_legend(
+  ggplot(df4d, aes(x = linkability, y = n, fill = linkability)) +
+    geom_col() +
+    scale_fill_manual(values = linkability_colours, name = "(B) Linkability tier") +
+    guides(fill = guide_legend(nrow = 4)) +
+    theme_minimal() +
+    theme(legend.position = "right",
+          legend.title = element_text(face = "bold"))
+)
+
+legends_row <- cowplot::plot_grid(legend_entity, legend_linkability, nrow = 1)
+
+p4bd_v <- (p4b_vert | p4d_vert) +
+  plot_annotation(
+    title = "Entity type composition and linkability of regulatory substances",
+    theme = theme(plot.title = element_text(size = 13, face = "bold"))
+  )
+
+p4bd_v_with_legend <- cowplot::plot_grid(
+  p4bd_v, legends_row,
+  ncol        = 1,
+  rel_heights = c(1, 0.25)
+)
+
+ggsave(p4bd_v_with_legend,
+       filename = here("output", "figures",
+                       "Analysis_4bd_v_Entity_type_and_linkability_vertical.pdf"),
+       device = "pdf",
+       height = 8, width = 14, units = "in")
+
+message("04_entity_classification.R: analysis 4 (4a, 4b, 4c, 4d, 4bd, 4bd_v) completed")

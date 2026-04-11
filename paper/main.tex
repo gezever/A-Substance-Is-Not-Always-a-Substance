@@ -8,6 +8,8 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage[section]{placeins}
+\usepackage{booktabs}
+\usepackage{longtable}
 \usepackage{tabularx}
 \graphicspath{{../output/figures/}}
 %\usepackage{times}
@@ -20,11 +22,12 @@
 \newcommand{\TODO}[1]{\textbf{[\textit{TODO: #1}]}}
 
 \begin{document}
+\pagestyle{plain}
 
 \input{sections/01_frontmatter}
 \input{sections/11_introduction}
 \input{sections/21_methods}
-\clearpage
+%\clearpage
 \input{sections/31_results}
 \input{sections/40_discussion}
 \input{sections/50_conclusion}

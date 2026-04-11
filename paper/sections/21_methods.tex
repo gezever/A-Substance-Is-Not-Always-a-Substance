@@ -1,22 +1,16 @@
 \section{Methods}
 \label{sec:methods}
 
-\paragraph{Data Integration}
-
-Substance records were compiled from 18 European regulatory sources, including
-REACH-related lists (candidate, authorisation, restriction, POPs~\cite{POPs2019}, CLP),
-the EU Pesticides Database, and a Flemish administrative list. For each entry,
-available identifiers (CAS number, EC number, substance name) were collected.
-
-Where possible, substances were linked to structure-based identifiers
-(InChIKey) via PubChem~\cite{Kim2015}. The resulting dataset links each regulatory entry to
-its identifiers and source list.
+Our analyses comprises of the following steps:
 
 \paragraph{Data Integration}
 
-Substance records were compiled from a comprehensive set of 18 European regulatory and monitoring sources and one Flemish administrative list. These include ECHA obligation lists (Candidate List~\cite{ECHA_CandidateList}, Authorisation List~\cite{ECHA_AuthorisationList}, Restriction List~\cite{ECHA_RestrictionList}, POPs List~\cite{ECHA_POPsList}, EU Positive List~\cite{ECHA_EUPositiveList}, and the CLH Harmonised Classification and Labelling List~\cite{ECHA_CLHList}), ECHA activity lists (Restriction Process~\cite{ECHA_RestrictionProcess}, SVHC Identification~\cite{ECHA_SVHCIdentification}, Authorisation Process~\cite{ECHA_AuthorisationProcess}, Dossier Evaluation~\cite{ECHA_DossierEvaluation}, CLH Process~\cite{ECHA_CLHProcess}, Substance Evaluation~\cite{ECHA_SubstanceEvaluation}, POPs Process~\cite{ECHA_POPsProcess}, PBT Assessment~\cite{ECHA_PBTAssessment}, and ED Assessment~\cite{ECHA_EDAssessment}), as well as REACH registration data~\cite{ECHA_REACHRegistrations}.
+Substance records were compiled from a comprehensive set of 18 European regulatory and monitoring sources and one Flemish administrative list. These include ECHA obligation lists (Candidate List~\cite{ECHA_CandidateList}, Authorisation List~\cite{ECHA_AuthorisationList}, Restriction List~\cite{ECHA_RestrictionList}, POPs List~\cite{ECHA_POPsList}, EU Positive List~\cite{ECHA_EUPositiveList}, and the CLH Harmonised Classification and Labelling List~\cite{ECHA_CLHList}), ECHA activity lists (Restriction Process~\cite{ECHA_RestrictionProcess}, SVHC Identification~\cite{ECHA_SVHCIdentification}, Authorisation Process~\cite{ECHA_AuthorisationProcess}, Dossier Evaluation~\cite{ECHA_DossierEvaluation}, CLH Process~\cite{ECHA_CLHProcess}, Substance Evaluation~\cite{ECHA_SubstanceEvaluation}, POPs Process~\cite{ECHA_POPsProcess}, PBT Assessment~\cite{ECHA_PBTAssessment}, and ED Assessment~\cite{ECHA_EDAssessment}), as well as REACH registration data~\cite{ECHA_REACHRegistrations}. 
+%Table~\ref{tab:datasources} provides an overview of all regulatory and monitoring sources included in this study.
 
-Additional sources comprise the EU Pesticides Database (Active Substances)~\cite{EU_Pesticides}, the OSPAR List of Chemicals for Priority Action~\cite{OSPAR_PriorityChemicals}, and a Flemish administrative substance list developed in the context of water quality modelling~\cite{Vlaanderen_SommatieStoffen}. For each entry, available identifiers (CAS number, EC number, and substance name) were collected.
+These are the most autoritative datasets that lay the foundation of EU regulatory oversight of chemical Substances.
+
+Additional sources comprise the EU Pesticides Database (Active Substances)~\cite{EU_Pesticides}, the OSPAR List of Chemicals for Priority Action~\cite{OSPAR_PriorityChemicals}, and a Flemish administrative substance list developed in the context of water quality modelling~\cite{Vlaanderen_SommatieStoffen}. This Flemish \texttt{summation substances} list reflects the heterogeneity of \emph{substance names} in the Flemish environmental permits and - monitoring. For each entry, available identifiers (CAS number, EC number, and substance name) were collected.
 
 Where possible, substances were linked to structure-based identifiers (InChIKey) via PubChem~\cite{Kim2015}. The resulting dataset establishes a unified mapping between regulatory entries, their identifiers, and their originating source lists.
 
@@ -47,9 +41,10 @@ calculated. Overlap between sources was analysed using structure-based matching
 \paragraph{Analysis of Non-Structure Substances}
 
 Substances without structure identifiers were analysed using text-based
-methods, including embedding-based clustering~\cite{Reimers2019,Wang2020MiniLM,Rousseeuw1987,Lloyd1982,McInnes2018} 
+methods, including embedding-based clustering~\cite{Rousseeuw1987,Lloyd1982,McInnes2018} 
 and similarity matching to chemical taxonomies (ChemOnt), to assess whether 
-semantic techniques can recover meaningful structure or classification~\cite{Manning2008,DjoumbouFeunang2016} .
+semantic techniques can recover meaningful structure or classification~\cite{Manning2008,DjoumbouFeunang2016}.
+Each substance name and ChemOnt class label was encoded using the \texttt{all-MiniLM-L6-v2} sentence-transformer model~\cite{Reimers2019,Wang2020MiniLM,devlin-etal-2019-bert}, yielding a 384-dimensional dense vector representation.
 
 \paragraph{Knowledge Graph Construction}
 
@@ -67,20 +62,9 @@ effort scales quadratically with the number of such entries as $\binom{N}{2} = N
 \paragraph{Priority Scoring}
 \label{sec:priority_score}
 
-To illustrate the analytical potential enabled by the integrated knowledge graph, 
-a composite priority score was defined by combining two independent dimensions: 
-(i) regulatory presence across multiple European substance lists 
-(e.g.\ CLP~\cite{CLP2008}, EU Chemicals Strategy for Sustainability~\cite{EUCSS2020}, 
-and POPs~\cite{POPs2019}), and 
-(ii) biological role annotations derived from ChEBI~\cite{Degtyarenko2008}.
+To demonstrate the analytical capabilities of the integrated knowledge graph, a composite priority score was developed by integrating two independent dimensions: (i) regulatory presence across multiple European substance lists, including the CLP Regulation~\cite{CLP2008}, the EU Chemicals Strategy for Sustainability~\cite{EUCSS2020}, and the Persistent Organic Pollutants (POPs) Regulation~\cite{POPs2019}; and (ii) biological role annotations obtained from ChEBI~\cite{Degtyarenko2008}. The approach is conceptually grounded in the ToxPi (Toxicological Priority Index) framework~\cite{Reif2010}, which integrates heterogeneous evidence streams into a single prioritisation
+score through transparent, domain-specific weights. 
 
-The resulting score does not represent a formal risk assessment, 
-but serves as an illustrative aggregation of heterogeneous regulatory 
-and biological information within a unified semantic framework. 
-Its purpose is to demonstrate how interoperable, structure-linked data 
-enables cross-domain queries and comparative analyses that are not 
-feasible in fragmented regulatory datasets.
+This score is not intended to constitute a formal risk assessment. Rather, it serves as an illustrative aggregation of heterogeneous regulatory and biological information within a unified semantic framework. The objective is to demonstrate how interoperable, structure-linked data enable cross-domain queries and comparative analyses that are difficult to achieve using fragmented regulatory datasets. Moreover, such an approach can support the prioritisation of policy enforcement activities, particularly in contexts where regulatory agencies operate with limited personnel resources.
 
-This approach highlights how combining regulatory metadata with 
-ontology-based annotations can support the identification of substances 
-and chemical classes that are prominent across multiple dimensions of interest.
+Overall, this methodology highlights the value of integrating regulatory metadata with ontology-based annotations to facilitate the identification of substances and chemical classes that are prominent across multiple dimensions of interest.
