@@ -282,7 +282,7 @@ p8_umap <- ggplot(plot_data_umap, aes(x = umap1, y = umap2, colour = cluster)) +
         .groups = "drop"
       ),
     aes(label = paste0(manual_label, " (C", cluster, ")")),
-    size        = 3,
+    size        = 10,
     show.legend = FALSE
   ) +
   scale_colour_manual(
@@ -301,9 +301,9 @@ p8_umap <- ggplot(plot_data_umap, aes(x = umap1, y = umap2, colour = cluster)) +
     y      = "UMAP 2",
     colour = "Cluster"
   ) +
-  theme_minimal(base_size = 12) +
+  theme_minimal(base_size = 16) +
   theme(
-    legend.position = "bottom",
+    legend.position = "none",
     plot.subtitle   = element_text(colour = "grey40")
   )
 

@@ -230,8 +230,8 @@ p9e <- ggplot(matches, aes(score)) +
   theme_minimal(base_size = 12) +
   labs(
     title    = "Cosine similarity score distribution",
-    subtitle = sprintf("Dashed line: applied threshold (score\u2081 > %.2f)", score_threshold),
-    x        = "Top-1 cosine similarity (score\u2081)",
+    subtitle = sprintf("Dashed line: applied threshold (score_1 > %.2f)", score_threshold),
+    x        = "Top-1 cosine similarity (score_1)",
     y        = "Number of substance names"
   ) +
   theme(plot.subtitle = element_text(colour = "grey40"))
@@ -534,19 +534,14 @@ message(paste(
 p8_umap <- readRDS(here("data", "processed", "p8_umap.rds"))
 
 axis_theme <- theme(
-  axis.text  = element_text(size = 20),
-  axis.title = element_text(size = 20)
+  axis.text  = element_text(size = 24),
+  axis.title = element_text(size = 24)
 )
 
 p8_umap_clean <- p8_umap +
   labs(tag = "(A)", title = NULL, subtitle = NULL) +
-  guides(colour = guide_legend(override.aes = list(size = 8))) +
   axis_theme +
-  theme(
-    legend.text     = element_text(size = 20),
-    legend.title    = element_text(size = 18),
-    legend.key.size = unit(1.2, "cm")
-  )
+  theme(legend.position = "none")
 
 p9e_clean <- p9e +
   labs(tag = "(B)", title = NULL, subtitle = NULL) +
@@ -555,7 +550,7 @@ p9e_clean <- p9e +
 p_89 <- (p8_umap_clean | p9e_clean) +
   plot_annotation(
     title = "Embedding-based clustering and ChemOnt match quality",
-    theme = theme(plot.title = element_text(size = 30, face = "bold"))
+    theme = theme(plot.title = element_text(size = 34, face = "bold"))
   ) +
   plot_layout(widths = c(2, 1))
 
