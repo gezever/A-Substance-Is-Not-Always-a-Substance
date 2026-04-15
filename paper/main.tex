@@ -3,8 +3,11 @@
 \documentclass{IOS-Book-Article}
 
 \usepackage{mathptmx}
+\usepackage{xcolor}
 \usepackage{soul}\setuldepth{article}
-%\usepackage{misc/mermaid}
+% Mermaid diagrams: use [cached] to skip mmdc and use pre-generated PDFs from .mermaid/
+% Remove [cached] (or use \usepackage{misc/mermaid}) to regenerate via mmdc on each build.
+\usepackage[cached]{misc/mermaid}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{float}
@@ -23,6 +26,9 @@
 \def\hb{\hbox to 11.5 cm{}}
 % Inline placeholder for missing numbers; replace with actual values before submission
 \newcommand{\TODO}[1]{\textbf{[\textit{TODO: #1}]}}
+
+% ORCID iD — renders as a small superscript link if hyperref is loaded, otherwise silently ignored
+\providecommand{\orcid}[1]{}
 
 \begin{document}
 \hypersetup{hidelinks}

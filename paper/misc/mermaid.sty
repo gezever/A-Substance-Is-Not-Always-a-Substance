@@ -1,7 +1,14 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{misc/mermaid}[2026/03/09 Mermaid diagram integration via mmdc]
+\ProvidesPackage{misc/mermaid}[2026/04/15 Mermaid diagram integration via mmdc]
 
 \RequirePackage{graphicx}
+
+% Package option: [cached] — skip mmdc and use pre-generated PDFs from the cache dir.
+% Default (no option): regenerate diagrams via mmdc when the source is newer.
+\newif\ifmermaid@usecache
+\mermaid@usecachefalse
+\DeclareOption{cached}{\mermaid@usecachetrue}
+\ProcessOptions\relax
 
 \newcommand{\mermaidcachedir}{.mermaid}
 \newcommand{\mermaidcroppadding}{2}
@@ -13,18 +20,23 @@
   \edef\mermaid@hash{\pdfmdfivesum{\mermaid@input}}%
   \edef\mermaid@output{\mermaidcachedir/\mermaid@hash.pdf}%
   \edef\mermaid@cropped{\mermaidcachedir/\mermaid@hash-crop.pdf}%
-  \immediate\write18{mkdir -p "\mermaidcachedir"}%
-  % Regenerate only when needed to avoid latexmk infinite reruns.
-  \immediate\write18{if [ ! -f "\mermaid@output" ] || [ "\mermaid@input" -nt "\mermaid@output" ]; then mmdc -q -f -i "\mermaid@input" -o "\mermaid@output"; fi}%
-  \immediate\write18{if command -v gs >/dev/null 2>&1; then if [ ! -f "\mermaid@cropped" ] || [ "\mermaid@output" -nt "\mermaid@cropped" ]; then pdfcrop --margins "\mermaidcroppadding" "\mermaid@output" "\mermaid@cropped" >/dev/null 2>&1; fi; fi}%
+  \ifmermaid@usecache
+    % Cache-only mode: use whatever is already in the cache directory.
+  \else
+    % Live mode: regenerate via mmdc when source is newer than cached output.
+    \immediate\write18{mkdir -p "\mermaidcachedir"}%
+    \immediate\write18{if [ ! -f "\mermaid@output" ] || [ "\mermaid@input" -nt "\mermaid@output" ]; then mmdc -q -f -i "\mermaid@input" -o "\mermaid@output"; fi}%
+    \immediate\write18{if command -v gs >/dev/null 2>&1; then if [ ! -f "\mermaid@cropped" ] || [ "\mermaid@output" -nt "\mermaid@cropped" ]; then pdfcrop --margins "\mermaidcroppadding" "\mermaid@output" "\mermaid@cropped" >/dev/null 2>&1; fi; fi}%
+  \fi
   \IfFileExists{\mermaid@cropped}{%
     \includegraphics[#1]{\mermaid@cropped}%
   }{%
     \IfFileExists{\mermaid@output}{%
       \includegraphics[#1]{\mermaid@output}%
     }{%
-      \PackageError{mermaid}{Failed to generate Mermaid diagram from '\mermaid@input'}{%
-Install Mermaid CLI (mmdc) and compile with shell-escape enabled.}%
+      \PackageError{mermaid}{Failed to find Mermaid diagram for '\mermaid@input'}{%
+In cached mode, ensure pre-generated PDFs exist in '\mermaidcachedir'.
+In live mode, install Mermaid CLI (mmdc) and compile with shell-escape enabled.}%
     }%
   }%
   \endgroup

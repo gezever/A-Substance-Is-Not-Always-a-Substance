@@ -34,13 +34,13 @@ numbers uniquely map to structures and vice versa.
 
 For each regulatory source, the proportion of structure-defined substances was
 calculated. Overlap between sources was analysed using structure-based matching
-(InChIKey) and set similarity measures.
+(i.e.,~using InChIKey) and set similarity measures.
 
 \paragraph{Analysis of Non-Structure Substances}
 
 Substances without structure identifiers were analysed using text-based
 methods, including embedding-based clustering~\cite{Rousseeuw1987,Lloyd1982,McInnes2018} 
-and similarity matching to chemical taxonomies (ChemOnt), to assess whether 
+and similarity matching to chemical taxonomies (i.e.,~using ChemOnt), to assess whether 
 semantic techniques can recover meaningful structure or classification~\cite{Manning2008,DjoumbouFeunang2016}.
 Each substance name and ChemOnt class label was encoded using the \path{all-MiniLM-L6-v2} sentence-transformer model~\cite{Reimers2019,Wang2020MiniLM,devlin-etal-2019-bert}, yielding a 384-dimensional dense vector representation.
 
@@ -60,7 +60,7 @@ transformer models (\path{all-MiniLM-L6-v2}, \path{all-mpnet-base-v2},
 framework~\cite{Reimers2019,Wang2020MiniLM,devlin-etal-2019-bert}. Cosine similarity was used to rank all ChemOnt classes for each substance name.
 
 Performance was assessed using standard information retrieval metrics,
-including Hit@k ($k = 1, 3, 5, 10$) and Mean Reciprocal Rank (MRR)~\cite{Manning2008}.
+including Hit@k ($k = 1, 3, 5, 10$) and Mean Reciprocal Rank~(MRR)~\cite{Manning2008}.
 To account for the hierarchical structure of ChemOnt, Hit@1 was additionally
 computed for each taxonomy level. A weighted lenient MRR was introduced to
 summarise performance across levels, assigning ordinal weights of 1.00 (direct

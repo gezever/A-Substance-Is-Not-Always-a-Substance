@@ -1,3 +1,4 @@
+%%{init: {"theme": "base", "themeVariables": {"clusterBkg": "#FAFAFA"}, "flowchart": {"nodeSpacing": 25, "rankSpacing": 40}}}%%
 graph LR
   subgraph ext["External sources"]
     ECHA["ECHA / Pesticides / OSPAR / VMM\n18 regulatory lists"]
@@ -49,3 +50,18 @@ graph LR
   ChEBI_stof -->|"geneontology:hasDbXref"| ExtDB
   Annotations -->|"oa:hasTarget"| Substances
   Annotations -->|"oa:hasBody"| ChEBI_rol
+
+  classDef extNode fill:#FDE8D1,stroke:#E07B2A,color:#1a1a1a
+  classDef skosNode fill:#D6E8F7,stroke:#4A90C4,color:#1a1a1a
+  classDef chebiNode fill:#D4EDDA,stroke:#28A745,color:#1a1a1a
+  classDef annNode fill:#E8D5F0,stroke:#7B4EA8,color:#1a1a1a
+  classDef extDBNode fill:#F5F5F5,stroke:#888888,color:#444444
+
+  class ECHA,PubChem,ClassyFire_src,ChEBI_src,BERT extNode
+  class Substances,Scheme,ChemOnt,XKOS,Collections skosNode
+  class ChEBI_stof,ChEBI_rol chebiNode
+  class Annotations annNode
+  class ExtDB extDBNode
+
+  style ext fill:#FFF4EA,stroke:#E07B2A
+  style kg fill:#F0F6FF,stroke:#4A90C4

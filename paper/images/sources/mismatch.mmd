@@ -1,6 +1,7 @@
+%%{init: {"theme": "base", "themeVariables": {"clusterBkg": "#FAFAFA"}, "flowchart": {"nodeSpacing": 25, "rankSpacing": 30}}}%%
 flowchart TB
 
-    subgraph Chemistry
+    subgraph chem["Chemistry"]
         A[Molecule]
         B[Structure representation<br/>atoms + bonds]
         C[Structure identifiers<br/>InChI / InChIKey]
@@ -9,7 +10,7 @@ flowchart TB
         B --> C
     end
 
-    subgraph Regulatory datasets
+    subgraph reg["Regulatory datasets"]
         D["Substance"]
 
         D --> E[Individual molecule]
@@ -22,3 +23,14 @@ flowchart TB
         G --> G1[Example: Perfluorinated compounds]
         H --> H1[Example: Sum PFOS + PFBA]
     end
+
+    classDef chemNode fill:#D6E8F7,stroke:#4A90C4,color:#1a1a1a
+    classDef regNode fill:#FDE8D1,stroke:#E07B2A,color:#1a1a1a
+    classDef exampleNode fill:#F5F5F5,stroke:#AAAAAA,color:#444444
+
+    class A,B,C chemNode
+    class D,E,F,G,H regNode
+    class E1,F1,G1,H1 exampleNode
+
+    style chem fill:#EBF5FF,stroke:#4A90C4
+    style reg fill:#FFF4EA,stroke:#E07B2A
