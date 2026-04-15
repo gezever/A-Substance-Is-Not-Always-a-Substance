@@ -1,3 +1,4 @@
+%%{init: {"theme": "base", "themeVariables": {"fontSize": "18px"}, "flowchart": {"nodeSpacing": 25, "rankSpacing": 40}}}%%
 graph LR
 %% Input layer
     A["Regulatory datasets\n(18 sources)"]
@@ -27,3 +28,13 @@ graph LR
 
     E --> H
     B --> H
+
+    classDef inputNode fill:#FDE8D1,stroke:#E07B2A,color:#1a1a1a
+    classDef coreNode fill:#D6E8F7,stroke:#4A90C4,color:#1a1a1a
+    classDef linkNode fill:#D4EDDA,stroke:#28A745,color:#1a1a1a
+    classDef derivedNode fill:#E8D5F0,stroke:#7B4EA8,color:#1a1a1a
+
+    class A inputNode
+    class B coreNode
+    class C,D,E linkNode
+    class F,G,H derivedNode

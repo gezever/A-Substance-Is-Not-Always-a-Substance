@@ -3,8 +3,10 @@
 \documentclass{IOS-Book-Article}
 
 \usepackage{mathptmx}
+\usepackage{xcolor}
 \usepackage{soul}\setuldepth{article}
-%\usepackage{misc/mermaid}
+% Remove [cached] (or use \usepackage{misc/mermaid}) to regenerate via mmdc on each build.
+\usepackage[cached]{misc/mermaid}
 \usepackage{amsmath}
 \usepackage{graphicx}
 \usepackage{float}
@@ -24,6 +26,12 @@
 % Inline placeholder for missing numbers; replace with actual values before submission
 \newcommand{\TODO}[1]{\textbf{[\textit{TODO: #1}]}}
 
+% Blind review mode: \blindreviewtrue hides author/address; \blindreviewfalse restores them.
+\newif\ifblindreview
+\blindreviewtrue
+
+\providecommand{\orcid}[1]{}
+
 \begin{document}
 \hypersetup{hidelinks}
 \pagestyle{empty}
@@ -37,7 +45,6 @@
 \input{sections/60_data_availability}
 \input{sections/70_supplementary_materials}
 \input{sections/80_LLM_declaration}
-\clearpage
 \input{sections/90_bibliography}
 
 \end{document}
