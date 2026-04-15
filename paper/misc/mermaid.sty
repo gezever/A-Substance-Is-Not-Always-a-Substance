@@ -17,9 +17,10 @@
 \newcommand{\includemermaid}[2][]{%
   \begingroup
   \edef\mermaid@input{#2}%
-  \edef\mermaid@hash{\pdfmdfivesum{\mermaid@input}}%
-  \edef\mermaid@output{\mermaidcachedir/\mermaid@hash.pdf}%
-  \edef\mermaid@cropped{\mermaidcachedir/\mermaid@hash-crop.pdf}%
+  \filename@parse{#2}%
+  \edef\mermaid@basename{\filename@base}%
+  \edef\mermaid@output{\mermaidcachedir/\mermaid@basename.pdf}%
+  \edef\mermaid@cropped{\mermaidcachedir/\mermaid@basename-crop.pdf}%
   \ifmermaid@usecache
     % Cache-only mode: use whatever is already in the cache directory.
   \else

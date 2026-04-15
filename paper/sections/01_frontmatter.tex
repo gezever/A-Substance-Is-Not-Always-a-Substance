@@ -2,10 +2,11 @@
 
 
 %\pretitle{Pretitle}
-\title{Chemical Identity Lost in Regulation\@: A Study of Semantic Interoperability in European Chemical Substance Data}
+\title{Chemical Identity Lost in Regulation\@:\\A Study of Semantic Interoperability in European Chemical Substance Data}
 \runningtitle{Chemical Identity Lost in Regulation}
 %\subtitle{Subtitle}
 
+\ifblindreview\else
 \author[A]{\fnms{Geert} \snm{Van Haute}\orcid{0009-0002-9836-8139}%
 \thanks{Corresponding Author: Geert Van Haute, contact details.}},
 \author[A]{\fnms{Pieter} \snm{Fannes}\orcid{....-....-....-....}}
@@ -15,17 +16,16 @@ and
 \author[A]{\fnms{Maxim} \snm{Van de Wynckel}\orcid{0000-0003-0314-7107}}
 
 \runningauthor{G. Van Haute et al.}
-\address[A]{Department of Environment and Spatial Development, Flemish Government, 1000 Brussels, Belgium}
+\address[A]{Department of Environment and Spatial Development, Flemish Government, Belgium}
+\fi
 
 
 \begin{abstract}
-    Chemical substances are fundamental entities in environmental regulation, yet their representation in regulatory data systems diverges significantly from established practices in chemistry and cheminformatics. While chemical identity can be unambiguously defined using structure-based identifiers such as the International Chemical Identifier~(InChI) and InChIKey, European regulatory datasets rely on heterogeneous identifiers including CAS numbers, EC numbers, textual names, and loosely defined group descriptions.
+    Chemical substance identity is inconsistently represented across European regulatory datasets, creating fundamental barriers to semantic interoperability. While structure-based identifiers such as InChI and InChIKey unambiguously define chemical entities, regulatory systems rely on heterogeneous identifiers including CAS numbers, EC numbers, textual names, and group descriptions that may represent mixtures, substance groups, or analytical parameters rather than molecules with a uniquely defined chemical structure.
 
-    This paper analyses the resulting interoperability challenges across European regulatory frameworks, based on a case study spanning 18 datasets from the European Chemicals Agency (ECHA) and related sources. We show that regulatory “substances” frequently represent heterogeneous semantic entities, including individual molecules, mixtures, analytical parameters, and substance groups, for which formal relationships are not explicitly defined.
+    In this research, we analysed interoperability challenges across 18 European regulatory datasets and demonstrate that; (i)~37.5\% of entries cannot be linked to a defined chemical structure, (ii)~CAS numbers exhibit both one-to-many and many-to-one mappings with molecular structures, and (iii)~embedding-based classification fails for non-structure substances, with the best model achieving a ChemOnt Hit@1 of only 5.75\%. The combinatorial complexity of cross-list identifier mappings makes retrospective harmonisation infeasible at scale.
 
-    Our results demonstrate that (i) a substantial fraction of regulatory entries cannot be linked to a defined chemical structure, (ii) CAS numbers do not provide a reliable unique identifier, and (iii) semantic and embedding-based approaches fail to recover chemical identity for non-structure substances. We further show that resolving these inconsistencies retrospectively leads to combinatorial complexity that is infeasible at scale.
-
-    In contrast, structure-based identifiers and ontology-driven approaches, as used in cheminformatics resources such as PubChem and ChEBI, enable scalable integration through linked data principles. We argue that interoperability of chemical substance data must be addressed at the level of legislation and data modelling, by adopting structure-based identifiers, formal ontologies, and machine-readable representations.
+    These findings demonstrate that interoperability cannot be achieved through post hoc technical solutions alone. We argue that it must be addressed at the level of data modelling and legislation, by adopting structure-based identifiers, formal ontologies, and machine-readable representations directly in regulatory data standards.
 \end{abstract}
 
 

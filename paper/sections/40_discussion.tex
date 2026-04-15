@@ -1,57 +1,57 @@
 \section{Implications}
 \label{sec:discussion}
 
-\paragraph{Structural linkability and its limits (\texorpdfstring{\hyperref[sec:question1]{RQ1}}{RQ1})}:
+\paragraph{Structural Linkability and Its Limits (\texorpdfstring{\hyperref[sec:question1]{RQ1}}{RQ1})}
 
 The results demonstrate that interoperability of regulatory substance data is fundamentally constrained by the absence of a shared and formalised notion of chemical identity. While structure-based identifiers such as InChIKey enable unambiguous linking across datasets, a substantial fraction of regulatory entries cannot be expressed in this form. Instead, regulatory “substances” frequently represent heterogeneous entities, including mixtures, substance groups, and analytical parameters.
 
 This heterogeneity is not merely a data quality issue but reflects a structural mismatch between chemical reality and regulatory abstraction. As a consequence, semantic relationships between regulatory entries, such as equivalence, subset relations or partial overlap, remain implicit and undefined. Without explicit formalisation of these relationships, automated integration across regulatory datasets is inherently limited.
 
-\paragraph{Unreliability of CAS-based identification (\texorpdfstring{\hyperref[sec:question2]{RQ2}}{RQ2})}:
+\paragraph{Unreliability of CAS-based Identification (\texorpdfstring{\hyperref[sec:question2]{RQ2}}{RQ2})}
 
 The analysis confirms that commonly used identifiers in regulatory contexts, particularly CAS numbers, do not provide a reliable foundation for interoperability. Although widely adopted, they exhibit both one-to-many and many-to-one mappings with chemical structures, reflecting differences in stereochemistry, salt forms, and context-dependent definitions.
 
 This finding challenges the widespread assumption in regulatory data integration that such identifiers can serve as globally unique references. In practice, relying on them introduces ambiguity rather than resolving it, undermining their suitability as a primary reference mechanism for cross-dataset linking.
 
-\paragraph{Failure of semantic compensation (\texorpdfstring{\hyperref[sec:question3]{RQ3}}{RQ3})}:
+\paragraph{Failure of Semantic Compensation (\texorpdfstring{\hyperref[sec:question3]{RQ3}}{RQ3})}
 
 This study shows that modern embedding-based methods cannot compensate for the absence of structure-based identifiers in regulatory substance data. While they can group substance names into loosely coherent semantic clusters, they fail to recover true chemical identity or reliably map entries to ChemOnt classes, with only a negligible number of correct assignments.
 
-These limitations are inherent to the data rather than the models: textual descriptions of mixtures, groups, and analytical entries lack the information required to infer molecular structure. As a result, semantic similarity largely reflects lexical overlap rather than chemical relatedness.
+These limitations are inherent to the data rather than the models: textual descriptions of mixtures, groups, and analytical entries lack the information required to infer molecular structure. As a result, semantic similarity largely reflects surface-level lexical overlap rather than genuine chemical relatedness.
 
-Sentence embeddings cannot therefore substitute for structure-resolvable identifiers. Reliable chemical classification and interoperability therefore require explicit structural representation, such as InChIKeys, at the source.
+Sentence embeddings cannot therefore substitute for structure-resolvable identifiers; reliable chemical classification and interoperability thus require explicit structural representation, such as InChIKeys, at the source.
 
-\paragraph{The combinatorial barrier to retrospective harmonisation}:
+\paragraph{The Combinatorial Barrier to Retrospective Harmonisation}
 
 The scale of the interoperability problem becomes evident when considering the effort required for manual reconciliation. For non-structure substances, establishing semantic relationships requires pairwise comparison, leading to quadratic growth in workload. The estimated effort of several thousand person-years demonstrates that retrospective correction is not a viable strategy at scale, interoperability must be built into regulatory data models by design.
 
-\paragraph{Towards ontology-driven regulatory data infrastructures}:
+\paragraph{Towards Ontology-Driven Regulatory Data Infrastructures}
 
-In contrast to regulatory datasets, cheminformatics infrastructures such as PubChem and ChEBI demonstrate that large-scale interoperability is achievable when chemical identity is explicitly represented and linked to formal ontologies. Structure-based identifiers, combined with hierarchical classifications and machine-readable knowledge graphs, enable consistent integration across domains.
+In contrast to regulatory datasets, cheminformatics infrastructures such as PubChem and ChEBI demonstrate that large-scale interoperability is achievable when chemical identity is explicitly represented and linked to formal ontologies. Structure-based identifiers, combined with hierarchical classifications and machine-readable knowledge graphs, enable consistent and scalable integration across scientific and regulatory domains.
 
 The priority scoring example illustrates that once chemical identity is formalised and linked across datasets, higher-level aggregations combining regulatory and biological information become straightforward to compute.
 
-The results of this study show that similar principles can be applied to regulatory data. Structure-defined substances can be successfully linked across datasets and enriched with chemical and biological annotations when represented using InChIKey and ontology-based classifications. 
+The results of this study show that similar principles can be applied to regulatory data. Structure-defined substances can be successfully linked across datasets and enriched with chemical and biological annotations via InChIKey and formal ontology-based classifications.
 
-\paragraph{Implications for FAIR chemical data in Europe}:
+\paragraph{Implications for FAIR Chemical Data in Europe}
 
 The findings have direct implications for the implementation of FAIR~(Findable, Accessible, Interoperable, Reusable) principles in European chemical regulation. Current regulatory datasets fall short of interoperability primarily because they lack globally unique, persistent, and machine-readable identifiers grounded in chemical structure.
 
-Achieving FAIR chemical substance data requires a shift from document-centric and identifier-fragmented approaches towards linked data infrastructures in which substances are represented as resolvable URIs, grounded in structure-based identifiers and connected through formal ontologies. This shift is not purely technical: it requires alignment between data modelling practices and the legal definitions of substances in regulatory frameworks.
+Achieving FAIR chemical substance data requires a shift from document-centric and identifier-fragmented approaches towards linked data infrastructures~\cite{BernersLee2006LinkedData,Heath2011LinkedData} in which substances are represented as resolvable URIs, grounded in structure-based identifiers and connected through formal ontologies. This shift is not purely technical: it requires alignment between data modelling practices and the legal definitions of substances in regulatory frameworks.
 
-\paragraph{Limitations and scope}:
+\paragraph{Limitations and Scope}
 
-This study focuses on datasets derived from ECHA and related European regulatory sources, and on the use of InChIKey as the primary structure-based identifier. While the results are consistent across the analysed datasets, further work is needed to assess the generality of these findings across other regulatory domains and jurisdictions.
+This study focuses on datasets derived from ECHA and related European regulatory sources, and on the use of InChIKey as the primary structure-based identifier. While the results are consistent across the analysed datasets, further work is needed to assess the generality of these findings across other regulatory domains, jurisdictions, and substance categories.
 
 Furthermore, not all regulatory concepts can or should be reduced to individual molecular structures. Mixtures, UVCBs, and analytical parameters are legitimate and necessary constructs in regulation. However, their current representation lacks formal semantics, limiting their integration with structure-based systems. Future work should explore hybrid models that explicitly represent these entities as sets, classes, or functions over well-defined chemical structures.
 
-\paragraph{From data integration to regulatory design}:
+\paragraph{From Data Integration to Regulatory Design}
 
-The interoperability problem is not primarily a technical integration challenge, but a consequence of how substances are defined and represented in regulation. Efforts to improve interoperability must therefore extend beyond data engineering to include the design of regulatory concepts and data standards.
+The interoperability problem is not primarily a technical integration challenge, but a consequence of how substances are defined and represented in regulation. Efforts to improve interoperability must therefore extend beyond data engineering to include the principled design of regulatory concepts, vocabularies, and data standards.
 
-Embedding structure-based identifiers, ontology references, and machine-readable semantics directly into regulatory processes would significantly reduce ambiguity and enable scalable integration. Without such changes, the gap between regulatory data and scientific data infrastructures will continue to widen, limiting the effectiveness of data-driven environmental governance.
+Embedding structure-based identifiers, ontology references, and machine-readable semantics directly into regulatory processes~\cite{EIF2017,InteroperableEuropeAct2024} would significantly reduce ambiguity and enable scalable integration. Without such changes, the gap between regulatory data and scientific data infrastructures will continue to widen, limiting the effectiveness of data-driven environmental governance.
 
 In practice, this implies that regulatory data infrastructures should:
-(i) include structure-based identifiers (e.g.\ InChIKey) wherever applicable;
-(ii) represent substance groups and mixtures using explicit semantic models (e.g.\ set- or class-based representations);
+(i) include structure-based identifiers (e.g.~InChIKey) wherever applicable;
+(ii) represent substance groups and mixtures using explicit semantic models (e.g.~set- or class-based representations);
 (iii) publish substance data as linked data with persistent URIs.

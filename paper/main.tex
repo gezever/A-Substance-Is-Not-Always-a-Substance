@@ -5,7 +5,6 @@
 \usepackage{mathptmx}
 \usepackage{xcolor}
 \usepackage{soul}\setuldepth{article}
-% Mermaid diagrams: use [cached] to skip mmdc and use pre-generated PDFs from .mermaid/
 % Remove [cached] (or use \usepackage{misc/mermaid}) to regenerate via mmdc on each build.
 \usepackage[cached]{misc/mermaid}
 \usepackage{amsmath}
@@ -27,7 +26,10 @@
 % Inline placeholder for missing numbers; replace with actual values before submission
 \newcommand{\TODO}[1]{\textbf{[\textit{TODO: #1}]}}
 
-% ORCID iD — renders as a small superscript link if hyperref is loaded, otherwise silently ignored
+% Blind review mode: \blindreviewtrue hides author/address; \blindreviewfalse restores them.
+\newif\ifblindreview
+\blindreviewtrue
+
 \providecommand{\orcid}[1]{}
 
 \begin{document}
@@ -43,7 +45,6 @@
 \input{sections/60_data_availability}
 \input{sections/70_supplementary_materials}
 \input{sections/80_LLM_declaration}
-\clearpage
 \input{sections/90_bibliography}
 
 \end{document}
