@@ -8,8 +8,9 @@ In chemistry and cheminformatics, chemical identity is well-defined and operatio
 In contrast, regulatory data systems adopt a fundamentally different approach. Substances are typically identified using heterogeneous and often ambiguous identifiers, including Chemical Abstracts Service~(CAS) registry numbers~\cite{CAS,Dittmar1976}, European Community numbers~(EC numbers)~\cite{ECHA_EC_numbers}, textual names, and informal group descriptions. Moreover, the concept of a \emph{substance} in regulation is not uniform: it may refer to a single molecule, a mixture of unknown or variable composition (UVCB)~\cite{Kutsarova2019}, a group of related compounds (e.g.,~PFAS), or even an analytical parameter defined as a function over multiple substances. As illustrated in Figure~\ref{fig:mismatch}, these entities correspond to fundamentally different semantic types.
 
 \begin{figure}[!ht]
-	\centering                 
-	\includemermaid[width=1\linewidth]{images/sources/mismatch.mmd} 
+	\centering         
+	\includegraphics[width=\linewidth]{67BF4EE33A891679003BFA37DB268E71.pdf}        
+	%\includemermaid[width=1\linewidth]{images/sources/mismatch.mmd} 
 	\caption{Conceptual model of the semantic mismatch.
 		In chemistry, a substance typically corresponds to a molecule defined by its molecular structure and uniquely identified using structure-derived identifiers such as InChI or InChIKey. In regulatory datasets, however, the concept of a “substance” often encompasses heterogeneous entities including individual molecules, mixtures, substance groups, and analytical sum parameters. These entities correspond to fundamentally different semantic types, which complicates interoperability and automated reasoning across regulatory datasets.
 		This conceptual mismatch is reflected empirically in Section~\ref{sec:semantic_mismatch}, where a large fraction of regulatory entries cannot be linked to a defined molecular structure.} \label{fig:mismatch}
@@ -21,7 +22,8 @@ As a result, integrating substance information across regulatory frameworks beco
 
 \begin{figure}[!ht]
 	\centering
-	\includemermaid[width=1\linewidth]{images/sources/regulatory_groups.mmd}
+	\includegraphics[width=\linewidth]{DE3F35C6EA94AD18211701CB94C60361.pdf}  
+	%\includemermaid[width=1\linewidth]{images/sources/regulatory_groups.mmd}
 	\caption{Set-theoretic view of regulatory substances. The lack of explicit set-based semantics leads to unclear relationships between entities and contributes to combinatorial complexity.}
 	\label{fig:regulatory_groups}
 \end{figure}
