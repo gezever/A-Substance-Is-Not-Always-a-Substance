@@ -1,429 +1,91 @@
 \section{Methods}
 \label{sec:methods}
 
-\subsection{Data Sources and Integration}
-\label{sec:datasources}
+Our analysis comprises the following steps:
 
-Substance records were compiled from multiple regulatory lists published through
-the European Chemicals Agency (ECHA), including the candidate list of substances
-of very high concern (SVHC), the authorisation list, the restriction list, the
-persistent organic pollutants (POPs) list, the harmonised classification and
-labelling list, the EU positive list, and the SVHC identification list, as well
-as the EU Pesticides Database and the Flemish administrative
-\textit{sommatie\_stoffen} list.  For each substance record, the available
-identifiers were collected: CAS registry number, EC number, and substance name.
+\paragraph{Data Integration}
 
-Where a CAS number was present, the corresponding InChIKey was retrieved via the
-PubChem PUG-REST API~\cite{Kim2015}; where a CAS lookup yielded no result, a
-fallback lookup by substance name was attempted.  All API responses were cached
-locally using the MD5 hash of the query as the filename, to avoid redundant
-network requests.  A delay of 0.2~s was enforced between successive requests to
-comply with the PubChem rate limit.  Known InChIKeys were subsequently propagated
-across all records sharing the same substance name within the dataset.  The
-resulting dataset was stored as a unified R~\cite{RCoreTeam2024} data frame
-linking each regulatory entry to its source list and all available identifiers
-(\texttt{data/processed/all\_substances.rds}).  RDF serialisation and graph
-merging were performed using Apache Jena~5.6.0.
+Substance records were compiled from a comprehensive set of 18 European regulatory and monitoring sources and one Flemish administrative list. These include ECHA obligation lists (Candidate List~\cite{ECHA_CandidateList}, Authorisation List~\cite{ECHA_AuthorisationList}, Restriction List~\cite{ECHA_RestrictionList}, POPs List~\cite{ECHA_POPsList}, EU Positive List~\cite{ECHA_EUPositiveList}, and the CLH Harmonised Classification and Labelling List~\cite{ECHA_CLHList}), ECHA activity lists (Restriction Process~\cite{ECHA_RestrictionProcess}, SVHC Identification~\cite{ECHA_SVHCIdentification}, Authorisation Process~\cite{ECHA_AuthorisationProcess}, Dossier Evaluation~\cite{ECHA_DossierEvaluation}, CLH Process~\cite{ECHA_CLHProcess}, Substance Evaluation~\cite{ECHA_SubstanceEvaluation}, POPs Process~\cite{ECHA_POPsProcess}, PBT Assessment~\cite{ECHA_PBTAssessment}, and ED Assessment~\cite{ECHA_EDAssessment}), as well as REACH registration data~\cite{ECHA_REACHRegistrations}. 
+%Table~\ref{tab:datasources} provides an overview of all regulatory and monitoring sources included in this study.
 
-\subsection{Chemical Identity Classification}
-\label{sec:classification}
+Additional sources comprise the EU Pesticides Database (Active Substances)~\cite{EU_Pesticides}, the OSPAR List of Chemicals for Priority Action~\cite{OSPAR_PriorityChemicals}, and a Flemish administrative substance list developed in the context of water quality modelling~\cite{Vlaanderen_SommatieStoffen}. This Flemish \texttt{summation substances} list reflects the heterogeneity of \emph{substance names} in Flemish environmental permits and monitoring. For each entry, available identifiers (CAS number, EC number, and substance name) were collected.
 
-To characterise the heterogeneity of regulatory substance entries, a rule-based
-classification scheme was applied to assign each unique substance name to one of
-seven mutually exclusive entity types.  Classification was implemented as an
-ordered conditional lookup in which the \textit{Molecule} type was evaluated
-first, so that the availability of a structure-based identifier always takes
-precedence over textual pattern matching.  The seven types are:
+Where possible, substances were linked to structure-based identifiers (InChIKey) via PubChem~\cite{Kim2015}. The resulting dataset establishes a unified mapping between regulatory entries, their identifiers, and their originating source lists.
 
-\begin{enumerate}
-  \item \textit{Molecule} --- any entry for which a valid InChIKey is available,
-    indicating that the substance can be represented as a defined molecular
-    structure;
-  \item \textit{Substance group} --- entries whose names contain phrases such as
-    ``and its compounds'', ``and its salts'', ``and its esters or isomers'', or
-    group acronyms (e.g.\ PFAS, PCB, PAH, PBDE, HBCDD);
-  \item \textit{Analytical parameter} --- entries describing measurement
-    quantities rather than individual substances, identifiable by phrases such
-    as ``Reaction mass of\ldots'', carbon-range notation ($\mathrm{C}_n$--$\mathrm{C}_m$),
-    or semicolon-separated compound lists;
-  \item \textit{Mixture} --- entries corresponding to complex compositions of
-    unknown or variable structure, including trade-name products, petroleum
-    derivatives (naphtha, kerosine, petrolatum), and creosote;
-  \item \textit{Regulatory entry} --- administrative entries referencing
-    legislative artefacts rather than chemical entities, such as entries
-    formatted as ``Entry~$N$'', references to EU directives, or annex
-    descriptions;
-  \item \textit{CAS without structure} --- entries with a CAS number for which
-    no InChIKey could be retrieved, indicating either that the substance is not
-    indexed in PubChem or that it represents an incompletely characterised
-    (UVCB) substance;
-  \item \textit{Unclassified} --- entries with neither an InChIKey nor a CAS
-    number and not matching any of the above patterns.
-\end{enumerate}
-
-\subsection{Linkability Taxonomy}
+\paragraph{Chemical Identity and Linkability}
 \label{sec:linkability}
 
-Building on the entity-type classification, a seven-tier linkability taxonomy
-was derived to express the degree to which a regulatory substance entry can be
-unambiguously associated with a defined chemical structure.  For substance-group
-entries, the presumed base-compound name was extracted by regular expression and
-an InChIKey lookup via PubChem was attempted, with a 0.2~s delay between
-requests, yielding a distinction between groups whose parent compound is
-structure-resolvable and those for which it is not.  Analytical parameters and
-mixtures were consolidated into a single UVCB/Mixture tier.  The taxonomy tiers,
-in decreasing order of chemical specificity, are:
-(1)~Structure (InChIKey);
-(2)~Group --- base compound resolvable;
-(3)~Group --- base compound not resolvable;
-(4)~CAS without structure;
-(5)~UVCB\,/\,Mixture;
-(6)~Regulatory entry;
-(7)~Unidentified.
+Each substance entry was classified into one of several types reflecting its
+degree of chemical specificity: structure-defined molecule, substance group,
+mixture/UVCB, analytical parameter, or administrative entry.
 
-This taxonomy was serialised as SKOS Collections in RDF Turtle format, with
-substance URIs minted as
-\texttt{https://data.omgeving.vlaanderen.be/id/concept/chemical\_sub\-stance/\{md5\}}.
-The classified dataset was saved as \texttt{data/processed/all\_substances\_classified.rds}
-for use in downstream analyses.
+Based on this classification, a linkability taxonomy was defined, ranging from
+fully structure-resolvable entries (InChIKey) to non-identifiable entries.
+This taxonomy expresses the extent to which regulatory substances can be
+unambiguously linked across datasets.
 
-\subsection{Identifier Mapping Consistency}
-\label{sec:identifier-mapping}
+\paragraph{Identifier Consistency Analysis}
 
-For all records possessing both a CAS number and an InChIKey, bidirectional
-mapping consistency was assessed in two directions.  First, the number of
-distinct InChIKeys associated with each CAS number was computed: a CAS number
-mapping to more than one InChIKey indicates that the same registry identifier has
-been assigned to multiple molecular structures, for example due to differing
-stereochemical representations, hydrates, or salt forms.  Second, the number of
-distinct CAS numbers associated with each InChIKey was computed: an InChIKey
-associated with multiple CAS numbers reflects the common regulatory practice of
-assigning separate registry identifiers to the same molecular structure in
-different trade or regulatory contexts.  Both distributions were visualised on a
-$\log_{10}$ frequency axis~\cite{Cleveland1993} to reveal the long tail of the
-distribution.  These analyses motivate the use of InChIKey, rather than CAS
-number, as the primary linking key throughout all subsequent cross-list analyses.
+For entries with both CAS numbers and InChIKeys, bidirectional mappings were
+analysed to assess identifier consistency. This analysis evaluates whether CAS
+numbers uniquely map to structures and vice versa.
 
-\subsection{Structure Coverage and Linking Ratio}
-\label{sec:coverage}
+\paragraph{Structure Coverage and Cross-List Overlap}
 
-For each regulatory source, the \textit{linking ratio} was defined as the number
-of unique InChIKeys divided by the total number of regulatory records in that
-source.  A ratio of~1 indicates that every record corresponds to a distinct
-molecular structure; a ratio below~1 reflects structural redundancy (multiple
-records per structure), a high non-structure fraction, or both.  The linking
-ratio was visualised as a $\log_{10}$--$\log_{10}$ scatter plot with a~1:1
-reference diagonal~\cite{Cleveland1993,Tufte2001}, enabling comparison across
-sources spanning three orders of magnitude in size.  This analysis provides the
-per-source structural density estimate that feeds the workload model described in
-Section~\ref{sec:workload}.
+For each regulatory source, the proportion of structure-defined substances was
+calculated. Overlap between sources was analysed using structure-based matching
+(InChIKey) and set similarity measures.
 
-\subsection{Cross-List Substance Overlap}
-\label{sec:overlap}
+\paragraph{Analysis of Non-Structure Substances}
 
-Four complementary analyses characterised how structure-defined substances are
-distributed across regulatory sources.
+Substances without structure identifiers were analysed using text-based
+methods, including embedding-based clustering~\cite{Rousseeuw1987,Lloyd1982,McInnes2018} 
+and similarity matching to chemical taxonomies (ChemOnt), to assess whether 
+semantic techniques can recover meaningful structure or classification~\cite{Manning2008,DjoumbouFeunang2016}.
+Each substance name and ChemOnt class label was encoded using the \texttt{all-MiniLM-L6-v2} sentence-transformer model~\cite{Reimers2019,Wang2020MiniLM,devlin-etal-2019-bert}, yielding a 384-dimensional dense vector representation.
 
-\textit{UpSet plots}~\cite{Lex2014} were used to visualise multi-set
-intersections of structure-defined substances across all sources with at least
-ten unique InChIKeys; the threshold of ten was chosen as a display heuristic to
-suppress near-empty sets that produce unreadable intersection bars.  The 30
-largest intersections were shown, as the full $2^n - 1$ possible intersections
-are not interpretable for $n > 5$.
+\paragraph{Embedding Model Validation Using ChemOnt Ground Truth}
+\label{sec:chemont_validation}
 
-Pairwise Jaccard similarity was computed for all source pairs:
-\begin{equation}
-  J(A,B) = \frac{|A \cap B|}{|A \cup B|},
-  \label{eq:jaccard}
-\end{equation}
-where $A$ and $B$ denote the sets of unique InChIKeys in two sources,
-respectively.  Only structure-defined entries were included.  The resulting
-similarity matrix was subjected to hierarchical clustering using average linkage
-on the complementary dissimilarity $1 - J$~\cite{Ward1963,Murtagh2014} and
-visualised as a clustered heatmap; text labels were suppressed for $J < 0.02$
-to avoid visual noise from near-zero overlaps.
+To evaluate the ability of text-based embeddings to recover chemical
+classifications from substance names, an internal validation was performed
+using structure-defined substances as ground truth. Substances with an
+unambiguous InChIKey were linked to the ChemOnt taxonomy through ClassyFire
+classification~\cite{DjoumbouFeunang2016}, providing reference assignments at
+the levels of direct parent, subclass, class, superclass, and kingdom.
 
-A second UpSet plot was constructed restricted to the seven principal regulatory
-obligation lists: the restriction list, candidate list, authorisation list, POPs
-list, EU positive list, harmonised classification list, and SVHC identification
-list.
+Substance names and ChemOnt class labels were encoded using pre-trained
+transformer models (\texttt{all-MiniLM-L6-v2, all-mpnet-base-v2, allenai/scibert\_scivocab\_uncased} 
+and \texttt{dmis-lab/biobert-v1.1}) within the \texttt{sentence-transformers}
+framework~\cite{Reimers2019,Wang2020MiniLM,devlin-etal-2019-bert}. Cosine
+similarity was used to rank all ChemOnt classes for each substance name.
 
-Finally, a force-directed network~\cite{Fruchterman1991} was constructed in
-which nodes represent regulatory sources (node size $\propto \log_{10}(\text{list
-size} + 1)$) and edges connect pairs of sources sharing at least five unique
-InChIKeys (edge width $\propto \log_{10}(\text{shared InChIKeys} + 1)$).  The
-threshold of five shared InChIKeys suppresses edges representing negligible
-structural overlap that would otherwise clutter the layout.
+Performance was assessed using standard information retrieval metrics,
+including Hit@k ($k = 1, 3, 5, 10$) and Mean Reciprocal Rank (MRR)~\cite{Manning2008}.
+To account for the hierarchical structure of ChemOnt, Hit@1 was additionally
+computed for each taxonomy level. A weighted lenient MRR was introduced to
+summarise performance across levels, assigning ordinal weights of 1.00 (direct
+parent), 0.75 (subclass), 0.50 (class), 0.25 (superclass), and 0.10 (kingdom),
+thereby favouring more specific classifications.
 
-\subsection{Semantic Embedding and Clustering of Non-Structure Substances}
-\label{sec:clustering}
+This validation provides a principled comparison of embedding models and
+demonstrates the extent to which semantic representations of substance names
+approximate structure-based chemical taxonomy assignments.
 
-Substance entries that could not be resolved to a chemical structure --- excluding
-administrative regulatory entries --- were analysed through unsupervised text
-embedding and clustering.  Each substance name was encoded using the
-\texttt{all-MiniLM-L6-v2} sentence-transformer model~\cite{Reimers2019,Wang2020MiniLM},
-yielding a 384-dimensional dense vector representation.
+\paragraph{Knowledge Graph Construction}
 
-The optimal number of clusters was determined by computing the silhouette
-score~\cite{Rousseeuw1987} for k-means solutions with $k \in \{2, \ldots, 12\}$
-(25 random starts, maximum 100 iterations, random seed~42).  The optimal
-solution ($k = 6$) was applied using Lloyd's algorithm~\cite{Lloyd1982} to
-partition the substance names into six semantically coherent groups.
+All data were integrated into an RDF knowledge graph using SKOS~\cite{W3C2009SKOS} for taxonomy
+representation. Structure-defined substances were linked to ChemOnt classes and
+to ChEBI entities via InChIKey, enabling integration of biological hazard
+annotations~\cite{W3C2017OA}.
 
-For visualisation, the embeddings were projected to two dimensions using
-UMAP~\cite{McInnes2018} (15 nearest neighbours, minimum distance~0.1, cosine
-metric, seed~42).
+\paragraph{Workload Estimation}
 
-The six resulting clusters were labelled manually upon visual inspection of the
-projections:
-(1)~reaction masses;
-(2)~complex substances (UVCB with partial structure);
-(3)~petroleum and coal tar fractions;
-(4)~inorganic compounds and metal salts;
-(5)~trade names, codes and biological materials;
-(6)~polymers, fatty acids and surfactants.
+For non-structure substances, interoperability requires manual assessment of
+pairwise relationships (equivalence, subset, overlap, disjoint). The required
+effort scales quadratically with the number of such entries as $\binom{N}{2} = N(N-1)/2$, where $N$ is the number of non-structure entries under consideration.
 
-\subsection{Chemical Taxonomy Matching}
-\label{sec:chemont}
+\paragraph{Priority Scoring}
+\label{sec:priority_score}
 
-Structure-defined and non-structure substances were mapped to standardised
-chemical classes using two complementary approaches.
-
-For \textit{non-structure substances}, the cosine similarity~\cite{Manning2008}
-was computed between the sentence-transformer embeddings of each substance name
-and the embeddings of all class labels in the ChemOnt~2.1 ontology~\cite{DjoumbouFeunang2016}.
-Substance names matching patterns characteristic of reaction masses, petroleum
-fractions, or UVCB descriptions were excluded prior to matching, as these names
-do not correspond to a single chemical class.  For each remaining substance, the
-top-3 most similar ChemOnt classes were identified and a composite confidence
-score was computed as
-\begin{equation}
-  c = 0.6 \cdot s_1 + 0.3 \cdot \Delta_{12} + 0.1 \cdot \Delta_{23},
-  \label{eq:confidence}
-\end{equation}
-where $s_1$ is the cosine similarity of the best-matching class and $\Delta_{12}$,
-$\Delta_{23}$ are the score gaps between the first and second, and second and
-third candidates, respectively.  Retaining three candidates rather than one is
-necessary to compute both gap metrics.  High-quality matches were retained subject
-to the empirically determined thresholds $s_1 > 0.8$ and $\Delta_{12} > 0.05$,
-selected by sweeping the primary threshold between 0.3 and~0.9 and inspecting
-the resulting quality landscape.
-
-For \textit{structure-defined substances}, the direct-parent ChemOnt class was
-retrieved for each unique InChIKey via the ClassyFire REST API~\cite{DjoumbouFeunang2016},
-with all API responses cached locally to avoid redundant requests.
-
-\subsection{Knowledge Graph Construction}
-\label{sec:kg}
-
-All processed substance data --- including the linkability taxonomy
-(Section~\ref{sec:linkability}), cluster assignments
-(Section~\ref{sec:clustering}), and ClassyFire annotations
-(Section~\ref{sec:chemont}) --- were serialised to RDF Turtle format.  Substance
-URIs were minted using MD5 hashes of InChIKeys for structure-defined entries, or
-of substance names otherwise, to ensure stable and opaque identifiers.  The
-linkability taxonomy and cluster assignments were represented as
-\texttt{skos:Collection} instances~\cite{W3C2009SKOS}, with \texttt{skos:member}
-triples encoding group-to-base-compound parent relationships.  Annotations were recorded using the OA Annotation Ontology~\cite{W3C2017OA}.
-
-All component graphs were merged with the ChemOnt~2.1 SKOS ontology using
-Apache Jena~5.6.0 \texttt{riot}, with semantic enrichment performed via SPARQL
-CONSTRUCT queries.
-
-To integrate biological hazard evidence, the ChEBI ontology~\cite{DjoumbouFeunang2016}
-was linked to the knowledge graph through a four-step pipeline implemented as a
-companion shell script.  First, the ChEBI OWL ontology was downloaded from the
-European Bioinformatics Institute and converted to RDF Turtle using Jena
-\texttt{riot}.  Second, the converted ontology was merged with the project's
-substance taxonomy graph using Jena.  Third, a SPARQL CONSTRUCT query
-(\texttt{exact\_match\_chebi.rq}) linked project substance concepts to their
-corresponding ChEBI entities via InChIKey string matching
-(\texttt{skos:exactMatch}), using the ChEBI \texttt{chemrof:inchi\_key\_string}
-property as the join key.  Fourth, a second SPARQL CONSTRUCT query
-(\texttt{chebi\_annotaties.rq}) traversed the ChEBI role hierarchy via the
-\texttt{RO:0000087} (\textit{has role}) object property and materialised each
-biological role assignment as an OA Annotation triple~\cite{W3C2017OA} linking
-the project substance concept to the corresponding ChEBI role class.  Finally,
-a SPARQL SELECT query with \texttt{GROUP\_CONCAT} (\texttt{chebi\_to\_table.rq})
-exported a flat CSV table (\texttt{data/processed/chebi.csv}) containing, per
-substance, pipe-separated lists of biological activity labels and ECHA list
-memberships.  This table is the primary input for the composite priority scoring
-described in Section~\ref{sec:prioritisation}.  The unified knowledge graph was
-stored at \texttt{data/processed/rdf/substances\_taxonomy.ttl}.
-
-\subsection{Workload Estimation for Manual Curation}
-\label{sec:workload}
-
-Regulatory entries that cannot be resolved to a chemical structure must be
-related to one another through manual expert assessment.  For each pair of
-non-structure entries, an expert must determine which of four mutually exclusive
-semantic relations holds: (1)~\textit{equivalence} --- both entries refer to the
-same set of substances; (2)~\textit{subset} --- one entry is fully contained
-within the other; (3)~\textit{overlap} --- the entries share some but not all
-substances; or (4)~\textit{disjoint} --- the entries share no substances.  Only
-by establishing these relations explicitly can the semantic alignment required
-for cross-list interoperability be achieved.
-
-Because every unique pair must be evaluated independently, the total number of
-assessments scales quadratically as $\binom{N}{2} = N(N-1)/2$.  At an assumed
-throughput of 100 pair assessments per person-day, the total workload in
-person-days is
-\begin{equation}
-  D(N) = \left\lceil \frac{N(N-1)}{200} \right\rceil,
-  \label{eq:workload}
-\end{equation}
-where $N$ is the number of non-structure entries under consideration.  The
-ceiling function avoids under-estimating the workload: a fraction of a
-person-day still requires at least one analyst-day.
-
-\subsection{Composite Priority Scoring}
-\label{sec:prioritisation}
-
-To rank regulatory substances by urgency, a composite priority score was
-constructed by combining two independent evidence dimensions: regulatory list
-membership and intrinsic biological hazard.  The approach is conceptually
-grounded in the ToxPi (Toxicological Priority Index) framework~\cite{Reif2010},
-which integrates heterogeneous evidence streams into a single prioritisation
-score through transparent, domain-specific weights.  The input is the flat CSV
-table produced by the ChEBI pipeline described in Section~\ref{sec:kg}
-(\texttt{data/processed/chebi.csv}), which contains, per substance, the set of
-ECHA regulatory lists on which it appears and the set of ChEBI biological role
-labels assigned to it.
-
-\subsubsection{Domain 1: Regulatory List Weights}
-\label{sec:list-weights}
-
-Each regulatory list was assigned a weight on an ordinal scale of~0 to~5,
-derived directly from the legal consequences triggered by each instrument under
-REACH~\cite{REACH2006}, CLP~\cite{CLP2008}, and the POPs
-Regulation~\cite{POPs2019}.  Table~\ref{tab:list-weights} summarises the
-assignments.
-
-
-The list score for a given substance is the sum of the weights of all lists on
-which it appears:
-\begin{equation}
-  \text{list\_score} = \sum_{i} w_{\text{list},i},
-  \label{eq:list-score}
-\end{equation}
-where $w_{\text{list},i}$ is the weight of list~$i$ and the sum runs over all
-lists containing the substance.  The numerical scale of~0--5 is not prescribed
-by any regulatory framework; it was chosen to reflect the ordinal REACH
-hierarchy while remaining interpretable, with the ratio 5:0 (SVHC candidate
-list : REACH registration) mirroring the qualitative difference in legal
-consequence.
-
-\begin{table}[!ht]
-	\caption{\textbf{} Regulatory list weights used in Domain~1 of the
-		composite priority score.  The weight hierarchy reflects the legal consequence
-		of each instrument under REACH (Arts.\ 57--73), CLP (Annex~VI), and the EU
-		POPs Regulation.}
-	\label{tab:list-weights}
-	\centering
-	\footnotesize
-	\begin{tabularx}{\linewidth}{@{}c p{3.8cm} X@{}}
-		\hline
-		\textbf{Weight} & \textbf{List or instrument} & \textbf{Legal basis} \\
-		\hline
-		5 & Candidate list; SVHC identification & Formal SVHC identification, REACH Arts.\ 57--59; triggers communication obligations (Art.\ 33) \\
-		4 & Restriction list; authorisation list; POPs list & Binding restrictions or use prohibition, REACH Arts.\ 60--73; elimination obligation, POPs Reg.\ (EU) 2019/1021 \\
-		3 & Restriction/authorisation/POPs process; PBT assessment; ED assessment & Active regulatory scrutiny; PBT/ED assessments correspond directly to SVHC criteria, REACH Arts.\ 57(d)--(f) and Annex~XIII \\
-		2 & Harmonised CLP list; CLH process; pesticide approval & Legally binding hazard classifications, CLP Annex~VI; positive safety determination required, Reg.\ (EC) No 1107/2009 \\
-		1 & Substance evaluation; dossier evaluation; EU positive list & Regulatory scrutiny without a final hazard determination \\
-		0 & REACH registration; anhydrous forms & Baseline administrative requirement; no inherent hazard determination, REACH Title~II \\
-		\hline
-	\end{tabularx}
-\end{table}
-
-\subsubsection{Domain 2: Biological Hazard Weights}
-\label{sec:bio-weights}
-
-Biological hazard weights were assigned to ChEBI role labels on a scale of~1
-to~3, aligned with the SVHC hazard criteria of REACH Art.~57 and the EU
-Chemicals Strategy for Sustainability~\cite{EUCSS2020}.  Only substances with a
-known InChIKey can receive a ChEBI biological role annotation
-(approximately~21\% of the dataset); substances without a ChEBI match are
-scored on regulatory list membership alone.
-
-CMR properties (carcinogenic, genotoxic, mutagenic, and teratogenic agents)
-receive a weight of~3, consistent with their equal legal standing as Tier-1
-SVHC criteria under REACH Arts.~57(a)--(c).  The ChEBI ontology uses the label
-\textit{teratogenic agent} (via \texttt{RO:0000087}) for reproductive and
-developmental toxicity, rather than the CLP term ``reproductive toxicant'';
-this distinction must be respected when mapping ChEBI roles to REACH hazard
-classes.  Persistent organic pollutants and endocrine disruptors also receive a
-weight of~3, corresponding to REACH Arts.~57(d)--(f) and the elevated priority
-assigned to endocrine disruption by the EU CSS~\cite{EUCSS2020}.
-
-Neurotoxins, ecotoxins, and confirmed allergens (sensitisation category~1A)
-receive a weight of~2.  Neurotoxicity is identified as a priority hazard class
-in the EU CSS~\cite{EUCSS2020}; ecotoxicity is a PBT-adjacent concern under
-REACH Annex~XIII.  Neither property is an explicit SVHC criterion under Art.~57,
-justifying placement below CMR/POP/ED at weight~2.
-
-Sensitisers (category~1B), antimicrobial agents, and pesticidal activities
-(herbicide, insecticide, fungicide, acaricide, nematocide) receive a weight of~1,
-reflecting biological interaction with living systems without reaching the
-threshold of systemic concern associated with higher tiers.
-
-The biological hazard score is the sum of the weights of all ChEBI roles
-associated with a substance:
-\begin{equation}
-  \text{bio\_score} = \sum_{j} w_{\text{bio},j},
-  \label{eq:bio-score}
-\end{equation}
-where $w_{\text{bio},j}$ is the weight of biological role~$j$.
-
-\subsubsection{Composite Score and Aggregation}
-\label{sec:composite-score}
-
-The composite priority score combines both domains by additive summation:
-\begin{equation}
-  \text{priority\_score} = \text{list\_score} + \text{bio\_score}.
-  \label{eq:priority-score}
-\end{equation}
-Whereas ToxPi computes a weighted average of normalised domain scores (each
-rescaled to $[0,1]$)~\cite{Reif2010}, additive summation was preferred here
-because the two domains are complementary and largely independent: a substance
-may appear on many regulatory lists but lack a ChEBI InChIKey match, or
-conversely carry strong biological hazard evidence whilst appearing on few lists.
-Normalising one domain against the other would suppress the contribution of the
-domain with the smaller raw value, reducing interpretability.  As a consequence
-the score is unbounded and is interpreted in relative rather than absolute terms.
-
-\subsubsection{Visualisations}
-\label{sec:priority-vis}
-
-Seven complementary figures were produced to answer distinct questions about the
-priority landscape:
-
-\begin{enumerate}
-  \item A ranked bar chart of the top-50 substances by composite score, identifying
-    which substances are most urgent overall.
-  \item A heatmap of ECHA list membership for the top-50 substances, revealing
-    which regulatory instruments drive each substance's score.
-  \item An UpSet plot restricted to concern-level lists, showing intersection
-    patterns among the highest-weight instruments.
-  \item A bar chart of hazard-type prevalence, broken down by evidence domain,
-    illustrating which hazard categories most often contribute to the bio-hazard
-    score.
-  \item A bubble chart of regulatory breadth (number of lists) against bio-hazard
-    score, partitioned into four quadrants using the median number of list
-    memberships as the horizontal threshold and $\text{bio\_score} > 0$ as the
-    vertical threshold.  The bio-score threshold was fixed at zero rather than
-    the median because the bio-score distribution is zero-inflated (approximately
-    79\% of substances lack a ChEBI match), which would produce a degenerate
-    two-quadrant split at the median.  The quadrants identify: (Q1) broad
-    regulatory coverage and biological hazard evidence --- the most urgent
-    substances; (Q2) limited regulatory coverage but biological hazard
-    evidence --- potential regulatory gaps; (Q3) broad regulatory coverage but
-    no biological hazard evidence --- substances requiring structural
-    identification to enable evidence-based assessment; and (Q4) limited
-    coverage and no biological hazard evidence.
-  \item An alluvial diagram tracing the flow from hazard type to regulatory
-    instrument, revealing whether the regulatory system has captured each hazard
-    class.
-  \item A treemap in which tile area represents the number of substances per
-    chemical class and tile colour represents the mean priority score, enabling
-    identification of common but under-prioritised chemical classes.
-\end{enumerate}
+To illustrate the analytical value of the integrated knowledge graph (C5), a composite priority score was computed by combining regulatory list membership with biological role annotations from ChEBI~\cite{Degtyarenko2008}, following the ToxPi framework~\cite{Reif2010}. This score is illustrative only and does not constitute a formal risk assessment.

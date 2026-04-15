@@ -12,6 +12,7 @@
 \usepackage{longtable}
 \usepackage{tabularx}
 \graphicspath{{../output/figures/}}
+
 %\usepackage{times}
 %\normalfont
 %\usepackage[T1]{fontenc}
@@ -22,17 +23,18 @@
 \newcommand{\TODO}[1]{\textbf{[\textit{TODO: #1}]}}
 
 \begin{document}
+\hypersetup{hidelinks}
 \pagestyle{plain}
 
 \input{sections/01_frontmatter}
 \input{sections/11_introduction}
-\input{sections/21_methods}
-%\clearpage
-\input{sections/31_results}
+\input{sections/20_methods}
+\input{sections/30_results}
 \input{sections/40_discussion}
 \input{sections/50_conclusion}
 \input{sections/60_data_availability}
 \input{sections/70_supplementary_materials}
+\input{sections/80_LLM_declaration}
 \clearpage
 \input{sections/90_bibliography}
 

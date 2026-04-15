@@ -1,284 +1,142 @@
 \section{Results}
 \label{sec:results}
 
-\subsection{Data Sources and Integration}
-\label{sec:results-datasources}
+\paragraph{Overview of the integrated knowledge graph}
+\label{sec:knowledge_graph}
 
-Integration of the 18 regulatory sources (see Section~\ref{sec:datasources}) yielded a unified dataset of 41,813 regulatory records. Each record was linked to its originating source and enriched with all available chemical identifiers (CAS number, EC number, substance name, and InChIKey where resolvable). The combined dataset spans the full breadth of European regulatory instruments, from broadly scoped REACH registration data (\textit{reach\_registrations}, 25,200 records) to narrowly focused obligation lists such as the SVHC identification list (273 records) and the POPs process list (12 records). The Flemish \textit{sommatie\_stoffen} list contributes a further 1,390 records dominated by substance groups without resolved structures.
-
-\subsection{Chemical Identity Classification}
-\label{sec:results-classification}
-
-The rule-based classifier assigned each of the 41,813 regulatory records to one of seven mutually exclusive entity types. The majority — 26,376 records (63.1\%) — are classified as \textit{Molecule}. The next largest categories are \textit{Unclassified} (6,359; 15.2\%), \textit{CAS without structure} (4,851; 11.6\%), and \textit{Analytical parameter} (3,440; 8.2\%). The remaining categories are comparatively small: \textit{Mixture} (685; 1.6\%), \textit{Substance group} (86; 0.2\%), and \textit{Regulatory entry} (16; 0.04\%).
-
-Figure~\ref{fig:analysis4b} illustrates how the entity type composition varies substantially across individual regulatory sources. Sources rooted in pharmaceutical and pesticide authorisation contexts — ED Assessment (85.5\% Molecule), CLH Process (84.2\%), and the Candidate List (80.6\%) — are dominated by structure-defined entries. In contrast, the \textit{sommatie\_stoffen} list (3.9\% Molecule) and the Restriction Process (29.4\%) contain a high proportion of unclassified or group-type entries, reflecting the broader, less chemically specific scope of those instruments.
+We constructed an integrated knowledge graph to analyse the representation
+and interoperability of regulatory substances across datasets.
+Figure~\ref{fig:knowledge_graph} provides an overview of the resulting
+graph structure and its main semantic layers.
 
 \begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_4b_Entity_type_breakdown_per_source.pdf}
-  \caption{Entity type composition broken down by regulatory source. Sources are ordered by decreasing proportion of Molecule entries. The variation in entity type mix reflects differences in regulatory scope and the specificity of chemical identity requirements.}
-  \label{fig:analysis4b}
+    \centering
+    \includemermaid[width=1\linewidth]{images/sources/knowledge_graph.mmd}
+    \caption{
+        Overview of the integrated knowledge graph constructed from 18 regulatory datasets.
+        Regulatory substances (~17,500 entities) are represented as SKOS concepts
+        and form the core layer of the graph.
+        Where possible, substances are linked to structure-based identifiers (InChIKey),
+        enabling alignment with chemical classification systems (ChemOnt)
+        and biological roles (ChEBI).
+        In addition, substances are organised into linkability tiers
+        reflecting their degree of chemical specificity, and into
+        semantic clusters derived from embedding-based similarity.
+        The graph is further enriched with annotations (~46,600 links)
+        connecting substances to regulatory sources and functional roles.
+        The figure highlights the multiple semantic layers
+        required to represent and integrate heterogeneous regulatory substance definitions.
+    }\label{fig:knowledge_graph}
 \end{figure}
 
-\subsection{Linkability Taxonomy}
-\label{sec:results-linkability}
+\paragraph{Dataset Overview (\texorpdfstring{\hyperref[sec:contribution1]{C1}}{C1})}
 
-Application of the seven-tier linkability taxonomy (Section~\ref{sec:linkability}) to the full dataset reveals that 20,909 entries (62.5\%) are fully addressable via a direct InChIKey (tier 1; Figure~\ref{fig:analysis4d}). A further 60 substance group entries could be partially resolved: 15 entries (${<}0.1$\%) belong to tier 2 (group with resolvable base compound) and 45 (0.1\%) to tier 3 (group with unresolvable base compound). Together these tiers comprise the structure-addressable portion of the dataset.
+Integration of 18 regulatory sources yielded 41,813 records. Of these,
+63\% could be linked to a defined molecular structure via InChIKey.
 
-The remaining 37.5\% of entries are not directly addressable by structure. Of these, 3,865 entries (11.6\%) carry a CAS number but no resolvable InChIKey (tier 4); 3,622 (10.8\%) are UVCB substances or undefined mixtures (tier 5); 15 entries (${<}0.1$\%) are administrative regulatory entries (tier 6); and 4,981 (14.9\%) are fully unidentified entries with no actionable identifier (tier 7). This last group — nearly one in six regulatory records — represents the most significant barrier to automated cross-list substance matching.
+%Table~\ref{tab:datasources} provides an overview of all regulatory and monitoring sources included in this study.
 
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_4d_Linkability_taxonomy_general_overview.pdf}
-  \caption{Seven-tier linkability taxonomy applied to all 33,452 unique regulatory substance entries. Tiers 1--3 are structure-addressable (62.5\%); tiers 4--7 require alternative or manual approaches to chemical identity resolution.}
-  \label{fig:analysis4d}
+%\input{../output/tables/datasources}
+
+\paragraph{Heterogeneity of Substance Definitions}
+\label{sec:semantic_mismatch}
+
+A significant share of regulatory entries (37\%) does not correspond to a defined chemical structure, consistent with Kutsarova et al.~\cite{Kutsarova2019}. These include mixtures (UVCBs), substance groups, analytical parameters, or entries without usable identifiers, reflecting differences in how “substances” are defined across regulatory contexts.
+
+Heterogeneity varies widely between regulatory lists: some are mostly structure-based, while others rely heavily on group or mixture definitions, limiting interoperability (Figure~\ref{fig:regulatory_groups}).
+
+Applying the seven-tier linkability taxonomy (Section~\ref{sec:linkability}) shows that 62.5\% of entries (20,909) are directly linkable via InChIKey (tier 1). Only a small fraction consists of partially resolvable groups (tiers 2–3; ${<}0.2$\%).
+
+The remaining 37.5\% cannot be directly linked to a structure: 11.6\% have unresolved CAS numbers (tier 4), 10.8\% are mixtures or UVCBs (tier 5), ${<}0.1$\% are administrative entries (tier 6), and 14.9\% lack any usable identifier (tier 7).
+
+More than one-third of regulatory entries cannot be mapped to a unique chemical structure, and even CAS numbers do not guarantee unambiguous identification. Consequently, structure-based integration applies only to part of the data, requiring alternative approaches for the remainder.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{Analysis_4bd_v_Entity_type_and_linkability_vertical.pdf}
+    \caption{
+        (A) Entity type composition across 18 regulatory sources. Each bar shows the proportional breakdown of substance entries into seven mutually exclusive types (Molecule, Substance group, Analytical parameter, Mixture, Regulatory entry, CAS without structure, Unclassified), illustrating that the mix of entity types differs substantially between regulatory instruments. (B) Linkability taxonomy applied to all 33,452 unique regulatory substance entries. A total of 20,909 entries (62.5\%) can be directly linked to a chemical structure via InChIKey (tier 1), while 4,981 entries (14.9\%) lack any usable identifier. Together, the panels show that structural linkability is unevenly distributed across sources and that more than one-third of all entries cannot be resolved to a unique chemical structure.
+    }
+    \label{fig:analysis4d}
 \end{figure}
 
-\subsection{Identifier Mapping Consistency}
-\label{sec:results-identifier-mapping}
+\paragraph{Limitations of CAS Numbers (\texorpdfstring{\hyperref[sec:contribution2]{C2}}{C2})}
 
-Of the 41,813 regulatory records, 17,277 carry both a CAS number and an InChIKey and could be assessed for bidirectional mapping consistency (Section~\ref{sec:identifier-mapping}).
+CAS numbers are not reliable unique identifiers. Bidirectional mapping analysis reveals that 195 InChIKeys are associated with more than one CAS number (up to 7 per structure), while 4 CAS numbers resolve to two distinct InChIKeys. These inconsistencies arise from differences in stereochemistry, salt forms, and context-dependent registration practices. CAS-based cross-dataset linking therefore introduces ambiguity rather than resolving it, making CAS numbers insufficient as a backbone for interoperability.
 
-In the CAS$\rightarrow$InChIKey direction, 17,273 of 17,277 assessed CAS numbers (99.98\%) map unambiguously to a single InChIKey. The remaining four CAS numbers each map to exactly two distinct InChIKeys. These discrepancies arise from entries in which the same CAS registry number has been assigned to structurally related but distinct compounds — most commonly stereoisomeric pairs, hydrate/anhydrous forms, or alternative salt representations recorded in different regulatory dossiers.
+\paragraph{Limited Interoperability Across Regulatory Lists}
 
-In the InChIKey$\rightarrow$CAS direction, 17,074 unique InChIKeys could be assessed, of which 16,879 (98.9\%) are associated with a single CAS number. The remaining 195 InChIKeys (1.1\%) each map to two or more CAS numbers (Figure~\ref{fig:analysis3b}), reflecting the common regulatory practice of assigning separate registry numbers to the same molecule under different trade, salt, or regulatory-context identifiers. These findings confirm that CAS numbers alone are insufficient as unambiguous primary identifiers for cross-list substance linking, and motivate the use of InChIKey as the primary key throughout subsequent analyses.
+Cross-list analysis of the 17,523 structure-resolved InChIKeys shows that 70.0\% (12,270 entries) appear in only a single regulatory source, while just 30.0\% (5,253 entries) are shared across two or more lists. This limited overlap reflects the domain-specific design of regulatory instruments rather than a shared chemical reference framework, and demonstrates that structure-based linking is necessary but not sufficient for cross-domain integration when each instrument selects substances according to its own regulatory mandate.
 
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_3b_CAS-InChIKey_inconsistencies_multiple_CAS_numbers.pdf}
-  \caption{Distribution of the number of distinct CAS numbers per InChIKey across 17,074 assessed structures. One hundred and ninety-five InChIKeys are associated with two or more CAS numbers, indicating registry fragmentation.}
-  \label{fig:analysis3b}
+\paragraph{Failure of Semantic Approaches for Non-Structure Substances (\texorpdfstring{\hyperref[sec:contribution3]{C3}}{C3})}
+Embedding-based clustering of non-structure substance names yields semantically coherent groups, but does not resolve chemical identity. While clusters reflect lexical or contextual similarity between substance descriptions, they do not correspond to well-defined molecular entities (Figure~\ref{fig:analysis89}A).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{Analysis_89_UMAP_and_ChemOnt_quality.pdf}
+    \caption{(A) UMAP projection of sentence embeddings for 12,522 non-structure regulatory substance entries, coloured by k-means cluster (k = 6). Each point represents a unique substance name; spatial proximity reflects semantic similarity in the 384-dimensional embedding space. (B) Distribution of top-1 cosine similarity scores~\cite{Manning2008} between substance name embeddings and ChemOnt class label embeddings across all 12,499 candidate substance-class pairs, shown here for \texttt{all-MiniLM-L6-v2}. The dashed line indicates the applied threshold ($s_1 > 0.80$); 133 entries (1.1\%) are retained as matches.}
+    \label{fig:analysis89}
 \end{figure}
 
-\subsection{Structure Coverage and Linking Ratio}
-\label{sec:results-coverage}
+To evaluate whether semantic similarity can recover chemical meaning, we attempted to map non-structure substances to ChemOnt taxonomy classes using cosine similarity between sentence embeddings of substance names and ChemOnt class labels. Four models were evaluated: \texttt{all-MiniLM-L6-v2} (miniLM), \texttt{all-mpnet-base-v2} (mpnet), \texttt{allenai/scibert\_scivocab\_uncased} (SciBERT), and \texttt{dmis-lab/biobert-v1.1} (BioBERT). The distribution of top-1 similarity scores is heavily skewed towards lower values (Figure~\ref{fig:analysis89}B). Cosine similarity scores are not comparable across models: scores for the 200th-ranked match range from approximately 0.80 for miniLM to 0.94 for BioBERT, reflecting differences in embedding geometry rather than differences in match quality. A fixed threshold such as $s_1 > 0.80$ is therefore model-dependent and arbitrary; it was applied here for the purpose of bounding a manual evaluation, not as a principled quality criterion.
 
-Across the combined dataset, 26,376 of 41,813 regulatory records (63.1\%) are structure-defined, i.e.\ possess a valid InChIKey. The 20,909 unique InChIKeys thus identified represent the directly linkable chemical space within European regulatory legislation.
+Manual inspection of the top-200 matches per model revealed that the majority of retained assignments are chemically incorrect, regardless of model. Correct assignments were largely limited to cases where the substance name closely resembles the ChemOnt class label (e.g.\ \textit{Phenols} $\to$ \textit{Phenols}, \textit{Alkyl mercury compounds} $\to$ \textit{Alkyl mercury compounds}), indicating that high similarity scores reflect surface-form overlap rather than semantic understanding. Systematic errors were present across all models: miniLM conflates organic and inorganic species and confuses elements sharing a common prefix (e.g.\ \textit{organostannic compounds} $\to$ \textit{organoarsenic compounds}); mpnet consistently misassigns all nickel sulfide variants to \textit{nitrile sulfides}, a token-level artefact of the chemical symbol Ni being read as the start of ``nitrile''; SciBERT and BioBERT, pre-trained on biomedical literature, exhibit severe score inflation---a score of 0.93 on an incorrect match provides less information than a score of 0.85 on a correct one---and produce repeated false anchors to specific heterocyclic and lipid ChemOnt classes for structurally unrelated substances. Trade names and reaction products were assigned arbitrary classes with no verifiable basis across all models.
 
-Structure coverage varies substantially across the 18 individual sources (Figure~\ref{fig:analysis2}), ranging from 85.5\% (ED Assessment) to 3.9\% (\textit{sommatie\_stoffen}). Sources operating within tightly defined pharmaceutical or pesticide authorisation frameworks exhibit the highest coverage: ED Assessment (85.5\%), CLH Process (84.2\%), Candidate List (80.6\%), and SVHC Identification List (79.5\%). The large REACH Registrations dataset, which contributes 25,200 records — more than 60\% of the total — achieves 63.3\% coverage. Sources with the lowest coverage include the Restriction Process (29.4\%), the POPs Process (33.3\%), and \textit{sommatie\_stoffen} (3.9\%), the latter dominated by substance group entries for which individual molecular structures are not specified.
+Score magnitude is not a reliable indicator of match correctness. Models with the highest score floors (SciBERT, BioBERT) performed worst on both manual inspection and quantitative validation, demonstrating that inflated cosine scores reflect poor calibration rather than genuine chemical understanding. Embedding-based methods cannot compensate for the absence of structure-based identifiers, and fail systematically for substance groups, mixtures, and analytically defined entries.
 
+To validate this failure quantitatively, the four models were evaluated against a structure-derived ChemOnt ground truth comprising 28,204 ClassyFire-assigned substances (Table~\ref{tab:chemont_validation}). \texttt{all-MiniLM-L6-v2} achieved the highest Hit@1 of 5.75\% and MRR of 0.093 — even this best result implies the correct class is retrieved in fewer than 1 in 17 attempts. All other models scored below Hit@1 = 1\%. Retrieval performance decreased further with increasing taxonomic abstraction: Hit@1 fell to 3.25\% at the subclass level and below 1\% for class, superclass, and kingdom. A hierarchy-aware weighted MRR of 0.099 was only marginally higher than the strict MRR, confirming that partial matches at higher levels of the ChemOnt hierarchy do not rescue overall classification quality.
+\label{sec:chemont_results}
+
+\begin{table}[!ht]
+    \centering
+    \caption{Performance of embedding models for ChemOnt classification.}
+    \label{tab:chemont_validation}
+    \begin{tabular}{lccccc}
+        \hline
+        Model           & Hit@1  & Hit@3  & Hit@5  & Hit@10 & MRR   \\
+        \hline
+        all-MiniLM-L6-v2  & 0.0575 & 0.0986 & 0.1234 & 0.1621 & 0.093 \\
+        all-mpnet-base-v2 & 0.0093 & 0.0152 & 0.0184 & 0.0247 & 0.015 \\
+        SciBERT           & 0.0040 & 0.0071 & 0.0102 & 0.0131 & 0.008 \\
+        BioBERT           & 0.0047 & 0.0077 & 0.0099 & 0.0150 & 0.009 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\paragraph{Scale of the Interoperability Problem (\texorpdfstring{\hyperref[sec:contribution4]{C4}}{C4})}
+For the more than 11,000 non-structure entries, full manual reconciliation would require on the order of hundreds of millions of pairwise comparisons. Under conservative assumptions, this corresponds to several thousand person-years of expert effort.
+
+\label{sec:workload}
 \begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_2_interoperability_differs_by_regulation.pdf}
-  \caption{Structure coverage (InChIKey availability) broken down by regulatory source. Sources are ordered by decreasing coverage. The 18-fold range from 85.5\% (ED Assessment) to 3.9\% (\textit{sommatie\_stoffen}) reflects fundamental differences in regulatory scope and the chemical specificity of substance identity requirements.}
-  \label{fig:analysis2}
+    \centering
+    \includegraphics[width=\linewidth]{Analysis_10c_workload_non_structured.pdf}
+    \caption{
+        Estimated pairwise curation workload for 11,250 non-structure entries across the combined European regulatory dataset, broken down by source.
+        The total corresponds to approximately 630,000 person-days (3,150 person-years) under an assumed throughput of 100 pair assessments per person-day.
+        The quadratic growth of the workload illustrates that manual reconciliation is not scalable, reinforcing the need for structure-based and ontology-driven representations at the source.
+    }
+    \label{fig:analysis10c}
 \end{figure}
 
-The log-log scatter plot of records versus unique InChIKeys per source (Figure~\ref{fig:analysis6}) illustrates the per-source linking ratio. Sources plotting near the 1:1 diagonal (e.g.\ the POPs list, Candidate List) show a near-one-to-one correspondence between regulatory records and distinct molecular structures. Sources well below the diagonal — notably REACH Registrations, Harmonised Classification List, and Dossier Evaluation — contain multiple records mapping to the same InChIKey, reflecting either systematic structural redundancy (e.g.\ separate entries for different salt forms of the same compound) or a high fraction of non-structure entries that suppress the effective ratio.
+
+
+Figure~\ref{fig:analysis10c} quantifies this workload across all regulatory sources, illustrating both the absolute scale and the quadratic growth that makes each additional non-structure entry disproportionately costly. Even moderate increases in the number of unresolved entries lead to a rapidly escalating curation burden.
+
+Manual pairwise reconciliation at this scale is not operationally feasible. This result highlights a fundamental constraint: interoperability cannot be achieved through retrospective harmonisation of heterogeneous substance definitions.
+
+Instead, the only scalable strategy is to address the problem at its source. By requiring structure-resolvable identifiers and ontology-based representations in regulatory definitions wherever chemically applicable, the number of entries requiring manual reconciliation can be structurally reduced rather than managed post hoc.
+
+\paragraph{Knowledge Graph Integration and Priority Scoring (\texorpdfstring{\hyperref[sec:contribution5]{C5}}{C5})}
+
+Structure-defined substances can be successfully integrated across regulatory lists, chemical taxonomies (ChemOnt), and biological annotations (ChEBI) using InChIKey as a linking key. This enables cross-domain queries that are infeasible on fragmented regulatory datasets: for example, identifying substances that appear on three or more ECHA lists and carry a documented biological role in ChEBI, or retrieving all members of a given ChemOnt class that are subject to authorisation requirements. As an illustration of this analytical potential, a composite priority score combining regulatory list membership with ChEBI biological role annotations was computed following the ToxPi framework~\cite{Reif2010}. Figure~\ref{fig:analysis14e} plots regulatory versus biological scores for all scored substances; bisphenol~A and dibutyl phthalate exemplify substances with both broad regulatory presence and multiple documented biological roles. This score is illustrative and does not constitute a formal risk assessment.
 
 \begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_6_Coverage_of_structure-based_linking.pdf}
-  \caption{Scatter plot (log$_{10}$--log$_{10}$ scale) of the number of regulatory records versus unique InChIKeys per source. The diagonal represents a 1:1 record-to-structure ratio. Sources below the diagonal exhibit structural redundancy or low structure coverage.}
-  \label{fig:analysis6}
+    \centering
+    \includegraphics[width=\linewidth]{Analysis_14e_Bubble_priority.pdf}
+    \caption{Bubble chart of composite priority space: regulatory list score versus biological hazard score for all scored substances. Bubble size is proportional to the number of regulatory source memberships. Substances in the upper-right quadrant combine broad regulatory coverage with documented biological hazard evidence.}
+    \label{fig:analysis14e}
 \end{figure}
 
-\subsection{Cross-List Substance Overlap}
-\label{sec:results-overlap}
-
-The UpSet plot in Figure~\ref{fig:analysis5} illustrates the pattern of structure-defined substance overlap across all sources with at least ten unique InChIKeys. The dominant pattern is source-specificity: the largest intersection bars correspond to substances appearing in only a single regulatory list. Shared substances across multiple lists are substantially less frequent, and the shared core across three or more lists is comparatively small. This distribution reflects the domain-specific design of individual regulatory instruments, each targeting a distinct subset of the chemical landscape rather than a common universe of regulated compounds.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_5_Overlap_between_lists_UpSet.pdf}
-  \caption{UpSet plot of structure-defined substance overlap across regulatory sources with $\geq 10$ unique InChIKeys (top-30 intersections shown). The majority of structure-defined substances appear in a single regulatory source.}
-  \label{fig:analysis5}
-\end{figure}
-
-The force-directed source network (Figure~\ref{fig:analysis7}) provides a complementary view, visualising pairwise substance sharing as weighted edges between source nodes. The REACH Registrations hub is the most connected node by virtue of its size, sharing at least five unique InChIKeys with nearly all other sources. Clusters of thematically related sources (e.g.\ the authorisation-related lists; the CLH and harmonised classification lists) are visually distinct, confirming domain-based structuring of the regulatory chemical space.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_7_Network_source_overlap.pdf}
-  \caption{Force-directed network of regulatory sources (Fruchterman--Reingold layout). Node size is proportional to $\log_{10}(\text{list size} + 1)$; edges connect source pairs sharing $\geq 5$ unique InChIKeys, with edge width proportional to $\log_{10}(\text{shared} + 1)$.}
-  \label{fig:analysis7}
-\end{figure}
-
-The pairwise Jaccard similarity heatmap (Figure~\ref{fig:analysis12a}) further reveals that regulatory sources cluster into domain-specific groups after hierarchical clustering on $1 - J$. The SVHC identification list, Candidate List, and Authorisation-related lists form a tight cluster with high mutual Jaccard similarity, consistent with their shared SVHC assessment pathway. The Harmonised Classification List and CLH Process cluster together, reflecting their overlapping scope. The \textit{sommatie\_stoffen} list and POPs Process appear as peripheral nodes, sharing little structural overlap with the larger clusters.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_12a_Jaccard_heatmap.pdf}
-  \caption{Pairwise Jaccard similarity heatmap of structure-defined substance sets across regulatory sources, ordered by hierarchical clustering (average linkage on $1 - J$). Domain-specific source clusters are clearly visible.}
-  \label{fig:analysis12a}
-\end{figure}
-
-Among the seven principal obligation lists, the UpSet plot in Figure~\ref{fig:analysis12b} shows that the Candidate List and SVHC Identification List share the largest bilateral overlap, as expected given their common SVHC assessment pathway. Substances appearing simultaneously in the Restriction List, Authorisation List, and Candidate List form a meaningful intersection representing the most broadly regulated structural substances in European legislation. The POPs list largely stands apart, with limited overlap with the other six lists.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_12b_UpSet_obligation_lists.pdf}
-  \caption{UpSet plot of the seven principal obligation lists (restriction, candidate, authorisation, POPs, EU positive list, harmonised classification, and SVHC identification lists), showing pairwise and multi-list intersection patterns among structure-defined substances.}
-  \label{fig:analysis12b}
-\end{figure}
-
-\subsection{Semantic Embedding and Clustering of Non-Structure Substances}
-\label{sec:results-clustering}
-
-Silhouette score analysis across $k \in \{2, \ldots, 12\}$ (Figure~\ref{fig:analysis8b}) identifies $k = 6$ as the optimal number of k-means clusters for the sentence-transformer embeddings of the 15,432 non-structure substance names (Section~\ref{sec:clustering}). The silhouette score peaks at $k = 6$ before declining monotonically for larger $k$, confirming that six clusters provide the best trade-off between cohesion and separation.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=0.7\linewidth]{Analysis_8b_silhouette_score.pdf}
-  \caption{Silhouette score as a function of the number of k-means clusters $k$ for sentence-embedding-based clustering of non-structure substance names. The score peaks at $k = 6$.}
-  \label{fig:analysis8b}
-\end{figure}
-
-The UMAP projection (Figure~\ref{fig:analysis8d}) shows clearly separated cluster regions, confirming that the six groups are semantically coherent. Manual inspection of cluster contents yielded the following labels:
-\begin{enumerate}
-  \item \textit{Reaction masses} — defined isomer or intermediate mixtures described by the ``Reaction mass of \ldots'' naming convention;
-  \item \textit{Complex UVCB substances} — multi-constituent or variable compositions not reducible to a single structure;
-  \item \textit{Petroleum and coal tar fractions} — distillation cuts, refinery streams, and tar derivatives;
-  \item \textit{Inorganic compounds and metal salts} — simple inorganic species, oxides, and coordination compounds;
-  \item \textit{Trade names, codes, and biological materials} — commercial product identifiers and biological matrix entries;
-  \item \textit{Polymers, fatty acids, and surfactants} — polymeric substances, long-chain fatty acids, and amphiphilic compounds.
-\end{enumerate}
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_8d_UMAP.pdf}
-  \caption{UMAP projection of sentence-transformer embeddings of non-structure substance names, coloured by k-means cluster assignment ($k = 6$). Each cluster corresponds to a semantically coherent chemical or regulatory category.}
-  \label{fig:analysis8d}
-\end{figure}
-
-These clusters illustrate that semantic embeddings can organise non-structure substance names into coherent groups, but cannot resolve their chemical identity or establish the formal ontological relationships needed for cross-list interoperability.
-
-\subsection{Chemical Taxonomy Matching}
-\label{sec:results-chemont}
-
-\subsubsection{Non-Structure Substances}
-
-Of the 15,432 non-structure substance names, only 107 (0.7\%) received a high-confidence ChemOnt assignment ($s_1 > 0.8$, $\Delta_{12} > 0.05$). The empirical cumulative distribution of best-match scores (Figure~\ref{fig:analysis9g}) shows that approximately half of all non-structure substance names achieve a cosine similarity below 0.5 against any ChemOnt class label, confirming that embedding-based taxonomy matching cannot substitute for structure-based chemical identification for compositional, trade-name, and UVCB-type entries.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_9g_precision_estimation.pdf}
-  \caption{Empirical cumulative distribution function of best-match cosine similarity scores ($s_1$) for non-structure substance names against ChemOnt class labels. The median match score is below 0.5, reflecting the fundamental mismatch between compositional substance names and structure-based class labels.}
-  \label{fig:analysis9g}
-\end{figure}
-
-\subsubsection{Structure-Defined Substances}
-
-ClassyFire direct-parent annotations were retrieved via the REST API for the 20,909 unique InChIKeys. Figure~\ref{fig:analysis13a} presents the top~30 ChemOnt classes by regulatory coverage. Benzenoids form the largest single class, reflecting the prevalence of aromatic compounds across regulatory lists. Organoheterocyclic compounds and carboxylic acids and derivatives are the next most represented classes, consistent with the chemical diversity of industrial substances regulated under REACH.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_13a_ChemOnt_prioritisation_top30.pdf}
-  \caption{Top~30 ChemOnt direct-parent classes ranked by number of unique regulatory substances (InChIKeys) and number of distinct regulatory sources in which they occur.}
-  \label{fig:analysis13a}
-\end{figure}
-
-Figure~\ref{fig:analysis13b} reveals the long-tail character of ChemOnt class coverage: a small number of broad classes account for a disproportionately large share of regulated substances, while the majority of ChemOnt classes are represented by only a handful of entries. This concentration pattern has practical implications for class-level regulatory prioritisation: interventions targeting the most prevalent ChemOnt classes would cover a substantial fraction of the regulated chemical space.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_13b_ChemOnt_coverage_histogram.pdf}
-  \caption{Distribution of the number of unique regulatory substances per ChemOnt class, illustrating the long-tail character of chemical class coverage in the combined ECHA regulatory dataset.}
-  \label{fig:analysis13b}
-\end{figure}
-
-\subsection{Knowledge Graph Construction}
-\label{sec:results-kg}
 
 
-All processed data — linkability taxonomy assignments, k-means cluster labels, ClassyFire direct-parent annotations, and ChEBI role annotations — were serialised to a unified RDF Turtle knowledge graph as described in Section~\ref{sec:kg}. The graph integrates substance-level nodes (one per unique InChIKey or substance name), their regulatory source memberships, chemical taxonomy classifications, and biological role annotations. Semantic enrichment via SPARQL CONSTRUCT queries over the merged ChemOnt 2.1 SKOS ontology and ChEBI OWL graph enables downstream SPARQL-based queries across the regulatory, structural, and biological dimensions of the dataset. The output file \texttt{data/processed/rdf/substances\_taxonomy.ttl} constitutes the machine-readable foundation for the priority scoring analysis described in the following subsection.
 
-\begin{figure}[!ht]
-	\centering                 
-	\includemermaid[width=1\linewidth]{images/sources/substances_taxonomy_diagram.mmd} 
-	\caption{knowledge graph construction} \label{fig:taxonomy_diagram}
-\end{figure}   
-
-\subsection{Workload Estimation for Manual Curation}
-\label{sec:results-workload}
-
-Across the full combined ECHA dataset, 15,432 regulatory entries lack a resolvable chemical structure (Section~\ref{sec:results-classification}).  Establishing the pairwise semantic relationships --- subset, overlap, or equivalence --- among these entries requires expert assessment of every unique pair, yielding a total of
-\[
-  \binom{15{,}432}{2} = 119{,}055{,}096 \text{ pairs.}
-\]
-At a throughput of 100 pair assessments per person-day, this corresponds to approximately 1,190,551 person-days --- \textbf{nearly 6,000 person-years of continuous expert effort}.  Figure~\ref{fig:analysis10c} plots this workload across all regulatory sources, illustrating both the absolute scale and the quadratic growth that makes each additional non-structure entry disproportionately costly.
-
-Manual pairwise curation at this scale is not operationally feasible.  The only scalable alternative is to prevent the problem at the source: by requiring structure-resolvable identifiers and ontology-based representations in regulatory definitions wherever chemically possible, the population of entries requiring manual reconciliation can be structurally reduced rather than managed retrospectively.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_10c_workload_non_structured.pdf}
-  \caption{Pairwise curation workload for all 15,432 non-structure entries across the combined ECHA regulatory dataset, broken down by source.  The total reaches approximately 1.2~million person-days --- nearly 6,000 person-years --- at an assumed throughput of 100 pair assessments per person-day.  Manual curation at this scale is not operationally feasible; interoperability must be addressed at the legislative source.}
-  \label{fig:analysis10c}
-\end{figure}
-
-\subsection{Composite Priority Scoring}
-\label{sec:results-prioritisation}
-
-The composite priority scoring model (Section~\ref{sec:prioritisation}) was applied to 17,518 structure-defined substances with at least one regulatory list membership. Scores combine regulatory breadth ($\text{list\_score}$) with biological hazard evidence from ChEBI ($\text{bio\_score}$).
-
-\subsubsection{Top-Ranked Substances}
-
-Figure~\ref{fig:analysis14a} presents the top~50 substances by priority score. Bisphenol A (2,2-bis(4-hydroxyphenyl)propane; BPA) achieves the highest score of 33 ($\text{list\_score} = 30$, $\text{bio\_score} = 3$), appearing across 12 distinct regulatory sources including the Candidate List, Restriction List, Authorisation Process, and Harmonised Classification List. Dibutyl phthalate ranks second with a score of 29 ($\text{list\_score} = 26$, $\text{bio\_score} = 3$), present in 10 sources. The third-ranked substance, 2-(2H-benzotriazol-2-yl)-4,6-di-tert-pentylphenol (score 27), achieves a high regulatory score through simultaneous listing in eight sources including the POPs list and Authorisation List, but receives no biological hazard score, indicating a gap in current ChEBI role annotations for this compound.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_14a_Top50_priority.pdf}
-  \caption{Top~50 structure-defined substances by composite priority score, showing the contribution of regulatory list score and biological hazard score. BPA achieves the maximum observed score of 33.}
-  \label{fig:analysis14a}
-\end{figure}
-
-\subsubsection{Regulatory List Co-occurrence}
-
-The regulatory list heatmap (Figure~\ref{fig:analysis14b}) visualises the co-occurrence of high-priority substances across the principal obligation lists. Substances appearing in both the Candidate List and the SVHC Identification List form the densest intersection; the Authorisation List and Restriction List constitute a secondary cluster. The heatmap confirms that the highest-priority substances are systematically distributed across multiple complementary regulatory instruments rather than being captured by any single list.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_14b_List_heatmap.pdf}
-  \caption{Heatmap of structure-defined substance co-occurrence across the principal obligation lists for the top-scoring priority substances. Substances at the intersection of multiple lists receive higher list scores.}
-  \label{fig:analysis14b}
-\end{figure}
-
-The UpSet plot in Figure~\ref{fig:analysis14c} further decomposes these intersections, confirming that the largest multi-list intersections involve the Candidate List, SVHC Identification List, and Authorisation-related lists.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_14c_UpSet_concern_lists.pdf}
-  \caption{UpSet plot of high-priority substance membership across the principal obligation lists, ordered by intersection size. The Candidate List and SVHC Identification List account for the largest shared intersections.}
-  \label{fig:analysis14c}
-\end{figure}
-
-\subsubsection{Biological Hazard Profile}
-
-Of the 17,518 scored substances, 522 received a non-zero $\text{bio\_score}$ based on ChEBI role annotations. Figure~\ref{fig:analysis14d} shows the distribution of ChEBI biological activity labels across these substances. Herbicidal activity is the most prevalent annotation (139 substances; 26.6\% of scored entries), followed by allergen (76; 14.6\%) and carcinogenic agent (67; 12.8\%). The predominance of herbicides reflects the large contribution of the pesticides database to the total dataset. Among the high-hazard-weight categories (weight 3; CMR and persistent environmental contaminants), carcinogenic agent (67 substances), mutagen (35), genotoxin (20), teratogenic agent (16), persistent organic pollutant (16), and endocrine disruptor (5) together account for 30.6\% of biologically scored substances.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_14d_Bio_hazard_profile.pdf}
-  \caption{Distribution of ChEBI biological activity labels across the 522 substances with non-zero biological hazard scores. Labels are grouped by impact domain (human health vs.\ environmental) and hazard weight (1--3).}
-  \label{fig:analysis14d}
-\end{figure}
-
-\subsubsection{Priority Space Structure}
-
-The bubble chart (Figure~\ref{fig:analysis14e}) maps the full priority space, plotting $\text{list\_score}$ against $\text{bio\_score}$ for all scored substances. The upper-right quadrant (high list score, high bio score) identifies the substances of greatest combined regulatory and biological concern; BPA and Dibutyl phthalate occupy prominent positions in this quadrant.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_14e_Bubble_priority.pdf}
-  \caption{Bubble chart of composite priority space: regulatory list score versus biological hazard score for all scored substances. Bubble size is proportional to the number of regulatory source memberships. Substances in the upper-right quadrant combine broad regulatory coverage with documented biological hazard evidence.}
-  \label{fig:analysis14e}
-\end{figure}
-
-The Sankey diagram (Figure~\ref{fig:analysis14f}) traces biological activity labels through to the regulatory lists in which the associated substances appear, revealing which obligation lists are most exposed to each hazard category. Carcinogens and mutagens flow predominantly into the Harmonised Classification List and Candidate List pathways, consistent with the CMR-based selection criteria of SVHC regulation. Herbicides and pesticide-related substances flow primarily through the pesticides database and, to a lesser extent, the Restriction List.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_14f_Sankey_activity_list.pdf}
-  \caption{Sankey diagram linking ChEBI biological activity labels (left) to regulatory list memberships (right) for biologically scored substances. Flow width is proportional to the number of substances.}
-  \label{fig:analysis14f}
-\end{figure}
-
-Finally, the treemap (Figure~\ref{fig:analysis14g}) partitions the biologically scored substances into six hazard groups, with tile area proportional to group size and tile colour encoding mean priority score. The POP/Environmental group (20 substances) exhibits the highest mean priority score (12.3), reflecting the co-occurrence of environmental persistence with broad regulatory listing. The Carcinogenic/Mutagenic group (108 substances, mean 9.6) is the largest high-hazard category by substance count. The Pesticidal group (245 substances) is the most numerous but carries a lower mean priority score (5.3), consistent with the lower per-list regulatory weights assigned to pesticide-specific lists.
-
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=\linewidth]{Analysis_14g_Treemap_priority.pdf}
-  \caption{Treemap of biologically scored substances partitioned by hazard group. Tile area represents group size (number of substances); colour encodes mean composite priority score. The POP/Environmental group achieves the highest mean score despite being the smallest group.}
-  \label{fig:analysis14g}
-\end{figure}
