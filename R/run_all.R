@@ -15,6 +15,7 @@ scripts <- c(
   "07_network_visualisation.R",              # Analysis 7:  bipartite substance ↔ list network
   "09b_chemont_model_comparison.R",          # creates scibert/biobert embedding caches (required by 8i/8j)
   "08_embedding_clustering.R",               # Analysis 8:  sentence embedding and clustering of non-structure names
+  "08b_cluster_regex.R",                     # Analysis 8b: regex reverse-engineering of embedding clusters
   "09_embedding_chemont.R",                  # Analysis 9:  cosine similarity matching to ChemOnt classes
   "10_workload.R",                           # Analysis 10: pairwise group-relation workload estimation
   "11_ambition_fte.R",                       # Analysis 11: FTE required to meet 2030 target

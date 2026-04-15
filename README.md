@@ -20,7 +20,7 @@ The paper argues that interoperability must be addressed at the level of legisla
 ## Repository Structure
 
 ```
-R/                              Analysis pipeline (14 scripts)
+R/                              Analysis pipeline (17 scripts)
 bash/                           Shell scripts for RDF/SPARQL processing
 data/
   source/                       Raw downloaded regulatory datasets
@@ -43,6 +43,8 @@ source("R/run_all.R")
 
 Or run individual scripts:
 
+Scripts are listed in execution order as defined in `run_all.R`. Dependencies are noted where the order is non-obvious.
+
 | Script | Description |
 |---|---|
 | `01_download.R` | Download regulatory datasets from ECHA and related sources |
@@ -52,13 +54,16 @@ Or run individual scripts:
 | `05_overlap_lists.R` | Analysis 5: overlap between regulatory lists (UpSet plots) |
 | `06_coverage_linking.R` | Analysis 6: coverage of structure-based linking per source |
 | `07_network_visualisation.R` | Analysis 7: bipartite substance ↔ list network |
-| `08_embedding_clustering.R` | Analysis 8: sentence embedding and clustering of non-structure names |
+| `09b_chemont_model_comparison.R` | Compare embedding models (MiniLM, MPNet, SciBERT, BioBERT) for ChemOnt matching; creates cached embeddings required by `08_embedding_clustering.R` (analyses 8i/8j) |
+| `08_embedding_clustering.R` | Analysis 8: sentence embedding and clustering of non-structure names (requires SciBERT/BioBERT caches from `09b`) |
+| `08b_cluster_regex.R` | Analysis 8b: reverse-engineer regular expressions for embedding clusters; evaluate precision, recall, and F1 per cluster (run after `08`) |
 | `09_embedding_chemont.R` | Analysis 9: cosine similarity matching to ChemOnt classes |
 | `10_workload.R` | Analysis 10: pairwise group-relation workload estimation |
 | `11_ambition_fte.R` | Analysis 11: FTE required to meet 2030 target |
 | `12_pairwise_overlap.R` | Analysis 12: pairwise Jaccard heatmap and obligation UpSet |
 | `13a_classyfire_coverage.R` | Analysis 13: ChemOnt class coverage via ClassyFire |
-| `13b_before_prioritisation_create_scheme.R` | RDF schema creation (prerequisite for 14) |
+| `13b_before_prioritisation_create_scheme.R` | RDF schema creation; merges substance RDF with ChemOnt and ChEBI; produces `substances_taxonomy_levels.ttl` (prerequisite for `09c` and `14`) |
+| `09c_chemont_model_validation.R` | Analysis 9c: validate ChemOnt embedding matching against ground truth derived from ClassyFire-classified substances (requires `substances_taxonomy_levels.ttl` from `13b`) |
 | `14_prioritization.R` | Analysis 14: composite priority scoring and visualisations |
 
 ## Data Sources
@@ -133,6 +138,60 @@ The central output of the RDF pipeline is `data/processed/rdf/substances_taxonom
 
 This file is the input for the priority scoring in `R/14_prioritization.R`.
 
+```mermaid
+graph LR
+  subgraph ext["External sources"]
+    ECHA["ECHA / Pesticides / OSPAR / VMM\n18 regulatory lists"]
+    PubChem["PubChem REST API\nCAS → InChIKey"]
+    ClassyFire_src["ClassyFire API\nInChIKey → ChemOnt direct parent"]
+    ChEBI_src["ChEBI OWL\nontology (EBI)"]
+    BERT["Sentence-BERT\nall-MiniLM-L6-v2\nk-means k=6"]
+  end
+
+  subgraph kg["Knowledge graph — substances_taxonomy.ttl"]
+    Scheme["ConceptScheme\nchemical_substance"]
+
+    Substances["skos:Concept + dbo:ChemicalSubstance\nRegulatory substances\n~17,500 csc:{md5hash}\n(CAS, EC, InChIKey)"]
+
+    ChemOnt["skos:Concept\nChemOnt 2.1\n~4,800 classes\ncsc:000xxxx\n(Kingdom → SubClass)"]
+
+    XKOS["xkos:ClassificationLevel\n4 levels:\nKingdom · SuperClass\nClass · SubClass"]
+
+    Collections["skos:Collection\n13 cosc:*\n7 linkability tiers\n+ 6 embedding clusters"]
+
+    ChEBI_stof["owl:Class\nChEBI — Chemical substances\n~4,000 classes\n(SMILES, InChI, mass, charge)"]
+
+    ChEBI_rol["owl:Class\nChEBI — Biological roles\n~1,400 classes\ne.g. carcinogenic agent,\nhepatotoxic agent, allergen"]
+
+    Annotations["oa:Annotation\n~46,600 annotations\n(regulatory sources\n+ ChEBI roles)"]
+
+    ExtDB["External databases\nPubChem · DrugBank · KEGG"]
+  end
+
+  %% External sources → knowledge graph
+  ECHA -->|"import + normalisation"| Substances
+  PubChem -->|"CAS → InChIKey\n(httr2, cached)"| Substances
+  ClassyFire_src -->|"InChIKey → direct_parent\nskos:broader"| ChemOnt
+  ChEBI_src -->|"riot OWL→TTL\nexact_match_chebi.rq"| ChEBI_stof
+  ChEBI_src -->|"riot OWL→TTL\nRO:0000087 roles"| ChEBI_rol
+  BERT -->|"embedding clusters\nclusters.ttl"| Collections
+
+  %% Within the knowledge graph
+  Substances -->|"skos:inScheme"| Scheme
+  Substances -->|"skos:broader"| ChemOnt
+  Substances -->|"skos:exactMatch\n(via InChIKey)"| ChEBI_stof
+  Collections -->|"skos:member"| Substances
+  ChemOnt -->|"skos:broader\n(internal)"| ChemOnt
+  Scheme -->|"xkos:levels"| XKOS
+  ChemOnt -->|"xkos:inLevel"| XKOS
+  ChEBI_stof -->|"rdfs:subClassOf\n(internal)"| ChEBI_stof
+  ChEBI_stof -->|"rdfs:subClassOf\n(substance plays role)"| ChEBI_rol
+  ChEBI_rol -->|"rdfs:subClassOf\nCHEBI_52209 / CHEBI_24432"| ChEBI_rol
+  ChEBI_stof -->|"geneontology:hasDbXref"| ExtDB
+  Annotations -->|"oa:hasTarget"| Substances
+  Annotations -->|"oa:hasBody"| ChEBI_rol
+```
+
 ## Outputs
 
 After running the full pipeline, results are written to:
@@ -154,6 +213,59 @@ Chemical taxonomy classification is retrieved from the ClassyFire API. Responses
 ### Apache Jena
 
 The bash scripts require Apache Jena 5.6.0 installed at `/opt/apache-jena-5.6.0/`. Adjust paths in the scripts if your installation differs.
+
+### Sentence embeddings (GPU)
+
+Scripts `08_embedding_clustering.R`, `09_embedding_chemont.R`, `09b_chemont_model_comparison.R`, and `09c_chemont_model_validation.R` compute sentence embeddings via the `sentence-transformers` Python library, called from R through `reticulate`. Embeddings are cached to disk after the first run; subsequent runs reuse the cache.
+
+**NVIDIA driver and CUDA**
+
+| Component | Version |
+|---|---|
+| NVIDIA driver | <!-- e.g. 570.xx --> |
+| CUDA toolkit | <!-- e.g. 12.x --> |
+
+Verify with:
+```bash
+nvidia-smi
+```
+
+**Python environment**
+
+```bash
+pip install torch --index-url https://download.pytorch.org/whl/cu121   # adjust cu-version to match your CUDA
+pip install sentence-transformers transformers
+```
+
+| Package | Version |
+|---|---|
+| Python | <!-- e.g. 3.11 --> |
+| torch | <!-- e.g. 2.x.x+cu121 --> |
+| sentence-transformers | <!-- e.g. 3.x.x --> |
+| transformers | <!-- e.g. 4.x.x --> |
+
+**R packages**
+
+```r
+install.packages("reticulate")
+```
+
+`reticulate` must point to the Python environment where `sentence-transformers` is installed. Set the interpreter explicitly if needed:
+
+```r
+Sys.setenv(RETICULATE_PYTHON = "/path/to/your/python")
+```
+
+**Models used**
+
+| Model | HuggingFace ID | Dimensions |
+|---|---|---|
+| MiniLM | `all-MiniLM-L6-v2` | 384 |
+| MPNet | `all-mpnet-base-v2` | 768 |
+| SciBERT | `allenai/scibert_scivocab_uncased` | 768 |
+| BioBERT | `dmis-lab/biobert-v1.1` | 768 |
+
+Models are downloaded automatically from HuggingFace on first use and cached locally by `sentence-transformers`.
 
 ## Paper
 
