@@ -277,4 +277,49 @@ ggsave(p10c,
 write_csv(p10c_data,
           here("output", "tables", "Analysis_10c_workload_non_structured.csv"))
 
+# ------------------------------------------------------------------------------
+# 10c (extra): Workload curve with per-source positions
+# ------------------------------------------------------------------------------
+
+n_max_10c <- max(ns_per_source$n)
+
+p10c_curve_data <- data.frame(
+  n    = seq_len(n_max_10c),
+  days = sapply(seq_len(n_max_10c), days_required, y = relations_per_day)
+)
+
+p10c_top5 <- p10c_data |> slice_max(n, n = 5)
+
+p10c_curve <- ggplot() +
+  geom_line(data = p10c_curve_data,
+            aes(x = n, y = days),
+            colour = "steelblue", linewidth = 1) +
+  geom_point(data = p10c_top5,
+             aes(x = n, y = total_days, shape = source),
+             colour = "black", size = 6) +
+  scale_shape_manual(values = c(15, 16, 17, 18, 8)) +
+  scale_x_continuous(labels = scales::comma,
+                     expand = expansion(mult = c(0.02, 0.05))) +
+  labs(
+    # title    = paste("Days required at", relations_per_day,
+    #                  "relations per day vs. non-structured substances per ECHA list"),
+    # subtitle = "Curve = quadratic growth model; points = actual n per list (top 5)",
+    x        = "Number of unique non-structured substance names (n)",
+    y        = "Days required",
+    shape    = "Source"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(plot.subtitle = element_text(colour = "grey40"),
+        legend.position = "right",
+        legend.text     = element_text(size = 14),
+        legend.title    = element_text(size = 15),
+        legend.key.size = unit(2, "lines"))
+
+print(p10c_curve)
+ggsave(p10c_curve,
+       filename = here("output", "figures",
+                       "Analysis_10c_workload_curve_per_source.pdf"),
+       device = "pdf",
+       height = 5, width = 10, units = "in")
+
 message("10_workload.R: analysis 10 completed")

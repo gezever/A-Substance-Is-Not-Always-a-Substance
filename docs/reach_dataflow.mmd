@@ -1,0 +1,63 @@
+flowchart LR
+%% Actors
+    A[Manufacturer / Importer] --> B[IUCLID Dossier Preparation]
+
+%% Dossier inhoud
+    B --> B1["Substance Identity\n(Composition, SIP)"]
+B --> B2["Hazard Data\n(Tox, Ecotox)"]
+B --> B3[Uses & Exposure]
+B --> B4[Guidance on Safe Use]
+
+%% Indiening
+B --> C[Submission via REACH-IT]
+C --> D[ECHA Completeness Check]
+
+%% Validatie
+D -->|Valid| E[Registration Number Assigned]
+D -->|Incomplete| B
+
+%% Evaluatie
+E --> F["Dossier Evaluation\n(ECHA / Member States)"]
+F --> G["Substance Evaluation\n(CoRAP)"]
+
+%% Besluitvorming
+G --> H["Risk Management Option Analysis (RMOA)"]
+
+%% Regulatoire routes
+H --> I1["SVHC Identification\n(Candidate List)"]
+H --> I2["Restriction Process\n(Annex XVII)"]
+H --> I3["Authorisation Process\n(Annex XIV)"]
+
+%% Publicatie
+E --> J["Dissemination Portal (ECHA Website)"]
+I1 --> J
+I2 --> J
+I3 --> J
+
+%% Publieke info
+J --> J1["Substance Identity (Generalised)"]
+J --> J2[Hazard Classification]
+J --> J3[Study Summaries]
+J --> J4[Use Information]
+
+%% Vertrouwelijke info
+B1 --> K1["Exact Composition (CBI)"]
+B2 --> K2["Full Study Reports (CBI)"]
+B3 --> K3["Detailed Use Info (CBI)"]
+
+%% Toegang
+K1 --> L[ECHA & Competent Authorities Only]
+K2 --> L
+K3 --> L
+
+%% Niet zichtbaar
+L -.-> J
+
+%% Styling
+classDef public fill:#C8E6C9,stroke:#2E7D32,color:#000;
+classDef confidential fill:#FFCDD2,stroke:#C62828,color:#000;
+classDef process fill:#BBDEFB,stroke:#1565C0,color:#000;
+
+class J,J1,J2,J3,J4 public;
+class K1,K2,K3,L confidential;
+class B,C,D,E,F,G,H,I1,I2,I3 process;

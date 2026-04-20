@@ -57,7 +57,7 @@ Cross-list analysis of the 17,523 structure-resolved InChIKeys shows that 70.0\%
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=\linewidth]{Analysis_89_UMAP_and_ChemOnt_quality.pdf}
+    \includegraphics[width=\linewidth]{Analysis_89_UMAP_and_ChemOnt_quality_ellipse.pdf}
     \caption{(A) UMAP projection of sentence embeddings for 12,499 non-structure regulatory substance entries, coloured by k-means cluster (k = 6). Each point represents a unique substance name; spatial proximity reflects semantic similarity in the 384-dimensional embedding space. (B) Distribution of top-1 cosine similarity scores~\cite{Manning2008} between substance name embeddings and ChemOnt class label embeddings across all 12,499 candidate substance-class pairs, shown here for \path{all-MiniLM-L6-v2}. The dashed line indicates the applied threshold ($s_1 > 0.80$); 132 entries (1.1\%) are retained as matches.}
     \label{fig:analysis89}
 \end{figure}
@@ -91,7 +91,7 @@ For the more than 11,000 non-structure entries, full manual reconciliation would
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width=\linewidth]{Analysis_10c_workload_non_structured.pdf}
+    \includegraphics[width=\linewidth]{Analysis_10c_workload_curve_per_source.pdf}
     \caption{
         Estimated pairwise curation workload for 11,250 non-structure entries across the combined European regulatory dataset, broken down by source.
         The total corresponds to approximately 630,000 person-days (3,150 person-years) under an assumed throughput of 100 pair assessments per person-day.

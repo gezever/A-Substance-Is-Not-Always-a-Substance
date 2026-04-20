@@ -398,8 +398,8 @@ linkability <- all_substances |>
   mutate(
     linkability = case_when(
       !is.na(inchikey)                                          ~ "Structure (InChIKey)",
-      entity_type == "Substance group" & !is.na(base_inchikey) ~ "Group \u2014 base compound resolvable",
-      entity_type == "Substance group"                         ~ "Group \u2014 base compound not resolvable",
+      entity_type == "Substance group" & !is.na(base_inchikey) ~ "Base compound resolvable",
+      entity_type == "Substance group"                         ~ "Base compound not resolvable",
       entity_type == "CAS without structure"                   ~ "CAS without structure",
       entity_type %in% c("Analytical parameter", "Mixture")   ~ "UVCB / Mixture",
       entity_type == "Regulatory entry"                        ~ "Regulatory entry",
@@ -407,8 +407,8 @@ linkability <- all_substances |>
     ),
     linkability = factor(linkability, levels = c(
       "Structure (InChIKey)",
-      "Group \u2014 base compound resolvable",
-      "Group \u2014 base compound not resolvable",
+      "Base compound resolvable",
+      "Base compound not resolvable",
       "CAS without structure",
       "UVCB / Mixture",
       "Regulatory entry",
@@ -426,8 +426,8 @@ print(df4d)
 
 linkability_colours <- c(
   "Structure (InChIKey)"                      = "#2171b5",  # blue  — Molecule
-  "Group \u2014 base compound resolvable"     = "#41ab5d",  # green — Substance group (resolved)
-  "Group \u2014 base compound not resolvable" = "#a1d99b",  # green light — Substance group (unresolved)
+  "Base compound resolvable"     = "#41ab5d",  # green — Substance group (resolved)
+  "Base compound not resolvable" = "#a1d99b",  # green light — Substance group (unresolved)
   "CAS without structure"                     = "#969696",  # grey  — CAS without structure
   "UVCB / Mixture"                            = "#756bb1",  # purple — Mixture / Analytical parameter
   "Regulatory entry"                          = "#e05c5c",  # red   — Regulatory entry

@@ -222,8 +222,8 @@ Scripts `08_embedding_clustering.R`, `09_embedding_chemont.R`, `09b_chemont_mode
 
 | Component | Version |
 |---|---|
-| NVIDIA driver | <!-- e.g. 570.xx --> |
-| CUDA toolkit | <!-- e.g. 12.x --> |
+| NVIDIA driver | 580.126.09 |
+| CUDA (driver level) | 13.0 |
 
 Verify with:
 ```bash
@@ -232,17 +232,24 @@ nvidia-smi
 
 **Python environment**
 
+This project uses a `reticulate`-managed `uv` environment. Install the CUDA variant of PyTorch into it as follows (adjust `cu130` to match the CUDA version reported by `nvidia-smi`):
+
 ```bash
-pip install torch --index-url https://download.pytorch.org/whl/cu121   # adjust cu-version to match your CUDA
-pip install sentence-transformers transformers
+~/.cache/R/reticulate/uv/bin/uv pip install torch \
+  --index-url https://download.pytorch.org/whl/cu130 \
+  --python ~/.cache/R/reticulate/uv/cache/archive-v0/Ki1QH51N4jeG6c5pJ9hTD/bin/python
 ```
+
+| CUDA version (`nvidia-smi`) | index URL |
+|---|---|
+| 12.1 | `https://download.pytorch.org/whl/cu121` |
+| 12.4 | `https://download.pytorch.org/whl/cu124` |
+| 13.0 | `https://download.pytorch.org/whl/cu130` |
 
 | Package | Version |
 |---|---|
-| Python | <!-- e.g. 3.11 --> |
-| torch | <!-- e.g. 2.x.x+cu121 --> |
-| sentence-transformers | <!-- e.g. 3.x.x --> |
-| transformers | <!-- e.g. 4.x.x --> |
+| torch | 2.11.0+cu130 |
+| sentence-transformers | 5.4.0 |
 
 **R packages**
 
@@ -250,11 +257,7 @@ pip install sentence-transformers transformers
 install.packages("reticulate")
 ```
 
-`reticulate` must point to the Python environment where `sentence-transformers` is installed. Set the interpreter explicitly if needed:
-
-```r
-Sys.setenv(RETICULATE_PYTHON = "/path/to/your/python")
-```
+`reticulate` manages its own Python environment via `uv`. See [`docs/gpu_cuda_setup.md`](docs/gpu_cuda_setup.md) for the full setup procedure, including driver installation and verification steps.
 
 **Models used**
 

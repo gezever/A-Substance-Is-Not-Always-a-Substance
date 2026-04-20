@@ -3,13 +3,12 @@ Chemical substances are central entities in environmental, health, and product r
 
 In chemistry and cheminformatics, chemical identity is well-defined and operationalised through algorithmically defined, structure-based, representations. Molecular structures can be uniquely encoded using standards such as SMILES notations~\cite{Weininger1988}, IUPAC names~\cite{Koppenol2016}, the International Chemical Identifier~(InChI)~\cite{Heller2015} and its hashed representation, the InChIKey, enabling unambiguous identification, comparison, and linking of substances across databases~\cite{Akhondi2012}. Large-scale infrastructures such as PubChem~\cite{Kim2015} and ChEBI~\cite{Degtyarenko2008} build on these identifiers to provide machine-readable, ontology-based knowledge graphs that support interoperability and automated reasoning.
 
-In contrast, regulatory data systems adopt a fundamentally different approach. Substances are typically identified using heterogeneous and often ambiguous identifiers, including Chemical Abstracts Service~(CAS) registry numbers~\cite{CAS,Dittmar1976}, European Community numbers~(EC-numbers)~\cite{ECHA_EC_numbers}, textual names, and informal group descriptions. Moreover, the concept of a \emph{substance} in regulation is not uniform: it may refer to a single molecule, a mixture of unknown or variable composition~(UVCB)~\cite{Kutsarova2019}, a group of related compounds (e.g.,~PFAS), or even an analytical parameter defined as a function over multiple substances.
-Figure~\ref{fig:mismatch} illustrates this contrast: the left panel shows the chemistry view, in which a substance corresponds to a molecule unambiguously identified by structure-derived identifiers such as InChI or InChIKey; the right panel shows the regulatory view, where the same term encompasses heterogeneous entities of fundamentally different semantic types.
+In contrast, European regulatory data systems adopt a fundamentally different approach. Substances are typically identified using heterogeneous and often ambiguous identifiers, including Chemical Abstracts Service~(CAS) registry numbers~\cite{CAS,Dittmar1976}, European Community numbers~(EC-numbers)~\cite{ECHA_EC_numbers}, textual names, and informal group descriptions.  Moreover, the concept of a \emph{substance} in regulation is not uniform: it may refer to a single molecule, a mixture of specific molecules, a mixture of unknown or variable composition~(UVCB)~\cite{Kutsarova2019}, a group of related compounds (e.g.,~PFAS), or even an analytical parameter defined as a function over multiple substances. For a number of \emph{substances}, the true identity, Substance Identity Profile (SIP), analytical data about the composition of \emph{UVCB substances}, detailed usage information and full toxicological information is not disclosed to the public in accordance to REACH Artikel 118~\cite{reach_art118} and only a competent authority has acces to complete REACH-dossiers. The general public and regional authorities have to rely on public ECHA info, CLP-classifications and safety data sheets (SDS)~\cite{reach_art31,reach_art119} which are not machine readable. Figure~\ref{fig:mismatch} illustrates this contrast: the right panel shows the chemistry view, in which a substance corresponds to a molecule unambiguously identified by structure-derived identifiers such as InChI or InChIKey; the left panel shows the regulatory view, where the same term encompasses heterogeneous entities of fundamentally different semantic types.
 
 \begin{figure}[!ht]
 	\centering         
 	\includemermaid[width=\linewidth]{images/sources/mismatch.mmd}
-	\caption{Conceptual model of the semantic mismatch between chemistry (left) and regulatory datasets (right). In chemistry, a substance corresponds to a molecule identified using structure-derived identifiers such as InChI or InChIKey. In regulatory datasets, the concept of a ``substance'' encompasses heterogeneous entities (individual molecules, mixtures, substance groups, and analytical sum parameters) that correspond to fundamentally different semantic types, complicating interoperability and automated reasoning. This mismatch is quantified empirically in Section~\ref{sec:semantic_mismatch}.} \label{fig:mismatch}
+	\caption{Conceptual model of the semantic mismatch between chemistry (right) and regulatory datasets (left). In chemistry, a substance corresponds to a molecule identified using structure-derived identifiers such as InChI or InChIKey. In regulatory datasets, the concept of a ``substance'' encompasses heterogeneous entities (individual molecules, mixtures, substance groups, and analytical sum parameters) that correspond to fundamentally different semantic types, complicating interoperability and automated reasoning. This mismatch is quantified empirically in Section~\ref{sec:semantic_mismatch}.} \label{fig:mismatch}
 \end{figure}
 
 
@@ -28,18 +27,18 @@ Neither relationship is formally specified, leading to ambiguity and combinatori
 
 This paper investigates the extent and consequences of this interoperability problem using a comprehensive analysis of 18 regulatory datasets from the European Chemicals Agency (ECHA) and related sources. We focus on three main research questions:
 
-\begin{itemize}
-	
+\begin{rqlist}
+
 	\item To what extent can substances in European regulatory datasets be linked to a precise, unique chemical structure?
 	\label{sec:question1}
 	\item How consistent and reliable are commonly used identifiers such as CAS numbers for cross-dataset linking?
 	\label{sec:question2}
 	\item \looseness=-1 Can semantic or embedding-based methods compensate for the absence of structure-based chemical identifiers?
 	\label{sec:question3}
-\end{itemize}
+\end{rqlist}
 
 Based on this analysis, we make the following contributions:
-\begin{enumerate}
+\begin{clist}
 	\item We quantify the heterogeneity of regulatory substance definitions and introduce a taxonomy of linkability reflecting their degree of chemical specificity.
 	\label{sec:contribution1}
 	\item \looseness=-1 We demonstrate the limitations of CAS-based identification and show that a substantial fraction of regulatory substances cannot be resolved to a uniquely defined molecular structure.
@@ -50,7 +49,7 @@ Based on this analysis, we make the following contributions:
 	\label{sec:contribution4}
 	\item We show that structure-based identifiers combined with ontology-driven approaches enable scalable integration through knowledge graphs.
 	\label{sec:contribution5}
-\end{enumerate}
+\end{clist}
 
 The remainder of this paper is structured as follows. Section~\ref{sec:methods} describes the data sources and analytical methods. Section~\ref{sec:results} presents the empirical findings. Section~\ref{sec:discussion} discusses the implications for regulatory data infrastructures and semantic interoperability. Section~\ref{sec:conclusion} concludes with recommendations for future work.
 

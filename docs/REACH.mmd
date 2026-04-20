@@ -1,0 +1,80 @@
+flowchart LR
+    A[REACH Dossier] --> B[Substance Identity - IUCLID Section 1.2]
+
+%% Exacte samenstelling
+    B --> C[Exact Composition]
+    C --> C1[Main Constituent]
+    C --> C2[Impurities]
+    C --> C3[Additives]
+    C --> C4[Concentration Information]
+    C --> C5[Analytical Information]
+    C --> C6[Batch Variation]
+    C --> C7["Substance Identity Profile (SIP)"]
+
+%% Main constituent details
+    C1 --> C1a[IUPAC Name]
+    C1 --> C1b[CAS Number]
+    C1 --> C1c[EC Number]
+    C1 --> C1d[Molecular Formula & Structure]
+    C1 --> C1e["Exact Concentration (%)"]
+
+%% Impurities
+    C2 --> C2a[Chemical Identification]
+    C2 --> C2b[Concentration Range]
+    C2 --> C2c[Toxicological Relevance]
+
+%% Additives
+    C3 --> C3a[Identification]
+    C3 --> C3b["Function (e.g. stabiliser)"]
+    C3 --> C3c[Exact Concentration]
+
+%% Analytical info
+    C5 --> C5a[GC/HPLC]
+    C5 --> C5b[NMR/IR/MS]
+    C5 --> C5c[Chromatograms & Spectra]
+
+%% Formalisation of substances
+    A --> D[Formalisation of Composition]
+    D --> D1[Mono-constituent]
+    D --> D2[Multi-constituent]
+    D --> D3[UVCB]
+    D --> D4[Substance with Additives]
+
+%% Access to information
+    A --> E[Access to Information]
+    E --> E1[Public via ECHA]
+    E --> E2["Confidential (CBI)"]
+    E --> E3[Partially Public]
+
+%% Public information
+    E1 --> E1a[Substance Identity]
+    E1 --> E1b[CAS/EC Number]
+    E1 --> E1c[Hazard Classification]
+    E1 --> E1d[Study Summaries]
+    E1 --> E1e[Guidance on Safe Use]
+    E1 --> E1f[General Description of Composition]
+
+%% Confidential information
+    E2 --> E2a[Exact Concentrations]
+    E2 --> E2b[Detailed Impurities]
+    E2 --> E2c[Manufacturing Process]
+    E2 --> E2d[Detailed Analytical Data]
+    E2 --> E2e[Full SIP Details]
+
+%% Partially public information
+    E3 --> E3a[Concentration Ranges]
+    E3 --> E3b[Generic Names for Impurities]
+    E3 --> E3c[UVCB Source Description]
+
+%% Styling
+    classDef public fill:#C8E6C9,stroke:#2E7D32,stroke-width:1px,color:#000;
+    classDef confidential fill:#FFCDD2,stroke:#C62828,stroke-width:1px,color:#000;
+    classDef partial fill:#FFF9C4,stroke:#F9A825,stroke-width:1px,color:#000;
+
+    class E1,E1a,E1b,E1c,E1d,E1e,E1f public;
+    class E2,E2a,E2b,E2c,E2d,E2e confidential;
+    class E3,E3a,E3b,E3c,C2b partial;
+
+%% Specific confidentiality indications
+    class C1e,C3c,C5a,C5b,C5c,C6,C7 confidential;
+    class C1a,C1b,C1c,C1d,C2a,C2c,C3a,C3b public;

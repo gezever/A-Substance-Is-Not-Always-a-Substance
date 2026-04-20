@@ -96,6 +96,8 @@ library(dplyr)
 library(tidyr)
 library(ggplot2)
 library(here)
+library(readr)
+library(ggrepel)
 library(reticulate)
 library(purrr)
 library(stringr)
@@ -549,7 +551,7 @@ p9e_clean <- p9e +
 
 p_89 <- (p8_umap_clean | p9e_clean) +
   plot_annotation(
-    title = "Embedding-based clustering and ChemOnt match quality",
+   # title = "Embedding-based clustering and ChemOnt match quality",
     theme = theme(plot.title = element_text(size = 34, face = "bold"))
   ) +
   plot_layout(widths = c(2, 1))
@@ -557,6 +559,65 @@ p_89 <- (p8_umap_clean | p9e_clean) +
 ggsave(p_89,
        filename = here("output", "figures",
                        "Analysis_89_UMAP_and_ChemOnt_quality.pdf"),
+       device = "pdf",
+       height = 30, width = 60, units = "cm")
+
+# ------------------------------------------------------------------------------
+# 8d+9e (ellipse variant): replace individual points with per-cluster ellipses
+# ------------------------------------------------------------------------------
+
+plot_data_umap <- p8_umap$data
+
+cluster_labels_manual <- c(
+  "Reaction masses",
+  "Complex substances (UVCB with structure)",
+  "Petroleum & coal tar fractions",
+  "Inorganic compounds & metal salts",
+  "Trade names, codes & biological materials",
+  "Polymers, fatty acids & surfactants"
+)
+
+p8_umap_ellipse <- ggplot(plot_data_umap,
+                          aes(x = umap1, y = umap2,
+                              linetype = cluster, fill = cluster)) +
+  stat_ellipse(geom = "polygon", alpha = 0.12, colour = NA) +
+  stat_ellipse(colour = "black", linewidth = 0.9) +
+  geom_text(
+    data = plot_data_umap |>
+      group_by(cluster) |>
+      summarise(umap1 = median(umap1), umap2 = median(umap2), .groups = "drop"),
+    aes(x = umap1, y = umap2, label = paste0("C", cluster)),
+    colour      = "black",
+    size        = 10,
+    fontface    = "bold",
+    inherit.aes = FALSE
+  ) +
+  scale_linetype_manual(values = c("solid", "dashed", "dotted",
+                                   "dotdash", "longdash", "twodash"),
+                        labels = paste0("C", 1:6, " — ", cluster_labels_manual)) +
+  scale_fill_grey(start = 0.2, end = 0.9,
+                  labels = paste0("C", 1:6, " — ", cluster_labels_manual)) +
+  labs(x = "UMAP 1", y = "UMAP 2", linetype = "Cluster", fill = "Cluster") +
+  theme_minimal(base_size = 16) +
+  theme(legend.position  = "bottom",
+        legend.text      = element_text(size = 14),
+        legend.title     = element_text(size = 15),
+        legend.key.size  = unit(1.8, "lines"),
+        plot.subtitle    = element_text(colour = "grey40"))
+
+p8_umap_ellipse_clean <- p8_umap_ellipse +
+  labs(tag = "(A)", title = NULL, subtitle = NULL) +
+  axis_theme
+
+p_89_ellipse <- (p8_umap_ellipse_clean | p9e_clean) +
+  plot_annotation(
+    theme = theme(plot.title = element_text(size = 34, face = "bold"))
+  ) +
+  plot_layout(widths = c(2, 1))
+
+ggsave(p_89_ellipse,
+       filename = here("output", "figures",
+                       "Analysis_89_UMAP_and_ChemOnt_quality_ellipse.pdf"),
        device = "pdf",
        height = 30, width = 60, units = "cm")
 

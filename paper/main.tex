@@ -11,6 +11,11 @@
 \usepackage{graphicx}
 \usepackage{float}
 \usepackage[section]{placeins}
+\usepackage{enumitem}
+\newlist{rqlist}{enumerate}{1}
+\setlist[rqlist]{label=\textbf{RQ\arabic*},ref=RQ\arabic*,leftmargin=*}
+\newlist{clist}{enumerate}{1}
+\setlist[clist]{label=\textbf{C\arabic*},ref=C\arabic*,leftmargin=*}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{tabularx}
