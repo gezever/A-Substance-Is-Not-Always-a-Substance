@@ -22,11 +22,15 @@ and
 
 
 \begin{abstract}
-    Chemical substance identity is inconsistently represented across European regulatory datasets, creating fundamental barriers to semantic interoperability. While structure-based identifiers such as InChI and InChIKey unambiguously define chemical entities, regulatory systems rely on heterogeneous identifiers including CAS numbers, EC numbers, textual names, and group descriptions that may represent mixtures, substance groups, or analytical parameters rather than molecules with a uniquely defined chemical structure.
+Chemical substance identity is inconsistently represented across European regulatory datasets, creating fundamental barriers to semantic interoperability. While structure-based identifiers such as InChI and InChIKey unambiguously define chemical entities, regulatory systems rely on heterogeneous identifiers, including CAS numbers, EC numbers, textual names, and group descriptions. These identifiers often refer to mixtures, substance groups, or analytical parameters rather than uniquely defined molecular structures.
 
-    In this research, we analysed interoperability challenges across 18 European regulatory datasets and demonstrate that; (i)~37.5\% of entries cannot be linked to a defined chemical structure, (ii)~CAS numbers exhibit both one-to-many and many-to-one mappings with molecular structures, and (iii)~embedding-based classification fails for non-structure substances, with the best model achieving a ChemOnt Hit@1 of only 5.75\%. The combinatorial complexity of cross-list identifier mappings makes retrospective harmonisation infeasible at scale.
+In this study, we analyse interoperability challenges across 18 European regulatory datasets from ECHA and related sources. Where possible, we map entries to InChIKeys, classify records by structural linkability, assess the consistency of CAS number mappings, evaluate embedding-based semantic matching, estimate the effort required for manual reconciliation, and implement a knowledge-graph-based integration approach.
 
-    These findings demonstrate that interoperability cannot be achieved through post hoc technical solutions alone. We argue that it must be addressed at the level of data modelling and legislation, by adopting structure-based identifiers, formal ontologies, and machine-readable representations directly in regulatory data standards.
+We find that only 62.5\% of entries can be directly linked to a defined chemical structure, leaving 37.5\% inherently non-structure-based. CAS numbers exhibit both one-to-many and many-to-one mappings with molecular structures, undermining their role as unique identifiers. Embedding-based approaches fail to recover chemical identity for non-structure substances, and the best model achieves a ChemOnt Hit@1 of only 5.75\%. The combinatorial complexity of cross-dataset identifier mappings makes retrospective harmonisation infeasible at scale.
+
+These findings demonstrate that semantic interoperability in chemical regulation cannot be achieved through post hoc technical solutions alone. Instead, it must be addressed at the level of data modelling and legislation, by adopting structure-based identifiers, formal ontologies, and machine-readable representations embedded directly in regulatory data standards. To support further research and reuse, we provide scripts for constructing an integrated knowledge graph spanning the analysed regulatory sources.
+
+
 \end{abstract}
 
 
