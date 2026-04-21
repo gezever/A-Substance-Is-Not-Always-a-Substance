@@ -586,7 +586,7 @@ p8_umap_ellipse <- ggplot(plot_data_umap,
     data = plot_data_umap |>
       group_by(cluster) |>
       summarise(umap1 = median(umap1), umap2 = median(umap2), .groups = "drop"),
-    aes(x = umap1, y = umap2, label = paste0("C", cluster)),
+    aes(x = umap1, y = umap2, label = paste0("Cl", cluster)),
     colour      = "black",
     size        = 10,
     fontface    = "bold",
@@ -594,15 +594,12 @@ p8_umap_ellipse <- ggplot(plot_data_umap,
   ) +
   scale_linetype_manual(values = c("solid", "dashed", "dotted",
                                    "dotdash", "longdash", "twodash"),
-                        labels = paste0("C", 1:6, " — ", cluster_labels_manual)) +
+                        labels = paste0("Cl", 1:6)) +
   scale_fill_grey(start = 0.2, end = 0.9,
-                  labels = paste0("C", 1:6, " — ", cluster_labels_manual)) +
+                  labels = paste0("Cl", 1:6)) +
   labs(x = "UMAP 1", y = "UMAP 2", linetype = "Cluster", fill = "Cluster") +
   theme_minimal(base_size = 16) +
-  theme(legend.position  = "bottom",
-        legend.text      = element_text(size = 14),
-        legend.title     = element_text(size = 15),
-        legend.key.size  = unit(1.8, "lines"),
+  theme(legend.position  = "none",
         plot.subtitle    = element_text(colour = "grey40"))
 
 p8_umap_ellipse_clean <- p8_umap_ellipse +
@@ -615,6 +612,7 @@ p_89_ellipse <- (p8_umap_ellipse_clean | p9e_clean) +
   ) +
   plot_layout(widths = c(2, 1))
 
+print(p_89_ellipse)
 ggsave(p_89_ellipse,
        filename = here("output", "figures",
                        "Analysis_89_UMAP_and_ChemOnt_quality_ellipse.pdf"),
@@ -645,12 +643,18 @@ n_candidates    <- nrow(top_wide)
 n_retained      <- nrow(filtered)
 pct_retained    <- round(n_retained / n_candidates * 100, 1)
 
+cluster_key <- paste(
+  paste0("Cl", 1:6, " = ", cluster_labels_manual),
+  collapse = "; "
+)
+
 caption_89 <- sprintf(
   paste0(
     "(A) UMAP projection of sentence embeddings for %s non-structure regulatory substance entries, ",
-    "coloured by k-means cluster (k = %d). ",
+    "grouped by k-means cluster (k = %d). ",
     "Each point represents a unique substance name; spatial proximity reflects semantic similarity ",
     "in the 384-dimensional embedding space. ",
+    "Clusters: %s. ",
     "(B) Distribution of top-1 cosine similarity scores between substance name embeddings ",
     "and ChemOnt class label embeddings across all %s candidate substance-class pairs. ",
     "The distribution is heavily skewed towards lower scores, indicating that most substance names ",
@@ -660,6 +664,7 @@ caption_89 <- sprintf(
   ),
   format(n_non_structure, big.mark = ","),
   n_clusters,
+  cluster_key,
   format(n_candidates, big.mark = ","),
   score_threshold,
   n_retained,

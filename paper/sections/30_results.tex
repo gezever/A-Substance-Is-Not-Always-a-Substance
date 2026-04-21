@@ -58,7 +58,7 @@ Cross-list analysis of the 17,523 structure-resolved InChIKeys shows that 70.0\%
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=\linewidth]{Analysis_89_UMAP_and_ChemOnt_quality_ellipse.pdf}
-    \caption{(A) UMAP projection of sentence embeddings for 12,499 non-structure regulatory substance entries, coloured by k-means cluster (k = 6). Each point represents a unique substance name; spatial proximity reflects semantic similarity in the 384-dimensional embedding space. (B) Distribution of top-1 cosine similarity scores~\cite{Manning2008} between substance name embeddings and ChemOnt class label embeddings across all 12,499 candidate substance-class pairs, shown here for \path{all-MiniLM-L6-v2}. The dashed line indicates the applied threshold ($s_1 > 0.80$); 132 entries (1.1\%) are retained as matches.}
+    \caption{(A) UMAP projection of sentence embeddings for 12,499 non-structure regulatory substance entries, grouped by k-means cluster (k = 6). Each point represents a unique substance name; spatial proximity reflects semantic similarity in the 384-dimensional embedding space. Clusters: Cl1 = Reaction masses; Cl2 = Complex substances (UVCB with structure); Cl3 = Petroleum \& coal tar fractions; Cl4 = Inorganic compounds \& metal salts; Cl5 = Trade names, codes \& biological materials; Cl6 = Polymers, fatty acids \& surfactants. (B) Distribution of top-1 cosine similarity scores~\cite{Manning2008} between substance name embeddings and ChemOnt class label embeddings across all 12,499 candidate substance-class pairs, shown here for \path{all-MiniLM-L6-v2}. The dashed line indicates the applied threshold ($s_1 > 0.80$); 132 entries (1.1\%) are retained as matches.}
     \label{fig:analysis89}
 \end{figure}
 
@@ -86,6 +86,8 @@ To validate this failure quantitatively, the four models were evaluated against 
     \end{tabular}
 \end{table}
 
+
+
 \paragraph{Scale of the Interoperability Problem (\texorpdfstring{\hyperref[sec:contribution4]{C4}}{C4})}
 For the more than 11,000 non-structure entries, full manual reconciliation would require on the order of hundreds of millions of pairwise comparisons. Under conservative assumptions, this corresponds to several thousand person-years of expert effort.
 
@@ -93,8 +95,8 @@ For the more than 11,000 non-structure entries, full manual reconciliation would
     \centering
     \includegraphics[width=\linewidth]{Analysis_10c_workload_curve_per_source.pdf}
     \caption{
-        Estimated pairwise curation workload for 11,250 non-structure entries across the combined European regulatory dataset, broken down by source.
-        The total corresponds to approximately 630,000 person-days (3,150 person-years) under an assumed throughput of 100 pair assessments per person-day.
+        Estimated pairwise curation workload for non-structure entries across the combined European regulatory dataset, broken down by source.
+        Reach registrations correspond to approximately 360,000 person-days (1,800 person-years) under an assumed throughput of 100 pair assessments per person-day.
         The quadratic growth of the workload illustrates that manual reconciliation is not scalable, reinforcing the need for structure-based and ontology-driven representations at the source.
     }
     \label{fig:analysis10c}
@@ -109,14 +111,13 @@ Manual pairwise reconciliation at this scale is not operationally feasible. This
 Instead, the only scalable strategy is to address the problem at its source. By requiring structure-resolvable identifiers and ontology-based representations in regulatory definitions wherever chemically applicable, the number of entries requiring manual reconciliation can be structurally reduced rather than managed post hoc.
 
 \paragraph{Knowledge Graph Integration and Priority Scoring (\texorpdfstring{\hyperref[sec:contribution5]{C5}}{C5})}
-
-Structure-defined substances can be successfully integrated across regulatory lists, chemical taxonomies (ChemOnt), and biological annotations (ChEBI) using InChIKey as a linking key. This enables cross-domain queries that are infeasible on fragmented regulatory datasets: for example, identifying substances that appear on three or more ECHA lists and carry a documented biological role in ChEBI, or retrieving all members of a given ChemOnt class that are subject to authorisation requirements. As an illustration of this analytical potential, a composite priority score combining regulatory list membership with ChEBI biological role annotations was computed following the ToxPi framework~\cite{Reif2010}. Figure~\ref{fig:analysis14e} plots regulatory versus biological scores for all scored substances; bisphenol~A and dibutyl phthalate exemplify substances with both broad regulatory presence and multiple documented biological roles. This score is illustrative and does not constitute a formal risk assessment.
+Structure-defined substances can be successfully integrated across regulatory lists, chemical taxonomies (ChemOnt), and biological annotations (ChEBI) using InChIKey as a linking key. This enables cross-domain queries that are infeasible on fragmented regulatory datasets: for example, identifying substances that appear on three or more ECHA lists and carry a documented biological role in ChEBI, or retrieving all members of a given ChemOnt class that are subject to authorisation requirements. As an illustration of this analytical potential, a composite priority score combining regulatory list membership with ChEBI biological role annotations was computed following the ToxPi framework~\cite{Reif2010}. Figure~\ref{fig:analysis14e} plots regulatory versus biological scores for all scored substances; 2,2-bis(4-hydroxyphenyl)propane and dibutyl phthalate exemplify substances with both broad regulatory presence and multiple documented biological roles. This score is illustrative and does not constitute a formal risk assessment.
 
 \begin{figure}[!ht]
-    \centering
-    \includegraphics[width=\linewidth]{Analysis_14e_Bubble_priority.pdf}
-    \caption{Bubble chart of composite priority space: regulatory list score versus biological hazard score for all scored substances. Bubble size is proportional to the number of regulatory source memberships. Substances in the upper-right quadrant combine broad regulatory coverage with documented biological hazard evidence.}
-    \label{fig:analysis14e}
+	\centering
+	\includegraphics[width=\linewidth]{Analysis_14e_Bubble_priority.pdf}
+	\caption{Bubble chart of composite priority space: regulatory list score versus biological hazard score for all scored substances. Bubble size is proportional to the number of regulatory source memberships. Substances in the upper-right quadrant combine broad regulatory coverage with documented biological hazard evidence.}
+	\label{fig:analysis14e}
 \end{figure}
 
 

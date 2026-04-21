@@ -434,6 +434,19 @@ cat_colors <- c(
   "Other"            = "#95a5a6"
 )
 
+# Shared shape palette — mirrors cat_colors order for double encoding (B&W legibility)
+cat_shapes <- c(
+  "SVHC / Candidate" = 16,
+  "Restriction"      = 15,
+  "Authorisation"    = 18,
+  "POP"              = 17,
+  "PBT"              = 25,
+  "ED"               =  8,
+  "Harmonised / CLP" =  3,
+  "Pesticides"       =  4,
+  "Other"            =  1
+)
+
 # ==============================================================================
 # Fig 14a: Top 50 priority substances - horizontal bar chart
 #
@@ -733,7 +746,8 @@ top20_ids <- priority |>
 
 p14e <- ggplot(plot_data_e,
                aes(x = n_lists, y = bio_score,
-                   size = priority_score, colour = top_list_cat)) +
+                   size = priority_score, colour = top_list_cat,
+                   shape = top_list_cat)) +
   geom_point(alpha = 0.45) +
   geom_text_repel(
     data = plot_data_e |> filter(substance %in% top20_ids),
@@ -744,6 +758,9 @@ p14e <- ggplot(plot_data_e,
     segment.colour = "grey50", segment.size = 0.3
   ) +
   scale_colour_manual(values = cat_colors, name = "Highest\nECHA list") +
+  scale_shape_manual(values = cat_shapes, name = "Highest\nECHA list") +
+  guides(colour = guide_legend(override.aes = list(size = 6)),
+         shape  = guide_legend(override.aes = list(size = 6))) +
   scale_size_continuous(range = c(1, 12), name = "Priority\nscore") +
   scale_x_continuous(breaks = 0:20) +
   labs(
@@ -752,7 +769,7 @@ p14e <- ggplot(plot_data_e,
     x        = "Number of ECHA lists",
     y        = "Biological hazard score (health + environment)"
   ) +
-  theme_minimal(base_size = 15) +
+  theme_minimal(base_size = 20) +
   theme(
     plot.subtitle        = element_text(colour = "grey40"),
     legend.position      = "right",
