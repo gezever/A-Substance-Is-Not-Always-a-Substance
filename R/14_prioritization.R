@@ -728,7 +728,7 @@ plot_data_e <- priority |>
 
 top20_ids <- priority |>
   filter(priority_score > 0) |>
-  slice_head(n = 20) |>
+  slice_head(n = 7) |>
   pull(substance)
 
 p14e <- ggplot(plot_data_e,
@@ -737,8 +737,8 @@ p14e <- ggplot(plot_data_e,
   geom_point(alpha = 0.45) +
   geom_text_repel(
     data = plot_data_e |> filter(substance %in% top20_ids),
-    aes(label = str_trunc(substance_name, 35)),
-    size = 4, max.overlaps = 10, show.legend = FALSE,
+    aes(label = str_trunc(substance_name, 50)),
+    size = 6, max.overlaps = 7, show.legend = FALSE, colour = "black",
     point.padding = 2.5, box.padding = 0.8,
     force = 3, force_pull = 0.4,
     segment.colour = "grey50", segment.size = 0.3
@@ -748,17 +748,17 @@ p14e <- ggplot(plot_data_e,
   scale_x_continuous(breaks = 0:20) +
   labs(
     title    = "Priority map - regulatory breadth vs. biological hazard",
-    subtitle = "Bubble size = priority score  |  Labels = top 20 substances",
+    subtitle = "Bubble size = priority score  |  Labels = top 7 substances",
     x        = "Number of ECHA lists",
     y        = "Biological hazard score (health + environment)"
   ) +
-  theme_minimal(base_size = 12) +
+  theme_minimal(base_size = 15) +
   theme(
     plot.subtitle        = element_text(colour = "grey40"),
     legend.position      = "right",
     legend.title         = element_text(size = 13),
-    legend.text          = element_text(size = 12),
-    legend.key.size      = unit(1.2, "lines")
+    legend.text          = element_text(size = 15),
+    legend.key.size      = unit(1.7, "lines")
   )
 
 print(p14e)
