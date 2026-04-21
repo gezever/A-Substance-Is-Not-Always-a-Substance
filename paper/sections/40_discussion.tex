@@ -5,7 +5,7 @@
 
 The results demonstrate that interoperability of regulatory substance data is fundamentally constrained by the absence of a shared and formalised notion of chemical identity. While structure-based identifiers such as InChIKey enable unambiguous linking across datasets, a substantial fraction of regulatory entries cannot be expressed in this form. Instead, regulatory “substances” frequently represent heterogeneous entities, including mixtures, substance groups, and analytical parameters.
 
-This heterogeneity is not merely a data quality issue but reflects a structural mismatch between chemical reality and regulatory abstraction. As a consequence, semantic relationships between regulatory entries, such as equivalence, subset relations or partial overlap, remain implicit and undefined. Without explicit formalisation of these relationships, automated integration across regulatory datasets is inherently limited.
+This reflects a structural mismatch between chemical reality and regulatory abstraction: without explicit formalisation of equivalence, subset, and overlap relations, automated integration remains inherently limited.
 
 \paragraph{Unreliability of CAS-based Identification (\texorpdfstring{\hyperref[sec:question2]{RQ2}}{RQ2})}
 
@@ -18,8 +18,6 @@ This finding challenges the widespread assumption in regulatory data integration
 This study shows that modern embedding-based methods cannot compensate for the absence of structure-based identifiers in regulatory substance data. While they can group substance names into loosely coherent semantic clusters, they fail to recover true chemical identity or reliably map entries to ChemOnt classes, with only a negligible number of correct assignments.
 
 These limitations are inherent to the data rather than the models: textual descriptions of mixtures, groups, and analytical entries lack the information required to infer molecular structure. As a result, semantic similarity largely reflects surface-level lexical overlap rather than genuine chemical relatedness.
-
-Sentence embeddings cannot therefore substitute for structure-resolvable identifiers; reliable chemical classification and interoperability thus require explicit structural representation, such as InChIKeys, at the source.
 
 \paragraph{The Combinatorial Barrier to Retrospective Harmonisation}
 

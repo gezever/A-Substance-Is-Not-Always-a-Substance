@@ -25,7 +25,7 @@ Integration of 18 regulatory sources yielded 41,813 records, of which 63\% could
 \paragraph{Heterogeneity of Substance Definitions}
 \label{sec:semantic_mismatch}
 
-A significant share of regulatory entries (37\%) does not correspond to a defined chemical structure, consistent with Kutsarova et al.~\cite{Kutsarova2019}. These include mixtures (UVCBs), substance groups, analytical parameters, or entries without usable identifiers, reflecting differences in how “substances” are defined across regulatory contexts.
+A significant share of regulatory entries (37\%) does not correspond to a defined chemical structure, consistent with Kutsarova et al.~\cite{Kutsarova2019}. These include mixtures (UVCBs), substance groups, analytical parameters, or entries without usable identifiers, reflecting differences in how “substances” are defined across regulatory contexts. 
 
 Figure~\ref{fig:analysis4d}A shows that heterogeneity varies widely between regulatory lists: some sources consist almost entirely of structure-defined molecules, whilst others contain few structure-defined entries.
 
@@ -111,7 +111,7 @@ Manual pairwise reconciliation at this scale is not operationally feasible. This
 Instead, the only scalable strategy is to address the problem at its source. By requiring structure-resolvable identifiers and ontology-based representations in regulatory definitions wherever chemically applicable, the number of entries requiring manual reconciliation can be structurally reduced rather than managed post hoc.
 
 \paragraph{Knowledge Graph Integration and Priority Scoring (\texorpdfstring{\hyperref[sec:contribution5]{C5}}{C5})}
-Structure-defined substances can be successfully integrated across regulatory lists, chemical taxonomies (ChemOnt), and biological annotations (ChEBI) using InChIKey as a linking key. This enables cross-domain queries that are infeasible on fragmented regulatory datasets: for example, identifying substances that appear on three or more ECHA lists and carry a documented biological role in ChEBI, or retrieving all members of a given ChemOnt class that are subject to authorisation requirements. As an illustration of this analytical potential, a composite priority score combining regulatory list membership with ChEBI biological role annotations was computed following the ToxPi framework~\cite{Reif2010}. Figure~\ref{fig:analysis14e} plots regulatory versus biological scores for all scored substances; 2,2-bis(4-hydroxyphenyl)propane and dibutyl phthalate exemplify substances with both broad regulatory presence and multiple documented biological roles. This score is illustrative and does not constitute a formal risk assessment.
+Structure-defined substances can be successfully integrated across regulatory lists, chemical taxonomies (ChemOnt), and biological annotations (ChEBI) using InChIKey as a linking key. 
 
 \begin{figure}[!ht]
 	\centering
@@ -119,6 +119,8 @@ Structure-defined substances can be successfully integrated across regulatory li
 	\caption{Bubble chart of composite priority space: regulatory list score versus biological hazard score for all scored substances. Bubble size is proportional to the number of regulatory source memberships. Substances in the upper-right quadrant combine broad regulatory coverage with documented biological hazard evidence.}
 	\label{fig:analysis14e}
 \end{figure}
+This enables cross-domain queries that are infeasible on fragmented regulatory datasets: for example, identifying substances that appear on three or more ECHA lists and carry a documented biological role in ChEBI, or retrieving all members of a given ChemOnt class that are subject to authorisation requirements. As an illustration of this analytical potential, a composite priority score combining regulatory list membership with ChEBI biological role annotations was computed following the ToxPi framework~\cite{Reif2010}. Figure~\ref{fig:analysis14e} plots regulatory versus biological scores for all scored substances; 2,2-bis(4-hydroxyphenyl)propane and dibutyl phthalate exemplify substances with both broad regulatory presence and multiple documented biological roles. This score is illustrative and does not constitute a formal risk assessment.
+
 
 
 
