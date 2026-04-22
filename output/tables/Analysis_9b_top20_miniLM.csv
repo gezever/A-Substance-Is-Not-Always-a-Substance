@@ -1,0 +1,21 @@
+substance_name,best_match,score_1
+Phenols,Phenols,1.0000000000000002
+Tannins,Tannins,0.9999999999999997
+cresols,Cresols,0.999999999999999
+xylenols,Xylenols,0.9999999999999989
+polysaccharides,Polysaccharides,0.9999999999999988
+Alkyl mercury compounds,Alkyl mercury compounds,0.9999999999996609
+naphthalene sulfonates,Naphthalene sulfonates,0.9999999999996478
+Other inorganic mercury compounds,Inorganic mercury compounds,0.9668960291582214
+polyethylene glycol,Polyethylene glycols,0.9588721470816225
+Arsenic compounds,Inorganic arsenic compounds,0.9466592562289614
+xylene,Xylenes,0.9376536795461597
+Xylene,Xylenes,0.9376536795461597
+Chromium VI compounds,Inorganic chromium (VI) compounds,0.9324580634243462
+polyterpenes,Polyterpenoids,0.9312399946530695
+Quinoline derivative,Quinolines and derivatives,0.9295856819677071
+Mercury compounds,Inorganic mercury compounds,0.9289707394376088
+Polychlorinated Biphenyls (PCB),Polychlorinated biphenyls,0.9116612830318039
+Diaminotoluene,Diaminotoluenes,0.9049868419214995
+Nickel and its compounds,Inorganic nickel compounds,0.9039107879643454
+Quaternary ammonium compounds,Quaternary ammonium salts,0.9012376183750882

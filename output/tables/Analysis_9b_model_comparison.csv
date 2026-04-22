@@ -1,0 +1,5 @@
+model_id,model_name,n_total,n_retained,pct,median_score
+biobert,dmis-lab/biobert-v1.1,12499,12138,97.11,0.9
+miniLM,all-MiniLM-L6-v2,12499,132,1.06,0.574
+mpnet,all-mpnet-base-v2,12499,283,2.26,0.593
+scibert,allenai/scibert_scivocab_uncased,12499,8369,66.96,0.824

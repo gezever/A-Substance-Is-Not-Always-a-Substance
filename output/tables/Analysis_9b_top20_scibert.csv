@@ -1,0 +1,21 @@
+substance_name,best_match,score_1
+polysaccharides,Polysaccharides,1.0000000000000002
+naphthalene sulfonates,Naphthalene sulfonates,0.9999999999999997
+xylenols,Xylenols,0.999999999999832
+Alkyl mercury compounds,Alkyl mercury compounds,0.9999999999998113
+Phenols,Phenols,0.9999999999997952
+Tannins,Tannins,0.9999999999996045
+cresols,Cresols,0.9999999999995883
+Inorganic ammonium salts,Inorganic chloride salts,0.9783214029383892
+polyterpenes,Polyterpenoids,0.9728011906798425
+Arsenic compounds,Inorganic arsenic compounds,0.9697788830216063
+Mercury compounds,Inorganic mercury compounds,0.9682493812064162
+Diisocyanates,Isocyanates,0.9679120378506114
+"[1,2,4]triazolo[1,5-a]pyridin-7-ol hydrochloride","Pyrazolo[4,3-e]pyrrolo[1,2-a]pyrazines",0.9580454546760843
+tannic acids,Tannins,0.9528954791625013
+"1,3,5-Triazine-2,4,6-triamine, deammoniated","1,3,5-triazine-2,4-diamines",0.9513943414164312
+"1,3,5-triazine-2,4,6-triyltriamine, monohydrobromide","1,3,5-triazine-2,4-diamines",0.9478110987970263
+Diaminotoluene,Diaminotoluenes,0.9455178868045191
+"3-Chloro-4-(pyridine-3-yl)-1,2,5-thiadiazole","2-amino-5-substituted-1,3,4-thiadiazoles",0.9451409945529982
+Other inorganic mercury compounds,Inorganic mercury compounds,0.943981011323307
+Alkyloxyl and aryl mercury compounds,Aryl mercury compounds,0.9428133150661361
