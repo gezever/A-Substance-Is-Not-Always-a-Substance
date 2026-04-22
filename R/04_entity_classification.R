@@ -96,6 +96,7 @@
 
 library(dplyr)
 library(ggplot2)
+library(ggpattern)
 library(here)
 library(readr)
 library(scales)
@@ -206,6 +207,36 @@ entity_colours <- c(
   "Unclassified"          = "#d9d9d9"
 )
 
+entity_bw_colours <- c(
+  "Molecule"              = "#111111",
+  "Substance group"       = "#ffffff",
+  "Analytical parameter"  = "#aaaaaa",
+  "Mixture"               = "#555555",
+  "Regulatory entry"      = "#333333",
+  "CAS without structure" = "#cccccc",
+  "Unclassified"          = "#eeeeee"
+)
+
+entity_patterns <- c(
+  "Molecule"              = "none",
+  "Substance group"       = "stripe",
+  "Analytical parameter"  = "crosshatch",
+  "Mixture"               = "circle",
+  "Regulatory entry"      = "stripe",
+  "CAS without structure" = "none",
+  "Unclassified"          = "none"
+)
+
+entity_pattern_angle <- c(
+  "Molecule"              = 45,
+  "Substance group"       = 45,
+  "Analytical parameter"  = 45,
+  "Mixture"               = 45,
+  "Regulatory entry"      = -45,
+  "CAS without structure" = 45,
+  "Unclassified"          = 45
+)
+
 p4a <- ggplot(df4, aes(x = reorder(entity_type, n), y = n, fill = entity_type)) +
   geom_col(width = 0.6, show.legend = FALSE) +
   geom_text(aes(label = paste0(n, " (", percent(pct, accuracy = 0.1), ")")),
@@ -284,6 +315,42 @@ print(p4b)
 ggsave(p4b,
        filename = here("output", "figures",
                        "Analysis_4b_Entity_type_breakdown_per_source.pdf"),
+       device = "pdf",
+       height = 5, width = 10, units = "in")
+
+p4b_bw <- ggplot(df4b, aes(x = source, y = pct,
+                            fill = entity_type, pattern = entity_type)) +
+  geom_col_pattern(
+    width           = 0.7,
+    pattern_colour  = "black",
+    pattern_fill    = "black",
+    pattern_density = 0.15,
+    pattern_spacing = 0.02
+  ) +
+  scale_y_continuous(labels = percent_format()) +
+  scale_fill_manual(values = entity_bw_colours) +
+  scale_pattern_manual(values = entity_patterns) +
+  scale_pattern_angle_manual(values = entity_pattern_angle) +
+  coord_flip() +
+  labs(
+    title    = "Entity type composition per source",
+    subtitle = "Each regulatory list has a different mix of molecules, groups, and administrative entries",
+    x        = NULL,
+    y        = "Share of records",
+    fill     = NULL,
+    pattern  = NULL
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "bottom",
+    plot.subtitle   = element_text(colour = "grey40")
+  ) +
+  guides(fill    = guide_legend(nrow = 2),
+         pattern = guide_legend(nrow = 2))
+
+ggsave(p4b_bw,
+       filename = here("output", "figures",
+                       "Analysis_4b_Entity_type_breakdown_per_source_BW.pdf"),
        device = "pdf",
        height = 5, width = 10, units = "in")
 
@@ -555,9 +622,9 @@ p4b_vert <- ggplot(df4b, aes(x = source, y = pct, fill = entity_type)) +
     y    = "Share of records",
     fill = NULL
   ) +
-  theme_minimal(base_size = 11) +
+  theme_minimal(base_size = 13) +
   theme(
-    axis.text.x     = element_text(angle = 45, hjust = 1, size = 11),
+    axis.text.x     = element_text(angle = 45, hjust = 1, size = 13),
     legend.position = "none"
   )
 
@@ -565,7 +632,7 @@ p4d_vert <- ggplot(df4d,
                    aes(x = reorder(linkability, n), y = n, fill = linkability)) +
   geom_col(width = 0.7, show.legend = FALSE) +
   geom_text(aes(label = paste0(pct, "%")),
-            vjust = -0.4, size = 3) +
+            vjust = -0.4, size = 4) +
   scale_y_continuous(expand = expansion(mult = c(0, 0.12)), labels = comma) +
   scale_fill_manual(values = linkability_colours) +
   labs(
@@ -573,8 +640,8 @@ p4d_vert <- ggplot(df4d,
     x   = NULL,
     y   = "Number of unique substance names"
   ) +
-  theme_minimal(base_size = 11) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11))
+  theme_minimal(base_size = 13) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 13))
 
 # Legend panel A: entity types
 legend_entity <- cowplot::get_legend(
@@ -582,7 +649,7 @@ legend_entity <- cowplot::get_legend(
     geom_col() +
     scale_fill_manual(values = entity_colours, name = "(A) Entity type") +
     guides(fill = guide_legend(nrow = 4)) +
-    theme_minimal() +
+    theme_minimal(base_size = 13) +
     theme(legend.position = "right",
           legend.title = element_text(face = "bold"))
 )
@@ -593,7 +660,7 @@ legend_linkability <- cowplot::get_legend(
     geom_col() +
     scale_fill_manual(values = linkability_colours, name = "(B) Linkability tier") +
     guides(fill = guide_legend(nrow = 4)) +
-    theme_minimal() +
+    theme_minimal(base_size = 13) +
     theme(legend.position = "right",
           legend.title = element_text(face = "bold"))
 )
@@ -603,7 +670,7 @@ legends_row <- cowplot::plot_grid(legend_entity, legend_linkability, nrow = 1)
 p4bd_v <- (p4b_vert | p4d_vert) +
   plot_annotation(
     title = "Entity type composition and linkability of regulatory substances",
-    theme = theme(plot.title = element_text(size = 13, face = "bold"))
+    theme = theme(plot.title = element_text(size = 15, face = "bold"))
   )
 
 p4bd_v_with_legend <- cowplot::plot_grid(
@@ -615,6 +682,76 @@ p4bd_v_with_legend <- cowplot::plot_grid(
 ggsave(p4bd_v_with_legend,
        filename = here("output", "figures",
                        "Analysis_4bd_v_Entity_type_and_linkability_vertical.pdf"),
+       device = "pdf",
+       height = 8, width = 14, units = "in")
+
+# ==============================================================================
+# Analysis 4bd_v_BW: B&W-versie — vulpatronen ipv kleur
+# ==============================================================================
+# entity_bw_colours, entity_patterns, entity_pattern_angle defined near top of script
+
+p4b_bw_vert <- ggplot(df4b, aes(x = source, y = pct,
+                            fill = entity_type, pattern = entity_type)) +
+  geom_col_pattern(
+    width           = 0.7,
+    pattern_colour  = "black",
+    pattern_fill    = "black",
+    pattern_density = 0.15,
+    pattern_spacing = 0.02
+  ) +
+  scale_y_continuous(labels = percent_format()) +
+  scale_fill_manual(values = entity_bw_colours) +
+  scale_pattern_manual(values = entity_patterns) +
+  scale_pattern_angle_manual(values = entity_pattern_angle) +
+  labs(tag = "(A)", x = NULL, y = "Share of records", fill = NULL, pattern = NULL) +
+  theme_minimal(base_size = 11) +
+  theme(axis.text.x     = element_text(angle = 45, hjust = 1, size = 11),
+        legend.position = "none")
+
+p4d_bw <- ggplot(df4d,
+                 aes(x = reorder(linkability, n), y = n)) +
+  geom_col(width = 0.7, fill = "#555555") +
+  geom_text(aes(label = paste0(pct, "%")), vjust = -0.4, size = 3) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.12)), labels = comma) +
+  labs(tag = "(B)", x = NULL, y = "Number of unique substance names") +
+  theme_minimal(base_size = 11) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 11))
+
+legend_entity_bw <- cowplot::get_legend(
+  ggplot(df4b, aes(x = source, y = pct,
+                   fill = entity_type, pattern = entity_type)) +
+    geom_col_pattern(
+      pattern_colour  = "black",
+      pattern_fill    = "black",
+      pattern_density = 0.35,
+      pattern_spacing = 0.04
+    ) +
+    scale_fill_manual(values = entity_bw_colours) +
+    scale_pattern_manual(values = entity_patterns) +
+    scale_pattern_angle_manual(values = entity_pattern_angle) +
+    guides(fill    = guide_legend(nrow = 4),
+           pattern = guide_legend(nrow = 4)) +
+    labs(fill = "(A) Entity type", pattern = "(A) Entity type") +
+    theme_minimal() +
+    theme(legend.position  = "right",
+          legend.title     = element_text(face = "bold"))
+)
+
+p4bd_v_bw <- (p4b_bw_vert | p4d_bw) +
+  plot_annotation(
+    title = "Entity type composition and linkability of regulatory substances",
+    theme = theme(plot.title = element_text(size = 13, face = "bold"))
+  )
+
+p4bd_v_bw_with_legend <- cowplot::plot_grid(
+  p4bd_v_bw, legend_entity_bw,
+  ncol        = 1,
+  rel_heights = c(1, 0.25)
+)
+
+ggsave(p4bd_v_bw_with_legend,
+       filename = here("output", "figures",
+                       "Analysis_4bd_v_Entity_type_and_linkability_vertical_BW.pdf"),
        device = "pdf",
        height = 8, width = 14, units = "in")
 
