@@ -18,6 +18,7 @@ construct
     skos:notation    ?notation ;
     skos:inScheme   conceptscheme:chemical_substance .
     conceptscheme:chemical_substance a skos:ConceptScheme .
+    ?broader skos:narrower ?stof .
     ?stof2 skos:topConceptOf conceptscheme:chemical_substance ;
     skos:broader ?broader ;
     skos:prefLabel ?label ;
@@ -25,7 +26,8 @@ construct
     skos:definition  ?definition ;
     skos:notation    ?notation ;
     skos:inScheme   conceptscheme:chemical_substance .
-    conceptscheme:chemical_substance skos:hasTopConcept ?stof2 .}
+    conceptscheme:chemical_substance skos:hasTopConcept ?stof2 .
+    ?broader skos:narrower ?stof2 .}
 where
 {{
     ?s a owl:Class ;
