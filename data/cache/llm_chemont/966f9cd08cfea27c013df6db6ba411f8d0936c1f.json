@@ -1,0 +1,1 @@
+{"kingdom": null, "superclass": null, "class_": null, "subclass": null, "reasoning": "JSON parse error: Expecting value: line 1 column 1 (char 0)", "confidence": "low", "substance_name": "Diethatyl  (-ethyl)", "usage": {"input_tokens": 312, "cache_creation_input_tokens": 0, "cache_read_input_tokens": 16760, "output_tokens": 300}}

@@ -1,0 +1,16 @@
+{
+  "kingdom": "Organic compounds",
+  "superclass": "Organosulfur compounds",
+  "class_": "Thioethers",
+  "subclass": null,
+  "direct_parent": "Thioethers",
+  "reasoning": "Thiocyclam (N,N-dimethyl-1,2,3-trithian-5-amine) is a cyclic polysulfide insecticide containing a 1,2,3-trithiane ring system with three consecutive sulfur atoms acting as thioether-type linkages. It is best classified as a thioether within organosulfur compounds.",
+  "confidence": "medium",
+  "substance_name": "Thiocyclam",
+  "usage": {
+    "input_tokens": 309,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 16760,
+    "output_tokens": 165
+  }
+}

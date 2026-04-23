@@ -1,0 +1,9 @@
+{"kingdom": "Organic compounds",
+  "superclass": "Organoheterocyclic compounds",
+  "class_": "Pyridines and derivatives",
+  "subclass": "Halopyridines",
+  "direct_parent": "2-halopyridines",
+  "reasoning": "2-Bromopyridine is a pyridine ring with a bromine substituent at the 2-position, making it an organoheterocyclic compound classified as a halopyridine, and more specifically a 2-halopyridine.",
+  "confidence": "high",
+  "substance_name": "2-bromopyridine",
+  "usage": {"input_tokens": 310, "cache_creation_input_tokens": 0, "cache_read_input_tokens": 16760, "output_tokens": 115}}

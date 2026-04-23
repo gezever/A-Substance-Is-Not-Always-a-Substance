@@ -1,0 +1,16 @@
+{
+  "kingdom": "Organic compounds",
+  "superclass": "Organophosphorus compounds",
+  "class_": "Organic phosphoric acids and derivatives",
+  "subclass": "Organic phosphoric acids and derivatives",
+  "direct_parent": "Aryl phosphotriesters",
+  "reasoning": "Biphenyl-4,4'-diyl tetraphenyl bis(phosphate) is a bis-phosphate ester where the biphenyl diol acts as the central diol, and each phosphate is esterified with two phenyl groups, forming aryl phosphotriester linkages. This classifies it under organophosphorus compounds as aryl phosphotriesters.",
+  "confidence": "high",
+  "substance_name": "Biphenyl-4,4'-diyl tetraphenyl bis(phosphate)",
+  "usage": {
+    "input_tokens": 323,
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 16760,
+    "output_tokens": 176
+  }
+}
