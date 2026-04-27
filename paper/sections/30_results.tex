@@ -24,7 +24,7 @@ Integration of 18 regulatory sources yielded 41,813 records, of which 63\% could
 \paragraph{Heterogeneity of Substance Definitions}
 \label{sec:semantic_mismatch}
 
-A significant share of regulatory entries (37\%) does not correspond to a defined chemical structure, consistent with Kutsarova et al.~\cite{Kutsarova2019}. These include mixtures (UVCBs), substance groups, analytical parameters, or entries without usable identifiers, reflecting differences in how “substances” are defined across regulatory contexts. 
+A large share of regulatory entries (37\%) does not correspond to a defined chemical structure, consistent with Kutsarova et al.~\cite{Kutsarova2019}. These include mixtures (UVCBs), substance groups, analytical parameters, or entries without usable identifiers, reflecting differences in how “substances” are defined across regulatory contexts. 
 
 Figure~\ref{fig:analysis4d}A shows that heterogeneity varies widely between regulatory lists: some sources consist almost entirely of structure-defined molecules, whilst others contain few structure-defined entries.
 
@@ -63,31 +63,29 @@ Cross-list analysis of the 17,523 structure-resolved InChIKeys shows that 70.0\%
 
 To evaluate whether semantic similarity can recover chemical meaning, cosine similarity between sentence embeddings of substance names and ChemOnt class labels was computed for four models (\path{all-MiniLM-L6-v2}, \path{all-mpnet-base-v2}, \path{allenai/scibert\_scivocab\_uncased}, \path{dmis-lab/biobert-v1.1}). Score distributions are heavily skewed towards lower values and are not comparable across models, as embedding geometry differs between architectures (Figure~\ref{fig:analysis89}B); a fixed threshold is therefore model-dependent and not a principled quality criterion. Manual inspection of the top-200 matches per model confirmed that the large majority of high-scoring assignments are chemically incorrect; correct cases were limited to surface-form overlap between substance name and class label (e.g.\ \textit{Phenols} $\to$ \textit{Phenols}). Score magnitude is not a reliable indicator of match correctness: models with the highest score floors (SciBERT, BioBERT) performed worst on both manual inspection and quantitative validation.
 
-To validate this failure quantitatively, the four models were evaluated against a structure-derived ChemOnt ground truth comprising 28,204 ClassyFire-assigned substances. These results, shown in Table~\ref{tab:chemont_validation}, indicate that \path{all-MiniLM-L6-v2} achieved the highest Hit@1 of 5.75\% and MRR of 0.093 — even this best result implies the correct class is retrieved in fewer than 1 in 17 attempts. All other models scored below Hit@1 = 1\%. Retrieval performance decreased further with increasing taxonomic abstraction: Hit@1 fell to 3.25\% at the subclass level and below 1\% for class, superclass, and kingdom. A hierarchy-aware weighted MRR of 0.099 was only marginally higher than the strict MRR, confirming that partial matches at higher levels of the ChemOnt hierarchy do not rescue overall classification quality.
+To validate this failure quantitatively, the four models were evaluated against a structure-derived ChemOnt ground truth comprising 28,204 ClassyFire-assigned substances. These results, shown in Table~\ref{tab:chemont_validation}, indicate that \path{all-MiniLM-L6-v2} achieved the highest Hit@1 of 5.75\% — even this best result implies the correct class is retrieved in fewer than 1 in 17 attempts. All other models scored below Hit@1 = 1\%. Retrieval performance decreased further with increasing taxonomic abstraction: Hit@1 fell to 3.25\% at the subclass level and below 1\% for class, superclass, and kingdom.
 
 \begin{table}[!ht]
     \centering
-    \caption{Performance of embedding models for ChemOnt classification.}
+    \caption{Performance of embedding models and LLM for ChemOnt classification.}
     \label{tab:chemont_validation}
-    \begin{tabular}{lccccc}
+    \begin{tabular}{lcccc}
         \hline
-        Model           & Hit@1  & Hit@3  & Hit@5  & Hit@10 & MRR   \\
+        Model           & Hit@1  & Hit@3  & Hit@5  & Hit@10 \\
         \hline
-        all-MiniLM-L6-v2  & 0.0575 & 0.0986 & 0.1234 & 0.1621 & 0.093 \\
-        all-mpnet-base-v2 & 0.0093 & 0.0152 & 0.0184 & 0.0247 & 0.015 \\
-        SciBERT           & 0.0040 & 0.0071 & 0.0102 & 0.0131 & 0.008 \\
-        BioBERT           & 0.0047 & 0.0077 & 0.0099 & 0.0150 & 0.009 \\
-        Claude Sonnet~4.6$^\dagger$ & 0.392 & 0.412 & 0.414 & 0.414$^*$ & 0.402 \\
-        \multicolumn{6}{l}{\footnotesize $^*$Hit@k saturates at Hit@5 because the LLM ranks over 5 hierarchy levels.} \\
-        \multicolumn{6}{l}{\footnotesize $^\dagger$LLM generates a label per hierarchy level, not a ranking over the full class space; metrics} \\
-        \multicolumn{6}{l}{\footnotesize \phantom{$^\dagger$}reflect per-level accuracy and are not directly comparable to embedding retrieval scores.} \\
+        all-MiniLM-L6-v2  & 0.0575 & 0.0986 & 0.1234 & 0.1621 \\
+        all-mpnet-base-v2 & 0.0093 & 0.0152 & 0.0184 & 0.0247 \\
+        SciBERT           & 0.0040 & 0.0071 & 0.0102 & 0.0131 \\
+        BioBERT           & 0.0047 & 0.0077 & 0.0099 & 0.0150 \\
+        Claude Sonnet~4.6$^\dagger$ & 0.392 & --- & --- & --- \\
+        \multicolumn{5}{l}{\footnotesize $^\dagger$LLM generates a single label per hierarchy level, not a ranking over the full class space.}  \\
         \hline
     \end{tabular}
 \end{table}
 
 
 
-Large language model classification substantially outperforms embedding-based retrieval: Claude Sonnet~4.6 achieves a Hit@1 of 39.2\% and MRR of 0.40, a seven-fold improvement over the best embedding model. Performance is monotonically higher at more general levels (96.5\% at kingdom, 52.3\% at superclass), and LLM-assigned confidence is a validated quality signal: high-confidence assignments reach 53.9\% accuracy, while low-confidence cases score 0\%. Nevertheless, even at its strongest, the LLM correctly classifies fewer than 2 in 5 substances at the most specific level, and application to non-structure substances yields substantially higher null rates and lower confidence, confirming that linguistic structure alone cannot substitute for chemical structure information.
+Large language model classification substantially outperforms embedding-based retrieval: Claude Sonnet~4.6 achieves a Hit@1 of 39.2\%, a seven-fold improvement over the best embedding model. Performance is monotonically higher at more general levels (96.5\% at kingdom, 52.3\% at superclass), and LLM-assigned confidence is a validated quality signal: high-confidence assignments reach 53.9\% accuracy, while low-confidence cases score 0\%. Nevertheless, even at its strongest, the LLM correctly classifies fewer than 2 in 5 substances at the most specific level, and application to non-structure substances yields substantially higher null rates and lower confidence, confirming that linguistic structure alone cannot substitute for chemical structure information.
 
 \paragraph{Scale of the Interoperability Problem (\texorpdfstring{\hyperref[sec:contribution4]{C4}}{C4})}
 For the more than 11,000 non-structure entries, full manual reconciliation would require on the order of hundreds of millions of pairwise comparisons. Under conservative assumptions, this corresponds to several thousand person-years of expert effort.

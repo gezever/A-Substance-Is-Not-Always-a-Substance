@@ -7,7 +7,7 @@
 %\subtitle{Subtitle}
 
 %% \\ifblindreview\\else[\s\S]*?\\fi
-\ifblindreview\else
+%\ifblindreview\else
 \author[A]{\fnms{Geert} \snm{Van Haute}\orcid{0009-0002-9836-8139}%
 \thanks{Corresponding Author: Geert Van Haute, geert.vanhaute@vlaanderen.be}},
 \author[A]{\fnms{Stijn} \snm{Goedertier}\orcid{0009-0003-4602-6601}}
@@ -17,13 +17,13 @@ and
 
 \runningauthor{G. Van Haute et al.}
 \address[A]{Department of Environment and Spatial Development, Flemish Government, Belgium}
-\fi
+%\fi
 
 
 \begin{abstract}
 
 %\noindent\textbf{Background.} 
-Chemical substance identity is inconsistently represented across European regulatory datasets, creating fundamental barriers to semantic interoperability. While structure-based identifiers such as InChI and InChIKey unambiguously define chemical entities, regulatory systems rely on heterogeneous identifiers (CAS numbers, EC numbers, textual names, and group descriptions) that frequently refer to mixtures, substance groups, or analytical parameters rather than uniquely defined molecular structures.
+Chemical substance identity is inconsistently represented across European regulatory datasets, creating barriers to semantic interoperability. While structure-based identifiers such as InChI and InChIKey unambiguously define chemical entities, regulatory systems rely on heterogeneous identifiers (CAS numbers, EC numbers, textual names, and group descriptions) that frequently refer to mixtures, substance groups, or analytical parameters rather than defined molecular structures.
 
 %\noindent\textbf{Objective.} 
 This study investigates the extent and consequences of this semantic mismatch and evaluates technical approaches for compensating or mitigating the resulting interoperability barriers.
@@ -32,10 +32,10 @@ This study investigates the extent and consequences of this semantic mismatch an
 We analyse 18~European regulatory datasets from ECHA and related sources (41,813 records total). We introduce a seven-tier linkability taxonomy to classify regulatory entries by degree of chemical specificity, assess the consistency of CAS number mappings, evaluate embedding-based and large-language-model semantic matching, estimate the effort required for manual reconciliation, and construct a knowledge-graph-based integration.
 
 %\noindent\textbf{Results.} 
-Only 62.5\% of entries can be directly linked to a defined chemical structure; 37.5\% are inherently non-structure-based. CAS numbers exhibit both one-to-many and many-to-one mappings with molecular structures, undermining their role as unique identifiers. Embedding-based approaches fail to recover chemical identity (best model ChemOnt Hit@1 = 5.75\%); Claude Sonnet~4.6 achieves Hit@1 = 39.2\%, a seven-fold improvement, yet still misclassifies the majority of substances. Taxonomic alignment of legislative group entries with ChemOnt yields 304~validated SKOS mapping triples, illustrating what formal ontologies enable while confirming that post-hoc coverage remains bounded.
+Only 62.5\% of entries can be directly linked to a defined chemical structure; 37.5\% are non-structure-based. CAS numbers exhibit both one-to-many and many-to-one mappings with molecular structures, undermining their role as unique identifiers. Embedding-based approaches fail to recover chemical identity (best model ChemOnt Hit@1 = 5.75\%); Claude Sonnet~4.6 achieves Hit@1 = 39.2\%, a seven-fold improvement, yet still misclassifies the majority of substances. Taxonomic alignment of legislative group entries with ChemOnt yields 304~validated SKOS mapping triples, illustrating what formal ontologies enable while confirming that post-hoc coverage remains bounded.
 
 %\noindent\textbf{Conclusion.} 
-Semantic interoperability in chemical regulation cannot be achieved through post hoc technical solutions alone. It must be addressed at the level of data modelling and legislation, by adopting structure-based identifiers, formal ontologies, and machine-readable representations embedded directly in regulatory data standards. We provide scripts for constructing an integrated knowledge graph spanning the analysed regulatory sources.
+Semantic interoperability in chemical regulation cannot be achieved through post hoc technical solutions alone. It must be addressed at the level of data modelling and legislation, by adopting structure-based identifiers, formal ontologies, and machine-readable representations embedded in regulatory data standards. We provide scripts for constructing an integrated knowledge graph spanning the analysed regulatory sources.
 
 \end{abstract}
 
