@@ -1,0 +1,501 @@
+substance_name,entity_type,matchable,is_group,equivalent_node,equivalent_level,relationship_type,confidence,emb_match,emb_score,emb_agrees
+"Barium oxide (BaO), solid soln. with calcium oxide, magnesium oxide, phosphorus oxide (P2O5), strontium oxide and zinc oxide, copper-doped",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Molybdic acid, compounds with di-tridecylamine (1:1), branched",Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"sodium perborate; sodium peroxoborate; [containing < 0,1 % (w/w) of particles with an aerodynamic diameter of below 50 μm]",Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"4-Nonylphenol, branched, ethoxylated",CAS without structure,TRUE,TRUE,Phenol ethers,class,subset,medium,NA,NA,FALSE
+oleum ... % SO3,Unclassified,TRUE,TRUE,Inorganic sulfides,class,broader,low,NA,NA,FALSE
+"1,1'-(dodecylimino)dipropan-2-ol + 1,1'-(tetradecylimino)dipropan-2-ol",Unclassified,TRUE,TRUE,Secondary alcohols,subclass,subset,low,NA,NA,FALSE
+"Thiocyanic acid, (1,3,8,10-tetrahydro-1,3,8,10-tetraoxoanthra[2,1,9-def:6,5,10-d'e'f']diisoquinoline-2,9-diyl)di-3,1-phenylene ester, reaction products with sodium sulfide (Na2(Sx))",CAS without structure,TRUE,TRUE,Organic salts,superclass,broader,low,NA,NA,FALSE
+"Fatty acids, C18, unsatd., dimers, reaction products with N,N-dimethyl-1,3-propanediamine and 1,3-propanediamine",CAS without structure,TRUE,TRUE,Fatty amides,subclass,subset,low,NA,NA,FALSE
+"quaternary ammonium compounds, benzyl(hydrogenated tallow alkyl)dimethyl, chlorides, compounds with bentonite",CAS without structure,TRUE,TRUE,Alkyldimethylbenzylammonium chlorides,subclass,subset,medium,NA,NA,FALSE
+N-[2-(imidazol-2-yl)ethyl]-(S)-pyrrolidine-2-carboxamide dihydrochloride,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+2-TPV,Unclassified,TRUE,FALSE,NA,NA,NA,low,NA,NA,FALSE
+salts of aconitine,Unclassified,TRUE,NA,NA,NA,NA,low,NA,NA,FALSE
+"O,O,O',O'-tetraoctyl-(branched and linear) S,S'-{methylenebis[imino(3-oxopropane-3,1-diyl)]} bis(phosphorothioate)",Unclassified,TRUE,NA,NA,NA,NA,low,NA,NA,FALSE
+"Fatty acids, C4-20-branched, lead salts",CAS without structure,TRUE,TRUE,Organic lead salts,subclass,subset,medium,NA,NA,FALSE
+poppy-seed oil fatty acids,Unclassified,TRUE,TRUE,Fatty acids and conjugates,subclass,subset,high,NA,NA,FALSE
+"(R, S)-2-Amino-3,3-dimethylbutane amide",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"N-isopropyl-N,N-dimethylpropan-2-aminium 1,1,2,2,3,3,4,4,4-nonafluorobutane-1-sulfonate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"1,3-bis(4-benzoyl-3-hydroxyphenoxy)prop-2-yl methacrylate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Sodium hexahydroxoantimonate,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+disproportionated rosin,Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"Benzenemethanol, lithium salt",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+polypropylene glycol,CAS without structure,TRUE,TRUE,Polyethylene glycols,direct_parent,subset,low,NA,NA,FALSE
+salts and esters of MCPA,Unclassified,TRUE,TRUE,Phenoxyacetic acid derivatives,subclass,subset,high,NA,NA,FALSE
+"Trimethoxy(methyl)silane and its reaction products with 3-aminopropyltriethoxysilane and [3-2,3-epoxypropoxy)propyl]trimethoxysilane",Unclassified,TRUE,TRUE,Organosilicon compounds,subclass,subset,medium,NA,NA,FALSE
+NK-4496,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Quaternary ammonium compounds, di-C12-18-alkyldimethyl, chlorides",CAS without structure,TRUE,TRUE,Alkyldimethylbenzylammonium chlorides,subclass,subset,low,NA,NA,FALSE
+BIS26X-OC,Unclassified,TRUE,FALSE,NA,NA,NA,low,NA,NA,FALSE
+Bis(1-n-butyl-3-methylcyclopentadienyl)zirconium dichloride,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"2,2,6,6-tetrakis(tetradecanoyloxymethyl)-4-oxa-heptane-1,7-diyl ditetradecanoate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"2-[3,5-bis(trifluoromethyl)phenyl]-N-{4-(4-fluoro-2-methylphenyl)-6-[(7S,9aS)-7-(hydroxymethyl)hexahydropyrazino[2,1-c][1,4]oxazin-8(1H)-yl]pyridin-3-yl}-N,2-dimethylpropanamide dihydrochloride isopropanol solvate",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"1-[(2S,3S)-2-(benzyloxy)pentan-3-yl]-N-{4-[4-(4-hydroxyphenyl)piperazin-1-yl]phenyl}hydrazine-1-carboxamide",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Glycerides, C16-18 mono-, di- and tri-, hydrogenated, citrates, sodium salts",CAS without structure,TRUE,TRUE,Triacylglycerols,subclass,broader,low,NA,NA,FALSE
+Reaction product of branched alkanols and alkanoic and alkenoic acids and monohydroxyalkanoic acid,Analytical parameter,TRUE,TRUE,Fatty acid esters,subclass,subset,medium,NA,NA,FALSE
+"7H-Pyrido[3,2,1-ij][4,1,2]benzoxadiazine-6-carboxylic acid, 9-fluoro-2,3-dihydro-3-methyl-10-(4-methyl-1-piperazinyl)-7-oxo-, compd. with formic acid (1:2)",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+MPDIOL POLYESTER A,Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+COAGULANT 122 (SOLID),Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+salts of oxalic acid with the exception of those specified elsewhere in this Annex,Unclassified,TRUE,TRUE,Carboxylic acid salts,direct_parent,subset,medium,NA,NA,FALSE
+"1,5-bis[1,2-bis(ethoxycarbonyl)ethylamino]-2-methylpentane",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"amylase, α-",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"α,ω-dicarboxylic acids (C6-C12), aliphatic, unbranched",Analytical parameter,TRUE,TRUE,Dicarboxylic acids and derivatives,subclass,subset,high,NA,NA,FALSE
+"(2S,3S)-2,3-Bis[(4-methylbenzoyl)oxy]butanedioic acid — methyl {(4S)-8-fluoro-2-[4-(3methoxyphenyl)piperazin-1-yl]-3-[2-methoxy-5-(trifluoromethyl)phenyl]-3,4-dihydroquinazolin-4yl}acetate — ethyl acetate (1:1:1)",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"N-(2,3-dihydroxypropyl)-N'-(3-hydroxy-2-oxopropyl)-2,4,6-triiodo-5-[2-(methylamino)-2-oxoethoxy]isophthalamide",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+STYLEZE W-20,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+AS Violet,Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"Fatty acids, vegetable-oil, esters with dipropylene glycol",CAS without structure,TRUE,TRUE,Fatty acid esters,subclass,subset,medium,NA,NA,FALSE
+PSD-300,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Nitrothal,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Esters of rosin oligomers with glycerol,CAS without structure,TRUE,TRUE,Carboxylic acid esters,direct_parent,subset,medium,NA,NA,FALSE
+"(-)-1-Benzyl-4-(-4-fluor-phenyl)-3-hydroxymethyl-1,2,3,6-tetrahydropyridine-L-dibenzoyl-tartaric salt",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"N-{[2-(Benzyloxy)-4-methoxy-6-methylpyridin-3-yl]methyl}-2,5-dichloro-6-(2-hydroxyethyl)-3-[(R)-methoxy(oxetan-3-yl)methyl]benzamide",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"2-ketogluconic acid, calcium salt",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Trisodium 2-{α[2-hydroxy-3-[4-chloro-6-[4-(2,3-dibromopropionylamino)-2-sulfonatophenylamino]-1,3,5-triazin-2-ylamino]-5-sulfonatophenylazo]-benzylidenehydrazino}-4-sulfonatobenzoate, copper complex",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+bis({9-[2-(carboxy-kO)phenyl]-6-(bis(tallow alkyl hydrogenated)amino)-3H-xanthen-3-ylidene}-3-bis(tallow alkyl hydrogenated)iminium)zinc(2+) dichloride,Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+reaction product of alumina and sulfuric acid,Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Bacillus thuringiensis subsp. Kurstaki strain ABTS-351,Unclassified,TRUE,NA,NA,NA,NA,low,NA,NA,FALSE
+"(4R)-4-[(3R,5S,7S,8R,9S,10S,13R,14S,17R)-3,7-dihydroxy-10,13-dimethyl-2,3,4,5,6,7,8,9,11,12,14,15,16,17-tetradecahydro-1H-cyclopenta[a]phenanthren-17-yl]pentanoic acid;N,N-diethylethanamine",Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+SS-AMINOALC-PTS 8321,Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"Octanoic acid, esters with anhydrosorbitol and dianhydrosorbitol",Unclassified,TRUE,TRUE,Fatty acid esters,subclass,subset,medium,NA,NA,FALSE
+(2S)‐2‐{[(2S)‐1‐(2‐{[(benzyloxy)carbonyl]amino}acetyl)‐2‐methylpyrrolidin‐2‐yl]formamido}pentanedioic acid,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Bacillus thuringiensis subsp. Kurstaki strain PB 54,Unclassified,TRUE,NA,NA,NA,NA,low,NA,NA,FALSE
+"Benzeneacetic acid, α-hydroxy-, (αS)-(γS)-compd. with N-methyl-γ-(2-methylphenoxy)benzenepropanamine (1:1)",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+(2RS)-1-([biphenyl]-4-yl)-2-(dimethylamino)-2-methyl-3-phenylpropan-1-one,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Reaction products of zinc oxide and glycerol,CAS without structure,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"Soil organic matter, alkaline extract, sodium salt",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Mentha citrata, ext.",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Residues, zinc smelting",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Jojoba, ext.",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+POLYUREA GREASE THICKENER,Unclassified,TRUE,TRUE,Polyureas,class,subset,medium,NA,NA,FALSE
+"Reaction products of condensation between disodium 4,4'-dinitrostilbene-2,2'-disulfonate and 4'-aminoazobenzene-4-sulphonic acid, sodium salts",Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"glycerol, esters with propionic acid",Unclassified,TRUE,TRUE,Carboxylic acid esters,direct_parent,subset,medium,NA,NA,FALSE
+Reaction product of sulfuric acid with Cedrenepoxide.,Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Methyl-2,3-dibromo-2-methylpropionate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Hydrocarbons, C9-14, ethylene-manuf.-by-product",CAS without structure,TRUE,TRUE,Hydrocarbons,superclass,subset,high,NA,NA,FALSE
+"Sulfuric acid, ammonium sodium salt, dihydrate",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+2-[[4-(4-aminophenyl)diazenyl-3-methyl-phenyl]-(2-hydroxyethyl)amino]ethanol,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"[x·sodium, y·lithium, x+y=3] 4-amino-3[[4-[[4-[(2-amino-4-hydroxyphenyl)diazenyl]phenyl]amino]-3-sulfonato phenyl]diazenyl]-5-hydroxy-6-(phenydiazenyl)naphthalene-2,7-disulfonat, mixture of isomers",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Mixture of mono-, di- and triesters obtained with isooctadecanoic acid and hydrogenated castor oil",Mixture,TRUE,TRUE,Triacylglycerols,subclass,broader,medium,NA,NA,FALSE
+Alkophen mesyl lactone,Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+H112323,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+CW501L-DW (CuZn10),Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"L-Leucine, N-formyl-, compd. with (2R)-2-amino-3-methoxy-N-(phenylmethyl)propanamide",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Alkenes C20+,Unclassified,TRUE,TRUE,Alkenes,direct_parent,subset,high,NA,NA,FALSE
+"zirconium(IV) oxide, stabilised with erbium(III) oxide, gadolinium(III) oxide and yttrium(III) oxide",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Alkenes, C15-18, branched",Unclassified,TRUE,TRUE,Branched unsaturated hydrocarbons,subclass,subset,medium,NA,NA,FALSE
+perilla oil,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"D-pentose and D-glucose, oligomeric, C8 and C10 alkyl glycosides",Unclassified,TRUE,TRUE,Alkyl glycosides,subclass,subset,medium,NA,NA,FALSE
+"Reaction products of 2,5-dimercapto-1,3,4-thiadiazole, sodium salt, with 1-octanethiol and hydrogen peroxide",Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+BROWN DER 8589,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Green KK 80884,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Tar brown-coal; [An oil distilled from brown-coal tar. Composed primarily of aliphatic, naphthenic and one- to three-ring aromatic hydrocarbons, their alkyl derivates, heteroaromatics and one- and two-ring phenols boiling in the range of approximately 150 oC to 360 oC (302 oF to 680 oF).]",Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"poly-[((4-((4-(ethyl-ethylene)amino)phenyl)-(4-(ethyl-(2-oxyethylene)amino)phenyl)methinyl)-3-methylcyclohexa-2,5-dienylidene)-N-ethyl-N-(2-hydroxyethyl)ammonium acetate]",CAS without structure,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+LUMILUX ROT CD 360,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Phosphonium tetrabutyl- 1 1 2 2 3 3 4 4-octafluorohexanedioate 2 1,CAS without structure,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"Cadmium sulfide (CdS), solid soln. with zinc sulfide, copper and nickel-doped",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"4-Nitrophenyl-alpha-D-maltoheptaosid, Raw: Reaction products of p-nitrophenyl alpha-glucoside with alpha-Cyclodextrin by transglycosylation with cyclodextrin glucanotransferase",Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+Species of monomeric platinum alkane dicarboxylate from the reaction of dihydrogen polyhydroxyplatinate(2-) and alkane dicarboxylic acid,Unclassified,TRUE,TRUE,Transition metal salts,class,subset,medium,NA,NA,FALSE
+"Grapefruit, ext.",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"1-Propanaminium, 3-amino-N-ethyl-N,N-dimethyl-, N-rape-oil acyl derivs., Et sulfates",CAS without structure,TRUE,TRUE,Quaternary ammonium salts,subclass,subset,medium,NA,NA,FALSE
+"CP-548,495",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+methyl 3-(2-bromopropanoylamino)-4-methyl-thiophene-2-carboxylate,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Benzenesulfonic acid, 4-C10-13-sec-alkyl derivs.-, compd. with 1-aminopropane-2-ol",Unclassified,TRUE,TRUE,Benzenesulfonic acids and derivatives,subclass,subset,medium,NA,NA,FALSE
+B-1123,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"dibenzylbenzene, ar-methyl derivative; dibenzyltoluene",Analytical parameter,TRUE,TRUE,Diphenylmethanes,subclass,subset,medium,NA,NA,FALSE
+dimethyl (3-methyl-4-(5-nitro-3-ethoxycarbonyl-2-thienyl)azo)phenylnitrilodipropionate,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+IMINOFLUMIZOLINE,Unclassified,TRUE,FALSE,NA,NA,NA,medium,Imidazolines,0.8137032209046158,FALSE
+Dodecanoic acid 2-dodecanoyloxy-1-alkyl ester,Unclassified,TRUE,TRUE,"1-alkyl,2-acylglycerols",direct_parent,subset,low,NA,NA,FALSE
+"Ammonium [trisulphamoyl-29H,31H-phthalocyaninesulphonato(3-)-N29,N30,N31,N32]cuprate(1-)",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Sophorolipids: fermentation products of glucose and fatty acids, C18 (unsaturated), glycerol esters with yeast Starmerella Bombicola, hydrolysed",Unclassified,TRUE,TRUE,Sophorolipids,subclass,subset,high,NA,NA,FALSE
+"oxalic acid-4-amino-3-(4-phenoxyphenyl)-1-[(3R)-piperidin-3-yl]-1,3-dihydro-2H-imidazo[4,5-c]pyridin-2-one (1/1)",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"3-[(4-amino-2-methylpyrimidin-5-yl)methyl]-5-(2-hydroxyethyl)-4-methyl-1,3-thiazol-3-ium sulfate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Reaction products of 2-amino-4-chlorophenol, 2-amino-4-nitrophenol-6-sulfonic acid with resorcinol, iron complex, sodium salts",Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"(4Z-9Z)-7,9-Dodecadien-1-ol",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+1-[4-(trans-4-propylcyclohexyl)-1-cyclohexen-1-yl]-4-trifluoromethoxybenzene,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+CGA 042,CAS without structure,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+Octacarbonyldicobalt,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Fatty acids, C18-unsaturated, 1,6 Hexanediol Diester",Unclassified,TRUE,TRUE,Fatty acid esters,subclass,subset,medium,NA,NA,FALSE
+PGMS,Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+LUMATION* GREEN 1302 LIGHT EMITTING POLYMER,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Reaction products of boric acid and calcium dihydroxide and lithium hydroxide,Unclassified,TRUE,TRUE,Alkaline earth metal borates,subclass,subset,low,NA,NA,FALSE
+"Coal Tar Solids Residue|Waste solids, coal-tar pitch coking|[The combination of wastes formed by the coking of bituminous coal tar pitch. It consists predominantly of carbon.]",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"tert-Butylammonium-(3R,5R)-3,5-dihydroxy-7-[(1'S,2'S,8'S,8a'R) -2'-methyl-8'-[(2""S)-2""-methyl-butoxy]-1',2',3',7',8',8a'-hexahydro-napht-1-yl] heptanoate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+COOLER 2,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Fatty acids, vegetable-oil, esters with sterols, mixed with vegetable-oil glycerides",CAS without structure,TRUE,TRUE,Lipids and lipid-like molecules,superclass,broader,medium,NA,NA,FALSE
+"Hydrocarbons, C4, 1,3-butadiene-free, polymd., pentaisobutylene fraction, hydrogenated",CAS without structure,TRUE,TRUE,Saturated hydrocarbons,class,subset,medium,NA,NA,FALSE
+FC 4001 STAGE 1,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Condensation products of N-(2-aminoethyl)octadecanamide and N-(2-aminoethyl)hexadecanamide with sebacic acid,Unclassified,TRUE,TRUE,Carboxylic acid amides,direct_parent,subset,medium,NA,NA,FALSE
+Reaction products of (Z)-octadec-9-enol and lactic acid,Unclassified,TRUE,TRUE,Fatty acid esters,subclass,subset,medium,NA,NA,FALSE
+"Enzymatic hydrolysis products of Laminaria japonica, S. japonica, Laminariaceae",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+3-phenylpropyldimethoxymethylsilan,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Essential oil of Canarium commune (Burseraceae) obtained from gum by steam distillation,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Octadecanoic acid, reaction products with 2-amino-2-methyl-1-propanol",CAS without structure,TRUE,TRUE,Carboxylic acid amides,direct_parent,subset,medium,NA,NA,FALSE
+UNDECANSAEURE-CD-SALZ,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Essential oil of Matricaria recutita (Asteraceae) obtained from flower tops by steam distillation of European origin,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+HM-CATALYST 346AA-ACO2,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Fatty acids, C8-10, mixed esters with adipic acid and trimethylolpropane",CAS without structure,TRUE,TRUE,Fatty acid esters,subclass,subset,medium,NA,NA,FALSE
+"Hydrocarbons, C4-6, depentanizer lights, arom. hydrotreater",CAS without structure,TRUE,TRUE,Hydrocarbons,superclass,subset,medium,NA,NA,FALSE
+"Cuprate(2-), [μ-[[3,3'-[methylenebis[(4,6-dihydroxy-3,1-phenylene)azo]]bis[4-hydroxy-5-nitrobenzenesulfonato]](6-)]]di-, sodium",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Naphthenic acids, mercury salts",CAS without structure,TRUE,TRUE,Organic metal salts,class,subset,medium,NA,NA,FALSE
+"4-{[4-(3-amino-4-sulfoanilino)-6-chloro-1,3,5-triazin-2-yl]amino}-6-[(5-carbamoyl-1-ethyl-2-hydroxy-4-methyl-6-oxo-1,6-dihydropyridin-3-yl)diazenyl]benzene-1,3-disulfonic acid",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Amine fluoride C8,Unclassified,TRUE,TRUE,Organofluorides,class,subset,medium,NA,NA,FALSE
+8-methyl-2-decanol propionate,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Copper, [29H,31H-phthalocyaninato(2-)-N29,N30,N31,N32]-, (1,3-dihydro-1,3-dioxo-2H-isoindol-2-yl)methyl derivs.",CAS without structure,TRUE,TRUE,Phthalocyanines,subclass,subset,high,NA,NA,FALSE
+"Silicic acid, aluminum sodium salt, sulfurized",CAS without structure,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"Boron, (benzenemethanamine)trifluoro-, (T-4)-, reaction products with Bu glycidyl ether",CAS without structure,TRUE,TRUE,Boronic acid derivatives,class,subset,low,NA,NA,FALSE
+"Hydrocarbons, C7-C8, n-alkanes",Analytical parameter,TRUE,TRUE,Alkanes,subclass,subset,high,NA,NA,FALSE
+Trinexapac (aka cimetacarb),CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+[8-[(4-amino-3-nitrophenyl)azo]-7-hydroxy-2-naphthyl]trimethylammonium chloride,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Fatty acids, C22-unsatd., dimers, hydrogenated",CAS without structure,TRUE,TRUE,Fatty acids and conjugates,subclass,subset,medium,NA,NA,FALSE
+"((1S,2R)-2-(aminomethyl)-2-(naphthalen-2-yl)cyclopropyl)methanol compound with 4-methylbenzenesulfonic acid (1:1)",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+oxozirconium; silane,Analytical parameter,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+Trisodium [5-[[4-[(3-chloro-2-hydroxy-5-sulphophenyl)azo]-3-hydroxyphenyl]azoxy]-2-[2-(4-nitro-2-sulphophenyl)vinyl]benzenesulphonato(5-)]cuprate(3-),CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+polychlorotrifluoroethylene,Unclassified,TRUE,TRUE,Organofluorides,class,subset,low,NA,NA,FALSE
+"poly(ethylene-co-acrylic acid), zinc salt",CAS without structure,TRUE,TRUE,Organic Polymers,superclass,subset,medium,NA,NA,FALSE
+BUTAMINE HCl,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+petrolatum,Mixture,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"oxo-heteropolycycle, substituted-(chloro-hydroxycarbomonocyclic)-",Unclassified,TRUE,TRUE,Organoheterocyclic compounds,superclass,subset,low,NA,NA,FALSE
+Octamethylcyclotetrasiloxane (D4); Decamethylcyclopentasiloxane (D5),Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Hydrocarbons, C10-14 (even numbered), n-alkanes, isoalkanes, <2% aromatics",Unclassified,TRUE,TRUE,Saturated hydrocarbons,class,subset,high,NA,NA,FALSE
+"Titanium alkyl oxy complexes, quats",Unclassified,TRUE,TRUE,Organometallic compounds,superclass,subset,low,NA,NA,FALSE
+"Cyclohexanemethanamine, 5-amino-1,3,3-trimethyl-, reaction products with glycidyl tolyl ether",CAS without structure,TRUE,TRUE,"Amino acids, peptides, and analogues",subclass,broader,low,NA,NA,FALSE
+Magnesium salt of C11-C13 alkenyldicarboxylic acid ester,Analytical parameter,TRUE,TRUE,Alkaline earth metal salts,class,subset,medium,NA,NA,FALSE
+"4-(5-(5-[1-(4-carboxyphenyl)hexahydro-2,4,6-trioxopyrimidin-5-ylidene]penta-1,3-dienyl)-1,2,3,4-tetrahydro-6-hydroxy-2,4-dioxopyrimidin-1-yl)benzoic acid-triethylamine salt",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+POLYAMIDE RESIN,Unclassified,TRUE,TRUE,Organic Polymers,superclass,subset,medium,NA,NA,FALSE
+"Almond, sweet, ext.",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Tetrasodium N,N'-(6,13-dichloro-4,11-bis(2-(sulfonatooxy)ethylsulfonyl)-5,12-dioxa-7,14-diazapentacene-3,10-diylbis(iminoethylene))disuccinamate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+GIALLO PERGASCRIPT RZ 3386,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+poly(vinyl methyl ether),Unclassified,TRUE,TRUE,Organic Polymers,superclass,subset,medium,NA,NA,FALSE
+N-[2-(piperazin-1-yl)ethyl]C18-insaturated-alkylamide,CAS without structure,TRUE,TRUE,Fatty amides,subclass,subset,medium,NA,NA,FALSE
+PRIOLUBE 1944,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"1,3-Dioxane, 2-[(1R,2S)-2,4-dimethyl-3-cyclohexen-1-yl]-5-methyl-5-(1-methylpropyl)-, trans-",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Reaction products of acetic acid and acetylferrocene and butan-1-ol and 2-methylpropan-1-ol and propan-1-ol and propan-2-ol,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Anthracene oil, anthracene paste, anthracene fraction; Anthracene Oil Fraction; [A complex combination of hydrocarbons from the distillation of anthracene obtained by the crystallization of anthracene oil from bituminous high temperature tar and boiling in the range of 330 °C to 350 °C (626 °F to 662 °F). It contains chiefly anthracene, carbazole and phenanthrene.]",Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Fatty acids, C18-36, esters with ethylene glycol",CAS without structure,TRUE,TRUE,Fatty acid esters,subclass,subset,high,NA,NA,FALSE
+MANDRESY,CAS without structure,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+cyclised rubber,CAS without structure,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+stearoyl-palmitoyl-benzoyl-methane,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Hydrocarbons, C14-C17, n-alkanes",Analytical parameter,TRUE,TRUE,Alkanes,subclass,subset,high,NA,NA,FALSE
+FAT 41'018,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Rosin,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Phosphorodithioic acid, mixed O,O-bis(1,3-dimethylbutyl and iso-Pr) esters, zinc salts",CAS without structure,TRUE,TRUE,Dithiophosphate O-esters,subclass,subset,medium,NA,NA,FALSE
+"Chromium (III) complexes with 2-[{2,4-dihydroxy-3-[(5-sulfo-1-naphthyl)diazenyl]phenyl}diazenyl]benzoic acid (1:2), sodium salts",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+sodium; 5-benzoyl-α-methyl-2-thiopheneacetic acid,Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Aluminium, aliphatic ester complexes",Unclassified,TRUE,TRUE,Organoaluminium compounds,subclass,subset,medium,NA,NA,FALSE
+"Fuel oil, residual; Heavy Fuel oil; [The liquid product from various refinery streams, usually residues. The composition is complex and varies with the source of the crude oil.]",Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+SCH 48461-Q,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Phenolates from Hydrocarbon Resin production,Unclassified,TRUE,TRUE,Phenols,class,subset,medium,NA,NA,FALSE
+"(1S,3R)-3-(2-chloro-3,3,3-trifluoroprop-1-en-1-yl)-2,2-dimethylcyclopropane-1-carbonyl chloride",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"(4S,4aR,5S,5aR,6R,12aS)-4-(dimethylamino)-3,5,10,12,12a-pentahydroxy-6-methyl-1,11-dioxo-1,4,4a,5,5a,6,11,12aoctahydrotetracene-2-carboxamide 4-methylbenzenesulfonate (1:1)",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Aschersonia aleyrodis,Unclassified,TRUE,NA,NA,NA,NA,low,NA,NA,FALSE
+Golden Yellow Continuous,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Fuel oil, heavy, high-sulfur",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+CHEMBLACK 1,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Pentane-1,5-diyl-bis(3-oxobutanoate)",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Copolymer of vinyl-alcohol and vinyl acetate partially acetilized with 4-(2-(4-formylphenyl)ethenyl)-1-methylpyridinium methylsulfate,CAS without structure,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"Scarlet HS 5050, notification presscake",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+C 1812,Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"C12-14-tert-alkylamine, methylphosphonic acid salt",CAS without structure,TRUE,TRUE,Organic salts,superclass,subset,medium,NA,NA,FALSE
+"[N,N',N''-tris[3-(dimethylamino)propyl]-29H,31H-phthalocyaninetrisulphonamidato(2-)-N29,N30,N31,N32]copper trihydrochloride",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Extract oils (coal), light oil; Acid Extract; [The aqueous extract produced by an acidic wash of alkali-washed carbolic oil. Composed primarily of acid salts of various aromatic nitrogen bases including pyridine, quinoline and their alkyl derivatives.]",Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Light Oil Extract Residues, low boiling|Extract residues (coal), light oil alk., distn. overheads|[The first fraction from the distillation of aromatic hydrocarbons, coumarone, naphthalene and indene rich prefractionator bottoms or washed carbolic oil boi",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+K-652,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Fatty acids, C18 unsat, reaction products with triethylenetetramin, tetraethylenepentamine and pentaethylenehexamine",Unclassified,TRUE,TRUE,Fatty amides,subclass,subset,medium,NA,NA,FALSE
+Alkyloxyl and aryl mercury compounds,Substance group,TRUE,TRUE,Organomercurial compounds,subclass,subset,medium,Alkyl mercury compounds,0.8805111516671102,FALSE
+"N-[3-benzotriazol-2-yl-2-hydroxy-5-(1,1,3,3-tetramethylbutyl)-benzyl]-2-methylacrylamide",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Talloil, 2-[(tetrahydro-2H-pyran-2-yl) thio]ethyl esters",CAS without structure,TRUE,TRUE,Carboxylic acid esters,direct_parent,subset,medium,NA,NA,FALSE
+salts and esters of dinosam,Unclassified,TRUE,NA,NA,NA,NA,low,NA,NA,FALSE
+"Benzenesulfonic acid, C10-24-branched and linear alkyl derivs., magnesium salts, overbased",Unclassified,TRUE,TRUE,Organic sulfonic acids and derivatives,superclass,subset,medium,NA,NA,FALSE
+Pentachlorophenol and its salts and esters,Substance group,TRUE,TRUE,Chlorophenols,subclass,subset,medium,NA,NA,FALSE
+"Hydrolysed chitosan, hydrochloride (DP = 25-55; average acetylation degree 0-20%); [OptiCHOS]",Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"1-(3,4-polymethoxyarylethyl)heteromonocycle-2,4,6(1H,3H,5H)-trione",Unclassified,TRUE,TRUE,Pyrimidines and pyrimidine derivatives,subclass,subset,medium,NA,NA,FALSE
+"Reaction products of diazotized potassium sodium 2-amino-5-{[2-(sulfonatooxy)alkyl] sulfonyl benzenesulfonate, 1-(3-aminophenyl)urea, (alkylamino)benzenesulfonic acid, and 2,4,6-trihalo-1,3,5-triazine",Unclassified,TRUE,TRUE,Azobenzenes,class,subset,low,NA,NA,FALSE
+SD956,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Ethanesulfonic acid, 2-(methylamino)-, N-coco acyl derivs., sodium salts",CAS without structure,TRUE,TRUE,Fatty amides,subclass,subset,medium,NA,NA,FALSE
+Methyl N-benzyloxycarbonyl-L-tyrosinate,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"N,N,N-tri-C8-C10-alkyl-N-methyl-1-aminium sulfate",Analytical parameter,TRUE,TRUE,Quaternary ammonium salts,subclass,subset,high,NA,NA,FALSE
+TIC-A,Unclassified,TRUE,FALSE,NA,NA,NA,low,NA,NA,FALSE
+"Amides, C10-12 (even numbered) and C18 (unsaturated) alkyl, N, N-bis(hydroxyethyl)",Unclassified,TRUE,TRUE,Fatty amides,subclass,subset,high,NA,NA,FALSE
+Reaction product of butanal aldol condensation being a residue during purification,Analytical parameter,TRUE,TRUE,Aldehydes,direct_parent,broader,low,NA,NA,FALSE
+"Hexamethylene diisocyanate, oligomers, reaction products with 4-Hydroxybutyl acrylate",Unclassified,TRUE,TRUE,Carboxylic acid esters,direct_parent,subset,low,NA,NA,FALSE
+RSP,Unclassified,TRUE,FALSE,NA,NA,NA,low,NA,NA,FALSE
+O-ethyl S-(1-methoxycarbonylethyl)dithiocarbonate,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Slimes and Sludges, lead refining",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+ACETYL D4T,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+DOW CORNING(R) 4-6025 INT (VINYL SILYL PHOSPHONATE),Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Lead, C5-23-branched carboxylate naphthenate octanoate complexes",CAS without structure,TRUE,TRUE,Organic metal salts,superclass,subset,medium,NA,NA,FALSE
+A mixture of: 1) a mixture of: a) dicholest-5-en-3-β-yl N-lauroylglutamate; b) 1-(cholest-5-en-3-β-yl)-5-(2-octyldodecyl) N-lauroylglutamate; c) 5-(cholest-5-en-3-β-yl)-1-(2-octyldodecyl) N-lauroylglutamate; d) 1-(cholest-5-en-3-β-yl) 5-docosanyl N-lauroylglutamate; e) 5-(cholest-5-en-3-β-yl) 1-docosanyl N-lauroylglutamate; 2) a mixture of: a) bis(2-octyldodecyl) N-lauroylglutamate; b) didocosanyl N-lauroylglutamate; c) 1-docosanyl 5-(2-octyldodecyl) N-lauroylglutamate; d) 5-docosanyl 1-(2-octyldodecyl) N-lauroylglutamate,Analytical parameter,TRUE,TRUE,"Amino acids, peptides, and analogues",subclass,subset,medium,NA,NA,FALSE
+"2-Methylpropene, trimers",CAS without structure,TRUE,TRUE,Unsaturated hydrocarbons,superclass,subset,medium,NA,NA,FALSE
+"fatty acids, tall oil",CAS without structure,TRUE,TRUE,Fatty acids and conjugates,subclass,subset,high,NA,NA,FALSE
+dipotassium 8-(phenylamino)-5-((E)-(4-((E)-(3-sulfonatophenyl)diazenyl)naphthalen-1-yl)diazenyl)naphthalene-1-sulfonate,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Ruscus aculeatus, ext.",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"2-hydroxy-2-sulfonato acetic acid, disodium salt",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Naphthenic acids, reaction products with diethylenetriamine",CAS without structure,TRUE,TRUE,Carboxylic acids and derivatives,class,subset,low,NA,NA,FALSE
+"phenols, styrenated",CAS without structure,TRUE,TRUE,Phenols,class,subset,high,NA,NA,FALSE
+"alkyl sulfate, sodium (mono C10-C16-alkyl esters)",Analytical parameter,TRUE,TRUE,Alkyl sulfates,subclass,subset,high,NA,NA,FALSE
+"N-((3R,4R)-1-benzyl-4-alkylpiperidin-3-yl)-2-halogeno-N-alkyl-7H-pyrrolo[2,3-d]pyrimidin-4-amine",Unclassified,TRUE,TRUE,Pyrrolopyrimidines,class,subset,high,NA,NA,FALSE
+"1-Propanaminium, 3-amino-N-[2-[(2-hydroxyethyl)amino]-2-oxoethyl]-N,N-dimethyl-, N-C12-18 acyl derivs., chlorides",CAS without structure,TRUE,TRUE,Quaternary ammonium salts,subclass,subset,high,NA,NA,FALSE
+"Alcohols, C20-30 (even numbered)",Unclassified,TRUE,TRUE,Long-chain fatty alcohols,direct_parent,subset,medium,NA,NA,FALSE
+"Fatty acids, C16-22",CAS without structure,TRUE,TRUE,Fatty acids and conjugates,subclass,subset,high,NA,NA,FALSE
+TCD-DI-HEA,Unclassified,TRUE,NA,NA,NA,NA,low,NA,NA,FALSE
+"Fatty acids, C8-10, triesters with trimethylolpropane",CAS without structure,TRUE,TRUE,Triacylglycerols,subclass,subset,medium,NA,NA,FALSE
+CNN-4,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+IRANDA,Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+PROTECT H,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"2-Propenoic acid, reaction products with pentaerythritol",CAS without structure,TRUE,TRUE,Carboxylic acid esters,direct_parent,subset,medium,NA,NA,FALSE
+2-fluoro-4-pentyl-4'-(2-(trans-4-propylcyclohexyl)ethyl)biphenyl,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Carboxylic acids, di-, C5-9",Unclassified,TRUE,TRUE,Dicarboxylic acids and derivatives,subclass,subset,high,Carboxylic acids,0.8209008288846701,FALSE
+"Naphtha fraction, waste plastic derived, hydrothermal conversion",Mixture,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"3-(5-acetylamino-4-(4-[4,6-bis(3-diethylaminopropylamino)-1,3,5-triazin-2-ylamino]phenylazo)-2-(2-methoxyethoxy)phenylazo)-6-amino-4-hydroxy-2-naphtalenesulfonic acid",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Reaction product of apple aminoacids and lauroyl chloride,Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Soybean oil, reaction products with ethaneperoxoic acid",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Reaction products of paraformaldehyde with 2-hydroxypropylamine (ratio 1:1),Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+DIM-Malonate,Unclassified,TRUE,FALSE,NA,NA,NA,low,NA,NA,FALSE
+"Fatty acids C10-20, reaction product with diethylenetriamine",Unclassified,TRUE,TRUE,Fatty amides,subclass,subset,medium,NA,NA,FALSE
+"Fatty acids, C8-18-branched and linear, esters with trimethylolpropane",CAS without structure,TRUE,TRUE,Fatty acid esters,subclass,subset,medium,NA,NA,FALSE
+FARBASTOFF 393,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"(methacrylic acid, ethyl acrylate, n-butyl acrylate, methyl methacrylate and butadiene) copolymer in nanoform",Unclassified,TRUE,TRUE,Organic Polymers,superclass,subset,medium,NA,NA,FALSE
+"Protein hydrolyzates, keratin, reaction products with 3-chloro-2-hydroxypropyl-cocoalkyl-dimethylammonium chloride",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Mercury(2+), bis(2,4,6-tri-2-pyridinyl-1,3,5-triazine-N1,N2,N6)-, (OC-6-1'2)-",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Maltodextrin,CAS without structure,TRUE,TRUE,Polysaccharides,class,subset,medium,NA,NA,FALSE
+"Iron(III) N,N-bis(carboxymethyl)-β-alaninate trihydrate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+T002260,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+salts and esters of MCPB,Unclassified,TRUE,TRUE,Carboxylic acids and derivatives,class,subset,medium,NA,NA,FALSE
+"Hydrocarbons, C4, 1,3-butadiene-free, polymd., triisobutylene fraction",CAS without structure,TRUE,TRUE,Hydrocarbons,superclass,subset,medium,NA,NA,FALSE
+Sodium salts of substituted amino acid (2),Unclassified,TRUE,TRUE,"Amino acids, peptides, and analogues",subclass,subset,medium,NA,NA,FALSE
+Rabitle FP-100,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"(2S)-2-[[(2S)-6-[[2-[2-[2-[[2-[2-[2-[[(4S)-5-tert-butoxy-4-[(20-tert-butoxy-20-oxo-icosanoyl)amino]-5-oxo-pentanoyl]amino]ethoxy]ethoxy]acetyl]amino]ethoxy]ethoxy]acetyl]amino]-2-[[(2S)-2-[[(2S)-2-[[(2S,3S)-2-[[(2S)-6-(tert-butoxycarbonylamino)-2-[[(2S)-4-tert-butoxy-2-(9H-fluoren-9-ylmethoxycarbonylamino)-4-oxo-butanoyl]amino]hexanoyl]amino]-3-methyl-pentanoyl]amino]propanoyl]amino]-5-oxo-5-(tritylamino)pentanoyl]amino]hexanoyl]amino]propanoic acid",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Quaternary ammonium compounds, (C16-18 and C18-unsatd. alkyl)trimethyl, chlorides",CAS without structure,TRUE,TRUE,Quaternary ammonium salts,subclass,subset,high,NA,NA,FALSE
+Bacillus velezensis strain TF3/BBR1,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Low boiling point naphtha - unspecified|Hydrocarbons, C<sub>4-11</sub>, naphtha-cracking, arom.-free|[A complex combination of hydrocarbons obtained from prehydrogenated cracked naphtha after distillative separation of benzene- and toluene-containing hydr",Mixture,TRUE,TRUE,Hydrocarbons,superclass,subset,medium,NA,NA,FALSE
+"Pentaerythritol, mixed esters with straight and branched fatty acids",Unclassified,TRUE,TRUE,Carboxylic acid esters,direct_parent,subset,medium,NA,NA,FALSE
+"iron, complexes with diazotised 4-aminobenzenesulfonamide,diazotised 3-aminobenzenesulfonic acid, diazotised 3-amino-4-hydroxybenzenesulfonamide,diazotised 3-amino-4-hydroxy-N-phenylbenzenesulfonamide, diazotised 5-amino-2-(phenylamino)benzenesulfonic acid and resorcinol, sodium salts",Unclassified,TRUE,TRUE,Organic diazonium salts,subclass,subset,low,NA,NA,FALSE
+NT-16,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Copper chromite black spinel,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Products of roasting of ""slags, steelmaking, vanadium""",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"1-Propanaminium, 3-amino-N-(carboxymethyl)-N,N-dimethyl-, N-C18(unsaturated) acyl derivs., hydroxides, inner salts",Unclassified,TRUE,TRUE,Fatty amides,subclass,subset,medium,NA,NA,FALSE
+"Esterification products of glycerol with docosanoic acid, icosanedioic acid and 16-methylheptadecanoic acid",Unclassified,TRUE,TRUE,Triacylglycerols,subclass,subset,medium,NA,NA,FALSE
+"Arabinofuranosidase, α-l-",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"poly-[((4-((4-ethyl-ethylene)amino)phenyl)-((4-(ethyl-(2-oxyethylene)amino)phenyl)methinyl)cyclohexa-2,5-dienylidene)-N-ethyl-N-(2-hydroxyethyl)ammonium acetate]",CAS without structure,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"4-nitrophenyl 1,3-thiazol-5-ylmethylcarbonate hydrochloride",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Fatty acids, C5-9, tetraesters with pentaerythritol",CAS without structure,TRUE,TRUE,Wax esters,direct_parent,subset,medium,NA,NA,FALSE
+TREATED CARBON BLACK 5,Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"Lead ores, concs., leached",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"(CIS)-5-(4,6-dimethylpyrimidin-2-yl)-2,3,3a,4,6,6a-hexahydro-1H-pyrrolo[3,4-c]pyrrole",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"4-(3-(3-(dimethyl(oxo)-l6-sulfaneylidene)-2-oxopropyl)-7-methylimidazo[1,2-a]pyridin-2-yl)-3,5-difluoro-N-methylbenzamide",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+sunflower oil fatty acids,CAS without structure,TRUE,TRUE,Fatty acids and conjugates,subclass,subset,high,NA,NA,FALSE
+4-(4'-Trifluoromethylphenyl)benzaldehyde,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Nickel Sulfide (Ni5S4),CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"3-(3,5-di-tert-butyl-4-hydroxybenzyl)benzothiazole-2-thione",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Reaction product of: 3,5-bis-tert-butylsalicylic acid and aluminiumsulfate",Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Man-made vitreous (silicate) fibres with random orientation with alkaline oxide and alkali earth oxide (Na2O+K2O+CaO+ MgO+BaO) content greater than 18 % by weight,Unclassified,TRUE,TRUE,NA,NA,broader,high,NA,NA,FALSE
+"Fatty acids, C14-18 and C18-unsatd., branched and linear, 2-ethylhexyl esters",CAS without structure,TRUE,TRUE,Fatty acid esters,subclass,subset,high,NA,NA,FALSE
+"Naphtha (coal), distn. residues",Mixture,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"castor oil, mono- and diglycerides",Unclassified,TRUE,TRUE,Glycerolipids,class,subset,medium,NA,NA,FALSE
+Amorphous barium copper zinc borobismuthate,Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"3-(C6-16, (even numbered) and C16 unsaturated alkyl)-4-(C7-17 (odd numbered) and C17 unsaturated alkylidene)-oxetan-2-one",CAS without structure,TRUE,TRUE,Oxetanes,class,subset,medium,NA,NA,FALSE
+"Residues (coal), liq. solvent extn.; [A cohesive powder composed of coal mineral matter and undissolved coal remaining after extraction of coal by a liquid solvent.]",Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+CERAPHYL SAQ,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Potassium bis(2-oxido-2,2-diphenyl-acetato) borate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"(E,Z)-8-Dodecen-1-yl acetate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Amines, C16-18-alkyl",CAS without structure,TRUE,TRUE,Primary amines,direct_parent,subset,medium,NA,NA,FALSE
+A mixture of: tetrakis(trimethylhexadecylammonium) hexa-μ-oxotetra-μ3-oxodi-μ5-oxotetradecaoxooctamolybdate(4-); tetrakis(trimethyloctadecylammonium) hexa-μ-oxotetra-μ3-oxodi-μ5-oxotetradecaoxooctamolybdate(4-),Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"4,4'-methylenediphenyl diisocyanate and its oligomeric reaction products with oxydipropanol and [(methylethylene)bis(oxy)]dipropanol",Unclassified,TRUE,TRUE,Isocyanates,subclass,broader,low,NA,NA,FALSE
+"Fatty acids, linseed-oil, maleated",CAS without structure,TRUE,TRUE,Fatty acids and conjugates,subclass,subset,medium,NA,NA,FALSE
+trisodium 2-(2-sulfonatoethoxy)ethane-1-sulfonate ethenesulfonate,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Protein hydrolyzates, wool, reaction products with 3-chloro-2-hydroxypropyl-cocoalkyl-dimethylammonium chloride",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Hydrocarbons, C13-C18, n-alkanes, isoalkanes, cyclics, <2% aromatics",Analytical parameter,TRUE,TRUE,Hydrocarbons,superclass,subset,high,NA,NA,FALSE
+polyethylenglycol ether (EO = 1-50) of linear and branched primary alcohols,Unclassified,TRUE,TRUE,Polyethylene glycols,level 6,subset,medium,NA,NA,FALSE
+"Resin acids and Rosin acids, esters with trimethylolpropane",CAS without structure,TRUE,TRUE,Carboxylic acid esters,direct_parent,subset,medium,NA,NA,FALSE
+"Phosphoric acid, mono- and di-C16-18 (even numbered) alkyl esters, salts with 2,2'-iminodiethanol",Unclassified,TRUE,TRUE,Organic phosphoric acids and derivatives,superclass,subset,medium,NA,NA,FALSE
+"Alcohols, C10-12 (even numbered), ethoxylated (1-2.5 EO), sulfated, sodium salts",Unclassified,TRUE,TRUE,Organic sulfate salts,superclass,subset,medium,NA,NA,FALSE
+"phenol, 3-dodecyl-, branched",Unclassified,TRUE,TRUE,Phenols,class,subset,high,NA,NA,FALSE
+"A mixture of: 2,2'-bis(tert-pentylperoxy)-p-diisopropylbenzene; 2,2'-bis(tert-pentylperoxy)-m-diisopropylbenzene",Analytical parameter,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Calcium, carbonate hydroxy aluminum complexes",CAS without structure,TRUE,TRUE,Alkaline earth metal salts,class,subset,low,NA,NA,FALSE
+Concrete of Rosa Damascena (Rosaceae) obtained from fresh flowers by extraction with an apolar solvent,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Bile, extract",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+BIS((C10-13)ALKYLPHENYL)IODONIUM HEXAFLUOROANTIMONATE,CAS without structure,TRUE,TRUE,Organoiodides,class,subset,medium,NA,NA,FALSE
+"Reaction product of 3,9-dibromobenzanthrone condensed with 2 equivalents of 1-aminoanthraquinone, subsequently further condensed under oxidative conditions",Analytical parameter,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"(2S,4R)-1-hexadecanoyl-4-hydroxy-pyrrolidine-2-carboxylic acid",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+3-hydroxy-3-carbethoxy-1-azabicyclo[2.2.2]octane,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"1-Propene, hydroformulation products, by-products from, distillation residues",CAS without structure,TRUE,TRUE,Organic compounds,kingdom,broader,low,NA,NA,FALSE
+"phosphorous acid, triphenyl ester, polymer with alpha-hydro-omega-hydroxypoly[oxy(methyl-1,2-ethanediyl)], C10-C16 alkyl esters",Analytical parameter,TRUE,TRUE,Organic Polymers,superclass,subset,medium,NA,NA,FALSE
+"(15α,16α,17β)-3-hydroxyestra-1,3,5(10)-triene-15,16,17-triyl triacetate",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+monopotassium [(E)-3-oxido-4-((1-oxido-8-sulfonatonaphthalen-2-yl)diazenyl)naphthalene-1-sulfonate (4-)]chromate(1-)],Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"3-amino-1,5-anhydro-2,3-dideoxy-D-threo-pentitol phosphate salt",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Acid chlorides, coco",CAS without structure,TRUE,TRUE,Acyl halides,class,subset,high,NA,NA,FALSE
+"Rosin, fumarated",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Hydrocarbons, C4, 1,3-butadiene-free, polymd., tetraisobutylene fraction",CAS without structure,TRUE,TRUE,Hydrocarbons,superclass,subset,medium,NA,NA,FALSE
+"Glycerides, C8-10 mono-, di- and tri-",CAS without structure,TRUE,TRUE,Glycerolipids,class,subset,high,NA,NA,FALSE
+NT-15,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Ethyl 2-(2-((7-(2-cyano-3-fluoropyridin-4-yl)benzofuran-5-yl)methoxy)phenyl)acetate,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Betaines, C12-16 (even numbered) -alkyldimethyl",Unclassified,TRUE,TRUE,Quaternary ammonium salts,subclass,subset,medium,NA,NA,FALSE
+"Pentasodium 5-[4-chloro-6-[4-(2-sulfatoethylsulfonyl)phenylamino]-1,3,5-triazin-2-ylamino]-4-hydroxy-3-(1,5-disulfonatonaphthalen-2-ylazo)naphthalene-2,7-disulfonate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Dialkyl C18 and C18-unsaturated phosphonates,Unclassified,TRUE,TRUE,Organic phosphonic acids and derivatives,superclass,subset,medium,NA,NA,FALSE
+Aqueous extract from fruit pods of Caesalpinia spinosa (Fabaceae),Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Acetic acid, oxo-, potassium salt, reaction products with ethylenediamine and para-hydroxybenzenesulfonic acid potassium salt, iron potassium salts",Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+ETANAL,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+24-325A,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"4-Amino-5-chloro-2,1,3-benzothiodiazole",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+A mixture of: Ca salicylates (branched C10-14 and C18-30 alkylated); Ca phenates (branched C10-14 and C18-30 alkylated); Ca sulfurized phenates (branched C10-14 and C18-30 alkylated),Analytical parameter,TRUE,TRUE,Organic metal salts,class,subset,medium,NA,NA,FALSE
+AAMBA-SULFAT,Unclassified,TRUE,FALSE,NA,NA,NA,low,NA,NA,FALSE
+"Reaction products of 2,7-Naphthalenedisulfonic acid, 5-[[4-chloro-6-(ethylphenylamino)-1,3,5-triazin-2-yl]amino]-4-hydroxy-3-[(1-sulfo-2-naphthaleny)azo]-, trisodium salt and lithium chloride",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+POLYPERING,Unclassified,TRUE,FALSE,NA,NA,NA,low,NA,NA,FALSE
+"Renewable hydrocarbons, C17-C18, branched alkanes",Analytical parameter,TRUE,TRUE,Branched alkanes,subclass,subset,high,NA,NA,FALSE
+KURTZ-GELB-ADDITIV (HYDROCHLORID),Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+sulfite liquors (calcium lignosulfonate),CAS without structure,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"2-Propenoic acid, perfluoro-C8-16-alkyl esters",CAS without structure,TRUE,TRUE,Acrylic acid esters,subclass,subset,high,NA,NA,FALSE
+PDN 5203 ACTIVE INGREDIENT (AI),Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Fuels, diesel, no. 2",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+S-04,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"4-Nonylphenol, branched and linear, ethoxylated",Unclassified,TRUE,TRUE,Phenol ethers,class,subset,medium,NA,NA,FALSE
+"Reaction products of 3-methylbutanal and 3-methylbut-3-en-1-ol, distillation overheads",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Fermentation reaction products of 4-hydroxy-3-methoxycinnamic acid,Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+Tall-oil fatty acids oligomeric reaction products with triethylenetriamine and gylcidyl tolyl ether,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Leach residues, cadmium-refining",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"N,N-bis(9,9-dimethylfluoren-2-yl)-4-phenyl-9,9'-spirobi[fluorene]-4'-amine",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"5-amino-1-[2,6-dichloro-4-(trifluoromethyl)phenyl]-4-[(1R,S)-(trifluoromethyl)thio]-1H-pyrazole-3-carbonitrile",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Reaction products of diazotised m-phenylendiamine, subsequently coupled with diazotised 4-aminobenzene-1-sulfonic acid, sodium salts",Unclassified,TRUE,TRUE,Azobenzenes,class,subset,medium,NA,NA,FALSE
+"acids, aliphatic, monocarboxylic (C6-C22), esters with polyglycerol",Analytical parameter,TRUE,TRUE,Fatty acid esters,subclass,subset,medium,NA,NA,FALSE
+2-({2-[4-(dimethylamino)benzoyloxy]ethyl}(methyl)amino)ethyl 4-(dimethylamino)benzoate,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Reaction product of oxoacetic acid, ethylene diamine, phenol, sodium hydroxide and potassium hydroxide",Analytical parameter,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"Fatty acids, castor-oil, hydrogenated, cadmium salts",CAS without structure,TRUE,TRUE,Organic cadmium salts,direct_parent,subset,medium,NA,NA,FALSE
+A mixture of isomers of: sodium phenethylnaphthalenesulfonate; sodium naphthylethylbenzenesulfonate,Analytical parameter,TRUE,TRUE,Naphthalene sulfonic acids and derivatives,subclass,subset,medium,NA,NA,FALSE
+"Nickel, borate C8-10-branched carboxylate complexes",CAS without structure,TRUE,TRUE,Transition metal salts,class,subset,medium,NA,NA,FALSE
+L 165,Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"3,6,9,12-Tetraoxatetradecan-1-ol, 14-(4-nonylphenoxy)-, branched",CAS without structure,TRUE,TRUE,Ethers,subclass,subset,medium,NA,NA,FALSE
+"Fatty acids, C18-unsatd., dimers, oligomeric reaction products with fatty acids, C16-18 and C18-unsatd., branched and linear, tetraethylenepentamine and triethylenetetramine",CAS without structure,TRUE,TRUE,Fatty acids and conjugates,subclass,broader,low,NA,NA,FALSE
+PDN 2899,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Benzeneacetamide, 4-[2-hydroxy-3-[(1-methylethyl)amino]propoxy]-, (2E)-2-butenedioate (salt)",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Amines, C11-C13 (linear and branched) alkyl",Analytical parameter,TRUE,TRUE,Primary amines,direct_parent,subset,medium,NA,NA,FALSE
+N-acetyl-3-(tritylsulfanyl)-L-valyl-L-asparaginyl-O-tert-butyl-L-threonyl-7-methyl-L-tryptophyl-N6-acetyl-L-lysyl-3-[(acetamidomethyl)sulfanyl]-L-valyl-O-[2-[(tert-butoxycarbonyl)amino]ethyl]-L-tyrosine,Unclassified,TRUE,NA,NA,NA,NA,low,NA,NA,FALSE
+Propolis (Water soluble extract),Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+methyl 3-(2-morpholinocyclopenten-1-yl)propanoate,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"A mixture of: propan-2-one-O,O'(methoxyvinylsilandiyl)dioxime; propan-2-one-O-(dimethoxyvinylsilyl)oxime; propan-2-one-O,O',O''-(vinylsilantriyl)trioxime",Analytical parameter,TRUE,TRUE,Oximes,subclass,subset,medium,NA,NA,FALSE
+Corsair Clear #12,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"alkene (sulfonic acid, C14-C16-alkane hydroxy & C14-C16-alkene sodium salts)",Analytical parameter,TRUE,TRUE,Organic sulfonic acids and derivatives,superclass,subset,medium,NA,NA,FALSE
+di-alkyl-benzenesulfonic acid,Unclassified,TRUE,TRUE,Benzenesulfonic acids and derivatives,subclass,subset,high,Benzenesulfonic acids and derivatives,0.8100265897916227,TRUE
+N-(4-dimethylaminopyridinium)-3-methoxy-4-(1-methyl-5-nitroindol-3-ylmethyl)-N-(o-tolylsulfonyl)benzamidate,CAS without structure,TRUE,NA,NA,NA,NA,low,NA,NA,FALSE
+"L-ornithine, fermentation products",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"lithium sodium 2-amino-4-{[4-(cyanoazanidyl)-6-[(3-sulfonatophenyl)amino]-1,3,5-triazin-2-yl]amino}-5-(2-{4-[2-(sulfonatooxy)ethanesulfonyl]phenyl}diazen-1-yl)benzene-1-sulfonate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+alginic acid,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Condensation products of m-phenylenebis(methylamine) with condensation products of 4-methyl-m-phenylene diisocyanate with alcohols, C10-14 (even numbered) and condensation products of 4-methyl-m-phenylene diisocyanate with butyltriglycol",Unclassified,TRUE,TRUE,Polyureas,superclass,subset,low,NA,NA,FALSE
+SENSIBILISATOR KF 1060 PINA,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+[1-(4-bromobenzyl)-2-butyl-4-chloro-1H-imidazol-5-yl]methanol,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"boron compounds, with the exception of those specified elsewhere in this Annex",Unclassified,TRUE,TRUE,Boronic acid derivatives,class,broader,medium,NA,NA,FALSE
+"Phosphoric Acid, C8-12(even-numbered) linear Alkyl Esters",Unclassified,TRUE,TRUE,Alkyl phosphates,direct_parent,subset,high,NA,NA,FALSE
+Cesium Tungsten Suboxide,CAS without structure,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+BLACK WATER SOLUBLE DYE,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+224 AUE,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"(ethyl-1,2-ethanediyl)[-2-[[[(2-hydroxyethyl)methylamino]acetyl]-propyl]ω-(nonylphenoxy)poly]oxy-(methyl-1,2-ethanediyl)",Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"4,4'-Isopropylidenediphenol, oligomeric reaction products with 1-chloro-2,3-epoxypropane, reaction products with m-phenylenebis(methylamine)",CAS without structure,TRUE,TRUE,Epoxides,class,broader,medium,NA,NA,FALSE
+"Coffee, bean, roasted, ext.",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Leach residues, zinc ore-calcine, cadmium-copper ppt.",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Hydrogen tetrabutylphosphanium difluoride,Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+lead alkyls,Unclassified,TRUE,TRUE,Alkyl lead compounds,direct_parent,exact,high,Alkyl lead compounds,0.8680208159115507,TRUE
+cellulose acetate butyrate,CAS without structure,TRUE,TRUE,Polysaccharides,class,subset,medium,NA,NA,FALSE
+"phenolic resins alone or modified with glycerophthalic, epoxy or polyvinyl butyral resins or with butyl alcohol",Unclassified,TRUE,TRUE,Organic Polymers,superclass,subset,medium,NA,NA,FALSE
+Cetyl Acetate and Stearyl Acetate and Oleyl Acetate and Acetylated Lanolin Alcohol,Unclassified,TRUE,TRUE,Fatty acid esters,subclass,subset,medium,NA,NA,FALSE
+"pentanol isomers, with the exception fo those specified elsewhere in this Annex",Unclassified,TRUE,TRUE,Primary alcohols,direct_parent,subset,low,NA,NA,FALSE
+Concrete of Coffee L. obtained from beans by organic solvent extraction,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+FS985,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+alumina doped with cobalt,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+potassium 3-oxocyclohex-1-enolate,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"[29H,31H-phthalocyaninetetrasulphonyl tetrachloridato(2)-N29,N30,N31,N32 ]nickel",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Fir, Abies alba, ext.",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+GEROL 007,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Tributyltin Compounds,Substance group,TRUE,TRUE,Triorganotin compounds,subclass,subset,high,NA,NA,FALSE
+"Reaction products of 2,7-Naphthalenedisulfonic acid, 5-[[4-chloro-6-[(2-methylphenyl)amino]-1,3,5-triazin-2-yl]amino]-4-hydroxy-3-[2-(2-sulfophenyl)diazenyl]-, trisodium salt and lithium chloride",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+N-ethyl-2-nitrobenzylsulfonamide,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+PHOTOSOL 7-577,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"poly-(methyl methacrylate)-co-(butylmethacrylate)-co-(4-acryloxybutyl-isopropenyl-α,α-dimethylbenzyl carbamate)-co-(maleicanhydride)",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+SUNA,Unclassified,TRUE,FALSE,NA,NA,NA,low,NA,NA,FALSE
+"L 708,350",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+BSC-524,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Cymbopogon winterianus, ext., reaction products with acetone",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Alkali metal [bis(4,4,5,5,6,6,7,7,8,8,9,9,9-tridecafluoro-2- substitutednonyl)amino]alkanesulfonate",Unclassified,TRUE,TRUE,Alkali metal salts,class,subset,medium,NA,NA,FALSE
+"cis-2-(acryloyloxy)ethyl hydrogen cyhexane-1,2-dicarboxylate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Oligomerisation products of hexamethylene diisocyanate, isocyanurate type, reacted with 2-hydroxyethyl acrylate.",Unclassified,TRUE,TRUE,Carboxylic acid esters,direct_parent,subset,low,NA,NA,FALSE
+microcrystalline waxes,CAS without structure,TRUE,TRUE,Wax esters,direct_parent,subset,low,NA,NA,FALSE
+"1,3-diphenylpropane-1,2,3-trione 2-[O-(ethoxycarbonyl)oxime]",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Dolomite (CaMg(CO3)2), calcined",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"1-Pentene, chlorinated, epoxidized, distn. residues",CAS without structure,TRUE,TRUE,Epoxides,class,subset,low,NA,NA,FALSE
+"salts of 2,2'-dichloro-4,4'-methylenedianiline; salts of 4,4'-methylenebis(2-chloroaniline)",Analytical parameter,TRUE,TRUE,Aniline and substituted anilines,subclass,subset,medium,NA,NA,FALSE
+RMS-019,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"ethylenediammonium O,O-bis(octyl) phosphorodithioate, mixed isomers",Unclassified,TRUE,TRUE,Organic dithiophosphoric acids and derivatives,class,subset,medium,NA,NA,FALSE
+"2,2,4(or 2,4,4)-trimethylhexanedinitrile",CAS without structure,TRUE,TRUE,Nitriles,direct_parent,subset,medium,NA,NA,FALSE
+"(S)-3-N-n-Dodecyl-(1-N-α-amido-pyroglutaminyl)-1,3-diaminopropane",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+aramid fibres,Substance group,TRUE,TRUE,Aromatic oligo- and polyamides,subclass,subset,high,NA,NA,FALSE
+"glycerol, esters with butyric acid",Unclassified,TRUE,TRUE,Carboxylic acid esters,direct_parent,subset,medium,NA,NA,FALSE
+Gallium zinc triarsenide,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"reaction products of 3,10-bis((2-aminopropyl)amino)-6,13-dichloro-4,11-triphenodioxazinedisulfonic acid with 2-amino-1,4-benzenedisulfonic acid, 2-((4-aminophenyl)sulfonyl)ethyl hydrogen sulfate and 2,4,6-trifluoro-1,3,5-triazine, sodium salts",CAS without structure,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"C16-18 (evennumbered, C18 unsaturated) alkyl bis(2-hydroxyethyl) amine oxide",CAS without structure,TRUE,TRUE,Long-chain alkyl amine oxides,direct_parent,subset,medium,NA,NA,FALSE
+isliFe,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Hydrocarbons, C4",CAS without structure,TRUE,TRUE,Hydrocarbons,superclass,subset,high,NA,NA,FALSE
+"Sulfonic acids, shale-oil, sodium salts",CAS without structure,TRUE,TRUE,Organic sulfonic acids and derivatives,superclass,subset,medium,NA,NA,FALSE
+"oxirane, mono[(C12-14-alkyloxy)methyl] derivs.",CAS without structure,TRUE,TRUE,Epoxides,class,subset,high,NA,NA,FALSE
+"7-bromo-4-methoxy-1H-pyrrolo[2,3-c]pyridine hydrogen chloride (1:1) monohydrate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Potassium sodium amino-hydroxy-[(3-{[2-(substituted)ethyl]sulfonyl}phenyl)diazenyl]-[(2-sulfonato-4-{[2-(substituted)ethyl]sulfonyl}phenyl)diazenyl]naphthalene-disulfonate,Unclassified,TRUE,TRUE,Azobenzenes,class,subset,medium,NA,NA,FALSE
+"Acetic acid, C11-14-branched alkyl esters, C13-Rich",CAS without structure,TRUE,TRUE,Fatty acid esters,subclass,subset,medium,NA,NA,FALSE
+"undecafluorohexanoic acid (PFHxA), its salts and related substances",Unclassified,TRUE,TRUE,Perfluoroalkyl carboxylic acid and derivatives,direct_parent,subset,high,NA,NA,FALSE
+"Anode, copper",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"A mixture of : Benzyl[3S-[2[R*(R*)],3R*]]-2-[2-(1-ethoxycarbonyl-3-phenylpropylamino)propinyl]-1,2,3,4-tetrahydroisoquinoline-3-carboxlate and (Z)-but-2-enedioic acid (1:1)",Mixture,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"4-nonylphenol, branched",CAS without structure,TRUE,TRUE,Phenols,class,subset,medium,NA,NA,FALSE
+"Amines, bis(hydrogenated rape oilalkyl)methyl, N-oxides",Unclassified,TRUE,TRUE,Long-chain alkyl amine oxides,direct_parent,subset,medium,NA,NA,FALSE
+"(R)-1-cyclohexa-1,4-dienyl-1-methoxycarbonyl-methylammoniumchloride",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+TREATED CARBON BLACK 14,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Tetradec-1-ene, dimers, hydrogenated",Unclassified,TRUE,TRUE,Saturated hydrocarbons,class,subset,medium,NA,NA,FALSE
+"Molybdenum sulfide (MoS2), roasted",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Alcohols, C9-11, branched and linear, ethoxylated, sulfates, ammonium salts",CAS without structure,TRUE,TRUE,Organic sulfate salts,superclass,subset,medium,NA,NA,FALSE
+C4-C10 branched and linear hydrocarbons (light) – Naphtha,Analytical parameter,TRUE,TRUE,Saturated hydrocarbons,class,subset,medium,NA,NA,FALSE
+condensation products of formaldehyde with melamine,Unclassified,TRUE,TRUE,Organic Polymers,superclass,subset,medium,NA,NA,FALSE
+"tert-butyl [(5S,6R)-6-methyl-2-oxo-5-phenylpiperidin-3-yl]carbamate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Concrete of Cistus ladaniferus (Cistaceae) obtained from stems and leaves by organic solvents extraction,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"2,3-dihydro-2-methyl-1H-indol-1-amine p-toluenesulfonate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Ethylene polymerisation (triethylaluminium catalysed), distillation residue, C20-40 fraction",Unclassified,TRUE,TRUE,Alkanes,subclass,subset,medium,NA,NA,FALSE
+2-[(3-hydroxy-3-oxo-propanoyl)amino]benzoic acid,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Sodium dl-α-tocopheryl phosphate,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Neutralisation product of iron oxide hydroxide, phosphoric acid, phosphonic acid, lithium hydroxide or lithium carbonate, D-Glucose, 4-O-β-D-galactopyranosyl-, hydrate (1:1) and amylopectin",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Reaction products of: thionyl chloride, 1,3,4-thiadiazol-2,5-dithiol, tert-nonanethiol and C12-14-tert-alkylamine",Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"2-Propenoic acid, 2-hydroxyethyl ester, phosphate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+(R)-(2-methyloxiran-2-yl)methyl 4-bromobenzenesulfonate,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Benzene, C20-22 (even numbered) alkyl derivs.",Unclassified,TRUE,TRUE,Benzene and substituted derivatives,class,subset,high,NA,NA,FALSE
+FARBMITTEL 4185,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Iso(C10-C14)alkyl (3,5-di-tert-butyl-4-hydroxyphenyl)methylthioacetate",Analytical parameter,TRUE,TRUE,Carboxylic acid esters,direct_parent,subset,medium,NA,NA,FALSE
+"Graphite, acid-treated",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+Bis-DPP Nickel(II)chloride,Unclassified,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+polyoxyalkyl (C2-C4) dimethyl polysiloxane,Analytical parameter,TRUE,TRUE,Siloxanes,direct_parent,subset,medium,NA,NA,FALSE
+"Acetic acid, esters with lanolin alcs.",CAS without structure,TRUE,TRUE,Wax esters,direct_parent,subset,medium,NA,NA,FALSE
+"Reaction products of 2- and 4-methyl-m-phenylene diisocyanate with C16-18-(even numbered, C18-unsaturated)-alkylamines and ethylenediamine",Unclassified,TRUE,TRUE,Ureas,subclass,subset,medium,NA,NA,FALSE
+"Fatty acids, sunflower-oil, conjugated, maleated,reation products with diethanolamine, maleated tall-oil fatty acids and triethanolamine",CAS without structure,TRUE,TRUE,Fatty acids and conjugates,subclass,broader,low,NA,NA,FALSE
+"7-[4-(3-diethylaminopropylamino)-6-(3-diethylammoniopropylamino)-1,3,5-triazin-2-ylamino]-4-hydroxy-3-(4-phenylazophenylazo)-naphthalene-2-sulfonate, acetic acid, lactic acid (2:1:1)",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"2-aminoacetate, hydron, copper(2+) sulfate",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Betaines, C12-14 (even numbered)-alkyldimethyl",Unclassified,TRUE,TRUE,Quaternary ammonium salts,subclass,subset,medium,NA,NA,FALSE
+"Benzene, 1,1'-oxybis[methyl-, sulfonated, ammonium salts",CAS without structure,TRUE,TRUE,Organic sulfonic acids and derivatives,superclass,subset,low,NA,NA,FALSE
+"Fatty acids, C18-unsatd., dimers, methyl esters",CAS without structure,TRUE,TRUE,Fatty acid methyl esters,subclass,subset,medium,NA,NA,FALSE
+"Condensation product of: 3-(7-carboxyhept-1-yl)-6-hexyl-4-cyclohexene-1,2-dicarboxylic acid with polyamines (primarily amino-ethyl-piperazine and triethylenetetramine)",Unclassified,TRUE,TRUE,Polypeptides,class,subset,low,NA,NA,FALSE
+High-temperature calcination products of diiron trioxide and amorphous silica resulting in a glassy silica matrix,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Reaction products of diazotized disodium 4-amino-3,6-bis[(4-aminophenyl)azo]-5-hydroxynaphthalene-2,7-disulphonate, coupled with m-phenylenediamine",CAS without structure,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+"α[2-[[[(2-hydroxyethyl)methylamino]acetyl]amino]propyl]- ω nonylphenoxy)poly[oxo(methyl-1,2-ethanediyl)]",CAS without structure,TRUE,FALSE,NA,NA,NA,medium,NA,NA,FALSE
+P-1057,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Fatty acids, tall-oil, reaction products with diethylenetriamine, maleic anhydride, tetraethylenepentamine and triethylenetetramine",CAS without structure,TRUE,TRUE,Fatty acids and conjugates,subclass,broader,low,NA,NA,FALSE
+"Vanadium(IV) oxide hydrogen phosphate hemihydrate, lithium, zinc, molybdenum, iron and chlorine doped",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+4-[(4-{[4-({5-[2-(acryloyloxy) ethoxy]-5-oxoalkanoyl}oxy) benzoyl]oxy}-2-methylaroxy)carbonyl] aryl 2-(acryloyloxy) ethyl alkandioate,Unclassified,TRUE,TRUE,Carboxylic acid esters,direct_parent,subset,medium,NA,NA,FALSE
+LUPRAPHEN VP 9329,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Tricyclo[8.2.2.24,7]hexadeca-4,6,10,12,13,15-hexaene, 5,11,13,15-tetramethyl-",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Lanolin, hydrogenated",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"(αS,α'S,2R,2'S)- 2H- 1-Benzopyran-2-methanol, α,α'-[[(phenylmethyl)imino]-bis(methylene)]-bis[6-fluoro-3,4-dihydro-, hydrochloride (1:1)",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+gadolinium(III)sulfite trihydrate,CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Cadmium sulfide (CdS), solid soln. with zinc sulfide, copper chloride-doped",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"reaction product of: saturated, monounsaturated and multiple unsaturated long-chained partly estrified alcohols of vegetable origin (Brassica napus L., Brassica rapa L., Helianthus annuus L., Glycine hispida, Gossypium hirsutum L., Cocos nucifera L., Elae",Analytical parameter,TRUE,TRUE,Fatty alcohols,subclass,subset,medium,NA,NA,FALSE
+"Mercury, (1-methoxyethyl)(neodecanoato-O)",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Ethyl(1R,2S)-1-[[(2S,4R)-1-[(2S)-2-[(5-methylheteromonocycle-2-carbonyl)amino]alkenoyl]-4-heteropolycycle-6-yloxy-heteromonocycle-2-carbonyl]amino]-2-vinyl-alicyclecarboxylate",Unclassified,TRUE,NA,NA,NA,NA,low,NA,NA,FALSE
+"Alkenes, C7-9-branched, C8-rich",CAS without structure,TRUE,TRUE,Branched unsaturated hydrocarbons,subclass,subset,medium,NA,NA,FALSE
+benzyl (2-chloroethyl)ethyl ether dimethyl ammonium chloride,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Waste solids, cadmium-electrolysis, thallium-rich",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"isopropyl (1s,3s)-3-(methylamino)cyclobutane-1-carboxylate succinate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Hydrocarbons, C27-42, naphthenic; Baseoil — unspecified",Analytical parameter,TRUE,TRUE,Hydrocarbons,superclass,subset,high,NA,NA,FALSE
+"Pyrochlore, bismuth cadmium ruthenium",CAS without structure,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+"Benzene, 1,1'-oxybis-, tetrapropylene derivs., sulfonated, sodium salts",CAS without structure,TRUE,TRUE,Organic sulfonic acids and derivatives,superclass,subset,medium,NA,NA,FALSE
+"2,4-bis(((2-(dimethylammonio)ethyloxy)carbonyl)phen-2-ylazo)benzene-1,3-diol sulfate",Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE
+HYAFF 11P50,Unclassified,TRUE,FALSE,NA,NA,NA,high,NA,NA,FALSE

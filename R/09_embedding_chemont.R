@@ -197,6 +197,16 @@ matches <- tibble(
 # produce spurious high-similarity results based on incidental word overlap.
 # Flagging these allows downstream filtering without dropping them from the
 # score distribution plots.
+#
+# SCOPE OF THIS FILTER
+# The `matchable` flag is the canonical input gate for any ChemOnt
+# classification attempt on non-structure substances — whether embedding-based
+# (this script) or LLM-based (future experiment).  The rationale is method-
+# independent: a name that does not describe a single chemical entity cannot
+# yield a meaningful class assignment regardless of the classifier used.
+# Any downstream classification experiment should apply the same filter:
+#   filter(matchable)
+# before passing substance names to the classifier.
 # ==============================================================================
 
 matches <- matches |>

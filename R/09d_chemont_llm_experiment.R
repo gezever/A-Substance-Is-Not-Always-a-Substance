@@ -324,27 +324,41 @@ p1 <- ggplot(hitatk_long, aes(x = k, y = value, fill = model_id)) +
   theme(plot.subtitle = element_text(colour = "grey40"))
 
 # Panel 2: per-level Hit@1 for LLM only
-levels_long <- tibble(
-  level    = factor(c("subclass", "class", "superclass", "kingdom"),
-                    levels = c("subclass", "class", "superclass", "kingdom")),
-  hit_at_1 = c(metrics_llm$hit_at_1_sub, metrics_llm$hit_at_1_cls,
-               metrics_llm$hit_at_1_sup, metrics_llm$hit_at_1_kin),
-  lo       = c(metrics_llm$hit_at_1_sub_lo, metrics_llm$hit_at_1_cls_lo,
-               metrics_llm$hit_at_1_sup_lo, metrics_llm$hit_at_1_kin_lo),
-  hi       = c(metrics_llm$hit_at_1_sub_hi, metrics_llm$hit_at_1_cls_hi,
-               metrics_llm$hit_at_1_sup_hi, metrics_llm$hit_at_1_kin_hi)
-)
+levels_val <- metrics_combined |>
+  select(model_id,
+         subclass   = hit_at_1_sub,
+         class      = hit_at_1_cls,
+         superclass = hit_at_1_sup,
+         kingdom    = hit_at_1_kin) |>
+  pivot_longer(-model_id, names_to = "level", values_to = "hit_at_1")
 
-p2 <- ggplot(levels_long, aes(x = level, y = hit_at_1)) +
-  geom_col(fill = "#66C2A5", width = 0.5) +
-  geom_errorbar(aes(ymin = lo, ymax = hi), width = 0.15, linewidth = 0.7) +
-  geom_text(aes(label = sprintf("%.3f", hit_at_1)), vjust = -0.4, size = 3.5) +
+levels_ci <- metrics_combined |>
+  select(model_id,
+         subclass_lo   = hit_at_1_sub_lo, subclass_hi   = hit_at_1_sub_hi,
+         class_lo      = hit_at_1_cls_lo, class_hi      = hit_at_1_cls_hi,
+         superclass_lo = hit_at_1_sup_lo, superclass_hi = hit_at_1_sup_hi,
+         kingdom_lo    = hit_at_1_kin_lo, kingdom_hi    = hit_at_1_kin_hi) |>
+  pivot_longer(-model_id,
+               names_to  = c("level", ".value"),
+               names_sep = "_(?=(lo|hi)$)")
+
+levels_long <- levels_val |>
+  left_join(levels_ci, by = c("model_id", "level")) |>
+  mutate(level = factor(level, levels = c("subclass", "class", "superclass", "kingdom")))
+
+p2 <- ggplot(levels_long, aes(x = level, y = hit_at_1, fill = model_id)) +
+  geom_col(position = "dodge", width = 0.7) +
+  geom_errorbar(aes(ymin = lo, ymax = hi),
+                position = position_dodge(width = 0.7), width = 0.2, linewidth = 0.7) +
+  geom_text(aes(label = sprintf("%.3f", hit_at_1)),
+            position = position_dodge(width = 0.7),
+            vjust = -0.4, size = 3) +
   scale_y_continuous(limits = c(0, 1.1), expand = expansion(mult = c(0, 0))) +
+  scale_fill_brewer(palette = "Set2", name = NULL) +
   theme_minimal(base_size = 12) +
   labs(
-    title    = "LLM Hit@1 per hierarchy level (most → least specific)",
-    subtitle = sprintf("n = %d; higher levels (kingdom) should be easier than subclass",
-                       nrow(eval_data)),
+    title    = "Hit@1 per hierarchy level (most → least specific)",
+    subtitle = "Error bars = 95% CI; only available for LLM (fixed sample size)",
     x = NULL, y = "Hit@1"
   ) +
   theme(plot.subtitle = element_text(colour = "grey40"))
@@ -354,5 +368,26 @@ p_final <- p1 / p2 + plot_layout(heights = c(2, 1))
 ggsave(p_final,
        filename = here("output", "figures", "Analysis_9d_llm_experiment.pdf"),
        device = "pdf", height = 25, width = 30, units = "cm")
+
+# ------------------------------------------------------------------------------
+# Step 6: Export cache to CSV
+# Reads all JSON files in CACHE_DIR into a flat dataframe (one row per substance).
+# Usage token counts are flattened into separate columns.
+# ------------------------------------------------------------------------------
+
+cache_files <- list.files(CACHE_DIR, pattern = "\\.json$", full.names = TRUE)
+
+cache_df <- map(cache_files, \(f) {
+  parsed        <- fromJSON(f)
+  usage         <- as_tibble(parsed$usage)
+  parsed$usage  <- NULL
+  parsed        <- map(parsed, \(x) if (is.null(x)) NA_character_ else x)
+  bind_cols(as_tibble(parsed), usage)
+}) |>
+  list_rbind() |>
+  rename(class = class_)
+
+write_csv(cache_df, here("output", "tables", "llm_chemont_cache.csv"))
+message(sprintf("Cache exported: %d rows → output/tables/llm_chemont_cache.csv", nrow(cache_df)))
 
 message("09d_chemont_llm_experiment.R: completed")

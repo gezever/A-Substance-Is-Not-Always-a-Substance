@@ -42,6 +42,12 @@ Performance was assessed using standard information retrieval metrics, including
 
 This validation provides a principled comparison of embedding models and demonstrates the extent to which semantic representations of substance names approximate structure-based chemical taxonomy assignments.
 
+To assess whether large language models provide a more capable baseline, Claude Sonnet~4.6 was applied to the same validation benchmark under a zero-shot prompting protocol. For each substance name, the model was prompted to generate the ChemOnt class label at each hierarchy level (kingdom, superclass, class, subclass, and direct parent) together with a confidence estimate (high, medium, or low). Because the LLM generates a predicted label rather than ranking the full class space, Hit@k was computed per hierarchy level: Hit@1 equals accuracy at that level, and the implicit rank ceiling is 5 (one per level). Performance metrics are therefore not directly comparable to the embedding retrieval results but address the same evaluation question.
+
+\paragraph{LLM-Based Equivalence Assessment for Non-Structure Substances}
+
+To identify regulatory group entries whose scope can be aligned with a ChemOnt taxonomy node, Claude Sonnet~4.6 was applied to a sample of non-structure substance names. For each entry, the model assessed whether the name describes a ChemOnt-equivalent group (rather than a single substance), identified the most specific equivalent ChemOnt node, and classified the relationship as \texttt{skos:exactMatch}, \texttt{skos:broadMatch} (regulatory entry is a subset of the ChemOnt class), or \texttt{skos:narrowMatch}. High-confidence assignments were serialised as SKOS triples and added to the knowledge graph.
+
 \paragraph{Knowledge Graph Construction}
 
 All data were integrated into an RDF knowledge graph using SKOS~\cite{W3C2009SKOS} for taxonomy representation. Structure-defined substances were linked to ChemOnt classes and to ChEBI entities via InChIKey, enabling integration of biological hazard annotations~\cite{W3C2017OA}.

@@ -4,8 +4,7 @@
 \paragraph{Overview of the Integrated Knowledge Graph}
 \label{sec:knowledge_graph}
 
-We constructed an integrated knowledge graph to analyse the representation
-and interoperability of regulatory substances across datasets.
+We constructed an integrated knowledge graph to analyse the representation and interoperability of regulatory substances across datasets.
 Figure~\ref{fig:knowledge_graph} provides an overview of the resulting graph structure and its main semantic layers.
 The graph is organised into four layers: an input layer of 18 regulatory sources; a core layer of $\sim$17,500 regulatory substance entities represented as SKOS concepts; linking layers connecting substances to structure-based identifiers~(InChIKey), chemical classifications~(ChemOnt), and biological roles~(ChEBI); and derived layers comprising linkability tiers, embedding-based semantic clusters, and annotations ($\sim$46,600 links).
 
@@ -14,7 +13,7 @@ The graph is organised into four layers: an input layer of 18 regulatory sources
     \includemermaid[width=\linewidth]{images/sources/knowledge_graph.mmd}
     \caption{
         Overview of the integrated knowledge graph constructed from 18 regulatory datasets.
-        The graph flows from the input layer of regulatory sources through the core layer of regulatory substances~(SKOS concepts) to linking layers~(InChIKey, ChemOnt, ChEBI) and derived layers comprising linkability tiers, semantic clusters, and annotations.
+        The graph flows from the input layer of regulatory sources through the core layer of regulatory substances~(SKOS concepts) to linking layers~(InChIKey, ChemOnt, ChEBI) and derived layers comprising linkability tiers, semantic clusters, annotations, and an LLM-based SKOS crosswalk of 304 high-confidence triples linking non-structure substance groups to ChemOnt nodes.
     }\label{fig:knowledge_graph}
 \end{figure}
 
@@ -39,7 +38,7 @@ More than one-third of regulatory entries cannot be mapped to a unique chemical 
     \centering
     \includegraphics[width=\linewidth]{Analysis_4bd_v_Entity_type_and_linkability_vertical.pdf}
     \caption{
-        (A) Entity type composition across 18 regulatory sources. Each bar shows the proportional breakdown of substance entries into seven mutually exclusive types (Molecule, Substance group, Analytical parameter, Mixture, Regulatory entry, CAS without structure, Unclassified), illustrating that the mix of entity types differs substantially between regulatory instruments. (B) Linkability taxonomy applied to all 33,452 unique regulatory substance entries. A total of 20,909 entries (62.5\%) can be directly linked to a chemical structure via InChIKey (tier 1), while 4,981 entries (14.9\%) lack any usable identifier. Together, the panels show that structural linkability is unevenly distributed across sources and that more than one-third of all entries cannot be resolved to a unique chemical structure.
+        (A) Entity type composition across 18 regulatory sources; the mix of seven mutually exclusive types (Molecule, Substance group, Analytical parameter, Mixture, Regulatory entry, CAS without structure, Unclassified) differs substantially between regulatory instruments. (B) Linkability taxonomy applied to all 33,452 unique regulatory substance entries: 20,909 entries (62.5\%) are directly linked via InChIKey (tier~1); 4,981 (14.9\%) lack any usable identifier. Together, the panels show that structural linkability is unevenly distributed and that more than one-third of all entries cannot be resolved to a unique chemical structure.
     }
     \label{fig:analysis4d}
 \end{figure}
@@ -58,15 +57,11 @@ Cross-list analysis of the 17,523 structure-resolved InChIKeys shows that 70.0\%
 \begin{figure}[!ht]
     \centering
     \includegraphics[width=\linewidth]{Analysis_89_UMAP_and_ChemOnt_quality_ellipse.pdf}
-    \caption{(A) UMAP projection of sentence embeddings for 12,499 non-structure regulatory substance entries, grouped by k-means cluster (k = 6). Each point represents a unique substance name; spatial proximity reflects semantic similarity in the 384-dimensional embedding space. Clusters: Cl1 = Reaction masses; Cl2 = Complex substances (UVCB with structure); Cl3 = Petroleum \& coal tar fractions; Cl4 = Inorganic compounds \& metal salts; Cl5 = Trade names, codes \& biological materials; Cl6 = Polymers, fatty acids \& surfactants. (B) Distribution of top-1 cosine similarity scores~\cite{Manning2008} between substance name embeddings and ChemOnt class label embeddings across all 12,499 candidate substance-class pairs, shown here for \path{all-MiniLM-L6-v2}. The dashed line indicates the applied threshold ($s_1 > 0.80$); 132 entries (1.1\%) are retained as matches.}
+    \caption{(A) UMAP projection of sentence embeddings for 12,499 non-structure regulatory substance entries, grouped by k-means cluster (k = 6); spatial proximity reflects semantic similarity in the 384-dimensional embedding space.  Clusters: Cl1 = Reaction masses; Cl2 = Complex substances (UVCB with structure); Cl3 = Petroleum \& coal tar fractions; Cl4 = Inorganic compounds \& metal salts; Cl5 = Trade names, codes \& biological materials; Cl6 = Polymers, fatty acids \& surfactants. (B) Distribution of top-1 cosine similarity scores between substance name embeddings and ChemOnt class label embeddings for \path{all-MiniLM-L6-v2}; the dashed line indicates the threshold ($s_1 > 0.80$) used to bound manual evaluation (132 entries, 1.1\%).}
     \label{fig:analysis89}
 \end{figure}
 
-To evaluate whether semantic similarity can recover chemical meaning, we attempted to map non-structure substances to ChemOnt taxonomy classes using cosine similarity between sentence embeddings of substance names and ChemOnt class labels. Four models were evaluated: \path{all-MiniLM-L6-v2} (miniLM), \path{all-mpnet-base-v2} (mpnet), \path{allenai/scibert\_scivocab\_uncased} (SciBERT), and \path{dmis-lab/biobert-v1.1} (BioBERT). The distribution of top-1 similarity scores is heavily skewed towards lower values (Figure~\ref{fig:analysis89}B). Cosine similarity scores are not comparable across models: scores for the 200th-ranked match range from approximately 0.80 for miniLM to 0.94 for BioBERT, reflecting differences in embedding geometry rather than differences in match quality. A fixed threshold such as $s_1 > 0.80$ is therefore model-dependent and arbitrary; it was applied here for the purpose of bounding a manual evaluation, not as a principled quality criterion.
-
-Manual inspection of the top-200 matches per model revealed that the majority of retained assignments are chemically incorrect, regardless of model. Correct assignments were largely limited to cases where the substance name closely resembles the ChemOnt class label (e.g.\ \textit{Phenols} $\to$ \textit{Phenols}, \textit{Alkyl mercury compounds} $\to$ \textit{Alkyl mercury compounds}), indicating that high similarity scores reflect surface-form overlap rather than semantic understanding. Systematic errors were present across all models: miniLM conflates organic and inorganic species and confuses elements sharing a common prefix (e.g.\ \textit{organostannic compounds} $\to$ \textit{organoarsenic compounds}); mpnet consistently misassigns all nickel sulfide variants to \textit{nitrile sulfides}, a token-level artefact of the chemical symbol Ni being read as the start of ``nitrile''; SciBERT and BioBERT, pre-trained on biomedical literature, exhibit severe score inflation (a score of 0.93 on an incorrect match provides less information than a score of 0.85 on a correct one) and produce repeated false anchors to specific heterocyclic and lipid ChemOnt classes for structurally unrelated substances. Trade names and reaction products were assigned arbitrary classes with no verifiable basis across all models.
-
-Score magnitude is not a reliable indicator of match correctness. Models with the highest score floors (SciBERT, BioBERT) performed worst on both manual inspection and quantitative validation, demonstrating that inflated cosine scores reflect poor calibration rather than genuine chemical understanding. Embedding-based methods cannot compensate for the absence of structure-based identifiers, and fail systematically for substance groups, mixtures, and analytically defined entries.
+To evaluate whether semantic similarity can recover chemical meaning, cosine similarity between sentence embeddings of substance names and ChemOnt class labels was computed for four models (\path{all-MiniLM-L6-v2}, \path{all-mpnet-base-v2}, \path{allenai/scibert\_scivocab\_uncased}, \path{dmis-lab/biobert-v1.1}). Score distributions are heavily skewed towards lower values and are not comparable across models, as embedding geometry differs between architectures (Figure~\ref{fig:analysis89}B); a fixed threshold is therefore model-dependent and not a principled quality criterion. Manual inspection of the top-200 matches per model confirmed that the large majority of high-scoring assignments are chemically incorrect; correct cases were limited to surface-form overlap between substance name and class label (e.g.\ \textit{Phenols} $\to$ \textit{Phenols}). Score magnitude is not a reliable indicator of match correctness: models with the highest score floors (SciBERT, BioBERT) performed worst on both manual inspection and quantitative validation.
 
 To validate this failure quantitatively, the four models were evaluated against a structure-derived ChemOnt ground truth comprising 28,204 ClassyFire-assigned substances. These results, shown in Table~\ref{tab:chemont_validation}, indicate that \path{all-MiniLM-L6-v2} achieved the highest Hit@1 of 5.75\% and MRR of 0.093 — even this best result implies the correct class is retrieved in fewer than 1 in 17 attempts. All other models scored below Hit@1 = 1\%. Retrieval performance decreased further with increasing taxonomic abstraction: Hit@1 fell to 3.25\% at the subclass level and below 1\% for class, superclass, and kingdom. A hierarchy-aware weighted MRR of 0.099 was only marginally higher than the strict MRR, confirming that partial matches at higher levels of the ChemOnt hierarchy do not rescue overall classification quality.
 
@@ -82,13 +77,17 @@ To validate this failure quantitatively, the four models were evaluated against 
         all-mpnet-base-v2 & 0.0093 & 0.0152 & 0.0184 & 0.0247 & 0.015 \\
         SciBERT           & 0.0040 & 0.0071 & 0.0102 & 0.0131 & 0.008 \\
         BioBERT           & 0.0047 & 0.0077 & 0.0099 & 0.0150 & 0.009 \\
-        Claude Sonnet 4.6 & X.XXXX & X.XXXX & X.XXXX & X.XXXX$^*$ & X.XXX \\
-        \multicolumn{6}{l}{\footnotesize $^*$max. rank = 5 (5 hiërarchieniveaus als impliciete ranglijst)} \\
+        Claude Sonnet~4.6$^\dagger$ & 0.392 & 0.412 & 0.414 & 0.414$^*$ & 0.402 \\
+        \multicolumn{6}{l}{\footnotesize $^*$Hit@k saturates at Hit@5 because the LLM ranks over 5 hierarchy levels.} \\
+        \multicolumn{6}{l}{\footnotesize $^\dagger$LLM generates a label per hierarchy level, not a ranking over the full class space; metrics} \\
+        \multicolumn{6}{l}{\footnotesize \phantom{$^\dagger$}reflect per-level accuracy and are not directly comparable to embedding retrieval scores.} \\
         \hline
     \end{tabular}
 \end{table}
 
 
+
+Large language model classification substantially outperforms embedding-based retrieval: Claude Sonnet~4.6 achieves a Hit@1 of 39.2\% and MRR of 0.40, a seven-fold improvement over the best embedding model. Performance is monotonically higher at more general levels (96.5\% at kingdom, 52.3\% at superclass), and LLM-assigned confidence is a validated quality signal: high-confidence assignments reach 53.9\% accuracy, while low-confidence cases score 0\%. Nevertheless, even at its strongest, the LLM correctly classifies fewer than 2 in 5 substances at the most specific level, and application to non-structure substances yields substantially higher null rates and lower confidence, confirming that linguistic structure alone cannot substitute for chemical structure information.
 
 \paragraph{Scale of the Interoperability Problem (\texorpdfstring{\hyperref[sec:contribution4]{C4}}{C4})}
 For the more than 11,000 non-structure entries, full manual reconciliation would require on the order of hundreds of millions of pairwise comparisons. Under conservative assumptions, this corresponds to several thousand person-years of expert effort.
@@ -106,11 +105,7 @@ For the more than 11,000 non-structure entries, full manual reconciliation would
 
 
 
-Figure~\ref{fig:analysis10c} quantifies this workload across all regulatory sources, illustrating both the absolute scale and the quadratic growth that makes each additional non-structure entry disproportionately costly. Even moderate increases in the number of unresolved entries lead to a rapidly escalating curation burden.
-
-Manual pairwise reconciliation at this scale is not operationally feasible. This result highlights a fundamental constraint: interoperability cannot be achieved through retrospective harmonisation of heterogeneous substance definitions.
-
-Instead, the only scalable strategy is to address the problem at its source. By requiring structure-resolvable identifiers and ontology-based representations in regulatory definitions wherever chemically applicable, the number of entries requiring manual reconciliation can be structurally reduced rather than managed post hoc.
+Figure~\ref{fig:analysis10c} illustrates this quadratic growth across all regulatory sources; the workload is dominated by REACH registrations (~1,800 person-years alone), and each additional non-structure entry is disproportionately costly.
 
 \paragraph{Knowledge Graph Integration and Priority Scoring (\texorpdfstring{\hyperref[sec:contribution5]{C5}}{C5})}
 Structure-defined substances can be successfully integrated across regulatory lists, chemical taxonomies (ChemOnt), and biological annotations (ChEBI) using InChIKey as a linking key. 
@@ -121,7 +116,7 @@ Structure-defined substances can be successfully integrated across regulatory li
 	\caption{Bubble chart of composite priority space: regulatory list score versus biological hazard score for all scored substances. Bubble size is proportional to the number of regulatory source memberships. Substances in the upper-right quadrant combine broad regulatory coverage with documented biological hazard evidence.}
 	\label{fig:analysis14e}
 \end{figure}
-This enables cross-domain queries that are infeasible on fragmented regulatory datasets: for example, identifying substances that appear on three or more ECHA lists and carry a documented biological role in ChEBI, or retrieving all members of a given ChemOnt class that are subject to authorisation requirements. As an illustration of this analytical potential, a composite priority score combining regulatory list membership with ChEBI biological role annotations was computed following the ToxPi framework~\cite{Reif2010}. Figure~\ref{fig:analysis14e} plots regulatory versus biological scores for all scored substances; 2,2-bis(4-hydroxyphenyl)propane and dibutyl phthalate exemplify substances with both broad regulatory presence and multiple documented biological roles. This score is illustrative and does not constitute a formal risk assessment.
+This enables cross-domain queries that are infeasible on fragmented regulatory datasets: for example, identifying substances that appear on three or more ECHA lists and carry a documented biological role in ChEBI, or retrieving all members of a given ChemOnt class that are subject to authorisation requirements. As an illustration of this analytical potential, a composite priority score combining regulatory list membership with ChEBI biological role annotations was computed following the ToxPi framework~\cite{Reif2010}. Figure~\ref{fig:analysis14e} plots regulatory versus biological scores for all scored substances; 2,2-bis(4-hydroxyphenyl)propane and dibutyl phthalate exemplify substances with both broad regulatory presence and multiple documented biological roles. This score is illustrative and does not constitute a formal risk assessment. Extending the knowledge graph to non-structure substance groups, LLM-based equivalence assessment identifies 31.7\% of sampled non-structure entries as ChemOnt-equivalent group entries---far above the 0.8\% detected by regular-expression pattern matching. Of these, 304 high-confidence SKOS mapping triples were validated (285~\texttt{skos:broadMatch}, 18~\texttt{skos:exactMatch}, 1~\texttt{skos:narrowMatch}), forming a directly reusable legislative--ChemOnt crosswalk. The dominance of \texttt{skos:broadMatch} (92.8\%) reflects that regulatory group entries typically define constrained subsets of ChemOnt classes (e.g.\ \textit{fatty acids, C16--22} $\subset$ \textit{Fatty acids and conjugates}), making their scope explicit and their member substances enumerable via the ChemOnt hierarchy. The remaining 68\% of non-structure entries could not be reliably mapped, underscoring the limits of post-hoc taxonomic alignment.
 
 
 

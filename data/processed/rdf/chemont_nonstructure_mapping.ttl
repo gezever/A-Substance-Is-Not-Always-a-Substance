@@ -1,0 +1,1524 @@
+@prefix concept: <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/> .
+@prefix skos:    <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f8989ebdcdb5f01eefcecf88acf5b43b>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004747> ;
+    rdfs:label "1,4-Benzenediamine, N,N-mixed Ph and tolyl derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/a8dfd0bc2eae49613acd5a64a887737a>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004620> ;
+    rdfs:label "A mixture of isomers of branched tetracosane"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/8d20dc656a5968e85c10244b0b18b53c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004188> ;
+    rdfs:label "Nickel, [29H,31H-phthalocyaninato(2-)-[?]N29,[?]N30,[?]N31,[?]N32]-, sulfo [[4-[[2-(sulfooxy)ethyl]sulfonyl]phenyl]amino]sulfonyl derivs., sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/94958669026bf6008b1e33cd307b467f>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C16-18, 2-hydroxyethyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/e18fc5fc91ff767f7f61df7c286c6038>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000151> ;
+    rdfs:label "Anthraquinone acid dye"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/a84d2a7d501937ac0a841196bb803ed5>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000032> ;
+    rdfs:label "Benzenesulfonic acid, 4-C10-13-sec-alkyl derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/c5d4c71c9e6f536069b2c7f00c5a30bf>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "sunflower oil fatty acids"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9542f8202b0baed0e4bd83a94614d3be>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "Fatty acids, C16-18 (even numbered) saturated and C16-20 (even numbered) unsaturated, lithium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f825b100529f3240ff69473de0cad8f3>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000175> ;
+    rdfs:label "Glycerides, C12-18 mono- and di-"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/eb70c74bf897a5c49d0bc599ed274681>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003961> ;
+    rdfs:label "Perfluorohexane-1-sulphonic acid and its salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f0f29902a5d848a19237d6ccd0159827>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000134> ;
+    rdfs:label "phenol, 2-dodecyl-, branched"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/27ebde397c7b3d1bad5a3d051e4e086c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002837> ;
+    rdfs:label "Hydrocarbons, C4, butane conc., n-butene-contg."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/a0c8080bb284c9314febe04251edd2f0>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004477> ;
+    rdfs:label "Aromatic hydrocarbons, C6-10, C8-rich"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/aafcdbcde44b36e3240da2c7f4020232>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C16-18, isononyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/2cd0c15588640c09759c4c80db26108a>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000159> ;
+    rdfs:label "Oxirane, mono[(C8-10-alkyloxy)methyl] derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/2d4e9451b142aae122816d5ab7a65f58>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004484> ;
+    rdfs:label "Phosphorous acid, tri-C12-14-alkyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/b4e704badf36eeef9ff3bb7410b144bd>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001334> ;
+    rdfs:label "Alcohols, C18-22, distn. residues"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/89bc58e04bd8be7bd67bd786ec2086c7>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000098> ;
+    rdfs:label "Triazine derivative"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/a2ffb67966f52cd9d1e97eff2c43572e>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003961> ;
+    rdfs:label "Perfluorooctane sulfonic acid (PFOS), its salts and PFOS-related compoundsC8F17SO2X (X = OH, Metal salt (O-M+ ), halide, amide, and other related compounds including polymers)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/92895a3e5c3f640d29907ef1774f406b>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001133> ;
+    rdfs:label "Glycerides, C14-22 mono-"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f3d1cd5316b20b023e2a1d44e358d574>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C16-18 tridecyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/93bd880b9af3d76276d6e1715b259e0e>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "Fatty acids, tall-oil, low-boiling"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f63fef7d6316c12818697f3ac8708093>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000331> ;
+    rdfs:label "Amides, C12-18(even numbered), N-[3-(dimethylamino)propyl]"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/3c7733730b54b00693ee63a9b428e5bb>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004474> ;
+    rdfs:label "Hydrocarbons, C5, n-alkanes, isoalkanes"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/4872a9240d6efb7380b78a4974cdefa9>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003457> ;
+    rdfs:label "Phosphoric Acid, C8-12(even-numbered) linear Alkyl Esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/953ad75925816bca6dd1b10c1c795b1f>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001661> ;
+    rdfs:label "Alcohols, C11-15-secondary"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/bf4c95f7bb5cdee344a86e80e3660263>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002837> ;
+    rdfs:label "Hydrocarbons, C≥5, C5-6-rich"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/b5b174dab7bc7d89ad62517e8879188c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000151> ;
+    rdfs:label "1,4-bis[(4-C12 (branched and linear) alkylphenyl)amino]anthraquinone"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/d4c13ebd7017acef42c2f123ef18c392>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002501> ;
+    rdfs:label "Alkenes, C9-11, C10-rich"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9750acb219e59e9104e6b6a9d7ae0050>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003962> ;
+    rdfs:label "undecafluorohexanoic acid and its ammonium salt"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/52aea2d098b5ea66a74a5534deb64a1e>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C18-36, esters with ethylene glycol"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/027e7ba3838ada1fa8b1b0ea1c093215>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001105> ;
+    rdfs:label "1,2-benzenedicarboxylic acid, di-C10-12-branched alkyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/58fcda5f61cd1a31d59c2b965631ebaf>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000175> ;
+    rdfs:label "Glycerides, C16-18 mono- and di-"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/727ff0e3548c5ac3e377f8fcae0d9aa3>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "Fatty acids, C16-18"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/336151bd5456ae5e320837ceffe711f4>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002501> ;
+    rdfs:label "Alkenes, C15-16"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/3a83da0f6d25fdf3f719dc9564b0d23e>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004188> ;
+    rdfs:label "Nickel, [29H,31H-phthalocyaninato(2-)-N29,N30,N31,N32]-, sulfo [[4-[[2-(sulfooxy)ethyl]sulfonyl]phenyl]amino]sulfonyl derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/375915e65a47d914df8579cd77b410df>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, coco, 2-ethylhexyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/b56d06e268c40148e904dcb46b2ac453>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001765> ;
+    rdfs:label "Rhamnolipids: fermentation products of glucose with Pseudomonas putida, Pseudomonacae, partially neutralized, sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f9a996c2a65996f48acfcb4b31f4275f>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004575> ;
+    rdfs:label "trialkylboranes, solid"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/aa5b278796d1c9bbf321015602809900>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002279> ;
+    rdfs:label "Benzene, C15-16-alkyl derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/572b7adb5f729dcf56b05041171d525e>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001105> ;
+    rdfs:label "1,2-Benzenedicarboxylic acid, di-C9-11-branched and linear alkyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9434359356900ef9f4cd17c71a415bba>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004474> ;
+    rdfs:label "Hydrocarbons, C11-14, n-alkanes, isoalkanes, <2% aromatics"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/1eee6969875d8b6dab4c949e8e16c3a5>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002279> ;
+    rdfs:label "Benzene, C20-24 (even numbered) sec-alkyl derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9e26c91ee8d4d60249a0f16150de73a2>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001272> ;
+    rdfs:label "Cresol"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/c593e712fedaf25e3765fc6f7500131d>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000331> ;
+    rdfs:label "Amides, C8-10 (even numbered), N-[3-(dimethylamino)propyl]"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/eaccabe04517901829ba3a09b7cecda2>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001334> ;
+    rdfs:label "Fatty alcohols, C12-18 (even numbered), manuf. of, destn. residues"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/103f50e5b222668217ee5560c8d6402a>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "Fatty acids, C8-18 and C18-unsatd."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/81832966b4d613ba82c6084bd03aec37>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002865> ;
+    rdfs:label "Acid chlorides, C16-18 (even numbered)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/69cad30595e272ad60bf6a5fbaf15fde>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004212> ;
+    rdfs:label "2,4(or 2,5)-xylenol"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/1047679df50785b4f4e18ce2f8b3db59>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001799> ;
+    rdfs:label "N-((3R,4R)-1-benzyl-4-alkylpiperidin-3-yl)-2-halogeno-N-alkyl-7H-pyrrolo[2,3-d]pyrimidin-4-amine"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/21c5fcd4bbb93e04a9b539a88cbd1612>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000331> ;
+    rdfs:label "Amides, C8-18 even numbered, N-[3-(dimethylamino)propyl]"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/d3e37e01a559a961dde09f2a3ef460fe>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000331> ;
+    rdfs:label "Amides, C8-10 (even-numbered), N-hydroxyethyl"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/48e57ff8518dd5e798b26e6b76621031>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003597> ;
+    rdfs:label "Naphthalenesulfonic acid, butyl-, Me derivs., sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/5b61c929100f8011fa731da60edf77e7>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004009> ;
+    rdfs:label "1,2-benzenedicarboxylic acid, di-C6-10-alkyl esters or mixed decyl and hexyl and octyl diesters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/902550d65e902b1ef5a34c9e58644c5d>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001845> ;
+    rdfs:label "Diphenylether, octabromo derivative C12H2Br8O"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/440a27cc809f3ac9974ef42792827519>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004446> ;
+    rdfs:label "polydimethylsiloxane"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/8373ea4eaa5dcf9dc291f0c9bdec663b>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002201> ;
+    rdfs:label "Sophorolipids: fermentation products of glucose and fatty acids, C18 (unsaturated), glycerol esters with yeast Starmerella bombicola, partially hydrolysed, partially neutralised, sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ad6ad0d4c0476fff29eab7e00c53bc47>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000159> ;
+    rdfs:label "Oxirane, mono[(C12-14-alkyloxy)methyl] derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/c2a9f8af36bdc319a9c85caed4d3f16f>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001334> ;
+    rdfs:label "Alcohols, C14-15-branched and linear"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/a43a49de59800050cd72876648186941>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000503> ;
+    rdfs:label "1-Propanaminium, 3-amino-N-[2-[(2-hydroxyethyl)amino]-2-oxoethyl]-N,N-dimethyl-, N-C12-18 acyl derivs., chlorides"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/48c616caf32f0f746e8c42aa06271fba>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000134> ;
+    rdfs:label "phenols, butylated, isobutylated or octylated"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/280682f710ed85d799562c470dc031f2>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001516> ;
+    rdfs:label "Chlorinated paraffins with carbon chain lengths in the range C14-17 and chlorination levels at or exceeding 45 per cent chlorine by weight"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/e20b73b01e6dd286e2838e79b9e19411>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001105> ;
+    rdfs:label "1,2-Benzenedicarboxylic acid, di-C8-10-branched alkyl esters, C9-rich"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/e6434d478b935a20b3d6aeea10d14074>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "perilla oil fatty acids"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/5b3ccedc65494695d8e8d1416a1e157c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004526> ;
+    rdfs:label "chloroanilines (with exception of those specified elsewhere in this Annex)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/027f66995cfef5aef79c2550dd3a6e28>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000407> ;
+    rdfs:label "organic compounds of mercury with the exception of those specified elsewhere in this Annex"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/3ce402efe68b400fd1d6b7223ec67326>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000143> ;
+    rdfs:label "4,4'-[2,2,2-trifluoro-1-(trifluoromethyl)ethylidene]diphenol and its salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0edbb9326fa6880aa642b8f0e433131b>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004026> ;
+    rdfs:label "salts of hydrogen cyanide with the exception of complex cyanides such as ferrocyanides, ferricyanides and mercuric oxycyanide and those specified elsewhere in this Annex"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/867075bdbaef4ce6f8584ae109af575c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004075> ;
+    rdfs:label "Cadmium laurate, palmitate, stearate"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/65bdf997d18208ef29e6265f322f1f1f>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000151> ;
+    rdfs:label "9,10-Anthracenedione, 1,4-diamino-, N,N'-mixed 2-ethylhexyl and hexyl and octyl derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/41edfc576273982078faa58b7861939c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003962> ;
+    rdfs:label "Perfluorononan-1-oic-acid and its sodium and ammonium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/57bb7f3865880416f410218af479f22b>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000175> ;
+    rdfs:label "glycerol, esters with oleic acid"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/111a686734e94ebcf864caa9cf26d554>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004085> ;
+    rdfs:label "stannane, dioctyl-, bis (coco acyloxy) derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/d33ebdf97415b412f73b04c92ed814b7>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "palm oil fatty acids"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/18606cee6f713724cd4c24d587ebcece>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003417> ;
+    rdfs:label "Fatty acids, C14-18 and C16-18-unsatd., Me esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/2936365aa5e957c83d5e5680326cf868>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001026> ;
+    rdfs:label "Alkanes, C14-17, chloro"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9be1661957e9d75ee99b1177f1acaf63>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002125> ;
+    rdfs:label "D-Glucose, reaction products with alcohols C16-18 (even numbered)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ebc9930bdb2ec79b9c6c6b125afc0d8a>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002201> ;
+    rdfs:label "Sophorolipids: fermentation products of glucose and fatty acids, C18 (unsaturated), glycerol esters with yeast Starmerella Bombicola"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/e83eda3faf0de106806e649059e77f33>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "fish oil fatty acids"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/c86a50cb00cc994157a9d48621e50b29>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004149> ;
+    rdfs:label "Polycyclic aromatic hydrocarbons (PAHs)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f82efea6d09df8fd36b7013d4d699019>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003310> ;
+    rdfs:label "naphthalene sulfonates"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/2098a50ae94148af66d363c789933fbc>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "Fatty acids, sunflower-oil, conjugated"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/bf6c96043d4f92e83f07022a23cb990b>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Octadecanoic acid, C16-20-branched alkyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/2ad19826f20c49743fc4e9168c97d81e>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002501> ;
+    rdfs:label "Alkenes C20+"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/80d3ed741a124c922fbc8a40ecd72a8b>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "fatty acids, tall oil"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/dfdf2330b9d8fe33bbfb530d8fbed0e4>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004188> ;
+    rdfs:label "Copper, [29H,31H-phthalocyaninato(2-)-N29,N30,N31,N32]-, aminosulfonyl sulfo derivs., sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/518f04684162c518fc073b53eab04d24>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003934> ;
+    rdfs:label "Carbamodithioic acid, bis(mixed 2-ethylhexyl and 2-methylbutyl and pentyl) derivs., antimony (3+) salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f7617fdb88a012580634fdabca66b92f>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C16-18 and C18-unsatd., Bu esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/034aac935ae012d18713c869347b51c9>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003965> ;
+    rdfs:label "Diaminotoluene"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/7207d4fe925c6b97a11f23fbd7cf56d1>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004744> ;
+    rdfs:label "PHENYLENEDIAMINE DYE"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ccb593b62de73054e44beda09f94f2c3>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003338> ;
+    rdfs:label "poly(oxy-1,2-ethanediyl), .alpha.-(4-hydroxybutyl)-.omega.-hydroxy"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/38b4779da2440318acec4a6fee4074a0>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000895> ;
+    rdfs:label "Reaction products of boric acid and lithium hydroxide"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/120a56afdf8987de9f29fff8feb009b1>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004009> ;
+    rdfs:label "Diundecyl phthalate, branched and linear"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/7e4dc524d4486db7c746f191d5bce113>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002500> ;
+    rdfs:label "Alkanes, C<sub>12-26</sub>-branched and linear"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/167a93612f820f9f7e6d9c266898cc56>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002837> ;
+    rdfs:label "Hydrocarbons, C4, 1,3-butadiene- and isobutene-free"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/41187156858d67c8fe28cdbde22b54cd>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C16-18, esters with diethylene glycol"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0f6454616516aa1773b7df56a1bbfa24>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C14-18 and C16-18-unsatd., esters with neopentyl glycol"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f8bd019a10ddab8a2740bd41a84dbff3>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004188> ;
+    rdfs:label "Copper, [29H,31H-phthalocyaninato(2-)-N29,N30,N31,N32]-, [[2-[(4-chloro-6-methoxy-1,3,5-triazin-2-yl)amino]ethyl]amino]sulfonyl sulfo derivs., sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/2ee42ef92661fe102d384fc5281719c6>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004528> ;
+    rdfs:label "chlorotoluene"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/4450bb19a841c58615f9efa4ebb01d57>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C16-18, Bu esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/3e025a69689b410d7e5c51907abd3556>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000331> ;
+    rdfs:label "Amides, coco, N-[3-(dimethylamino)propyl]"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/d794d09ea37b5100e93b8474ec667b91>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004208> ;
+    rdfs:label "Xylene"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/8fbbf23db552229f6d8152235f059802>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000331> ;
+    rdfs:label "Amides, C8-18 (even numbered) and C18-unsatd., N-(hydroxyethyl)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0a5f4a33ec187b0b2b990231062b7214>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000032> ;
+    rdfs:label "Benzenesulfonic acid, mono- and dialkylation products with C16-20 (even numbered, branched and linear) olefins"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/be4cfc570536607cc7382d4c6f1a5265>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000331> ;
+    rdfs:label "Amides, C10-12 (even numbered) and C18 (unsaturated) alkyl, N, N-bis(hydroxyethyl)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/96fc32afea6ebfc12c756c4e31d39b3d>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003597> ;
+    rdfs:label "Naphthalenesulfonic acids, branched and linear Bu derivs., sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/d996b837c86ee1db98222cf926f42eed>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000492> ;
+    rdfs:label "salts of hyoscyamine"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/fa3b86f994accc57836169216d9245fe>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000298> ;
+    rdfs:label "Straight Chain Lepidopteran Pheromones (SCLPs) - Aldehydes"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/34d21932c6529152e92b6230b679d7a4>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001185> ;
+    rdfs:label "Sulfuric acid, mono-C16-18-alkyl esters, sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/8085975643edd67560802039fc00a8db>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000032> ;
+    rdfs:label "Benzenesulfonic acid, mono-C11-13-branched alkyl derivs., sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/89c539987d6fa6c4e65f4bf9daeece38>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000175> ;
+    rdfs:label "glycerol, esters with myristic acid"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ec4c13f5fd98d26814b9ccecfd5dd588>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002501> ;
+    rdfs:label "Alkenes, C6-8"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/d2e9dba29e75b1bce31a4572ba061c0f>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000331> ;
+    rdfs:label "Amides, C8-18 (even numbered) and C18-unsatd., N,N-bis(hydroxyethyl)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/bcebe52236d4ed024d66d2967be43595>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003455> ;
+    rdfs:label "Sulfuric acid, C10-12 (even numbered)-alkyl esters, sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/91bf8dffcdd08e5a526cd6bbf616c4e1>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002452> ;
+    rdfs:label "Amines, (C16-18 and C18-unsatd. alkyl)dimethyl"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ba9cf006876d7246dcdd9047819c0381>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003417> ;
+    rdfs:label "Methyl ester of fatty acids, Cx-Cy, Hydroxymethylated"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/bdd13d6c0586de73c53ee396d4d37060>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002501> ;
+    rdfs:label "Alkenes, C20-24 α-"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/daaffe2a7d8b1912a7a241a5d935f291>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "Fatty acids, coco, hydrogenated"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/5e9eb8df3beffba8c908f17eba2019cc>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004024> ;
+    rdfs:label "Plumbane, ethyl methyl derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/28d6bda6654aa1d9f4e375a6f82d5a5c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003417> ;
+    rdfs:label "Fatty acids, C14-18 and C18-unsatd., branched and linear, Me esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/72ffd1be2f2f4ebeac89f8add0abadd4>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "hempseed oil fatty acids"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/8d4922fdec440c0031144fac48f77384>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003962> ;
+    rdfs:label "Perfluoroheptanoic acid and its salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/a261157927488d90ef03b5df05687003>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004188> ;
+    rdfs:label "Low chlorinated copper, [29H,31Hphthalocyaninato(2-)-N29,N30,N31,N32]-, wherein the number of chlorines ismore than or equal to 0 and less than or equal to 5"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/76d253e91e806991d169631533341056>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004009> ;
+    rdfs:label "1,2-Benzenedicarboxylic acid, di-C6-10-alkyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/c80ea9a5895a73b4585368409d04a6af>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004620> ;
+    rdfs:label "Hydrocarbons, C6, isoalkanes, <5% n-hexane"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/1d196d7313732255222927eccf31f112>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004702> ;
+    rdfs:label "Benzoic acid, 4-hydroxy- ester with alcohols C18-22-alkyl (even numbered)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/3e0b277883c9eebd77df7bbcd655d6f3>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004794> ;
+    rdfs:label "Naphthalene, chloro derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/11ef8068b113fe4656cf6af2b2920980>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003297> ;
+    rdfs:label "acetic acid ethenyl ester, polymer with chloroethene and ethene"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/5c7d0f052c8869434b5afc0392e2954b>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002501> ;
+    rdfs:label "Alkenes, C10-14-branched and linear, C12-rich"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0b490ac6b06450338dff5b8961eff18c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000175> ;
+    rdfs:label "Glycerides, C16-18 mono-, di- and tri-"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/02a1d740526d4bcb3cd0793a424b1d95>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, vegetable-oil, esters with neopentyl glycol"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/268fa3e347620742662adea7c0835f33>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004149> ;
+    rdfs:label "Polycyclic-aromatic hydrocarbons (PAH)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/1da7885bc10f12891fcc23e66ecf283d>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001201> ;
+    rdfs:label "salts of thiocyanic acid, with the exception of those specified elsewhere in this Annex"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/6975ba7f3f90244be50d965a0056b068>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004452> ;
+    rdfs:label "Reactionmass of octan-2-yl prop-2-enoate and octan-3-yl prop-2-enoate and octan-4-yl prop-2-enoate"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/3ca7d873baa12a3d56d26ff0f9c047ea>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003961> ;
+    rdfs:label "Perfluorohexane sulfonic acid (PFHxS), its salts and PFHxS-related compounds"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/20ca14359205209490188faa7ac1743b>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004794> ;
+    rdfs:label "Polychlorinated naphthalenes"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/04149c4733f768552b00cc7f0fc83ac6>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000331> ;
+    rdfs:label "Amides, C16-18 (even numbered), N-C16-18 (even numbered) alkyl"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/7d16efd69355b0fdea634ceece63a70a>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002837> ;
+    rdfs:label "Hydrocarbons, C3"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/270a6a8c24bba96a34f7df652dcde9c5>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003417> ;
+    rdfs:label "Fatty acids, C16-18 and C18-unsatd., Me esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9517fa94d16ae3c0bd7b51be58f34a94>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004568> ;
+    rdfs:label "aluminium alkyls"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/811676af4f634ddc8d2d19749dd660a0>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000331> ;
+    rdfs:label "Amides, C12-18(even-numbered) and C18(unsatd.), N,N-bis(hydroxyethyl)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9580af763f7b83f658da4edf6e73d48a>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001845> ;
+    rdfs:label "Hexabromodiphenyl ether (group)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/c237dda5074733106db4b0c9f2a3ca8a>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004317> ;
+    rdfs:label "AMINO SUCCINIC ACID DERIVATIVE"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/575f9b0d13a65d003c7fcc97f4c31cca>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "Fatty acids, C8-18 and C18-unsatd., barium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f4456a21af73ca3fa9a7ca8e676dd807>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C16-18 and C18-unsatd., esters with sorbitol"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/2f68c1ec4ad75ead6acf0fbb8ea1be7b>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000331> ;
+    rdfs:label "Amides, tall-oil fatty, N-[3-(dimethylamino)propyl]"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/dee1020f37e2c756601586ebea7cbf1b>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002501> ;
+    rdfs:label "Alkenes, C>8"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/aa987587105afa1bbe06446c1e1684f4>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001133> ;
+    rdfs:label "Glycerides, C16-18 and C18-unsatd. mono-"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/d7a70479a2b81ce8e825a9f255fa5765>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004620> ;
+    rdfs:label "C16-(branched), C20-(branched) and C24-(branched)-alkanes"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/1cc8e9738951a02fa1bb2ee9e5e3683a>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C12-18 (even-numbered), 3-methylbutyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/3cbfe57ddfe982535d97ff74228b5f8f>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001873> ;
+    rdfs:label "PHTALIDE"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/4f071f7c8c601e5e53c7697be3d89455>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001350> ;
+    rdfs:label "Benzoic acid, C12-15-alkyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/b21b7f193eaf2590e7561e9e65059cda>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000739> ;
+    rdfs:label "Lead sulphates"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/09c16bcca57b5bbbc8c3ba96c3e8afca>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004060> ;
+    rdfs:label "inorganic compounds of mercury with the exception of mercuric sulphide and those specified elsewhere in this Annex"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/99b97b3cefc44aea81cdbebb7e3e3bce>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000134> ;
+    rdfs:label "Crude Phenols|Tar acids, brown-coal gasification|[A complex combination of organic compounds obtained from brown coal gasification. Composed primarily of C<sub>6-10</sub> hydroxy aromatic phenols and their homologs.]"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/619e5dc33ad1abd72730d5eb8f956f89>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000503> ;
+    rdfs:label "Bisquaternary ammonium compound"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/258339c726e4e6c7e9824b28961b6536>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C8-10 (even numbered), 2-ethylhexyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/24f49be493c1b7c5753ceedcd3feb241>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, safflower-oil, Et esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/50f81119645425527a8482c464d7dc4d>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004188> ;
+    rdfs:label "Copper, [29H,31H-phthalocyaninato(2-)-N29,N30,N31,N32]-, [[3-(cyclohexylamino)propyl]amino]sulfonyl derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/b46d23553c05a01056124a47cc9061f3>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000032> ;
+    rdfs:label "Benzenesulfonic acid, 4-C7-13-sec-alkyl derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/5556c1f2bfead4f3fdee2e3f407fdb1d>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004474> ;
+    rdfs:label "Hydrocarbons, C7, n-alkanes, isoalkanes, cyclics"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/eaa6fcc5faaca8f2ee96d3de0546b40b>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003961> ;
+    rdfs:label "Perfluorobutane sulfonic acid (PFBS) and its salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/fcd8ecbaf2a453ba721d0fb7014be409>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000503> ;
+    rdfs:label "Quaternary ammonium compounds, N,N,N'-tris(hydroxyethyl)-N,N'-dimethyl-N'-C16-18 (even numbered) and C18 unsatd., alkyltrimethylenedi-, bis(Me sulfates) (salts)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/3f86da8a7243bd055f36ce428c406773>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000143> ;
+    rdfs:label "Bisphenols with endocrine disrupting properties for the environment and their salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/4b010ca6ce86b2bddf0cd69dabd8e557>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000023> ;
+    rdfs:label "Alkylnaphthalene"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/a1fe59c6ac5a2bc6e0cb79cffe3c3913>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, soya, iso-Pr esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/3469a94f3c999497bc8e5b9b9246e0ce>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004066> ;
+    rdfs:label "trimethyltin compounds, with the exception of those specified elsewhere in this Annex"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/2da997009c0f27a2107187ba2c9f589e>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003297> ;
+    rdfs:label "(butyl acrylate, methyl methacrylate, butyl methacrylate) copolymer"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/2abeeee0ce1421e8ea5099c6ce5202e6>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000175> ;
+    rdfs:label "glycerol, esters with ricinoleic acid"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/98683bd644548189619214679d4864d1>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001334> ;
+    rdfs:label "Blend of 1-octadecenol, 1-octadecadienols, different isomers"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/70fd52e645b5a4f6ed5c3776f86e5113>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000079> ;
+    rdfs:label "1H-Imidazole-1-ethanol, 4,5-dihydro, 2-(C11-17 alkyl) derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f2874dc6ad498ffbc1ddf5cb7abc6ae0>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000238> ;
+    rdfs:label "tannic acids"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/e5e28652c57757e0fe726a86b813205a>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000089> ;
+    rdfs:label "Pyridine, alkyl derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/cf802363f960f3277cab35bdb76dd2a1>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001185> ;
+    rdfs:label "Sulfuric acid, mono-C12-16-alkyl esters, sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/d61bbc4658fac6f01282a43790671a2e>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002501> ;
+    rdfs:label "Alkenes, C6-"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/d80a95d011b1fcd024ca6eb6c7bd8a1c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "Fatty acids, C16-22"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/adf238bca511eba639b6c3da6280e6f2>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000134> ;
+    rdfs:label "Phenols"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/fa31b0579cc8ee5607ccf1cc6a6e2d10>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000032> ;
+    rdfs:label "Benzenesulfonic acid, 4-C20-24 (even numbered) sec-alkyl derivs., sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f24b5b9533e64068a33beff9da4a1fef>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000041> ;
+    rdfs:label "4-Aminobiphenyl xenylamine and its salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/6055b981258f0dae0992d11d332ba6ab>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004188> ;
+    rdfs:label "Nickel, [29H,31H-phthalocyaninato(2-)-N29,N30,N31,N32]-, [[3-[(1,3-dioxobutyl)amino]phenyl]amino]sulfonyl derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f0e6ce05c27a40423496b89aa636c430>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "poppy-seed oil fatty acids"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/028992fe31ad4e56a5d001d83921758d>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000013> ;
+    rdfs:label "Amino acids: mix"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/dc3e5cd63d78da3b62eeda69397f1e68>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002951> ;
+    rdfs:label "Alcohols, C14-15"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/c84552ee221ec2b5c442d9acf97d5e41>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004611> ;
+    rdfs:label "metal salts of thiocyanic acid, with the exception of those specified elsewhere in this Annex"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/4e1276402b00ec948ff4970976492671>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000159> ;
+    rdfs:label "2-[(C14-15alkyloxy)methyl]oxirane"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/661fc7e20def6944d42bdcd28abd0f72>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, coco, isotridecyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ac0d4a5a901649df2e3d553e70158a18>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003954> ;
+    rdfs:label "Polybromobiphenyls, Polybrominatedbiphenyls (PBB)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/4d5ec65c7ffbd5b6f28be23cf5f91cb2>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002279> ;
+    rdfs:label "Benzene, mono- and di- C20-24 (even numbered) (linear and branched) alkyl derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/64db455899f6a3759a8d30f9e754d67b>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002951> ;
+    rdfs:label "Alcohols, C12-13"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/83faca721c0b944f4c29f0c3515631c1>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003977> ;
+    rdfs:label "Quaternary ammonium compounds, C12-14-alkyl[(ethylphenyl)methyl]dimethyl, chlorides"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/279b191222be572066e9105b739c415b>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001334> ;
+    rdfs:label "Alcohols, C16-18 and C18-unsatd."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/92e23b0a26ea8561485065690d65a4a5>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001845> ;
+    rdfs:label "Heptabromodiphenyl ether (Group)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/7a0318d36a60fc301235a64a7e876c23>
+    skos:narrowMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004057> ;
+    rdfs:label "Arsenic compounds"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f99237609919ff68b5a5dc4b245da750>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001334> ;
+    rdfs:label "Alcohols, C16-17-monobranched"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/2fb91f1ddf0667e41e1dbd0f64c56acb>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000175> ;
+    rdfs:label "Glycerides, C16-18"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/43ac6080aac3c4b2621479324d34b3f2>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, tall-oil, esters with ethylene glycol"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/72f9dd1babe90d686f208eb83528c75f>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003136> ;
+    rdfs:label "Sulfonic acids, C14-17-sec-alkane, sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/5b40610ed362a72ffcceef7f4d18329e>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004747> ;
+    rdfs:label "N,N'-diaryl-p-phenylenediamine"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ea54d6d372b04be9f5b4eb16264cfad2>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004446> ;
+    rdfs:label "polydimethylsiloxane (MW > 6 800 Da)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/29a07af09996c99ad3e2dc61c9472192>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004009> ;
+    rdfs:label "1,2-Benzenedicarboxylic acid, di-C11-14-branched alkyl esters, C13-rich"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/7517f492daec7771caeca0455bd820c0>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000032> ;
+    rdfs:label "Benzenesulfonic acid, mono-C10-16-alkyl derivs., sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ba0f9c6b706730bff7ea79bb3a9c49d7>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004183> ;
+    rdfs:label "Amines, C12-16 (even numbered)-alkyldimethyl, N-oxides"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/240de067164867816e2351907f91f8c8>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002228> ;
+    rdfs:label "Amines, di-C12-18-alkyl"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/03338311d8c469c47e3d99739dcc4129>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004149> ;
+    rdfs:label "Polycyclic aromatic hydrocarbons (PAH)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ece49093fd4c71ca7de3b610a2ab755e>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002239> ;
+    rdfs:label "Amines, tri-C8-10-alkyl"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/49c82dc3d2cbe9c65eb9dab7ecaef98e>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000159> ;
+    rdfs:label "Epoxides, C>8-alkyl"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/d97533d8fd87ff6cbdf6c46f3cabb280>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001334> ;
+    rdfs:label "Fatty alcohols, C12-22 (even numbered), manuf. of, by-products from"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/13c9854735cba24dda30a6e967087a6f>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "Fatty acids, C10-20-neo-"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/7128dd0dca125f39c0d88ffb9dcfbe15>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003962> ;
+    rdfs:label "Carboxylic acids, C7-13, perfluoro, ammonium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/942b23d833a10a9626aa06b12fb1e1d1>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000175> ;
+    rdfs:label "Glycerides, C8-18"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/c34856646a27aab8aec26d0015220b00>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, tall-oil, C12-15-branched alkyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/e77e7959ea913324dea1a4105b5b35b6>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C16-18, iso-Pr esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/c08f19dcdff4b9e7a7b5f9ede29e7dba>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C16-18 and C18-unsatd., branched and linear, butyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/230a76f9d302caff3d2ef6d726387327>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002201> ;
+    rdfs:label "Sophorolipids: fermentation products of glucose and fatty acids, C18 (unsaturated), glycerol esters with yeast Candida Bombicola"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/2c95bbd88c124115fd7473a81350eb7f>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000159> ;
+    rdfs:label "oxirane, mono[(C12-14-alkyloxy)methyl] derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/438498008846971634231ebf6494569c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C16-18, esters with ethylene glycol"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/499c100d8a19c23502d06edd033e68c3>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004009> ;
+    rdfs:label "1,2-Benzenedicarboxylic acid, di-C8-10-alkyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/c0539dca930ed0d1e947146fe364beeb>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000331> ;
+    rdfs:label "Amides, C16-18 (even numbered), N-[(dimethylamino)propyl]"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/c53c1ecb93fcc7a88302ebae4c0f4696>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004066> ;
+    rdfs:label "triethyltin compounds, with the exception of those specified elsewhere in this Annex"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/3d466264c0f01a7712af6d0a328a027e>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002837> ;
+    rdfs:label "Hydrocarbons, C4-7, C5-rich, isoprene-purifn. by-product"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ad13787e8c8f46b81b5e73fb3fcb803e>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C16 and C18-20 (even numbered, unsaturated), 2-ethylhexyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/85c4723ef74c421777bac161f0d7ef6a>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000175> ;
+    rdfs:label "Glycerides, C14-18"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/09efc56f8649a7262f1a0633fb2fdc67>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002450> ;
+    rdfs:label "C12-14-(even numbered)-alkylamines"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/bd4a27cdabff9ad3f8376fdd6066013a>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004452> ;
+    rdfs:label "2-Propenoic acid, heptadecyl ester, branched"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/235403d251fbfe4b94ed3f7b1e17094f>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001516> ;
+    rdfs:label "Alkanes, C14-17, chloro (MCCP, Medium chained chlorinated paraffins)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/752012ba3891f3938b7ae6c0277f004d>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003300> ;
+    rdfs:label "Polyurea, produced by reacting diphenylmethane diisocyanate with octyl amine and stearyl amine"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/1c9c637a143ed6f06a42012d785b4c4d>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000175> ;
+    rdfs:label "Glycerides, C12-18 mono-, di- and tri-"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/87d6ba88d2449b801ff810c1dc3d8e24>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000503> ;
+    rdfs:label "Quaternary ammonium compounds, tri-C8-10-alkylmethyl, chlorides"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/bf926b7051f440a48a80b7ace30c0d98>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000151> ;
+    rdfs:label "Substituted anthraquinone compound"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/a7946118296b0c5bd431cea3ac282851>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002650> ;
+    rdfs:label "3,5-Heptanedione-1-(4-hydroxy-3-methoxyphenyl)-7-(4-hydroxyphenyl) and 3,5-Heptanedione-1,7-bis(4-hydroxyphenyl) and 3,5-Heptanedione-1,7-bis(4-hydroxy-3-methoxyphenyl)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/c7d05467f8d9e919fb1f675f126616ea>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001549> ;
+    rdfs:label "Mixture of Limonene, alpha-Terpinen, gamma-Terpinen, p-Cymene, 1,4-Cineol, 1,8-Cineol and Terpinolene"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/b90465df5552a5681e260bf379520bae>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003338> ;
+    rdfs:label "poly(oxy-1,2-ethanediyl), α-methyl-ω-hydroxy-"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/684117cdfe6bab5b1799bec138c97385>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004009> ;
+    rdfs:label "1,2-benzenedicarboxylic acid, di-C9-11-branched and linear alkyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/687e1625752c9db6d90da3a1bff56b04>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001350> ;
+    rdfs:label "Benzoic acid, C9-11, C10-rich, branched alkyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/531b0122b54a117b6f35690e8f23ff7b>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "fatty acids, coco hydrogenated"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0aa926ddfb3bd8cc03e9d36c7c2ef959>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001202> ;
+    rdfs:label "Organosulphide"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/8a449c10abeb334a8443a86b1a71a34c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "Fatty acids, C14-22"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ab75696a6bc25bc5b0843929fcc93c6a>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001334> ;
+    rdfs:label "Fatty alcohols / Aliphatic alcohols"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/eb0c8b7d1d01a53c3e899bd6212177f1>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C8-16(even numbered), 2-ethylhexyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/18b662d68b30271af406da29298d44bc>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "fatty acids, soya"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/761fd03766582ecaabe86bc4257317f3>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003265> ;
+    rdfs:label "alkoxysilanes with functional groups, e.g. vinyl, methacryl, amino or glycidyl groups"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/dce4ef57b81394c73b078291c2aa133c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004188> ;
+    rdfs:label "Copper, [29H,31H-phthalocyaninato(2-)-N29,N30,N31,N32]-, chlorosulfonyl derivs., reaction products with 2-[(4-aminophenyl)amino]-5-nitrobenzenesulfonic acid, sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9f55389b72821e8b7697d77389c1f808>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "fatty acids, coco"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9104d2f7a7691f0a71b66342c21d9fc8>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002213> ;
+    rdfs:label "Lecithins (basic substance)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ad2073e44e8a28fe9b6049d7ec3d3b36>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000134> ;
+    rdfs:label "Phenol, mono-C24-28 (even)-sec-alkyl derivs, ortho- and para-"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9978748a5d3c5556221a9ea61cb84cd9>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, essential, Et esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/06e995159033f0807804d6f770fbf7a4>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001539> ;
+    rdfs:label "polysaccharides"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/1d8976db13517a15cf3d34cda3f708a0>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000032> ;
+    rdfs:label "Benzenesulphonic acid, dimethyl-, mono C14-16 (even numbered) sec alkyl derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/4d1a53dc3559094be727ffd172efff00>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000032> ;
+    rdfs:label "di-alkyl-benzenesulfonic acid"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/077bbf1c3331e2e8a236519cb345f142>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003976> ;
+    rdfs:label "Benzyl-C12-14-alkyldimethylammonium chlorides"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9daaeb527922a1980d61efed2552744f>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001026> ;
+    rdfs:label "Alkanes, C10-13, chloro (Short Chain Chlorinated Paraffins)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/5196394bcfb7df5e7639644ccba69f85>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Isononanoic acid, C16-18 (even numbered)-alkyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ba264702f3c25a3067e2aa281430d640>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003967> ;
+    rdfs:label "Alcohols, C8-14, γ-ω-perfluoro"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/eee711135388d101626b793a6d79c41c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000032> ;
+    rdfs:label "Benzenesulfonic acid, mono-C20-24 (even)-sec-alkyl derivs., para-, sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/417ccf453c490fec66679012cdd9f3e9>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "Fatty acids, C16-18, sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/1436b4e124f4a741878d75c39d638b99>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C16-18 (even numbered) and C18 (unsaturated) hexadecyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/a578bfba3934ae1415b4119c97003c9c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001238> ;
+    rdfs:label "1,3-Propanediol, 2,2-dimethyl-, C5-9 carboxylates"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f5c3cdb5ebf2a153dc7c1b483dde3064>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004183> ;
+    rdfs:label "Amines, C12-18(even numbered)-alkyldimethyl, N-oxides"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/4dccfdec3339a4862f9d4f62c1bc3d16>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004066> ;
+    rdfs:label "trioctyltin compounds, with the exception of those specified elsewhere in this Annex"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/059f4e0c4e7125376da3756406cbc86f>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004620> ;
+    rdfs:label "Alkanes, C10-13-iso-"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/383305b6ab72ed9d31e82748ed871365>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000331> ;
+    rdfs:label "Amides, C16-18 (even-numbered), N-(hydroxyethyl)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/759605debd0b5f839208c632b668ada6>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003457> ;
+    rdfs:label "Phosphoric acid, C8-10-alkyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/7531b1205b70269e12ac117f1126340e>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004099> ;
+    rdfs:label "Fatty acids, C16-22, lithium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/09e015e3abc31f0168544f5b46329b0c>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001272> ;
+    rdfs:label "cresols"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/a4e89bbf88f4a9dace91cb28cf310b8c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000503> ;
+    rdfs:label "Quaternary ammonium compounds, C18 and C18 (unsaturated) alkyltrimethyl, chlorides"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/d0eafd0598fedc31718bc6d7b68ead14>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004434> ;
+    rdfs:label "Benzenesulfonic acid, C16-24-alkyl derivs."@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/bc2ba70b646fc4b8fbde86d8b7798323>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002201> ;
+    rdfs:label "Sophorolipids: fermentation products of glucose and fatty acids, C18 (unsaturated), glycerol esters with yeast Starmerella Bombicola, hydrolysed"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/6716c6c51ee1959dfbd786c3e82f8968>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000407> ;
+    rdfs:label "Phenylmercury compounds"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0ff96509a648294ae38e84ac55fcb783>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004188> ;
+    rdfs:label "Low chlorinated copper, [29H,31Hphthalocyaninato(2-)-N29,N30,N31,N32]-, wherein the number of chlorines is more than or equal to 0 and less than or equal to 7"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9f8dc80b083cedfa7da572e3782ff403>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002837> ;
+    rdfs:label "Hydrocarbons, C2-4, C3-rich"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/3bf93e26f8ed59d181f0c32a5c03db00>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002837> ;
+    rdfs:label "Hydrocarbons, C4-11, naphtha-cracking, arom.-free"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ff8e53ad24da394f70509413a1b93beb>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000503> ;
+    rdfs:label "Quaternary ammonium compounds, C14-18 (even numbered) and C18 unsaturated-alkyl-hydroxyethyl-dimethyl, chlorides"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/c425e37429db53e9e941ba40c0b0200a>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000503> ;
+    rdfs:label "Quaternary ammonium compounds, trimethylsoya alkyl, chlorides"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/04b754c7908d0eb789aedaa1395fbe22>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004066> ;
+    rdfs:label "tripropyltin compounds, with the exception of those specified elsewhere in this Annex"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/c65b1a2e836d6c46899be1ad6ac1252f>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000023> ;
+    rdfs:label "mono-, di- and tri(sec-hexadecyl)naphthalene"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/d100595f03937c012f73a604bf7e3319>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000175> ;
+    rdfs:label "Glycerides, C14-18 mono- and di-"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/a41030ee971c328326502680403eaa5c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004620> ;
+    rdfs:label "Alkanes, C16-20-iso-"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ad62f84ee0ce1d440350a806568e07ae>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002452> ;
+    rdfs:label "N-(C16-18, C18 unsatd alkyl)-N-methyl(C16-18, C18 unsatd alkyl)-1-amine"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/e1c4f3f70793eb0234992089058dc691>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000503> ;
+    rdfs:label "N-(2-hydroxyethyl)-N,N-dimethyl alkyl-C12-14-(even numbered)-1-aminium chloride"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0558e2a4ca3aea1bfb150faa2707353d>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000331> ;
+    rdfs:label "Amides, C18 (unsaturated)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/5780a3be078be485da5fdbcf24d8bc3c>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000175> ;
+    rdfs:label "Glycerides, C18-36"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/93c3da2e111281fedde17506901ed747>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004188> ;
+    rdfs:label "Nickel, [29H,31H-phthalocyaninato(2-)-κN29,κN30,κN31,κN32]-, sulfo [[4-[[2-(sulfooxy)ethyl]sulfonyl]phenyl]amino]sulfonyl derivs., potassium sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9f97c5596dee4e698e2493f47b1956ad>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004188> ;
+    rdfs:label "Nickel, [29H,31H-phthalocyaninato(2-)-[?]N29,[?]N30,[?]N31,[?]N32]-, [[3-[(5-chloro-6-fluoro-4-pyrimidinyl)amino]phenyl]amino]sulfonyl sulfo derivs., sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/7b04b93b7074c33dc2adcfeb51eee90e>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004066> ;
+    rdfs:label "Tributyltin Compounds"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/8b5f5043a87e4115bd98a5c6d1223205>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003955> ;
+    rdfs:label "Benzidine and its salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9ff7d3385739b4f6ed3b78131c5534aa>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000134> ;
+    rdfs:label "phenols, styrenated"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/d332108c12e1290050105c3f5c387c99>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002501> ;
+    rdfs:label "Alkenes, C11-12"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/52b2ac8282666ea2ba701eb424bdbc8d>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000362> ;
+    rdfs:label "Nitriles, C16-22"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/f9729bde07a4f56f961057a344d12045>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004188> ;
+    rdfs:label "Nickel, [29H,31H-phthalocyaninato(2-)-N29,N30,N31,N32]-, [[3-[(5-chloro-2,6-difluoro-4-pyrimidinyl)amino]phenyl]amino]sulfonyl sulfo derivs., sodium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/3547b19db71e0c16c4acd86dbfe11d07>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004009> ;
+    rdfs:label "1,2-Benzenedicarboxylic acid, di-C6-8-branched alkyl esters, C7-rich"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/e18d09bbd042293d4921de5c3c685295>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004074> ;
+    rdfs:label "Chromium (VI) compounds, with the exception of barium chromate and of compounds specified elsewhere in this Annex"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/1555b0cdb9ad4e117013b4accabe735f>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003338> ;
+    rdfs:label "Poly(oxy-1,2-ethanediyl),α-hydro-ω-hydroxy- Ethane-1,2-diol, ethoxylated"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/39c519e52089b5800ac635262f9759fe>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C16-18 and C18-unsatd., esters with propylene glycol"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/67be46ccf30ccae4e0999fed3c2afb58>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002042> ;
+    rdfs:label "Polychlorinated terphenyls (PCTs)"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/28ad437fa57d27eb5077f3d2d1f8a852>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C16 and C18-unsaturated, benzyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/5455e21a3e0103383483b903624e1fd6>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000324> ;
+    rdfs:label "Fatty acids, C6-18, 2,2-dimethyl-1,3-propanediyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9cc7cbf58cf0fbc8763f5edcbf14f57f>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0000262> ;
+    rdfs:label "palmkernel oil fatty acids"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/e29c8a78d0db59171f1844526c618064>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004188> ;
+    rdfs:label "Copper, [29H,31H-phthalocyaninato(2-)-N29,N30,N31,N32]-, [[3-(dimethylamino)propyl]amino]sulfonyl derivs., acetates"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/ecd4f46ac0598a7550460278cce106fe>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002837> ;
+    rdfs:label "Hydrocarbons of plastic waste origin obtained through thermolysis and thermosynthesis, C20 – C44 linear alkanes, branched alkanes and alkenes"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/655eaf9d94170bb50dac62391eb6d8a5>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001765> ;
+    rdfs:label "Rhamnolipids: fermentation products of glucose with Pseudomonas putida, Pseudomonacae, partially neutralized, potassium salts"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/9f66cad8ab5c47ba952b48056396afca>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0003457> ;
+    rdfs:label "Phosphoric acid, mono- and di-C11-14 (linear and branched) alkyl esters"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/53ce4a4fef75ca681e4620dec84fe711>
+    skos:exactMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0004208> ;
+    rdfs:label "xylene"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/58ed02d0b8c03d966abd639fccb03fae>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0002837> ;
+    rdfs:label "Hydrocarbons, C4"@nl ;
+    skos:note "confidence: high" .
+
+<https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/7f6ec35c3b1da872d1b8aa46087b6356>
+    skos:broadMatch <https://data.omgeving.vlaanderen.be/id/concept/chemical_substance/0001963> ;
+    rdfs:label "aramid fibres"@nl ;
+    skos:note "confidence: high" .
+
