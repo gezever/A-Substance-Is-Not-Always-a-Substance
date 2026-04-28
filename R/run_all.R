@@ -23,6 +23,10 @@ scripts <- c(
   "13a_classyfire_coverage.R",               # Analysis 13: ChemOnt class coverage via ClassyFire cache
   "13b_before_prioritisation_create_scheme.R", # Schema creation (prerequisite for 14); creates substances_taxonomy_levels.ttl
   "09c_chemont_model_validation.R",          # Analysis 9c: requires substances_taxonomy_levels.ttl from 13b
+  "09d_chemont_llm_experiment.R",            # Analysis 9d: requires Analysis_9c_model_validation.csv from 09c
+  "09e_llm_nonstructure.R",                  # Analysis 9e: requires final_matches.csv from 09_embedding_chemont
+  "09f_llm_group_equivalence.R",             # Analysis 9f: requires final_matches.csv from 09_embedding_chemont
+  "09g_chemont_skos_mapping.R",              # Analysis 9g: requires Analysis_9f_group_equivalence.csv from 09f
   "14_prioritization.R",                      # Analysis 14: composite priority scoring and visualisations
 
 )
