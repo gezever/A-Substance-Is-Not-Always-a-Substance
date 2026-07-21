@@ -1,0 +1,216 @@
+\begin{thebibliography}{24}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Heller et~al.(2015)Heller, McNaught, Pletnev, Stein, and
+  Tchekhovskoi}]{Heller2015}
+\bibinfo{author}{S.~R. Heller}, \bibinfo{author}{A.~McNaught},
+  \bibinfo{author}{I.~Pletnev}, \bibinfo{author}{S.~Stein},
+  \bibinfo{author}{D.~Tchekhovskoi},
+\newblock \bibinfo{title}{{InChI}, the {IUPAC} international chemical
+  identifier},
+\newblock \bibinfo{journal}{Journal of Cheminformatics} \bibinfo{volume}{7}
+  (\bibinfo{year}{2015}) \bibinfo{pages}{23}.
+  \DOIprefix\doi{10.1186/s13321-015-0068-4}.
+%Type = Article
+\bibitem[{Kim et~al.(2015)Kim, Thiessen, Bolton, and Bryant}]{Kim2015}
+\bibinfo{author}{S.~Kim}, \bibinfo{author}{P.~A. Thiessen},
+  \bibinfo{author}{E.~E. Bolton}, \bibinfo{author}{S.~H. Bryant},
+\newblock \bibinfo{title}{Pug-soap and pug-rest: web services for programmatic
+  access to chemical information in pubchem},
+\newblock \bibinfo{journal}{Nucleic Acids Research} \bibinfo{volume}{43}
+  (\bibinfo{year}{2015}) \bibinfo{pages}{W605--W611}.
+  \DOIprefix\doi{10.1093/nar/gkv396}.
+%Type = Article
+\bibitem[{Degtyarenko et~al.(2008)}]{Degtyarenko2008}
+\bibinfo{author}{K.~Degtyarenko}, et~al.,
+\newblock \bibinfo{title}{{ChEBI}: a database and ontology for chemical
+  entities of biological interest},
+\newblock \bibinfo{journal}{Nucleic Acids Research} \bibinfo{volume}{36}
+  (\bibinfo{year}{2008}) \bibinfo{pages}{D344--D350}.
+  \DOIprefix\doi{10.1093/nar/gkm791}.
+%Type = Techreport
+\bibitem[{{European Parliament} and {Council of the European
+  Union}(2006)}]{REACH2006}
+\bibinfo{author}{{European Parliament}}, \bibinfo{author}{{Council of the
+  European Union}}, \bibinfo{title}{Regulation ({EC}) No 1907/2006 concerning
+  the Registration, Evaluation, Authorisation and Restriction of Chemicals
+  ({REACH})}, \bibinfo{type}{Regulation} \bibinfo{number}{L 396}, Official
+  Journal of the European Union, \bibinfo{year}{2006}. \URLprefix
+  \url{http://data.europa.eu/eli/reg/2006/1907/2022-03-01}.
+%Type = Techreport
+\bibitem[{{European Parliament} and {Council of the European
+  Union}(2008)}]{CLP2008}
+\bibinfo{author}{{European Parliament}}, \bibinfo{author}{{Council of the
+  European Union}}, \bibinfo{title}{Regulation ({EC}) No 1272/2008 on
+  classification, labelling and packaging of substances and mixtures ({CLP})},
+  \bibinfo{type}{Regulation} \bibinfo{number}{L 353}, Official Journal of the
+  European Union, \bibinfo{year}{2008}. \URLprefix
+  \url{http://data.europa.eu/eli/reg/2008/1272/oj}.
+%Type = Article
+\bibitem[{Kutsarova et~al.(2019)}]{Kutsarova2019}
+\bibinfo{author}{S.~S. Kutsarova}, et~al.,
+\newblock \bibinfo{title}{{UVCB} substances {II}: Development of an
+  endpoint-nonspecific procedure for selection of computationally generated
+  representative constituents},
+\newblock \bibinfo{journal}{Environmental Toxicology and Chemistry}
+  \bibinfo{volume}{38} (\bibinfo{year}{2019}) \bibinfo{pages}{682--694}.
+  \DOIprefix\doi{10.1002/etc.4358}.
+%Type = Misc
+\bibitem[{{Chemical Abstracts Service}(2024)}]{CAS}
+\bibinfo{author}{{Chemical Abstracts Service}}, \bibinfo{title}{Cas registry},
+  \bibinfo{howpublished}{\url{https://www.cas.org}}, \bibinfo{year}{2024}.
+  \bibinfo{note}{Accessed: 2026-04-08}.
+%Type = Misc
+\bibitem[{Parliament and of~the
+  European~Union(2006{\natexlab{a}})}]{reach_art118}
+\bibinfo{author}{E.~Parliament}, \bibinfo{author}{C.~of~the European~Union},
+  \bibinfo{title}{Regulation (ec) no 1907/2006 reach, article 118:
+  Confidentiality}, \bibinfo{year}{2006}{\natexlab{a}}. \URLprefix
+  \url{http://data.europa.eu/eli/reg/2006/1907/2025-10-23}.
+%Type = Misc
+\bibitem[{Parliament and of~the
+  European~Union(2006{\natexlab{b}})}]{reach_art31}
+\bibinfo{author}{E.~Parliament}, \bibinfo{author}{C.~of~the European~Union},
+  \bibinfo{title}{Regulation (ec) no 1907/2006 reach, article 31: Requirements
+  for safety data sheets}, \bibinfo{year}{2006}{\natexlab{b}}. \URLprefix
+  \url{http://data.europa.eu/eli/reg/2006/1907/2025-10-23}.
+%Type = Misc
+\bibitem[{Parliament and of~the
+  European~Union(2006{\natexlab{c}})}]{reach_art119}
+\bibinfo{author}{E.~Parliament}, \bibinfo{author}{C.~of~the European~Union},
+  \bibinfo{title}{Regulation (ec) no 1907/2006 (reach), article 119:
+  Information on substances to be made publicly available},
+  \bibinfo{year}{2006}{\natexlab{c}}. \URLprefix
+  \url{http://data.europa.eu/eli/reg/2006/1907/2025-10-23}.
+%Type = Techreport
+\bibitem[{{European Parliament} and {Council of the European
+  Union}(2024)}]{InteroperableEuropeAct2024}
+\bibinfo{author}{{European Parliament}}, \bibinfo{author}{{Council of the
+  European Union}}, \bibinfo{title}{Regulation ({EU}) 2024/903 ({Interoperable
+  Europe Act})}, \bibinfo{type}{Regulation} \bibinfo{number}{L 2024/903},
+  Official Journal of the European Union, \bibinfo{year}{2024}. \URLprefix
+  \url{http://data.europa.eu/eli/reg/2024/903/oj}.
+%Type = Article
+\bibitem[{Wilkinson et~al.(2016)}]{Wilkinson2016}
+\bibinfo{author}{M.~D. Wilkinson}, et~al.,
+\newblock \bibinfo{title}{The {FAIR} guiding principles for scientific data
+  management and stewardship},
+\newblock \bibinfo{journal}{Scientific Data} \bibinfo{volume}{3}
+  (\bibinfo{year}{2016}) \bibinfo{pages}{160018}.
+  \DOIprefix\doi{10.1038/sdata.2016.18}.
+%Type = Article
+\bibitem[{Sepehri et~al.(2025)Sepehri, Heymans, {De Win}, Maushagen, Sanctorum,
+  Debruyne, Rodrigues, {De Kock}, Rogiers, {De Troyer}, and
+  Vanhaecke}]{Sepehri2025TOXIN}
+\bibinfo{author}{S.~Sepehri}, \bibinfo{author}{A.~Heymans},
+  \bibinfo{author}{D.~{De Win}}, \bibinfo{author}{J.~Maushagen},
+  \bibinfo{author}{A.~Sanctorum}, \bibinfo{author}{C.~Debruyne},
+  \bibinfo{author}{R.~M. Rodrigues}, \bibinfo{author}{J.~{De Kock}},
+  \bibinfo{author}{V.~Rogiers}, \bibinfo{author}{O.~{De Troyer}},
+  \bibinfo{author}{T.~Vanhaecke},
+\newblock \bibinfo{title}{The {TOXIN} knowledge graph: Supporting animal-free
+  risk assessment of cosmetics},
+\newblock \bibinfo{journal}{Database} \bibinfo{volume}{2025}
+  (\bibinfo{year}{2025}). \DOIprefix\doi{10.1093/database/baae121}.
+%Type = Article
+\bibitem[{Filtz et~al.(2021)Filtz, Kirrane, and Polleres}]{Filtz2021}
+\bibinfo{author}{E.~Filtz}, \bibinfo{author}{S.~Kirrane},
+  \bibinfo{author}{A.~Polleres},
+\newblock \bibinfo{title}{The linked legal data landscape: linking legal data
+  across different countries},
+\newblock \bibinfo{journal}{Artificial Intelligence and Law}
+  \bibinfo{volume}{29} (\bibinfo{year}{2021}) \bibinfo{pages}{485--539}.
+  \DOIprefix\doi{10.1007/s10506-021-09282-8}.
+%Type = Article
+\bibitem[{Djoumbou~Feunang et~al.(2016)}]{DjoumbouFeunang2016}
+\bibinfo{author}{Y.~Djoumbou~Feunang}, et~al.,
+\newblock \bibinfo{title}{{ClassyFire}: automated chemical classification with
+  a comprehensive, computable taxonomy},
+\newblock \bibinfo{journal}{Journal of Cheminformatics} \bibinfo{volume}{8}
+  (\bibinfo{year}{2016}) \bibinfo{pages}{61}.
+  \DOIprefix\doi{10.1186/s13321-016-0174-y}.
+%Type = Techreport
+\bibitem[{Miles and Bechhofer(2009)}]{W3C2009SKOS}
+\bibinfo{author}{A.~Miles}, \bibinfo{author}{S.~Bechhofer},
+  \bibinfo{title}{{SKOS} Simple Knowledge Organization System Reference},
+  \bibinfo{type}{{W3C} Recommendation}, World Wide Web Consortium,
+  \bibinfo{year}{2009}. \URLprefix \url{https://www.w3.org/TR/skos-reference/}.
+%Type = Misc
+\bibitem[{{European Chemicals Agency
+  (ECHA)}(2025{\natexlab{a}})}]{ECHA_CandidateList}
+\bibinfo{author}{{European Chemicals Agency (ECHA)}}, \bibinfo{title}{Candidate
+  list of substances of very high concern for authorisation},
+  \bibinfo{howpublished}{\url{https://chem.echa.europa.eu/obligation-lists/candidateList}},
+  \bibinfo{year}{2025}{\natexlab{a}}. \bibinfo{note}{Substances meeting SVHC
+  criteria under REACH Article 57; updated periodically. Accessed: 15 April
+  2026}.
+%Type = Misc
+\bibitem[{{European Chemicals Agency
+  (ECHA)}(2025{\natexlab{b}})}]{ECHA_REACHRegistrations}
+\bibinfo{author}{{European Chemicals Agency (ECHA)}}, \bibinfo{title}{Reach
+  registered substances database},
+  \bibinfo{howpublished}{\url{https://echa.europa.eu/information-on-chemicals/registered-substances}},
+  \bibinfo{year}{2025}{\natexlab{b}}. \bibinfo{note}{Database of substances
+  registered under REACH, including identity information and hazard data.
+  Accessed: 15 April 2026}.
+%Type = Misc
+\bibitem[{{European Chemicals Agency (ECHA)}(nd)}]{ECHA_EC_numbers}
+\bibinfo{author}{{European Chemicals Agency (ECHA)}}, \bibinfo{title}{About
+  {EC} and list numbers},
+  \bibinfo{howpublished}{\url{https://echa.europa.eu/en/about-ec-and-list-numbers}},
+  \bibinfo{year}{n.d.} \bibinfo{note}{Explanation of the EC number system
+  (EINECS, ELINCS, NLP) used to identify chemical substances in EU legislation.
+  Accessed: 15 April 2026}.
+%Type = Article
+\bibitem[{Akhondi et~al.(2012)Akhondi, Kors, and Muresan}]{Akhondi2012}
+\bibinfo{author}{S.~A. Akhondi}, \bibinfo{author}{J.~A. Kors},
+  \bibinfo{author}{S.~Muresan},
+\newblock \bibinfo{title}{Consistency of systematic chemical identifiers within
+  and between small-molecule databases},
+\newblock \bibinfo{journal}{Journal of Cheminformatics} \bibinfo{volume}{4}
+  (\bibinfo{year}{2012}) \bibinfo{pages}{35}.
+  \DOIprefix\doi{10.1186/1758-2946-4-35}.
+%Type = Inproceedings
+\bibitem[{Reimers and Gurevych(2019)}]{Reimers2019}
+\bibinfo{author}{N.~Reimers}, \bibinfo{author}{I.~Gurevych},
+\newblock \bibinfo{title}{Sentence-{BERT}: Sentence embeddings using {Siamese
+  BERT}-networks},
+\newblock in: \bibinfo{booktitle}{Proceedings of EMNLP 2019},
+  \bibinfo{publisher}{Association for Computational Linguistics},
+  \bibinfo{year}{2019}, pp. \bibinfo{pages}{3982--3992}.
+  \DOIprefix\doi{10.18653/v1/D19-1410}.
+%Type = Article
+\bibitem[{Reif et~al.(2010)}]{Reif2010}
+\bibinfo{author}{D.~M. Reif}, et~al.,
+\newblock \bibinfo{title}{Endocrine profiling and prioritization of
+  environmental chemicals using {ToxCast} data},
+\newblock \bibinfo{journal}{Environmental Health Perspectives}
+  \bibinfo{volume}{118} (\bibinfo{year}{2010}) \bibinfo{pages}{1714--1720}.
+  \DOIprefix\doi{10.1289/ehp.1002180}.
+%Type = Article
+\bibitem[{Williams and Ekins(2011)}]{Williams2011Quality}
+\bibinfo{author}{A.~J. Williams}, \bibinfo{author}{S.~Ekins},
+\newblock \bibinfo{title}{A quality alert and call for improved curation of
+  public chemistry databases},
+\newblock \bibinfo{journal}{Drug Discovery Today} \bibinfo{volume}{16}
+  (\bibinfo{year}{2011}) \bibinfo{pages}{747--750}. \URLprefix
+  \url{https://www.sciencedirect.com/science/article/pii/S1359644611002406}.
+  \DOIprefix\doi{10.1016/j.drudis.2011.07.007}.
+%Type = Misc
+\bibitem[{Berners-Lee(2006)}]{BernersLee2006LinkedData}
+\bibinfo{author}{T.~Berners-Lee}, \bibinfo{title}{Linked data},
+  \bibinfo{howpublished}{\url{https://www.w3.org/DesignIssues/LinkedData.html}},
+  \bibinfo{year}{2006}. \bibinfo{note}{{W3C} Design Issues}.
+
+\end{thebibliography}

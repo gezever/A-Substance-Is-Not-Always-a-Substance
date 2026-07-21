@@ -1,0 +1,44 @@
+%%{init: {"theme": "base", "themeVariables": {"fontSize": "18px", "fontFamily": "Libertinus Sans"}, "flowchart": {"nodeSpacing": 25, "rankSpacing": 40}}}%%
+graph LR
+%% Input layer
+    A["Regulatory datasets\n(18 sources)"]
+
+%% Core layer
+    B["Regulatory substances\n~17,500 entities\n(SKOS concepts)"]
+
+%% Linking layers
+    C["Structure-based identity\n(InChIKey)"]
+    D["Chemical classification\n(ChemOnt hierarchy\n~4,800 classes)"]
+    E["Biological roles\n(ChEBI roles\n~1,400 classes)"]
+
+%% Derived layers
+    F["Linkability tiers\n(7 categories)"]
+    G["Semantic clusters\n(embedding-based\nk = 6)"]
+    H["Annotations\n~46,600 links"]
+    I["SKOS crosswalk\n(LLM-based\n304 triples)"]
+
+%% Relations
+    A --> B
+
+    B --> C
+    B --> D
+    B --> E
+
+    B --> F
+    B --> G
+
+    E --> H
+    B --> H
+
+    B --> I
+    I --> D
+
+    classDef inputNode fill:#FDE8D1,stroke:#E07B2A,color:#1a1a1a
+    classDef coreNode fill:#D6E8F7,stroke:#4A90C4,color:#1a1a1a
+    classDef linkNode fill:#D4EDDA,stroke:#28A745,color:#1a1a1a
+    classDef derivedNode fill:#E8D5F0,stroke:#7B4EA8,color:#1a1a1a
+
+    class A inputNode
+    class B coreNode
+    class C,D,E linkNode
+    class F,G,H,I derivedNode

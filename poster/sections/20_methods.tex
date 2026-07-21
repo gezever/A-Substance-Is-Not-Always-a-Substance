@@ -1,0 +1,14 @@
+\section{Methods}
+
+\paragraph{Data integration and linkability.}
+We integrated 18~sources: six European Chemicals Agency (ECHA) obligation lists (Candidate~\cite{ECHA_CandidateList}, Authorisation, Restriction, POPs, EU~Positive, CLH), nine ECHA activity lists, REACH registrations~\cite{ECHA_REACHRegistrations}, the EU Pesticides Database, OSPAR priority chemicals, and a Flemish administrative substance list.
+Per entry, CAS, EC number~\cite{ECHA_EC_numbers}, and substance name were collected; substances were linked to InChIKey via PubChem~\cite{Kim2015}.
+Each entry was then assigned to one of seven tiers: tier~1 (direct InChIKey link), tiers~2--3 (partially resolvable), tier~4 (unresolved CAS), tier~5 (mixture or UVCB~\cite{Kutsarova2019}), tier~6 (administrative entry), tier~7 (no usable identifier).
+InChI extensions such as MInChI~\cite{Heller2015} support representation of some mixtures in principle, but are absent from current European regulatory datasets; tier~5 entries therefore resist structure-based linking.
+Bidirectional CAS--InChIKey mappings were analysed to assess identifier consistency~\cite{Akhondi2012}.
+
+\paragraph{Semantic matching.}
+We test the hypothesis that semantic similarity can serve as a proxy for chemical taxonomy assignment, expecting it to fail because substance names for groups and mixtures carry no structural information. Substance names and \textasciitilde{}4,800~ChemOnt class labels~\cite{DjoumbouFeunang2016} were encoded using four sentence-transformer models~\cite{Reimers2019} (MiniLM, MPNet, SciBERT, BioBERT).
+Performance was measured using Hit@$k$ against 28,204~ClassyFire-assigned substances as ground truth.
+Claude Sonnet~4.6 was applied to the same benchmark under zero-shot prompting. For non-structure entries, it was further used to (a)~classify ChemOnt membership directly and (b)~assess how the entry's name relates to a ChemOnt node (exact, subset, or broader scope), using SKOS mapping types~\cite{W3C2009SKOS}.
+Structure-defined substances were integrated into an RDF knowledge graph with ChEBI biological roles~\cite{Degtyarenko2008}, and a ToxPi-inspired composite priority score~\cite{Reif2010} was computed to illustrate the analytical value.

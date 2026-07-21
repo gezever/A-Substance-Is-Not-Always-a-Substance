@@ -1,0 +1,29 @@
+\section{Introduction and Related Work}
+
+In chemistry, substance identity is operationalised through structure-based identifiers such as the International Chemical Identifier (InChI) and InChIKey~\cite{Heller2015}, enabling unambiguous linking across databases such as PubChem~\cite{Kim2015} and the Chemical Entities of Biological Interest database (ChEBI)~\cite{Degtyarenko2008}.
+In European regulation, defined under the Registration, Evaluation, Authorisation and Restriction of Chemicals framework (REACH)~\cite{REACH2006} and the Classification, Labelling and Packaging regulation (CLP)~\cite{CLP2008}, a \emph{substance} may refer to a single molecule, a mixture of unknown or variable composition (UVCB)~\cite{Kutsarova2019}, a group of related compounds (e.g.\ per- and polyfluoroalkyl substances, PFAS, which encompasses individual molecules such as PFOS without explicit set-membership semantics; Figure~\ref{fig:regulatory_groups}), or an analytical sum parameter, as summarised in Figure~\ref{fig:mismatch}.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{mismatch.pdf}
+	\caption{Conceptual contrast between chemistry (structure-based identity via InChI/InChIKey) and regulatory datasets (heterogeneous substance types).}
+	\label{fig:mismatch}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{regulatory_groups.pdf}
+	\caption{PFAS as a regulatory group without explicit set-membership semantics; \emph{Sum PFOS + PFBA} as a derived analytical parameter.}
+	\label{fig:regulatory_groups}
+\end{figure}
+
+These are identified by Chemical Abstracts Service (CAS) numbers~\cite{CAS} and textual names that carry no structural information.
+Much of this information remains confidential or inaccessible in machine-readable form: REACH restricts public disclosure of the full Substance Identity Profile and UVCB composition~\cite{reach_art118}, leaving only non-machine-readable safety data sheets and classifications publicly available~\cite{reach_art31,reach_art119}.
+This semantic mismatch limits automated integration~\cite{InteroperableEuropeAct2024} and FAIR (Findable, Accessible, Interoperable, Reusable) data reuse~\cite{Wilkinson2016}.
+Prior work shows that structure-based identifiers and ontology-driven knowledge graphs enable interoperability in chemistry and in single-domain regulatory contexts such as cosmetics risk assessment~\cite{Sepehri2025TOXIN}, while legal-data integration across jurisdictions remains fragmented~\cite{Filtz2021}. However, the cross-dataset mismatch between structure-based chemical identity and regulatory substance definitions has not previously been systematically characterised.
+
+We address three research questions:
+(RQ1)~To what extent can regulatory substances be linked to a unique chemical structure?
+(RQ2)~How reliable are CAS numbers as cross-dataset identifiers?
+(RQ3)~Can embedding-based or LLM methods compensate for absent structure identifiers?
+Contributions: (C1)~a seven-tier linkability taxonomy; (C2)~empirical demonstration of CAS inconsistency; (C3)~a benchmark showing the failure of semantic approaches; (C4)~an integrated knowledge graph linking 18~sources with ChemOnt~\cite{DjoumbouFeunang2016} and ChEBI; (C5)~304~validated SKOS (Simple Knowledge Organization System)~\cite{W3C2009SKOS} mapping triples as a legislative--ChemOnt crosswalk.

@@ -1,0 +1,61 @@
+\documentclass[]{ceurart}
+
+\sloppy
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage[labelfont=bf,format=plain,
+justification=raggedright,singlelinecheck=false]{caption}
+
+% Reduce float separation to save space
+\setlength{\floatsep}{6pt}
+\setlength{\textfloatsep}{8pt}
+\setlength{\abovecaptionskip}{4pt}
+\setlength{\belowcaptionskip}{2pt}
+
+\graphicspath{{./images/}}
+
+\begin{document}
+
+\copyrightyear{2026}
+\copyrightclause{Copyright for this paper by its authors.
+Use permitted under Creative Commons License Attribution 4.0 International (CC BY 4.0).}
+\conference{Posters, Demos, Blue Sky, and Tutorials at SEMANTiCS 2026, Sep 2026, Ghent, Belgium}
+
+\title{Chemical Identity Lost in Regulation: A Study of Semantic Interoperability in European Chemical Substance Data}
+
+\address[1]{Department of Environment and Spatial Development, Flemish Government, Brussels, Belgium}
+
+\author[1]{Geert {Van Haute}}[%
+  orcid=0009-0002-9836-8139,
+  email=geert.vanhaute@vlaanderen.be
+]
+\cormark[1]
+
+\author[1]{Stijn Goedertier}[%
+  orcid=0009-0003-4602-6601
+]
+
+\author[1]{Pieter Fannes}[%
+  orcid=0009-0001-7859-1977
+]
+
+\author[1]{Maxim {Van de Wynckel}}[%
+  orcid=0000-0003-0314-7107
+]
+
+\input{sections/00_abstract}
+
+\maketitle
+
+\input{sections/10_intro}
+\input{sections/20_methods}
+\input{sections/30_results}
+
+\clearpage
+\input{sections/40_conclusion}
+
+\bibliography{references}
+
+\end{document}
