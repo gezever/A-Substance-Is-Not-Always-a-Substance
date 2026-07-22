@@ -1,0 +1,286 @@
+% =====================================================================
+%  SEMANTiCS 2026 poster  --  A0 portrait
+%  Compile with:  pdflatex poster.tex
+% =====================================================================
+\documentclass[final]{beamer}
+\usepackage[orientation=portrait,size=a0,scale=1.26]{beamerposter}
+\usetheme{default}
+\usefonttheme{professionalfonts}
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=28mm, text margin right=28mm}
+\newlength{\colh}
+\AtBeginDocument{\typeout{DIMS textwidth=\the\textwidth\space textheight=\the\textheight\space paperheight=\the\paperheight}}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[scaled]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+
+% ------------------------------------------------------------ palette
+% Internationale huisstijl Vlaamse overheid
+\definecolor{voyellow}{HTML}{FFED00}   % hoofdkleur - Pantone Yellow C
+\definecolor{vodark}{HTML}{3C3D3C}     % Pantone 447
+\definecolor{volight}{RGB}{246,245,243}% Cool gray 1
+% aliases used throughout the body
+\colorlet{navy}{vodark}
+\colorlet{navydeep}{vodark}
+\colorlet{teal}{vodark}
+\colorlet{green}{vodark}
+\colorlet{statred}{vodark}
+\colorlet{orange}{voyellow}
+\colorlet{panelblue}{volight}
+\colorlet{panelgrey}{volight}
+\colorlet{panelgold}{volight}
+\colorlet{rule}{vodark}
+\colorlet{ink}{vodark}
+
+\setbeamercolor{background canvas}{bg=white}
+\color{ink}
+
+% ------------------------------------------------------------ blocks
+% \begin{pbox}{<title colour>}{<body colour>}{<title>} ... \end{pbox}
+\newtcolorbox{pbox}[3]{
+  enhanced, breakable=false,
+  colback=#2, colframe=#2, boxrule=0pt, arc=0pt, outer arc=0pt,
+  left=8mm, right=8mm, top=6mm, bottom=6mm,
+  title={#3}, colbacktitle=#1, coltitle=white,
+  fonttitle=\bfseries\large,
+  toptitle=4mm, bottomtitle=4mm, lefttitle=6mm,
+  titlerule=0pt, sharp corners,
+  boxsep=0pt, before skip=0pt, after skip=10mm
+}
+
+% big-number callout
+\newtcolorbox{callout}[2]{
+  enhanced, colback=#1, colframe=#1, boxrule=0pt, arc=0pt, sharp corners,
+  left=8mm, right=8mm, top=8mm, bottom=8mm,
+  borderline west={6mm}{0mm}{#2},
+  before skip=0pt, after skip=10mm
+}
+
+% single statistic tile
+\newcommand{\stat}[3]{%
+  \begin{tcolorbox}[enhanced, colback=white, colframe=rule, boxrule=0.6mm,
+      arc=0pt, sharp corners, left=2mm, right=2mm, top=4mm, bottom=4mm,
+      borderline north={3mm}{0mm}{voyellow}]
+    \centering{\fontsize{62}{66}\selectfont\bfseries\color{vodark}#2}\\[3mm]
+    {\small #3}
+  \end{tcolorbox}}
+
+\newcommand{\figcap}[1]{\vspace{2mm}{\footnotesize\itshape #1}\vspace{2mm}}
+
+\begin{document}
+\begin{frame}[t]
+\vspace*{18pt}
+\setlength{\colh}{0.7116\textheight}
+
+% ==================================================================== HEADER
+\begin{tcolorbox}[enhanced, colback=voyellow, colframe=voyellow, boxrule=0pt,
+    arc=0pt, sharp corners, left=14mm, right=14mm, top=10mm, bottom=10mm,
+    borderline south={5mm}{0mm}{vodark}, after skip=12mm]
+\begin{minipage}[c]{0.79\linewidth}
+  {\fontsize{86}{96}\selectfont\bfseries\color{vodark}
+   Chemical Identity Lost in Regulation}\\[5mm]
+  {\fontsize{44}{50}\selectfont\itshape\color{vodark}
+   A Study of Semantic Interoperability in European Chemical Substance Data}\\[9mm]
+  {\fontsize{31}{36}\selectfont\bfseries\color{vodark}
+   Geert Van Haute \quad Stijn Goedertier \quad Pieter Fannes \quad Maxim Van de Wynckel}\\[3mm]
+  {\fontsize{25}{30}\selectfont\color{vodark}
+   Department of Environment \& Spatial Development, Flemish Government, Brussels
+   \enspace$\bullet$\enspace SEMANTiCS 2026, Ghent}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.19\linewidth}\raggedleft
+  \includegraphics[width=\linewidth]{../images/State_of_the_art_horizontal_yellow_full_version_qlaz5v.jpeg}
+\end{minipage}
+\end{tcolorbox}
+
+\begin{columns}[t,onlytextwidth]
+
+% ==================================================================== COLUMN 1
+\begin{column}{0.315\textwidth}
+\begin{minipage}[t][\colh][s]{\linewidth}
+\strut\par
+
+\begin{pbox}{navy}{panelgrey}{The problem}
+  \justifying
+  In chemistry, substance identity is exact: structure-based identifiers
+  (\textbf{InChI\,/\,InChIKey}) link a molecule unambiguously across PubChem,
+  ChEBI and beyond.\\[6mm]
+  In EU regulation (\textbf{REACH}, \textbf{CLP}), a substance may be a single
+  molecule, a mixture or \textbf{UVCB}, a \textbf{group} (e.g.\ PFAS, with no
+  explicit set membership), or an analytical sum parameter --- identified only
+  by \textbf{CAS numbers} and textual names that carry no structure.
+\end{pbox}
+
+\includegraphics[width=0.94\linewidth]{../images/mismatch.pdf}
+\figcap{Fig.~1 --- Structure-based chemical identity vs.\ heterogeneous
+regulatory substance types.}
+
+\vfill
+\includegraphics[width=0.94\linewidth]{../images/regulatory_groups.pdf}
+\figcap{Fig.~2 --- PFAS as a regulatory group without set-membership semantics;
+Sum PFOS\,+\,PFBA a derived analytical parameter.}
+
+\vfill
+\begin{pbox}{teal}{panelblue}{Research questions}
+  \textbf{RQ1}\enspace To what extent can regulatory substances be linked to a
+  unique chemical structure?\\[5mm]
+  \textbf{RQ2}\enspace How reliable are CAS numbers as cross-dataset
+  identifiers?\\[5mm]
+  \textbf{RQ3}\enspace Can embedding-based or LLM methods compensate for absent
+  structure identifiers?
+\end{pbox}
+
+\begin{callout}{voyellow}{vodark}
+  {\fontsize{100}{104}\selectfont\bfseries\color{vodark}37.5\%}\\[6mm]
+  {\fontsize{31}{38}\selectfont\bfseries\color{vodark}
+   of regulatory substance entries have no machine-readable structural identity.}
+\end{callout}
+
+\end{minipage}
+\end{column}
+
+% ==================================================================== COLUMN 2
+\begin{column}{0.315\textwidth}
+\begin{minipage}[t][\colh][s]{\linewidth}
+\strut\par
+
+\begin{pbox}{navy}{panelgrey}{Approach}
+  \justifying
+  We integrated \textbf{18 ECHA-based datasets} (41,813 records): obligation and
+  activity lists, REACH registrations, the EU Pesticides Database, OSPAR and a
+  Flemish administrative list. Each entry was linked to InChIKey via PubChem and
+  assigned to a \textbf{seven-tier linkability taxonomy}.\\[6mm]
+  Substance names were matched to ${\sim}$4,800 ChemOnt classes using four
+  sentence-transformer models and Claude Sonnet 4.6, benchmarked against 28,204
+  ClassyFire assignments.
+\end{pbox}
+
+\begin{minipage}[t]{0.315\linewidth}\stat{green}{62.5\%}{link to a defined structure (tier 1)}\end{minipage}\hfill
+\begin{minipage}[t]{0.315\linewidth}\stat{statred}{37.5\%}{non-structure-based entries}\end{minipage}\hfill
+\begin{minipage}[t]{0.315\linewidth}\stat{navy}{39.2\%}{best LLM Hit@1 (still a minority)}\end{minipage}
+
+\vfill
+\begin{pbox}{navy}{panelblue}{Linkability\ \ (RQ1)}
+  \justifying
+  Of 33,452 unique entries, \textbf{62.5\% (20,909)} link directly via InChIKey.
+  The other \textbf{37.5\%} resist structure-based linking: 11.6\% unresolved CAS
+  (tier 4), 10.8\% mixtures or UVCBs (tier 5), and 14.9\% lack any usable
+  identifier (tier 7).
+\end{pbox}
+
+\includegraphics[width=0.94\linewidth]{../images/Analysis_4bd_v_Entity_type_and_linkability_vertical.pdf}
+\figcap{Fig.~3 --- Entity-type composition (A) and seven-tier linkability (B)
+across 18 sources.}
+
+\vfill
+\begin{pbox}{navy}{panelgrey}{CAS unreliability\ \ (RQ2)}
+  \justifying
+  \textbf{70.0\%} of structure-resolved InChIKeys appear in only one source ---
+  CAS is insufficient as a shared key.\\[6mm]
+  Ambiguity compounds this: 195 InChIKeys map to multiple CAS numbers (up to
+  seven); 4 CAS numbers resolve to two distinct InChIKeys (e.g.\ toluene
+  diisocyanate $\rightarrow$ two positional isomers).
+\end{pbox}
+
+\begin{callout}{vodark}{voyellow}
+  {\fontsize{42}{52}\selectfont\bfseries\color{white}
+   CAS numbers introduce ambiguity rather than resolving it.}
+\end{callout}
+
+\end{minipage}
+\end{column}
+
+% ==================================================================== COLUMN 3
+\begin{column}{0.315\textwidth}
+\begin{minipage}[t][\colh][s]{\linewidth}
+\strut\par
+
+\begin{pbox}{statred}{panelgrey}{Semantic methods fail\ \ (RQ3)}
+  \justifying
+  Embedding-based matching collapses: the best model reaches
+  \textbf{Hit@1 = 5.75\%}; all others score below 1\%. Claude Sonnet 4.6 reaches
+  \textbf{39.2\%} --- a seven-fold gain, but it still misclassifies the majority.
+  Text cannot substitute for structure.
+\end{pbox}
+
+{\centering
+\begin{tabular}{@{}l r r r r@{}}
+\toprule
+\textbf{Model} & \textbf{Hit@1} & \textbf{Hit@3} & \textbf{Hit@5} & \textbf{Hit@10}\\
+\midrule
+all-MiniLM-L6-v2  & 0.0575 & 0.0986 & 0.1234 & 0.1621\\
+all-mpnet-base-v2 & 0.0093 & 0.0152 & 0.0184 & 0.0247\\
+SciBERT           & 0.0040 & 0.0071 & 0.0102 & 0.0131\\
+BioBERT           & 0.0047 & 0.0077 & 0.0099 & 0.0150\\
+\textbf{Claude Sonnet 4.6} & \textbf{0.392} & --- & --- & ---\\
+\bottomrule
+\end{tabular}\par}
+\figcap{Table~1 --- ChemOnt classification (direct-parent level). Only Hit@1 is
+comparable across rows.}
+
+\vfill
+\begin{pbox}{green}{panelblue}{What works: the knowledge graph\ \ (C4, C5)}
+  \justifying
+  ${\sim}$17,500 regulatory substances (SKOS concepts) are integrated with
+  structure-based identity, ChemOnt classification and ChEBI biological roles ---
+  \textbf{${\sim}$46,600 cross-domain links}, enabling composite priority scoring
+  that is infeasible on fragmented data.\\[6mm]
+  LLM-based scope mapping yields \textbf{304 validated SKOS triples}
+  (285 broadMatch, 18 exactMatch, 1 narrowMatch) as a legislative--ChemOnt
+  crosswalk.
+\end{pbox}
+
+\includegraphics[width=0.94\linewidth]{../images/knowledge_graph.pdf}
+\figcap{Fig.~4 --- Integrated knowledge graph linking identity, classification
+and biological roles.}
+
+\vfill
+\begin{pbox}{navydeep}{panelgold}{Conclusions \& recommendations}
+  \justifying
+  Over one-third of entries cannot be linked to a structure; CAS adds ambiguity;
+  neither embeddings nor LLMs can replace structural information. Manual
+  reconciliation (${\sim}$3,150 person-years for REACH) is infeasible.
+  \textbf{Harmonisation must happen at the source, not downstream.}\\[6mm]
+  \textbf{1}\enspace Require structure-based identifiers (InChIKey; MInChI for
+  mixtures) across regulatory instruments.\\[4mm]
+  \textbf{2}\enspace Mandate explicit substance-group representation using
+  formal ontologies such as ChemOnt.\\[4mm]
+  \textbf{3}\enspace Publish regulatory data as linked data with persistent URIs
+  and SKOS links (FAIR / Interoperable Europe Act).
+\end{pbox}
+
+\end{minipage}
+\end{column}
+\end{columns}
+
+% ==================================================================== FOOTER
+\vfill
+\begin{tcolorbox}[enhanced, colback=vodark, colframe=vodark, boxrule=0pt,
+    arc=0pt, sharp corners, left=14mm, right=14mm, top=7mm, bottom=7mm,
+    borderline west={6mm}{0mm}{voyellow}]
+\begin{minipage}[c]{0.76\linewidth}
+  {\color{white}\large
+   \textbf{Code \& data:}\enspace
+   github.com/gezever/A-Substance-Is-Not-Always-a-Substance \\[3mm]
+   \textbf{Contact:}\enspace geert.vanhaute@vlaanderen.be \\[3mm]
+   {\normalsize\itshape AI declaration: Claude Sonnet 4.6 was used as the object
+   of study for the LLM experiments (${\sim}$\$100 API) and as a development
+   tool. All content was reviewed by the authors. CC BY 4.0.}}
+\end{minipage}\hfill
+\begin{minipage}[c]{0.22\linewidth}\raggedleft
+  \includegraphics[width=32mm]{../images/qrcode_github.png}\\[2mm]
+  {\color{white}\normalsize Scan for code \& data}
+\end{minipage}
+\end{tcolorbox}
+\vspace*{45pt}
+
+\end{frame}
+\end{document}
