@@ -20,13 +20,16 @@ The paper argues that interoperability must be addressed at the level of legisla
 ## Repository Structure
 
 ```
-R/                              Analysis pipeline (17 scripts)
+R/                              Analysis pipeline (22 scripts)
 bash/                           Shell scripts for RDF/SPARQL processing
 data/
   source/                       Raw downloaded regulatory datasets
   cache/classyfire/             ClassyFire API response cache
+  cache/llm_chemont*/           Anthropic API response cache (09d–09f, see below)
   processed/
-    rdf/substances_taxonomy.ttl RDF knowledge graph (substances + ChemOnt + ChEBI)
+    rdf/substances_taxonomy.ttl        RDF knowledge graph (substances + ChemOnt + ChEBI)
+    rdf/substances_taxonomy_levels.ttl RDF knowledge graph + typed ChemOnt hierarchy (wk:kingdom/superclass/class/subclass)
+    rdf/chemont_nonstructure_mapping.ttl LLM-derived SKOS mappings for non-structure substances (09g; not yet merged into substances_taxonomy.ttl)
 output/
   figures/                      Generated plots (PDF, one per analysis)
   tables/                       Generated tables (CSV, one per analysis)
@@ -64,6 +67,10 @@ Scripts are listed in execution order as defined in `run_all.R`. Dependencies ar
 | `13a_classyfire_coverage.R` | Analysis 13: ChemOnt class coverage via ClassyFire |
 | `13b_before_prioritisation_create_scheme.R` | RDF schema creation; merges substance RDF with ChemOnt and ChEBI; produces `substances_taxonomy_levels.ttl` (prerequisite for `09c` and `14`) |
 | `09c_chemont_model_validation.R` | Analysis 9c: validate ChemOnt embedding matching against ground truth derived from ClassyFire-classified substances (requires `substances_taxonomy_levels.ttl` from `13b`) |
+| `09d_chemont_llm_experiment.R` | Analysis 9d: classify substances into ChemOnt classes via the Anthropic API instead of embeddings, as a comparison point for `09c`; caches per-substance results in `data/cache/llm_chemont/` |
+| `09e_llm_nonstructure.R` | Apply the `09d` LLM classifier to non-structure substances (no InChIKey) and compare against the embedding-based matches |
+| `09f_llm_group_equivalence.R` | LLM assessment of whether a substance-group name is equivalent to (exact/broader/narrower than) a ChemOnt class |
+| `09g_chemont_skos_mapping.R` | Convert `09f`'s high-confidence equivalences into formal `skos:exactMatch`/`broadMatch`/`narrowMatch` triples; writes `data/processed/rdf/chemont_nonstructure_mapping.ttl` directly (not merged into `substances_taxonomy.ttl` by any script) |
 | `14_prioritization.R` | Analysis 14: composite priority scoring and visualisations |
 
 ## Data Sources
@@ -132,11 +139,15 @@ SPARQL query files (`.rq`) in `bash/` are used by the scripts above:
 
 The central output of the RDF pipeline is `data/processed/rdf/substances_taxonomy.ttl`, a Turtle file that integrates:
 - All regulatory substance entries with their identifiers
-- ChemOnt chemical taxonomy (via ClassyFire classification)
+- ChemOnt chemical taxonomy (via ClassyFire classification), including the typed `wk:kingdom`/`wk:superclass`/`wk:class`/`wk:subclass` hierarchy (`wk:` = `https://data.omgeving.vlaanderen.be/ns/wk#`, a project-owned namespace)
 - ChEBI biological hazard annotations (via InChIKey exact match)
 - Cluster and linkability annotations from the R pipeline
 
-This file is the input for the priority scoring in `R/14_prioritization.R`.
+The typed ChemOnt hierarchy is only present in the sibling file `substances_taxonomy_levels.ttl` (produced right after `substances_taxonomy.ttl` by `13b_before_prioritisation_create_scheme.R` + `bash/merge.bash`); `R/14_prioritization.R` reads the plain `substances_taxonomy.ttl`.
+
+A separate, experimental branch (`09d`–`09g`) classifies substances and substance-group names via an LLM instead of embeddings/ClassyFire, and writes any high-confidence equivalences to `data/processed/rdf/chemont_nonstructure_mapping.ttl` as `skos:exactMatch`/`broadMatch`/`narrowMatch` triples. **This file is not merged into `substances_taxonomy.ttl` by any tracked script** — treat it as a standalone experiment until a merge step is added.
+
+> **Note:** `substances_taxonomy.ttl`/`substances_taxonomy_levels.ttl` must be rebuilt (`bash/merge.bash` then `bash/chebi.sh`) any time `substances.ttl` or its upstream inputs (classification, clustering, ChEBI ontology version) change, otherwise the merged file goes stale relative to the diagram's counts below.
 
 ```mermaid
 graph LR
@@ -145,15 +156,16 @@ graph LR
     PubChem["PubChem REST API\nCAS → InChIKey"]
     ClassyFire_src["ClassyFire API\nInChIKey → ChemOnt direct parent"]
     ChEBI_src["ChEBI OWL\nontology (EBI)"]
-    BERT["Sentence-BERT\nall-MiniLM-L6-v2\nk-means k=6"]
+    BERT["Sentence-BERT\n4 models compared (09b/09c)\nall-MiniLM-L6-v2 + k-means k=6 used for Collections"]
+    LLM["Anthropic API\n09d–09f: LLM ChemOnt\nclassification + group equivalence"]
   end
 
-  subgraph kg["Knowledge graph — substances_taxonomy.ttl"]
+  subgraph kg["Knowledge graph — substances_taxonomy.ttl + substances_taxonomy_levels.ttl"]
     Scheme["ConceptScheme\nchemical_substance"]
 
     Substances["skos:Concept + dbo:ChemicalSubstance\nRegulatory substances\n~17,500 csc:{md5hash}\n(CAS, EC, InChIKey)"]
 
-    ChemOnt["skos:Concept\nChemOnt 2.1\n~4,800 classes\ncsc:000xxxx\n(Kingdom → SubClass)"]
+    ChemOnt["skos:Concept\nChemOnt 2.1\n~4,800 classes\ncsc:000xxxx\n(Kingdom → SubClass)\n+ wk:kingdom/superclass/class/subclass\n(substances_taxonomy_levels.ttl only)"]
 
     XKOS["xkos:ClassificationLevel\n4 levels:\nKingdom · SuperClass\nClass · SubClass"]
 
@@ -163,10 +175,12 @@ graph LR
 
     ChEBI_rol["owl:Class\nChEBI — Biological roles\n~1,400 classes\ne.g. carcinogenic agent,\nhepatotoxic agent, allergen"]
 
-    Annotations["oa:Annotation\n~46,600 annotations\n(regulatory sources\n+ ChEBI roles)"]
+    Annotations["oa:Annotation\n~48,400 annotations\n(regulatory sources\n+ ChEBI roles)"]
 
     ExtDB["External databases\nPubChem · DrugBank · KEGG"]
   end
+
+  LLMMap["chemont_nonstructure_mapping.ttl\nskos:exactMatch/broadMatch/narrowMatch\n(09g output — standalone,\nNOT merged into kg above)"]
 
   %% External sources → knowledge graph
   ECHA -->|"import + normalisation"| Substances
@@ -175,6 +189,8 @@ graph LR
   ChEBI_src -->|"riot OWL→TTL\nexact_match_chebi.rq"| ChEBI_stof
   ChEBI_src -->|"riot OWL→TTL\nRO:0000087 roles"| ChEBI_rol
   BERT -->|"embedding clusters\nclusters.ttl"| Collections
+  LLM -->|"high-confidence\nequivalences (09g)"| LLMMap
+  Substances -.->|"not yet linked\n(no merge step)"| LLMMap
 
   %% Within the knowledge graph
   Substances -->|"skos:inScheme"| Scheme
@@ -198,7 +214,9 @@ After running the full pipeline, results are written to:
 
 - **`output/figures/`** — one PDF per analysis (e.g. `Analysis_1_What_is_a_substance.pdf`, `Analysis_14e_Bubble_priority.pdf`)
 - **`output/tables/`** — one CSV per analysis (e.g. `Analysis_1_structure_vs_nonstructure.csv`, `Analysis_14a_top50.csv`)
-- **`data/processed/rdf/substances_taxonomy.ttl`** — the merged RDF knowledge graph
+- **`data/processed/rdf/substances_taxonomy.ttl`** — the merged RDF knowledge graph (input to `R/14_prioritization.R`)
+- **`data/processed/rdf/substances_taxonomy_levels.ttl`** — the same graph plus the typed ChemOnt `wk:kingdom`/`superclass`/`class`/`subclass` hierarchy
+- **`data/processed/rdf/chemont_nonstructure_mapping.ttl`** — LLM-derived SKOS mappings for non-structure substances (09g); standalone, not yet merged into the files above
 
 ## Dependencies
 
