@@ -1,6 +1,6 @@
 cff-version: 1.2.0
 message: "If you use this software or data, please cite it as below."
-title: "Chemical Identity Lost in Regulation: A Study of Semantic Interoperability in European Chemical Substance Data"
+title: "Chemical Identity Lost in Regulation: software and data"
 authors:
   - family-names: Van Haute
     given-names: Geert
