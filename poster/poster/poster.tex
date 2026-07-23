@@ -103,7 +103,7 @@
    solid arrows: asserted RDF relations\quad$\cdot$\quad dashed: deliberately not merged}
 \end{tcolorbox}
 
-{\centering\resizebox{\diagscale\linewidth}{!}{\input{kgdiagram.tex}}\par}
+{\centering\resizebox{\diagscale\linewidth}{!}{\input{kg_opt2.tex}}\par}
 \figcap{Regulatory substances form one SKOS concept scheme; ChemOnt supplies
 chemical classification over four XKOS levels, ChEBI an orthogonal axis of
 biological roles, and an annotation layer keeps regulatory provenance attached
@@ -211,16 +211,17 @@ across rows; ground truth is 28,204 ClassyFire assignments.}
 \rule{0pt}{0pt}%
 \begin{pbox}{vodark}{volight}{What the model makes possible}
   \justifying
-  \textbf{Two axes, not one.} ChemOnt classifies substances chemically; ChEBI
-  roles describe what they \emph{do}. Both hang off the same concept, so
-  ``every substance on an obligation list acting as a carcinogenic agent''
-  becomes one query.\\[5mm]
-  \textbf{Provenance survives integration.} Regulatory statements stay as
-  \texttt{oa:Annotation} instead of being folded into the concept, so 18 sources
-  can disagree without overwriting one another.\\[5mm]
-  \textbf{A classification, not just a tree.} Four \texttt{xkos} levels make
-  ChemOnt navigable at a chosen granularity, and composite priority scoring
-  becomes feasible.
+  \textbf{Two axes, not one.} ChemOnt classifies substances chemically
+  (\texttt{skos:broader}); ChEBI says what they \emph{do}. Both reach the same
+  concept, so ``every substance on an obligation list acting as a carcinogenic
+  agent'' is one query.\\[4mm]
+  \textbf{Provenance survives integration.} \textbf{48,438
+  \texttt{oa:Annotation}} nodes carry the cross-domain links (40,644 list
+  memberships, 7,794 ChEBI roles) so 18 sources can disagree without
+  overwriting one another.\\[4mm]
+  \textbf{A classification, not just a tree.} Four
+  \texttt{xkos:ClassificationLevel} steps (kingdom $\rightarrow$ subclass) make
+  ChemOnt navigable at a chosen granularity.
 \end{pbox}
 
 \vfill

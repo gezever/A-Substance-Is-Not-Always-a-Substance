@@ -3,6 +3,9 @@
 Coordinates are in mm on a fixed canvas; everything is checked for overlap
 and containment before a single line of TikZ is written."""
 
+import itertools
+import math
+
 CANVAS_W, CANVAS_H = 780.0, 312.0
 
 # style -> (fill, draw, dashed, bold title)
@@ -56,7 +59,9 @@ BOXES = {
             "regulatory provenance + biological roles"]),
 }
 
-# (from, to, label, side)  side: 'l'/'r'/'c' nudges the label off the line
+# (from, to, label, side)  side: 'l'/'r'/'c' nudges the label off the line.
+# Routing (straight vs. bent around an intervening tier) is computed, not
+# hand-placed -- see route() below.
 EDGES = [
     ("A1", "HUB", "import + normalisation", "l"),
     ("A2", "HUB", "resolve identity", "l"),
@@ -73,6 +78,84 @@ EDGES = [
     ("D3", "C4",  "oa:hasBody", "c"),
     ("HUB", "SEP", "", "c"),
 ]
+
+# ------------------------------------------------------------ tier layout
+# Rows are laid out left-to-right independently; D2/D3 are not part of the
+# search because their geometry is derived from C2/C3/C4 after the fact
+# (D2 sits under whichever box ends up in C2's slot; D3 spans C3+C4).
+ROW_A = ["A1", "A2", "A3", "A4", "A5"]
+ROW_B = ["B0", "HUB", "SEP"]
+ROW_C = ["C1", "C2", "C3", "C4"]
+ROWS = [ROW_A, ROW_B, ROW_C, ["D2", "D3"]]
+ROW_OF = {name: i for i, row in enumerate(ROWS) for name in row}
+
+def row_gap(row):
+    """The (uniform, by construction) gap between consecutive boxes in a row."""
+    ordered = sorted(row, key=lambda n: BOXES[n][0])
+    n1, n2 = ordered[0], ordered[1]
+    return BOXES[n2][0] - (BOXES[n1][0] + BOXES[n1][2])
+
+def layout_row(order, start_x, gap):
+    """x-position for each box name in `order`, packed left-to-right from
+    start_x using each box's own width; total row width is order-independent
+    since it only depends on the (fixed) set of widths and the gap."""
+    xs, cur = {}, start_x
+    for n in order:
+        xs[n] = cur
+        cur += BOXES[n][2] + gap
+    return xs
+
+def total_edge_length(xs):
+    def centre(n):
+        x = xs.get(n, BOXES[n][0])
+        return (x + BOXES[n][2] / 2, BOXES[n][1] + BOXES[n][3] / 2)
+    total = 0.0
+    for a, b, _lab, _side in EDGES:
+        (ax, ay), (bx, by) = centre(a), centre(b)
+        total += math.hypot(ax - bx, ay - by)
+    return total
+
+def optimize_order():
+    """Brute-force the left-right order within each of ROW_A/B/C (independent
+    permutations, small enough to enumerate fully) to minimise total edge
+    length. C3/C4 are kept adjacent so D3 can still span exactly those two
+    columns. Returns {name: new_x} for every box in ROW_A + ROW_B + ROW_C."""
+    start_a, gap_a = BOXES["A1"][0], row_gap(ROW_A)
+    start_b, gap_b = BOXES["B0"][0], row_gap(ROW_B)
+    start_c, gap_c = BOXES["C1"][0], row_gap(ROW_C)
+
+    best_cost, best_xs = None, None
+    for perm_a in itertools.permutations(ROW_A):
+        xs_a = layout_row(perm_a, start_a, gap_a)
+        for perm_b in itertools.permutations(ROW_B):
+            xs_b = layout_row(perm_b, start_b, gap_b)
+            for perm_c in itertools.permutations(ROW_C):
+                if abs(perm_c.index("C3") - perm_c.index("C4")) != 1:
+                    continue
+                xs_c = layout_row(perm_c, start_c, gap_c)
+                xs = {**xs_a, **xs_b, **xs_c}
+                cost = total_edge_length(xs)
+                if best_cost is None or cost < best_cost:
+                    best_cost, best_xs = cost, xs
+    return best_xs
+
+def apply_order(xs):
+    for name, x in xs.items():
+        old = list(BOXES[name])
+        old[0] = x
+        BOXES[name] = tuple(old)
+    # D2 tracks C2's slot exactly (same x and width).
+    c2 = BOXES["C2"]
+    d2 = list(BOXES["D2"]); d2[0], d2[2] = c2[0], c2[2]
+    BOXES["D2"] = tuple(d2)
+    # D3 spans the bounding box of C3 and C4 (kept adjacent by construction).
+    c3, c4 = BOXES["C3"], BOXES["C4"]
+    left = min(c3[0], c4[0])
+    right = max(c3[0] + c3[2], c4[0] + c4[2])
+    d3 = list(BOXES["D3"]); d3[0], d3[2] = left, right - left
+    BOXES["D3"] = tuple(d3)
+
+apply_order(optimize_order())
 
 # ------------------------------------------------------------------ checks
 def rect(b):
@@ -115,7 +198,32 @@ def anchors(a, b):
             p1 = (ax, acy); p2 = (bx + bw, bcy)
     return p1, p2
 
-def emit(path="kgdiagram.tex"):
+def nearest_gap(row, near_x):
+    """x-coordinate of the midpoint of the row's gap closest to near_x."""
+    ordered = sorted(row, key=lambda n: BOXES[n][0])
+    gaps = []
+    for n1, n2 in zip(ordered, ordered[1:]):
+        left = BOXES[n1][0] + BOXES[n1][2]
+        right = BOXES[n2][0]
+        gaps.append((left + right) / 2)
+    return min(gaps, key=lambda g: abs(g - near_x))
+
+def route(a, b, stagger=0.0):
+    """Path (list of points) for edge a->b. Adjacent/same-tier edges get a
+    straight line. An edge that skips a tier (currently: tier A -> tier C)
+    is bent through the nearest free gap in the tier it would otherwise cut
+    across, so it never crosses a box that sits between its endpoints."""
+    p1, p2 = anchors(a, b)
+    if abs(ROW_OF[a] - ROW_OF[b]) < 2:
+        return [p1, p2]
+    mid_row = ROWS[(ROW_OF[a] + ROW_OF[b]) // 2]
+    gap_x = nearest_gap(mid_row, (p1[0] + p2[0]) / 2) + stagger
+    band_hi = (min(BOXES[n][1] for n in ROWS[ROW_OF[a]])
+               + max(BOXES[n][1] + BOXES[n][3] for n in mid_row)) / 2 + stagger
+    top_b = max(BOXES[n][1] + BOXES[n][3] for n in ROWS[ROW_OF[b]])
+    return [p1, (p1[0], band_hi), (gap_x, band_hi), (gap_x, top_b), p2]
+
+def render():
     errs = validate()
     if errs:
         raise SystemExit("LAYOUT ERRORS:\n  " + "\n  ".join(errs))
@@ -125,21 +233,7 @@ def emit(path="kgdiagram.tex"):
     L.append("\\begin{tikzpicture}[x=1mm,y=1mm]")
     L.append(f"\\path[use as bounding box] (0,0) rectangle ({CANVAS_W:.1f},{CANVAS_H:.1f});")
 
-    # edges first so boxes paint over the ends
-    for a, b, lab, side in EDGES:
-        p1, p2 = anchors(a, b)
-        dash = "dash pattern=on 4mm off 3mm, " if (a == "SEP" or b == "SEP") else ""
-        L.append(f"\\draw[{dash}-{{Stealth[length=5mm,width=3.5mm]}}, line width=0.9mm, vodark] "
-                 f"({p1[0]:.1f},{p1[1]:.1f}) -- ({p2[0]:.1f},{p2[1]:.1f});")
-        if lab:
-            mx, my = (p1[0]+p2[0])/2, (p1[1]+p2[1])/2
-            off = {"l": (-3, 0), "r": (3, 0), "c": (0, 0)}[side]
-            anch = {"l": "east", "r": "west", "c": "center"}[side]
-            L.append(f"\\node[anchor={anch}, inner sep=1.2mm, fill=white, "
-                     f"font=\\fontsize{{17}}{{20}}\\selectfont] "
-                     f"at ({mx+off[0]:.1f},{my+off[1]:.1f}) {{\\ttfamily {lab}}};")
-
-    # boxes
+    # boxes first (bottom layer), so lines and labels always paint on top of them
     for name, (x, y, w, h, style, title, details) in BOXES.items():
         fill, draw, dashed = STYLES[style]
         opts = [f"anchor=south west", f"minimum width={w}mm", f"minimum height={h}mm",
@@ -155,11 +249,47 @@ def emit(path="kgdiagram.tex"):
                      + "\\\\ ".join(details))
         L.append(f"\\node[{', '.join(opts)}] at ({x},{y}) {{{body}}};")
 
+    # edges on top of boxes, so a line is never hidden by a box it happens to pass near.
+    # Edges that skip a tier are staggered (fanned out around the direct path)
+    # so their bent routes don't run on top of one another.
+    skip_edges = [i for i, (a, b, *_r) in enumerate(EDGES) if abs(ROW_OF[a] - ROW_OF[b]) >= 2]
+    stagger_of = {i: (k - (len(skip_edges) - 1) / 2) * 6.0 for k, i in enumerate(skip_edges)}
+
+    edge_labels = []
+    for i, (a, b, lab, side) in enumerate(EDGES):
+        pts = route(a, b, stagger=stagger_of.get(i, 0.0))
+        dash = "dash pattern=on 4mm off 3mm, " if (a == "SEP" or b == "SEP") else ""
+        path = " -- ".join(f"({x:.1f},{y:.1f})" for x, y in pts)
+        L.append(f"\\draw[{dash}-{{Stealth[length=5mm,width=3.5mm]}}, line width=0.9mm, vodark] "
+                 f"{path};")
+        if lab:
+            # place the label on the longest segment of the (possibly bent) path
+            segs = list(zip(pts, pts[1:]))
+            (sx1, sy1), (sx2, sy2) = max(segs, key=lambda s: (s[0][0]-s[1][0])**2 + (s[0][1]-s[1][1])**2)
+            mx, my = (sx1+sx2)/2, (sy1+sy2)/2
+            off = {"l": (-3, 0), "r": (3, 0), "c": (0, 0)}[side]
+            anch = {"l": "east", "r": "west", "c": "center"}[side]
+            edge_labels.append((mx + off[0], my + off[1], anch, lab))
+
+    # labels last (top layer), so a label is always legible over both boxes and lines
+    for mx, my, anch, lab in edge_labels:
+        L.append(f"\\node[anchor={anch}, inner sep=1.2mm, fill=white, draw=vodark, line width=0.3mm, "
+                 f"font=\\fontsize{{17}}{{20}}\\selectfont] "
+                 f"at ({mx:.1f},{my:.1f}) {{\\ttfamily {lab}}};")
+
     L.append("\\end{tikzpicture}%")
-    open(path, "w").write("\n".join(L) + "\n")
+    return "\n".join(L) + "\n"
+
+def emit(path="kgdiagram.tex"):
+    text = render()
+    open(path, "w").write(text)
     return len(BOXES), len(EDGES)
 
 if __name__ == "__main__":
+    import sys
+    if "--print" in sys.argv:
+        sys.stdout.write(render())
+        raise SystemExit(0)
     nb, ne = emit()
     print(f"layout valid: {nb} boxes, {ne} edges, canvas {CANVAS_W}x{CANVAS_H} mm")
     used = max(rect(b)[3] for b in BOXES.values())
