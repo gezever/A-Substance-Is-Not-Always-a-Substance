@@ -165,15 +165,15 @@ graph LR
 
     Substances["skos:Concept + dbo:ChemicalSubstance\nRegulatory substances\n~17,500 csc:{md5hash}\n(CAS, EC, InChIKey)"]
 
-    ChemOnt["skos:Concept\nChemOnt 2.1\n~4,800 classes\ncsc:000xxxx\n(Kingdom → SubClass)\n+ wk:kingdom/superclass/class/subclass\n(substances_taxonomy_levels.ttl only)"]
+    ChemOnt["skos:Concept\nChemOnt 2.1\n~3,800 classes\ncsc:000xxxx\n(Kingdom → SubClass)\n+ wk:kingdom/superclass/class/subclass\n(substances_taxonomy_levels.ttl only)"]
 
     XKOS["xkos:ClassificationLevel\n4 levels:\nKingdom · SuperClass\nClass · SubClass"]
 
     Collections["skos:Collection\n13 cosc:*\n7 linkability tiers\n+ 6 embedding clusters"]
 
-    ChEBI_stof["owl:Class\nChEBI — Chemical substances\n~4,000 classes\n(SMILES, InChI, mass, charge)"]
+    ChEBI_stof["owl:Class\nChEBI — Chemical substances\n~4,900 classes\n(SMILES, InChI, mass, charge)"]
 
-    ChEBI_rol["owl:Class\nChEBI — Biological roles\n~1,400 classes\ne.g. carcinogenic agent,\nhepatotoxic agent, allergen"]
+    ChEBI_rol["owl:Class\nChEBI — Biological roles\n~650 classes\ne.g. carcinogenic agent,\nhepatotoxic agent, allergen"]
 
     Annotations["oa:Annotation\n~48,400 annotations\n(regulatory sources\n+ ChEBI roles)"]
 
