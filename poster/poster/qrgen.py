@@ -2,7 +2,7 @@
 """Minimal QR encoder (byte mode, version 5, EC level M) with self-verification.
 Version 5-M: 37x37 modules, 2 blocks x (43 data + 24 EC) codewords = 134 total."""
 
-URL = "https://github.com/gezever/A-Substance-Is-Not-Always-a-Substance"
+URL = "https://doi.org/10.5281/zenodo.21512303"
 
 VER, SIZE = 5, 37
 NBLOCKS, DATA_PER_BLOCK, EC_PER_BLOCK = 2, 43, 24
