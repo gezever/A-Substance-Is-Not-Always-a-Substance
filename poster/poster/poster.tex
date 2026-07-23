@@ -1,8 +1,10 @@
+% !TeX program = lualatex
 % =====================================================================
 %  SEMANTiCS 2026 poster  --  A0 portrait
 %  Central artefact: the integrated knowledge graph
-%  Compile with:  pdflatex poster.tex     (one run is enough)
-%  Needs: kgdiagram.tex, qrcode.tex, fig/fig1.png
+%  Compile with:  lualatex poster.tex     (one run is enough)
+%  Needs: kg_opt2.tex, qrcode.tex, fig1.tex, fig2.tex, and the Flanders Art
+%  Sans / Latin Modern Sans fonts installed (fc-list | grep Flanders).
 % =====================================================================
 \documentclass[final]{beamer}
 \usepackage[orientation=portrait,size=a0,scale=1.26]{beamerposter}
@@ -13,11 +15,12 @@
 \newlength{\colh}
 \newcommand{\diagscale}{0.90}
 
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage[scaled]{helvet}
-\renewcommand{\familydefault}{\sfdefault}
-\usepackage{textcomp}
+\usepackage{fontspec}
+\setmainfont{Flanders Art Sans}
+\setsansfont{Flanders Art Sans}
+% Flanders Art Sans has no U+2192 glyph; fall back to Latin Modern for it.
+\newfontfamily\FBfont{Latin Modern Sans}
+\renewcommand{\textrightarrow}{{\FBfont\char"2192}}
 
 \usepackage{booktabs}
 \usepackage{tcolorbox}
@@ -89,7 +92,7 @@
    \enspace$\bullet$\enspace SEMANTiCS 2026, Ghent}
 \end{minipage}\hfill
 \begin{minipage}[c]{0.19\linewidth}\raggedleft
- \includegraphics[width=\linewidth]{../images/State_of_the_art_horizontal_yellow_full_version_qlaz5v.jpeg}
+ \includegraphics[width=\linewidth]{../images/logo-flanders-state-of-the-art.pdf}
 \end{minipage}
 \end{tcolorbox}
 
@@ -264,10 +267,9 @@ across rows; ground truth is 28,204 ClassyFire assignments.}
   {\color{white}\large
    \textbf{Code \& data:}\enspace
    github.com/gezever/A-Substance-Is-Not-Always-a-Substance \\[3mm]
-   \textbf{Contact:}\enspace geert.vanhaute@vlaanderen.be \\[3mm]
-   {\normalsize\itshape AI declaration: Claude Sonnet 4.6 was used as the object
-   of study for the LLM experiments (${\sim}$\$100 API) and as a development
-   tool. All content was reviewed by the authors. CC BY 4.0.}}
+   \textbf{Contact:}\enspace geert.vanhaute@vlaanderen.be \\[4mm]
+   \raisebox{-2.2mm}{\includegraphics[height=9mm]{../cc-by.pdf}}\enspace CC BY 4.0
+}
 \end{minipage}\hfill
 \begin{minipage}[c]{0.22\linewidth}\raggedleft
   \input{qrcode.tex}\\[2mm]
