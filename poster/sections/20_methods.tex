@@ -8,7 +8,7 @@ InChI extensions such as MInChI~\cite{Heller2015} support representation of some
 Bidirectional CAS--InChIKey mappings were analysed to assess identifier consistency~\cite{Akhondi2012}.
 
 \paragraph{Semantic matching.}
-We test the hypothesis that semantic similarity can serve as a proxy for chemical taxonomy assignment, expecting it to fail because substance names for groups and mixtures carry no structural information. Substance names and \textasciitilde{}4,800~ChemOnt class labels~\cite{DjoumbouFeunang2016} were encoded using four sentence-transformer models~\cite{Reimers2019} (MiniLM, MPNet, SciBERT, BioBERT).
+We test the hypothesis that semantic similarity can serve as a proxy for chemical taxonomy assignment, expecting it to fail because substance names for groups and mixtures carry no structural information. Substance names and \textasciitilde{}3,800~ChemOnt class labels~\cite{DjoumbouFeunang2016} were encoded using four sentence-transformer models~\cite{Reimers2019} (MiniLM, MPNet, SciBERT, BioBERT).
 Performance was measured using Hit@$k$ against 28,204~ClassyFire-assigned substances as ground truth.
 Claude Sonnet~4.6 was applied to the same benchmark under zero-shot prompting. For non-structure entries, it was further used to (a)~classify ChemOnt membership directly and (b)~assess how the entry's name relates to a ChemOnt node (exact, subset, or broader scope), using SKOS mapping types~\cite{W3C2009SKOS}.
 Structure-defined substances were integrated into an RDF knowledge graph with ChEBI biological roles~\cite{Degtyarenko2008}, and a ToxPi-inspired composite priority score~\cite{Reif2010} was computed to illustrate the analytical value.

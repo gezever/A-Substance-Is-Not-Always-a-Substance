@@ -4,7 +4,7 @@ We analyse 18~ECHA-based datasets (41,813~records) using a seven-tier linkabilit
 Only 62.5\% of entries link to a defined molecular structure; 37.5\% are non-structure-based.
 CAS numbers prove unreliable as unique identifiers.
 Four sentence-embedding models achieve ChemOnt Hit@1 $\leq 5.75\%$; Claude Sonnet~4.6 reaches 39.2\% yet still misclassifies the majority.
-Structure-defined substances are integrated into a knowledge graph with ChemOnt classification and ChEBI biological roles (\textasciitilde{}46,600 cross-domain links).
+Structure-defined substances are integrated into a knowledge graph with ChemOnt classification and ChEBI biological roles (\textasciitilde{}48,400 cross-domain links).
 For non-structure entries, the LLM abstains from direct classification far more often than for structure-defined substances, appropriately reflecting their lack of a defined structure; a separate LLM-based scope-mapping assessment yields 304~validated SKOS triples linking regulatory group entries to ChemOnt nodes.
 Semantic interoperability requires structural changes at the level of regulatory data modelling and legislation.
 \end{abstract}
