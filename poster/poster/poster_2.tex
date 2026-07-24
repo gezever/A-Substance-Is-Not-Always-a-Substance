@@ -1,0 +1,342 @@
+% !TeX program = lualatex
+% =====================================================================
+% SEMANTiCS 2026 poster -- A0 portrait
+% Central artefact: the integrated knowledge graph
+% Compile with: lualatex poster.tex (one run is enough)
+% Needs: kg_opt2.tex, qrcode.tex, fig1.tex, fig2.tex, and the Flanders Art
+% Sans / Latin Modern Sans fonts installed (fc-list | grep Flanders).
+%
+% >>> AGITPROP-VERSIE: constructivistische ingrepen binnen de internationale
+% >>> huisstijl. Alle toevoegingen zijn gemarkeerd met ">>>". De vaste hoek is
+% >>> overal 12 graden, van linksonder naar rechtsboven (tan 12 = 0.2126).
+% >>> Vergt TikZ >= 3.1 (patterns.meta) -- zit in elke recente TeX Live.
+% =====================================================================
+\documentclass[final]{beamer}
+\usepackage[orientation=portrait,size=a0,scale=1.26]{beamerposter}
+\usetheme{default}
+\usefonttheme{professionalfonts}
+\setbeamertemplate{navigation symbols}{}
+\setbeamersize{text margin left=28mm, text margin right=28mm}
+\newlength{\colh}
+% >>> iets kleiner dan 0.90 om ruimte te maken voor de patroonstrook
+\newcommand{\diagscale}{0.86}
+\usepackage{fontspec}
+\setmainfont{Flanders Art Sans}
+\setsansfont{Flanders Art Sans}
+% Flanders Art Sans has no U+2192 glyph; fall back to Latin Modern for it.
+\newfontfamily\FBfont{Latin Modern Sans}
+\renewcommand{\textrightarrow}{{\FBfont\char"2192}}
+\usepackage{booktabs}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta}
+% >>> huisstijlpatronen (arcering op 12 graden, stippen) als drukwerktextuur
+\usetikzlibrary{patterns.meta}
+\usepackage{graphicx}
+\usepackage{ragged2e}
+\usepackage{xcolor}
+
+% ------------------------------- Internationale huisstijl Vlaamse overheid
+\definecolor{voyellow}{HTML}{FFED00}   % hoofdkleur - Pantone Yellow C
+\definecolor{vodark}{HTML}{3C3D3C}     % Pantone 447
+\definecolor{volight}{RGB}{246,245,243} % Cool gray 1
+\colorlet{rule}{vodark}
+\setbeamercolor{background canvas}{bg=white}
+\color{vodark}
+
+% >>> ------------------------------------------------------ achtergronddiagonaal
+% >>> Een breed, zeer licht vlak op 12 graden dat achter de hele poster
+% >>> doorloopt, met een dunne gele lijn langs de bovenrand. Het vlak is
+% >>> volight en verdwijnt achter de blokken; alleen in de goten tussen de
+% >>> kolommen blijft de diagonale "draad" zichtbaar. Kost geen lay-outruimte.
+% >>> A0 = 841 x 1189 mm; stijging over de volle breedte = 841*0.2126 = 178.8 mm.
+\setbeamertemplate{background}{%
+    \begin{tikzpicture}
+        \useasboundingbox (0,0) rectangle (841mm,1189mm);
+        \fill[volight]
+        (0,350mm) -- (841mm,528.8mm) -- (841mm,648.8mm) -- (0,470mm) -- cycle;
+        \draw[voyellow, line width=2.5mm] (0,470mm) -- (841mm,648.8mm);
+    \end{tikzpicture}}
+
+% ------------------------------------------------------------------ blocks
+% \begin{pbox}{<title colour>}{<body colour>}{<title>} ... \end{pbox}
+\newtcolorbox{pbox}[3]{
+    enhanced, breakable=false,
+    colback=#2, colframe=#2, boxrule=0pt, arc=0pt, outer arc=0pt,
+    left=8mm, right=8mm, top=6mm, bottom=6mm,
+    title={#3}, colbacktitle=#1, coltitle=white,
+    fonttitle=\bfseries\large,
+    toptitle=4mm, bottomtitle=4mm, lefttitle=6mm,
+    titlerule=0pt, sharp corners,
+    boxsep=0pt, before skip=0pt, after skip=10mm
+}
+
+% yellow emphasis panel
+\newtcolorbox{callout}[1][voyellow]{
+    enhanced, colback=#1, colframe=#1, boxrule=0pt, arc=0pt, sharp corners,
+    left=8mm, right=8mm, top=8mm, bottom=8mm,
+    borderline west={6mm}{0mm}{vodark},
+    before skip=0pt, after skip=10mm
+}
+
+\newcommand{\stat}[2]{%
+    \begin{tcolorbox}[enhanced, colback=white, colframe=rule, boxrule=0.6mm,
+        arc=0pt, sharp corners, left=2mm, right=2mm, top=4mm, bottom=4mm,
+        borderline north={3mm}{0mm}{voyellow}]
+    \centering{\fontsize{54}{58}\selectfont\bfseries\color{vodark}#1}\\[3mm]
+    {\small #2}
+    \end{tcolorbox}}
+
+\newcommand{\figcap}[1]{\vspace{2mm}{\footnotesize\itshape #1}\vspace{2mm}}
+
+% >>> genummerde eis in manifeststijl: nummer in geel vierkant
+\newcommand{\demand}[2]{%
+    \colorbox{voyellow}{\makebox[11mm]{\rule[-2.2mm]{0pt}{9mm}\bfseries\Large\color{vodark}#1}}%
+    \enspace\textbf{#2}}
+
+\begin{document}
+    \begin{frame}[t]
+        \setlength{\colh}{0.485\textheight}
+        \vspace*{6pt}
+
+% ==================================================================== HEADER
+        \begin{tcolorbox}[enhanced, colback=voyellow, colframe=voyellow, boxrule=0pt,
+            arc=0pt, sharp corners, left=14mm, right=14mm, top=8mm, bottom=8mm,
+            borderline south={5mm}{0mm}{vodark}, after skip=6mm]
+            \begin{minipage}[c]{0.79\linewidth}
+                {\fontsize{74}{82}\selectfont\bfseries\color{vodark}
+                Chemical Identity Lost in Regulation}\\[4mm]
+                {\fontsize{37}{43}\selectfont\itshape\color{vodark}
+                A Study of Semantic Interoperability in European Chemical Substance Data}\\[7mm]
+            {\fontsize{29}{34}\selectfont\bfseries\color{vodark}
+            Geert Van Haute \quad Stijn Goedertier \quad Pieter Fannes \quad Maxim Van de Wynckel}\\[2mm]
+            {\fontsize{24}{29}\selectfont\color{vodark}
+            Department of Environment \& Spatial Development, Flemish Government, Brussels
+            \enspace$\bullet$\enspace SEMANTiCS 2026, Ghent}
+            \end{minipage}\hfill
+            \begin{minipage}[c]{0.19\linewidth}\raggedleft
+                \includegraphics[width=\linewidth]{../images/logo-flanders-state-of-the-art.pdf}
+            \end{minipage}
+        \end{tcolorbox}
+
+% >>> =========================================== PATROONSTROOK (naar gids p.16)
+% >>> Arcering op 12 graden, trapezium, gele parallellogram, stippenveld en de
+% >>> enkele diagonale lijn: de officiele bouwstenen als constructivistische
+% >>> zetsel-elementen. Vaste hoogte van 24 mm, dus geen overloop-risico.
+
+%        \noindent\begin{tikzpicture}[x=1mm,y=1mm]
+%                     \useasboundingbox (0,0) rectangle (785,24);
+%                     \fill[pattern={Lines[angle=12, distance=3.4mm, line width=1mm]},
+%                         pattern color=vodark] (0,3) rectangle (300,21);
+%                     \fill[vodark]   (318,3) -- (398,3) -- (401.8,21) -- (321.8,21) -- cycle;
+%                     \fill[voyellow] (414,3) -- (452,3) -- (455.8,21) -- (417.8,21) -- cycle;
+%                     \fill[pattern={Dots[distance=3.6mm, radius=0.5mm]},
+%                         pattern color=vodark] (468,3) rectangle (520,21);
+%                     \draw[vodark, line width=1.2mm] (560,3.5) -- (642,20.9); % 12 graden
+%                     \fill[voyellow] (652,14) rectangle (664,21);
+%        \end{tikzpicture}
+%        \vspace{4mm}
+
+% ============================================== CENTREPIECE: KNOWLEDGE GRAPH
+        \begin{tcolorbox}[enhanced, colback=vodark, colframe=vodark, boxrule=0pt,
+            arc=0pt, sharp corners, left=8mm, right=8mm, top=4mm, bottom=4mm,
+            before skip=0pt, after skip=6mm]
+        {\color{white}\bfseries\large
+        One semantic model over 18 regulatory sources\hfill
+        \mdseries\normalsize
+        solid arrows: asserted RDF relations\quad$\cdot$\quad dashed: deliberately not merged}
+        \end{tcolorbox}
+
+            {\centering\resizebox{\diagscale\linewidth}{!}{\input{kg_opt3.tex}}\par}
+        \figcap{Regulatory substances form one SKOS concept scheme; ChemOnt supplies
+        chemical classification over four XKOS levels, ChEBI an orthogonal axis of
+        biological roles, and an annotation layer keeps regulatory provenance attached
+        to every claim.}
+        \vspace{4mm}
+
+        \begin{columns}[t,onlytextwidth]
+
+% ==================================================================== COLUMN 1
+            \begin{column}{0.315\textwidth}
+                \begin{minipage}[t][\colh][s]{\linewidth}
+                    \rule{0pt}{0pt}%
+% >>> titel in kapitalen: telegramstijl
+                    \begin{pbox}{vodark}{volight}{WHY CHEMICAL IDENTITY BREAKS DOWN}
+                        \justifying
+                        In chemistry, identity is exact: \textbf{InChI\,/\,InChIKey} link a molecule
+                        unambiguously across PubChem and ChEBI.\\[4mm]
+                        In EU regulation (\textbf{REACH}, \textbf{CLP}) a substance may be a molecule,
+                        a mixture or \textbf{UVCB}, a \textbf{group} such as PFAS with no set
+                        membership, or an analytical sum parameter --- carrying only \textbf{CAS
+                        numbers} and names, which encode no structure.
+                    \end{pbox}
+                    \vfill
+                    {\centering\input{fig1.tex}\par}
+                    \figcap{Structure-based chemical identity versus the heterogeneous substance
+                    types found in regulatory datasets.}
+                    \vfill
+                    {\centering\input{fig2.tex}\par}
+                    \figcap{PFAS as a regulatory group without explicit set-membership semantics;
+                    Sum PFOS\,+\,PFBA as a derived analytical parameter.}
+                    \vfill
+                    \begin{minipage}[t]{0.315\linewidth}\stat{62.5\%}{link to a defined structure}\end{minipage}\hfill
+                    \begin{minipage}[t]{0.315\linewidth}\stat{37.5\%}{no structural identity}\end{minipage}\hfill
+                    \begin{minipage}[t]{0.315\linewidth}\stat{39.2\%}{best LLM Hit@1}\end{minipage}
+                    \vfill
+                    \begin{callout}
+                    {\color{vodark}\bfseries
+                    RQ1\enspace Can substances be linked to a unique structure?\\[2mm]
+                    RQ2\enspace How reliable is CAS across datasets?\\[2mm]
+                    RQ3\enspace Can embeddings or LLMs compensate?}
+                    \end{callout}
+                \end{minipage}
+            \end{column}
+
+% ==================================================================== COLUMN 2
+            \begin{column}{0.315\textwidth}
+                \begin{minipage}[t][\colh][s]{\linewidth}
+                    \rule{0pt}{0pt}%
+                    \begin{pbox}{vodark}{volight}{WHAT THE DATA SHOWS}
+                        \justifying
+                        \textbf{Linkability (RQ1).} Of 33,452 unique entries, \textbf{62.5\%
+                        (20,909)} link directly via InChIKey. The other \textbf{37.5\%} resist
+                        structure-based linking: 11.6\% unresolved CAS (tier 4), 10.8\% mixtures or
+                        UVCBs (tier 5), 14.9\% no usable identifier (tier 7).\\[5mm]
+                        \textbf{CAS reliability (RQ2).} \textbf{70.0\%} of structure-resolved
+                        InChIKeys occur in a single source, so CAS cannot serve as a shared key.
+                        Ambiguity compounds this: 195 InChIKeys carry multiple CAS numbers (up to
+                        seven) and 4 CAS numbers resolve to two distinct InChIKeys --- for example
+                        toluene diisocyanate, which maps to two positional isomers.
+                    \end{pbox}
+                    \vfill
+
+                    % >>> ================================================== DE WIG (naar Lissitzky)
+% >>> Vervangt de typografische callout. Donker veld = 18 versnipperde
+% >>> regulatoire bronnen; witte cirkel = structurele identiteit (InChI);
+% >>> gele wig met as op exact 12 graden = het semantisch model, dat de cirkel
+% >>> bereikt voor 62,5% van de data. De rest blijft in het donker.
+% >>> Stippen-driehoek rechtsonder = huisstijlpatroon als drukwerktextuur.
+                    \begin{center}
+                        \resizebox{\linewidth}{!}{%
+                            \begin{tikzpicture}[x=1mm,y=1mm]
+                                \fill[vodark] (0,0) rectangle (240,150);
+                                \fill[pattern={Dots[distance=4mm, radius=0.55mm]}, pattern color=volight]
+                                (52,0) -- (240,0) -- (240,40) -- cycle;
+                                \fill[white] (172,95) circle (42);
+                                % wig: as op 12 graden, apex raakt de cirkelrand
+                                \fill[voyellow] (0,40) -- (130.9,86.3) -- (0,77) -- cycle;
+                                % de 12-gradenlijn loopt door de cirkel: dit deel is 'bereikt'
+                                \draw[voyellow, line width=1.4] (130.9,86.3) -- (213,103.7);
+                                \node[font=\fontsize{58}{58}\selectfont\bfseries, text=voyellow,
+                                    anchor=west] at (6,132) {37.5\%};
+                                \node[rotate=12, font=\bfseries\normalsize, text=white, align=left,
+                                    anchor=west] at (16,99) {A SUBSTANCE IS NOT\\ALWAYS A SUBSTANCE};
+                                \node[font=\bfseries\small, text=white, anchor=west] at (6,20)
+                                    {NO STRUCTURE --- NO LINK};
+                            \end{tikzpicture}}
+                    \end{center}
+                    \figcap{37.5\% of regulatory substance entries carry no machine-readable
+                    structural identity. The semantic model (wedge) reaches structure-based
+                    identity (circle) for 62.5\% only. After El Lissitzky, 1919.}
+
+                    \vfill
+
+% >>> agitprop-titel; de body blijft academisch
+                    \begin{pbox}{vodark}{volight}{TEXT IS NOT STRUCTURE (RQ3)}
+                        \justifying
+                        Embedding-based matching collapses: the best model reaches \textbf{Hit@1 =
+                        5.75\%}, the rest score below 1\%. Claude Sonnet 4.6 reaches \textbf{39.2\%}
+                        --- a seven-fold gain, yet it still misclassifies the majority. Text is not a
+                        substitute for structure.
+                    \end{pbox}
+                        {\centering
+                    \begin{tabular}{@{}l r r r r@{}}
+                        \toprule
+                        \textbf{Model} & \textbf{Hit@1} & \textbf{Hit@3} & \textbf{Hit@5} & \textbf{Hit@10}\\
+                        \midrule
+                        all-MiniLM-L6-v2   & 0.0575 & 0.0986 & 0.1234 & 0.1621\\
+                        all-mpnet-base-v2  & 0.0093 & 0.0152 & 0.0184 & 0.0247\\
+                        SciBERT            & 0.0040 & 0.0071 & 0.0102 & 0.0131\\
+                        BioBERT            & 0.0047 & 0.0077 & 0.0099 & 0.0150\\
+                        \textbf{Claude Sonnet 4.6} & \textbf{0.392} & --- & --- & ---\\
+                        \bottomrule
+                    \end{tabular}\par}
+                    \figcap{ChemOnt classification, direct-parent level. Only Hit@1 is comparable
+                    across rows; ground truth is 28,204 ClassyFire assignments.}
+
+
+                \end{minipage}
+            \end{column}
+
+% ==================================================================== COLUMN 3
+            \begin{column}{0.315\textwidth}
+                \begin{minipage}[t][\colh][s]{\linewidth}
+                    \rule{0pt}{0pt}%
+                    \begin{pbox}{vodark}{volight}{WHAT THE MODEL MAKES POSSIBLE}
+                        \justifying
+                        \textbf{Two axes, not one.} ChemOnt classifies substances chemically
+                        (\texttt{skos:broader}); ChEBI says what they \emph{do}. Both reach the same
+                        concept, so ``every substance on an obligation list acting as a carcinogenic
+                        agent'' is one query.\\[4mm]
+                        \textbf{Provenance survives integration.} \textbf{48,438
+                        \texttt{oa:Annotation}} nodes carry the cross-domain links (40,644 list
+                        memberships, 7,794 ChEBI roles) so 18 sources can disagree without
+                        overwriting one another.\\[4mm]
+                        \textbf{A classification, not just a tree.} Four
+                        \texttt{xkos:ClassificationLevel} steps (kingdom $\rightarrow$ subclass) make
+                        ChemOnt navigable at a chosen granularity.
+                    \end{pbox}
+                    \vfill
+                    \begin{pbox}{vodark}{volight}{SCOPE MAPPING, KEPT SEPARATE}
+                        \justifying
+                        For entries without a structure, an LLM assesses how a regulatory group
+                        relates to a ChemOnt node, yielding \textbf{304 validated SKOS triples}
+                        (285 \texttt{broadMatch}, 18 \texttt{exactMatch}, 1 \texttt{narrowMatch}).
+                        Regulatory groups are constrained \emph{subsets} of a ChemOnt class, not
+                        equivalents.\\[5mm]
+                        It is published as a \textbf{separate graph}: machine-generated mappings do
+                        not enter the core until validated.
+                    \end{pbox}
+                    \vfill
+% >>> conclusietitel als imperatief; eisen als manifest met gele nummerblokken
+                    \begin{pbox}{vodark}{volight}{HARMONISE AT THE SOURCE}
+                        \justifying
+                        Over one-third of entries cannot be linked to a structure, CAS adds ambiguity,
+                        and neither embeddings nor LLMs replace structural information. Manual
+                        reconciliation (${\sim}$3,150 person-years for REACH) is infeasible.
+                        \textbf{Harmonisation must happen at the source.}\\[4mm]
+                        \demand{1}{Require structure-based identifiers (InChIKey; MInChI for
+                        mixtures) across instruments.}\\[3mm]
+                        \demand{2}{Mandate explicit substance-group representation via
+                        ontologies such as ChemOnt.}\\[3mm]
+                        \demand{3}{Publish regulatory data as linked data with persistent URIs
+                        and SKOS links.}
+                    \end{pbox}
+                \end{minipage}
+            \end{column}
+
+        \end{columns}
+
+% ==================================================================== FOOTER
+        \vfill
+        \begin{tcolorbox}[enhanced, colback=vodark, colframe=vodark, boxrule=0pt,
+            arc=0pt, sharp corners, left=14mm, right=14mm, top=7mm, bottom=7mm,
+            borderline west={6mm}{0mm}{voyellow}]
+            \begin{minipage}[c]{0.76\linewidth}
+                {\color{white}\large
+                \textbf{Code \& data:}\enspace
+                doi.org/10.5281/zenodo.21512303 \\[3mm]
+                \textbf{Contact:}\enspace geert.vanhaute@vlaanderen.be \\[4mm]
+                \raisebox{-2.2mm}{\includegraphics[height=9mm]{../cc-by.pdf}}\enspace CC BY 4.0
+                }
+            \end{minipage}\hfill
+            \begin{minipage}[c]{0.22\linewidth}\raggedleft
+                \input{qrcode.tex}\\[2mm]
+                {\color{white}\normalsize Scan for code \& data}
+            \end{minipage}
+        \end{tcolorbox}
+        \vspace*{18pt}
+
+    \end{frame}
+\end{document}
