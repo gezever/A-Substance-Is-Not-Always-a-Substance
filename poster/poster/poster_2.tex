@@ -81,12 +81,13 @@
 }
 
 \newcommand{\stat}[2]{%
-    \begin{tcolorbox}[enhanced, colback=white, colframe=rule, boxrule=0.6mm,
-        arc=0pt, sharp corners, left=2mm, right=2mm, top=4mm, bottom=4mm,
-        borderline north={3mm}{0mm}{voyellow}]
-    \centering{\fontsize{54}{58}\selectfont\bfseries\color{vodark}#1}\\[3mm]
-    {\small #2}
-    \end{tcolorbox}}
+	\begin{tcolorbox}[enhanced, colback=white, colframe=rule, boxrule=0.6mm,
+		arc=0pt, sharp corners, left=2mm, right=2mm, top=4mm, bottom=4mm,
+		borderline north={3mm}{0mm}{voyellow},
+		equal height group=stats, valign=top]
+		\centering{\fontsize{54}{58}\selectfont\bfseries\color{vodark}#1}\\[3mm]
+		{\small #2}
+\end{tcolorbox}}
 
 \newcommand{\figcap}[1]{\vspace{2mm}{\footnotesize\itshape #1}\vspace{2mm}}
 
@@ -162,7 +163,7 @@
                 \begin{minipage}[t][\colh][s]{\linewidth}
                     \rule{0pt}{0pt}%
 % >>> titel in kapitalen: telegramstijl
-                    \begin{pbox}{vodark}{volight}{WHY CHEMICAL IDENTITY BREAKS DOWN}
+                    \begin{pbox}{vodark}{volight}{CHEMICAL IDENTITY BREAKS DOWN}
                         \justifying
                         In chemistry, identity is exact: \textbf{InChI\,/\,InChIKey} link a molecule
                         unambiguously across PubChem and ChEBI.\\[4mm]
@@ -180,10 +181,15 @@
                     \figcap{PFAS as a regulatory group without explicit set-membership semantics;
                     Sum PFOS\,+\,PFBA as a derived analytical parameter.}
                     \vfill
+                   \vfill
+                    \vfill
+                     \vfill
+                    \noindent
                     \begin{minipage}[t]{0.315\linewidth}\stat{62.5\%}{link to a defined structure}\end{minipage}\hfill
                     \begin{minipage}[t]{0.315\linewidth}\stat{37.5\%}{no structural identity}\end{minipage}\hfill
                     \begin{minipage}[t]{0.315\linewidth}\stat{39.2\%}{best LLM Hit@1}\end{minipage}
                     \vfill
+                
                     \begin{callout}
                     {\color{vodark}\bfseries
                     RQ1\enspace Can substances be linked to a unique structure?\\[2mm]
@@ -217,28 +223,13 @@
 % >>> gele wig met as op exact 12 graden = het semantisch model, dat de cirkel
 % >>> bereikt voor 62,5% van de data. De rest blijft in het donker.
 % >>> Stippen-driehoek rechtsonder = huisstijlpatroon als drukwerktextuur.
-                    \begin{center}
-                        \resizebox{\linewidth}{!}{%
-                            \begin{tikzpicture}[x=1mm,y=1mm]
-                                \fill[vodark] (0,0) rectangle (240,150);
-                                \fill[pattern={Dots[distance=4mm, radius=0.55mm]}, pattern color=volight]
-                                (52,0) -- (240,0) -- (240,40) -- cycle;
-                                \fill[white] (172,95) circle (42);
-                                % wig: as op 12 graden, apex raakt de cirkelrand
-                                \fill[voyellow] (0,40) -- (130.9,86.3) -- (0,77) -- cycle;
-                                % de 12-gradenlijn loopt door de cirkel: dit deel is 'bereikt'
-                                \draw[voyellow, line width=1.4] (130.9,86.3) -- (213,103.7);
-                                \node[font=\fontsize{58}{58}\selectfont\bfseries, text=voyellow,
-                                    anchor=west] at (6,132) {37.5\%};
-                                \node[rotate=12, font=\bfseries\normalsize, text=white, align=left,
-                                    anchor=west] at (16,99) {A SUBSTANCE IS NOT\\ALWAYS A SUBSTANCE};
-                                \node[font=\bfseries\small, text=white, anchor=west] at (6,20)
-                                    {NO STRUCTURE --- NO LINK};
-                            \end{tikzpicture}}
-                    \end{center}
-                    \figcap{37.5\% of regulatory substance entries carry no machine-readable
-                    structural identity. The semantic model (wedge) reaches structure-based
-                    identity (circle) for 62.5\% only. After El Lissitzky, 1919.}
+% \vfill
+				{\centering\input{wedge.tex}\par}
+                % {\centering\input{wedge_2.tex}\par}   
+                %    \figcap{37.5\% of regulatory substance entries carry no machine-readable
+                %    structural identity. The semantic model (wedge) reaches structure-based
+                %    identity (circle) for 62.5\% only. After El Lissitzky, 1919.}
+                    \figcap{Structure-based identity (wedge) penetrates 62.5\% of the regulatory mass; 37.5\% remains beyond reach. After El Lissitzky, 1919.}
 
                     \vfill
 
@@ -250,7 +241,9 @@
                         --- a seven-fold gain, yet it still misclassifies the majority. Text is not a
                         substitute for structure.
                     \end{pbox}
-                        {\centering
+                        {\centering\footnotesize
+                        %	\setlength{\tabcolsep}{3pt}%
+                        %	\renewcommand{\arraystretch}{0.92}%
                     \begin{tabular}{@{}l r r r r@{}}
                         \toprule
                         \textbf{Model} & \textbf{Hit@1} & \textbf{Hit@3} & \textbf{Hit@5} & \textbf{Hit@10}\\

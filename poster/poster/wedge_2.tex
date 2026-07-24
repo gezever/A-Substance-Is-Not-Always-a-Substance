@@ -1,0 +1,19 @@
+\begin{center}
+                  \resizebox{\linewidth}{!}{%
+                      \begin{tikzpicture}[x=1mm,y=1mm]
+                          \fill[vodark] (0,0) rectangle (240,150);
+                          \fill[pattern={Dots[distance=4mm, radius=0.55mm]}, pattern color=volight]
+                          (52,0) -- (240,0) -- (240,40) -- cycle;
+                          \fill[white] (172,95) circle (42);
+                          % wig: as op 12 graden, apex raakt de cirkelrand
+                          \fill[voyellow] (0,40) -- (190,99) -- (0,77) -- cycle;
+                          % de 12-gradenlijn loopt door de cirkel: dit deel is 'bereikt'
+                          \draw[voyellow, line width=1.4] (130.9,86.3) -- (213,103.7);
+                          \node[font=\fontsize{58}{58}\selectfont\bfseries, text=voyellow,
+                              anchor=west] at (6,132) {37.5\%};
+                          \node[rotate=12, font=\bfseries\normalsize, text=white, align=left,
+                              anchor=west] at (16,99) {A SUBSTANCE IS NOT\\ALWAYS A SUBSTANCE};
+                          \node[font=\bfseries\small, text=white, anchor=west] at (6,20)
+                              {NO STRUCTURE --- NO LINK};
+                      \end{tikzpicture}}
+\end{center}
