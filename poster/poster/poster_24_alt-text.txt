@@ -1,0 +1,113 @@
+Short alt text (for the <img alt="..."> attribute):
+Academic conference poster titled "Chemical Identity Lost in Regulation: A Study of
+Semantic Interoperability in European Chemical Substance Data" by Geert Van Haute,
+Stijn Goedertier, Pieter Fannes and Maxim Van de Wynckel (Flemish Government,
+SEMANTiCS 2026). A full text description of the poster's content follows in this file.
+
+Long description:
+
+Header
+The poster is titled "Chemical Identity Lost in Regulation", subtitled "A Study of
+Semantic Interoperability in European Chemical Substance Data". Authors: Geert Van
+Haute, Stijn Goedertier, Pieter Fannes and Maxim Van de Wynckel, Department of
+Environment & Spatial Development, Flemish Government, Brussels, presented at
+SEMANTiCS 2026, Ghent. The Flanders State of the Art logo appears top right.
+
+Central diagram: "One semantic model over 18 regulatory sources"
+A node-and-arrow diagram shows five regulatory/chemical data sources on the left
+(18 regulatory lists such as ECHA, Pesticides, OSPAR, VMM; PubChem, mapping CAS to
+InChIKey; ClassyFire, mapping InChIKey to parent class; the ChEBI ontology; and
+Embeddings + LLM sources such as MiniLM and Claude) all feeding into a central
+highlighted box, "Regulatory substances" (17,523 dbo:ChemicalSubstance /
+skos:Concept records, keyed by CAS, EC number and InChIKey). From this central box,
+solid arrows (asserted RDF relations) lead to: a "13 skos:Collection" box (7
+linkability tiers, 6 embedding clusters), which links onward to "ChemOnt 2.1" (3,943
+skos:Concept entries across 4 XKOS levels, kingdom to subclass); and to "ChEBI
+substances" (owl:Class, SMILES, InChI), which links onward to "ChEBI roles"
+(owl:Class in an rdfs:subClassOf hierarchy, agrochemical roles). A dashed arrow
+(deliberately not merged) connects the ChemOnt classification to a separate "Scope
+mapping" box (304 SKOS triples, kept separate). Below the central box, an
+"oa:Annotation" box (48,438 annotations: 40,644 list memberships + 7,794 ChEBI
+roles) links via oa:hasTarget to the regulatory substances and via oa:hasBody to
+the ChEBI roles, preserving provenance for every cross-source claim. Caption below
+the diagram: "Regulatory substances form one SKOS concept scheme; ChemOnt supplies
+chemical classification over four XKOS levels, ChEBI an orthogonal axis of
+biological roles, and an annotation layer keeps regulatory provenance attached to
+every claim."
+
+Column 1: "Why chemical identity breaks down"
+In chemistry, identity is exact: InChI/InChIKey link a molecule unambiguously
+across PubChem and ChEBI. In EU regulation (REACH, CLP), however, a "substance" may
+be a molecule, a mixture, a UVCB (substance of unknown or variable composition), a
+group such as PFAS with no fixed membership, or an analytical sum parameter -
+carrying only CAS numbers and names, which encode no structure. A supporting
+diagram contrasts regulatory substance types (individual molecule, mixture,
+substance group, analytical parameter, each with an example: PFOS; a commercial
+PFAS mixture; perfluorinated compounds; sum PFOS+PFBA) against the chemistry side
+(molecule -> structure of atoms and bonds -> structure identifiers InChI/InChIKey).
+Caption: "Structure-based chemical identity versus the heterogeneous substance
+types found in regulatory datasets." A second diagram illustrates PFAS as a
+regulatory group without explicit set-membership semantics: a "universe of chemical
+molecules" contains a "Regulatory group: PFAS" box grouping PFOS, PFBA, PFBS and
+other fluorinated molecules, plus an analytical parameter "Sum PFOS + PFBA" derived
+from two of them. Caption: "PFAS as a regulatory group without explicit
+set-membership semantics; Sum PFOS + PFBA as a derived analytical parameter."
+Three stat callouts follow: 62.5% link to a defined structure; 37.5% have no
+structural identity; 39.2% is the best LLM Hit@1. A highlighted box lists the three
+research questions: RQ1 - Can substances be linked to a unique structure? RQ2 - How
+reliable is CAS across datasets? RQ3 - Can embeddings or LLMs compensate?
+
+Column 2: "What the data shows"
+Linkability (RQ1): Of 33,452 unique entries, 62.5% (20,909) link directly via
+InChIKey. The other 37.5% resist structure-based linking: 11.6% unresolved CAS
+(tier 4), 10.8% mixtures or UVCBs (tier 5), 14.9% no usable identifier (tier 7).
+CAS reliability (RQ2): 70.0% of structure-resolved InChIKeys occur in a single
+source, so CAS cannot serve as a shared key. Ambiguity compounds this: 195
+InChIKeys carry multiple CAS numbers (up to seven), and 4 CAS numbers resolve to
+two distinct InChIKeys - for example toluene diisocyanate, which maps to two
+positional isomers.
+Subsection "Semantic methods cannot fill the gap" - Embeddings & LLM (RQ3):
+embedding-based matching collapses: the best model reaches Hit@1 = 5.75%, the rest
+score below 1%. Claude Sonnet 4.6 reaches 39.2% - a seven-fold gain, yet it still
+misclassifies the majority. Text is not a substitute for structure. A results table
+("ChemOnt classification, direct-parent level; ground truth 28,204 ClassyFire
+assignments; only Hit@1 is comparable across rows") lists, by model, Hit@1/Hit@3/
+Hit@5/Hit@10: all-MiniLM-L6-v2: 0.0575 / 0.0986 / 0.1234 / 0.1621;
+all-mpnet-base-v2: 0.0093 / 0.0152 / 0.0184 / 0.0247; SciBERT: 0.0040 / 0.0071 /
+0.0102 / 0.0131; BioBERT: 0.0047 / 0.0077 / 0.0099 / 0.0150; Claude Sonnet 4.6:
+0.392 (Hit@3/5/10 not applicable, shown as dashes).
+Below the table, a large highlighted stat: "37.5% of regulatory substance entries
+have no machine-readable structural identity."
+
+Column 3: "What the model makes possible" / "Scope mapping, kept separate" /
+"Conclusions & recommendations"
+Two axes, not one: ChemOnt classifies substances chemically (skos:broader); ChEBI
+states what they do. Both reach the same concept, so a query such as "every
+substance on an obligation list acting as a carcinogenic agent" becomes a single
+query. Provenance survives integration: 48,438 oa:Annotation nodes carry the
+cross-domain links (40,644 list memberships, 7,794 ChEBI roles) so that 18 sources
+can disagree without overwriting one another. A classification, not just a tree:
+four xkos:ClassificationLevel steps (kingdom to subclass) make ChemOnt navigable at
+a chosen granularity.
+Scope mapping, kept separate: for entries without a structure, an LLM assesses how
+a regulatory group relates to a ChemOnt node, yielding 304 validated SKOS triples
+(285 broadMatch, 18 exactMatch, 1 narrowMatch). Regulatory groups are constrained
+subsets of a ChemOnt class, not equivalents. It is published as a separate graph:
+machine-generated mappings do not enter the core ontology until validated by
+experts.
+Conclusions & recommendations: over one-third of entries cannot be linked to a
+structure, CAS adds ambiguity, and neither embeddings nor LLMs replace structural
+information. Manual reconciliation (an estimated 3,150 person-years for REACH
+alone) is infeasible. Harmonisation must happen at the source. Three
+recommendations: (1) require structure-based identifiers (InChIKey; MInChI for
+mixtures) across regulatory instruments; (2) mandate explicit substance-group
+representation via ontologies such as ChemOnt; (3) publish regulatory data as
+linked data with persistent URIs and SKOS links.
+
+Footer
+Contact: geert.vanhaute@vlaanderen.be (G. Van Haute). ORCID identifiers are given
+for all four authors: 0009-0002-9836-8139 (G. Van Haute); 0009-0003-4602-6601 (S.
+Goedertier); 0009-0001-7859-1977 (P. Fannes); 0000-0003-0314-7107 (M. Van de
+Wynckel). Licensed under CC BY 4.0. Code & data available at
+https://doi.org/10.5281/zenodo.21512303, with a QR code linking to the same
+address ("Scan for code & data").
