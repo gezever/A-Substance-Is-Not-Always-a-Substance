@@ -50,7 +50,7 @@
   enhanced, breakable=false,
   colback=#2, colframe=#2, boxrule=0pt, arc=0pt, outer arc=0pt,
   left=8mm, right=8mm, top=6mm, bottom=6mm,
-  title={#3}, colbacktitle=#1, coltitle=white,
+  title={\strut#3}, colbacktitle=#1, coltitle=white,
   fonttitle=\bfseries\large,
   toptitle=4mm, bottomtitle=4mm, lefttitle=6mm,
   titlerule=0pt, sharp corners,
@@ -179,12 +179,13 @@ Sum PFOS\,+\,PFBA as a derived analytical parameter.}
 \end{pbox}
 
 \vfill
-\begin{pbox}{vodark}{volight}{Semantic methods cannot fill the gap (RQ3)}
+\begin{pbox}{vodark}{volight}{Semantic methods cannot fill the gap}
   \justifying
-  Embedding-based matching collapses: the best model reaches \textbf{Hit@1 =
+  \textbf{Embeddings \& LLM (RQ3).} Embedding-based matching collapses: the best model reaches \textbf{Hit@1 =
   5.75\%}, the rest score below 1\%. Claude Sonnet 4.6 reaches \textbf{39.2\%}
   --- a seven-fold gain, yet it still misclassifies the majority. Text is not a
   substitute for structure.
+  
 \end{pbox}
 
 {\centering
@@ -241,7 +242,7 @@ across rows; ground truth is 28,204 ClassyFire assignments.}
   Regulatory groups are constrained \emph{subsets} of a ChemOnt class, not
   equivalents.\\[5mm]
   It is published as a \textbf{separate graph}: machine-generated mappings do
-  not enter the core until validated.
+  not enter the core until validated by experts.
 \end{pbox}
 
 \vfill
