@@ -27,9 +27,12 @@
 \tcbuselibrary{skins,breakable}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta}
+% >>> huisstijlpatronen (arcering op 12 graden, stippen) als drukwerktextuur
+\usetikzlibrary{patterns.meta}
 \usepackage{graphicx}
 \usepackage{ragged2e}
 \usepackage{xcolor}
+\usepackage{fontawesome5}
 
 % ------------------------------- Internationale huisstijl Vlaamse overheid
 \definecolor{voyellow}{HTML}{FFED00}    % hoofdkleur - Pantone Yellow C
@@ -62,12 +65,13 @@
 }
 
 \newcommand{\stat}[2]{%
-  \begin{tcolorbox}[enhanced, colback=white, colframe=rule, boxrule=0.6mm,
-      arc=0pt, sharp corners, left=2mm, right=2mm, top=4mm, bottom=4mm,
-      borderline north={3mm}{0mm}{voyellow}]
-    \centering{\fontsize{54}{58}\selectfont\bfseries\color{vodark}#1}\\[3mm]
-    {\small #2}
-  \end{tcolorbox}}
+	\begin{tcolorbox}[enhanced, colback=white, colframe=rule, boxrule=0.6mm,
+		arc=0pt, sharp corners, left=2mm, right=2mm, top=4mm, bottom=4mm,
+		borderline north={3mm}{0mm}{voyellow},
+		equal height group=stats, valign=top]
+		\centering{\fontsize{54}{58}\selectfont\bfseries\color{vodark}#1}\\[3mm]
+		{\small #2}
+\end{tcolorbox}}
 
 \newcommand{\figcap}[1]{\vspace{2mm}{\footnotesize\itshape #1}\vspace{2mm}}
 
@@ -259,24 +263,35 @@ across rows; ground truth is 28,204 ClassyFire assignments.}
 \end{columns}
 
 % ==================================================================== FOOTER
-\vfill
-\begin{tcolorbox}[enhanced, colback=vodark, colframe=vodark, boxrule=0pt,
-    arc=0pt, sharp corners, left=14mm, right=14mm, top=7mm, bottom=7mm,
-    borderline west={6mm}{0mm}{voyellow}]
-\begin{minipage}[c]{0.76\linewidth}
-  {\color{white}\large
-   \textbf{Code \& data:}\enspace
-   doi.org/10.5281/zenodo.21512303 \\[3mm]
-   \textbf{Contact:}\enspace geert.vanhaute@vlaanderen.be \\[4mm]
-   \raisebox{-2.2mm}{\includegraphics[height=9mm]{../cc-by.pdf}}\enspace CC BY 4.0
-}
-\end{minipage}\hfill
-\begin{minipage}[c]{0.22\linewidth}\raggedleft
-  \input{qrcode.tex}\\[2mm]
-  {\color{white}\normalsize Scan for code \& data}
-\end{minipage}
-\end{tcolorbox}
-\vspace*{18pt}
+        \vfill
+        \begin{tcolorbox}[enhanced, colback=vodark, colframe=vodark, boxrule=0pt,
+            arc=0pt, sharp corners, left=14mm, right=14mm, top=7mm, bottom=7mm,
+            borderline west={6mm}{0mm}{voyellow}]
+            \begin{minipage}[c]{0.5\linewidth}
+                {\color{white}\large
+
+                \faEnvelope\enspace\href{mailto:geert.vanhaute@vlaanderen.be}{geert.vanhaute@vlaanderen.be}\enspace(G.~Van Haute) \\[3mm]
+                {\small
+                \faOrcid\enspace
+                \href{https://orcid.org/0009-0002-9836-8139}{0009-0002-9836-8139}~(G.~Van Haute);\enspace
+                \href{https://orcid.org/0009-0003-4602-6601}{0009-0003-4602-6601}~(S.~Goedertier);\enspace \vfill
+                \href{https://orcid.org/0009-0001-7859-1977}{0009-0001-7859-1977}~(P.~Fannes);\enspace
+                \href{https://orcid.org/0000-0003-0314-7107}{0000-0003-0314-7107}~(M.~Van de Wynckel)}\\[4mm]
+                \raisebox{-2.2mm}{\includegraphics[height=9mm]{../cc-by.pdf}}\enspace CC BY 4.0
+                }
+            \end{minipage}\hfill
+                        \begin{minipage}[c]{0.22\linewidth}
+            	{\color{white}\large
+            		\textbf{Code \& data:}\\[2mm]
+            		{\normalsize\faLink\enspace\href{https://doi.org/10.5281/zenodo.21512303}{doi.org/10.5281/zenodo.21512303}} \\[3mm]
+            	}
+            \end{minipage}\hfill
+            \begin{minipage}[c]{0.22\linewidth}\raggedleft
+                \input{qrcode.tex}\\[2mm]
+                {\color{white}\normalsize Scan for code \& data}
+            \end{minipage}
+        \end{tcolorbox}
+        \vspace*{18pt}
 
 \end{frame}
 \end{document}
