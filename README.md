@@ -302,8 +302,7 @@ The full manuscript source is in `paper/`. See [`paper/README.md`](paper/README.
 A shorter companion submission was made to the SEMANTiCS 2026 Posters, Demos,
 Blue Sky, and Tutorials track:
 
-- **Poster paper** (CEUR-WS style, `ceurart` class): source in `poster/`, see
-  [`poster/SKILL.md`](poster/SKILL.md) for build instructions;
+- **Poster paper** (CEUR-WS style, `ceurart` class): source in `poster/`,
   built PDF: [`poster/main.pdf`](poster/main.pdf).
   ```bash
   ./poster/scripts/build_pdf.sh
