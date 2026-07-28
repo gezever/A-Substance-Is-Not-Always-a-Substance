@@ -15,7 +15,7 @@ graph LR
     F["Linkability tiers\n(7 categories)"]
     G["Semantic clusters\n(embedding-based\nk = 6)"]
     H["Annotations\n~46,600 links"]
-    I["SKOS crosswalk\n(LLM-based\n304 triples)"]
+    I["SKOS crosswalk\n(LLM-based\n304 triples,\nkept separate)"]
 
 %% Relations
     A --> B
@@ -31,7 +31,7 @@ graph LR
     B --> H
 
     B --> I
-    I --> D
+    I -.->|not merged| D
 
     classDef inputNode fill:#FDE8D1,stroke:#E07B2A,color:#1a1a1a
     classDef coreNode fill:#D6E8F7,stroke:#4A90C4,color:#1a1a1a

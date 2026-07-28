@@ -94,9 +94,9 @@
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/"> 
    <xmp:CreatorTool>LaTeX with hyperref</xmp:CreatorTool> 
-   <xmp:ModifyDate>2026-07-28T12:34:02+02:00</xmp:ModifyDate> 
-   <xmp:CreateDate>2026-07-28T12:34:02+02:00</xmp:CreateDate> 
-   <xmp:MetadataDate>2026-07-28T12:34:02+02:00</xmp:MetadataDate> 
+   <xmp:ModifyDate>2026-07-28T15:22:53+02:00</xmp:ModifyDate> 
+   <xmp:CreateDate>2026-07-28T15:22:53+02:00</xmp:CreateDate> 
+   <xmp:MetadataDate>2026-07-28T15:22:53+02:00</xmp:MetadataDate> 
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:xmpRights = "http://ns.adobe.com/xap/1.0/rights/"> 
    <xmpRights:Marked>True</xmpRights:Marked>
@@ -105,7 +105,7 @@
   </rdf:Description> 
   <rdf:Description rdf:about="" xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"> 
    <xmpMM:DocumentID>uuid:DF005B57-2A06-8753-7167-92D8CE935460</xmpMM:DocumentID> 
-   <xmpMM:InstanceID>uuid:06515E15-5872-F599-DD04-56830F14DE12</xmpMM:InstanceID> 
+   <xmpMM:InstanceID>uuid:39E09D9E-0294-BF57-5A58-891F0CECD841</xmpMM:InstanceID> 
   </rdf:Description> 
  </rdf:RDF> 
 </x:xmpmeta> 
