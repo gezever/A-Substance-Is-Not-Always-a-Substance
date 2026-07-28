@@ -1,18 +1,372 @@
+# -----------------------------------------------------------------------------
+# Citation File Format (CFF) 1.2.0
+# https://citation-file-format.github.io/
+#
+# Validate before committing:
+#   pip install cffconvert && cffconvert --validate
+#   (or: R) install.packages("cffr"); cffr::cff_validate("CITATION.cff")
+#
+# TODO before committing: vul de met "TODO" gemarkeerde affiliaties/ORCIDs aan
+# en verwijder de regels die je niet wil publiceren.
+# -----------------------------------------------------------------------------
+
 cff-version: 1.2.0
-message: "If you use this software or data, please cite it as below."
+message: >-
+  If you use this software, data or knowledge graph, please cite both the
+  archived software release (Zenodo DOI below) and the accompanying paper
+  listed under "preferred-citation".
+
 title: "Chemical Identity Lost in Regulation: code and data"
-authors:
-  - family-names: Van Haute
-    given-names: Geert
-  - family-names: Goedertier
-    given-names: Stijn
-  - family-names: Fannes
-    given-names: Pieter
-  - family-names: Van de Wynckel
-    given-names: Maxim
-license: CC-BY-4.0
+abstract: >-
+  'Reproducibility repository for "Chemical Identity Lost in Regulation:
+  A Study of Semantic Interoperability in European Chemical Substance Data"
+  (Poster & Demo track, SEMANTiCS 2026, Ghent).
+
+  European regulatory datasets represent chemical substances heterogeneously —
+  as single molecules, mixtures, UVCBs, substance groups or analytical sum
+  parameters — identified only by CAS numbers and free-text names rather than
+  structure-based identifiers. This repository integrates 18 ECHA-based datasets
+  (41,813 records) under a seven-tier linkability taxonomy: only 62.5% of the
+  33,452 unique entries link to a defined molecular structure via InChIKey, and
+  CAS numbers prove unreliable as cross-dataset identifiers (70% of
+  structure-resolved InChIKeys occur in only one source). Sentence-embedding
+  models fail to substitute for structure in ChemOnt classification
+  (Hit@1 <= 5.75%); Claude Sonnet 4.6 reaches 39.2% but still misclassifies the
+  majority. Structure-defined substances are integrated into an RDF knowledge
+  graph (SKOS, XKOS, ChEBI, ~48,400 cross-domain annotation links), with a
+  separate LLM-based scope-mapping step yielding 304 validated SKOS crosswalk
+  triples between regulatory groups and ChemOnt classes.
+
+  Contents: the R/Python analysis pipeline, the SPARQL/ROBOT-based RDF
+  integration scripts, the resulting knowledge graph (data/processed/rdf/), and
+  the poster/paper sources.'
+
+type: software
+version: "v3.0-semantics2026"
+date-released: "2026-07-23"
+
+# Concept DOI (resolves to the most recent version) — this is what people cite.
+doi: 10.5281/zenodo.21512303
+
+url: "https://zenodo.org/records/21512303"
 repository-code: "https://github.com/gezever/A-Substance-Is-Not-Always-a-Substance"
+# commit: "TODO: git rev-parse HEAD van de v3.0-semantics2026 tag"
+
+# The repository ships a GPL-3.0 LICENSE file, while the Zenodo deposit is
+# published under CC BY 4.0 (code vs. data/paper). Both are declared here;
+# reduce to a single value if you harmonise the licensing.
+license:
+  - GPL-3.0-or-later
+
+authors:
+  - family-names: "Van Haute"
+    given-names: "Geert"
+    orcid: "https://orcid.org/0009-0002-9836-8139"
+    affiliation: "Environment Department, Flemish Government"
+    city: "Brussels"
+    country: "BE"
+    email: "geert.vanhaute@vlaanderen.be"
+  - family-names: "Goedertier"
+    given-names: "Stijn"
+    orcid: "https://orcid.org/0009-0003-4602-6601"
+    affiliation: "Environment Department, Flemish Government"
+    city: "Brussels"
+    country: "BE"
+  - family-names: "Fannes"
+    given-names: "Pieter"
+    orcid: "https://orcid.org/0009-0001-7859-1977"
+    affiliation: "Environment Department, Flemish Government"
+    city: "Brussels"
+    country: "BE"
+  - family-names: "Van de Wynckel"
+    given-names: "Maxim"
+    orcid: "https://orcid.org/0000-0003-0314-7107"
+    affiliation: "Environment Department, Flemish Government"
+    city: "Brussels"
+    country: "BE"
+    website: "https://maximvdw.be"
+
+contact:
+  - family-names: "Van Haute"
+    given-names: "Geert"
+    email: "geert.vanhaute@vlaanderen.be"
+
+keywords:
+  - chemical substances
+  - semantic interoperability
+  - linked data
+  - RDF
+  - SKOS
+  - XKOS
+  - knowledge graph
+  - ChemOnt
+  - ClassyFire
+  - ChEBI
+  - InChIKey
+  - CAS Registry Number
+  - chemical identity
+  - REACH
+  - ECHA
+  - CLP
+  - POPs
+  - persistent organic pollutants
+  - substances of very high concern
+  - environmental regulation
+  - EU chemicals policy
+  - regulatory data
+  - data integration
+  - ontology
+  - sentence embeddings
+  - large language models
+  - reproducible research
+  - FAIR data
+  - R
+  - SPARQL
+
 identifiers:
   - type: doi
     value: 10.5281/zenodo.21512303
-    description: "Archived snapshot of code and data on Zenodo (all versions)"
+    description: >-
+      Concept DOI — always resolves to the latest version of this deposit.
+  - type: url
+    value: "https://github.com/gezever/A-Substance-Is-Not-Always-a-Substance"
+    description: Development repository (latest state).
+
+# -----------------------------------------------------------------------------
+# Preferred citation: the paper this repository accompanies.
+# -----------------------------------------------------------------------------
+preferred-citation:
+  type: conference-paper
+  title: >-
+    Chemical Identity Lost in Regulation: A Study of Semantic Interoperability
+    in European Chemical Substance Data
+  authors:
+    - family-names: "Van Haute"
+      given-names: "Geert"
+      orcid: "https://orcid.org/0009-0002-9836-8139"
+      affiliation: "Environment Department, Flemish Government, Brussels, Belgium"
+    - family-names: "Goedertier"
+      given-names: "Stijn"
+      orcid: "https://orcid.org/0009-0003-4602-6601"
+      affiliation: "Environment Department, Flemish Government, Brussels, Belgium"
+    - family-names: "Fannes"
+      given-names: "Pieter"
+      orcid: "https://orcid.org/0009-0001-7859-1977"
+      affiliation: "Environment Department, Flemish Government, Brussels, Belgium"
+    - family-names: "Van de Wynckel"
+      given-names: "Maxim"
+      orcid: "https://orcid.org/0000-0003-0314-7107"
+      affiliation: "Environment Department, Flemish Government, Brussels, Belgium"
+  collection-title: >-
+    Posters, Demos, Blue Sky, and Tutorials at SEMANTiCS 2026
+  collection-type: proceedings
+  conference:
+    name: >-
+      22nd International Conference on Semantic Systems (SEMANTiCS 2026) —
+      Poster & Demo Track
+    city: "Ghent"
+    country: "BE"
+    date-start: "2026-09-15"
+    date-end: "2026-09-17"
+  year: 2026
+  month: 9
+  # publisher:
+  #   name: "TODO (e.g. CEUR-WS.org)"
+  # url: "TODO: proceedings URL once published"
+  # doi: "TODO: paper DOI once published"
+  languages:
+    - en
+  keywords:
+    - semantic interoperability
+    - chemical substances
+    - regulatory data
+    - knowledge graph
+
+# -----------------------------------------------------------------------------
+# Key external resources this work builds on.
+# -----------------------------------------------------------------------------
+references:
+  - type: article
+    title: >-
+      ClassyFire: automated chemical classification with a comprehensive,
+      computable taxonomy
+    authors:
+      - family-names: "Djoumbou Feunang"
+        given-names: "Yannick"
+      - family-names: "Eisner"
+        given-names: "Roman"
+      - family-names: "Knox"
+        given-names: "Craig"
+      - family-names: "Chepelev"
+        given-names: "Leonid"
+      - family-names: "Hastings"
+        given-names: "Janna"
+      - family-names: "Owen"
+        given-names: "Gareth"
+      - family-names: "Fahy"
+        given-names: "Eoin"
+      - family-names: "Steinbeck"
+        given-names: "Christoph"
+      - family-names: "Subramanian"
+        given-names: "Shankar"
+      - family-names: "Bolton"
+        given-names: "Evan"
+      - family-names: "Greiner"
+        given-names: "Russell"
+      - family-names: "Wishart"
+        given-names: "David S."
+    journal: "Journal of Cheminformatics"
+    volume: 8
+    year: 2016
+    doi: 10.1186/s13321-016-0174-y
+    notes: Source of the ChemOnt chemical taxonomy used throughout the pipeline.
+
+  - type: article
+    title: >-
+      ChEBI in 2016: Improved services and an expanding collection of
+      metabolites
+    authors:
+      - family-names: "Hastings"
+        given-names: "Janna"
+      - family-names: "Owen"
+        given-names: "Gareth"
+      - family-names: "Dekker"
+        given-names: "Adriano"
+      - family-names: "Ennis"
+        given-names: "Marcus"
+      - family-names: "Kale"
+        given-names: "Namrata"
+      - family-names: "Muthukrishnan"
+        given-names: "Venkatesh"
+      - family-names: "Turner"
+        given-names: "Steve"
+      - family-names: "Swainston"
+        given-names: "Neil"
+      - family-names: "Mendes"
+        given-names: "Pedro"
+      - family-names: "Steinbeck"
+        given-names: "Christoph"
+    journal: "Nucleic Acids Research"
+    volume: 44
+    year: 2016
+    doi: 10.1093/nar/gkv1031
+    notes: >-
+      ChEBI ontology, used for InChIKey-based exact matching and biological
+      role/hazard annotations.
+
+  - type: article
+    title: "PubChem 2023 update"
+    authors:
+      - family-names: "Kim"
+        given-names: "Sunghwan"
+      - family-names: "Chen"
+        given-names: "Jie"
+      - family-names: "Cheng"
+        given-names: "Tiejun"
+      - family-names: "Gindulyte"
+        given-names: "Asta"
+      - family-names: "He"
+        given-names: "Jia"
+      - family-names: "He"
+        given-names: "Siqian"
+      - family-names: "Li"
+        given-names: "Qingliang"
+      - family-names: "Shoemaker"
+        given-names: "Benjamin A."
+      - family-names: "Thiessen"
+        given-names: "Paul A."
+      - family-names: "Yu"
+        given-names: "Bo"
+      - family-names: "Zaslavsky"
+        given-names: "Leonid"
+      - family-names: "Zhang"
+        given-names: "Jian"
+      - family-names: "Bolton"
+        given-names: "Evan E."
+    journal: "Nucleic Acids Research"
+    volume: 51
+    year: 2023
+    doi: 10.1093/nar/gkac956
+    notes: PubChem REST API, used to resolve CAS numbers to InChIKeys.
+
+  - type: conference-paper
+    title: >-
+      Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks
+    authors:
+      - family-names: "Reimers"
+        given-names: "Nils"
+      - family-names: "Gurevych"
+        given-names: "Iryna"
+    collection-title: >-
+      Proceedings of the 2019 Conference on Empirical Methods in Natural
+      Language Processing (EMNLP-IJCNLP)
+    year: 2019
+    doi: 10.18653/v1/D19-1410
+    notes: >-
+      sentence-transformers library; basis for the embedding experiments
+      (MiniLM, MPNet, SciBERT, BioBERT).
+
+  - type: standard
+    title: "SKOS Simple Knowledge Organization System Reference"
+    authors:
+      - family-names: "Miles"
+        given-names: "Alistair"
+      - family-names: "Bechhofer"
+        given-names: "Sean"
+    institution:
+      name: "World Wide Web Consortium (W3C)"
+    year: 2009
+    url: "https://www.w3.org/TR/skos-reference/"
+    notes: Vocabulary used to model substances, ChemOnt classes and crosswalks.
+
+  - type: standard
+    title: "XKOS: An SDMX/RDF Vocabulary for Statistical Classifications"
+    institution:
+      name: "DDI Alliance"
+    url: "https://rdf-vocabulary.ddialliance.org/xkos.html"
+    year: 2019
+    notes: Used to type the four ChemOnt classification levels.
+
+  - type: software
+    title: "Apache Jena"
+    authors:
+      - name: "The Apache Software Foundation"
+    version: "5.6.0"
+    url: "https://jena.apache.org/"
+    license: Apache-2.0
+    notes: riot/sparql tooling used by the bash RDF pipeline.
+
+  - type: software
+    title: "ROBOT: A Tool for Automating Ontology Workflows"
+    authors:
+      - name: "OBO Tools / ROBOT contributors"
+    url: "https://robot.obolibrary.org/"
+    notes: Used to convert the ChemOnt OBO release to OWL.
+
+  - type: database
+    title: "ECHA regulatory substance lists (obligation and activity lists)"
+    authors:
+      - name: "European Chemicals Agency (ECHA)"
+    url: "https://chem.echa.europa.eu/"
+    notes: >-
+      Primary data source; 16 of the 18 datasets analysed. Downloaded by
+      R/01_download.R and bash/get_source_lists.sh.
+
+  - type: database
+    title: "EU Pesticides Database — Active Substances"
+    authors:
+      - name: "European Commission, DG SANTE"
+    url: "https://ec.europa.eu/food/plant/pesticides/eu-pesticides-database/start/screen/active-substances"
+
+  - type: database
+    title: "OSPAR List of Chemicals for Priority Action"
+    authors:
+      - name: "OSPAR Commission"
+    url: "https://www.ospar.org/work-areas/hasec/hazardous-substances/priority-action"
+
+  - type: database
+    title: "Codelijst sommatie stoffen"
+    authors:
+      - name: "Departement Omgeving, Vlaamse overheid"
+    url: "https://datasets.omgeving.vlaanderen.be/"
+    notes: Flemish substance list used in a water quality model.
