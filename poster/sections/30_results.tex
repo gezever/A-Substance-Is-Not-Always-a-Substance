@@ -22,14 +22,19 @@ Integration of 18 sources yielded 41,813 records. Applying the seven-tier taxono
 70.0\% of structure-resolved InChIKeys appear in only a single source, making CAS-based cross-dataset linking fundamentally insufficient as a shared key. Ambiguity compounds this: 195 InChIKeys are each associated with more than one CAS number (up to seven), while 4 CAS numbers resolve to two distinct InChIKeys~\cite{Akhondi2012,Williams2011Quality}; for example, CAS~26471-62-5 (toluene diisocyanate) maps to two positional isomers with different InChIKeys across sources. Even for structure-defined substances, then, a flat CAS number cannot substitute for a structure-based identifier: the same semantic gap that leaves non-structure entities unlinked entirely (RQ1).
 
 \paragraph{Failure of embedding- and LLM-based approaches (RQ3).}
-Table~\ref{tab:chemont} shows that, on the tier-1 (structure-linked) benchmark, embedding-based matching fails: the best model (\texttt{all-MiniLM-L6-v2}) achieves Hit@1 of 5.75\%, meaning the correct ChemOnt class is retrieved in fewer than 1 in 17 attempts; all others score below 1\%. Claude Sonnet~4.6 reaches Hit@1~$= 39.2\%$ (seven-fold improvement); high-confidence assignments reach 53.9\% accuracy while low-confidence cases score 0\%. The LLM still misclassifies the majority of substances. Applied to the tier~4/5/7 non-structure entries that make up the 37.5\% unlinked population (RQ1), the LLM abstains from classification far more often than for structure-defined substances, confirming that textual descriptions cannot substitute for structural information.
+Table~\ref{tab:chemont} shows that, on the tier-1 (structure-linked) benchmark, embedding-based matching fails: the best model (\texttt{all-MiniLM-L6-v2}) achieves Hit@1 of 5.75\%, meaning the correct ChemOnt class is retrieved in fewer than 1 in 17 attempts; all others score below 1\%. Claude Sonnet~4.6 reaches Hit@1~$= 39.2\%$ (seven-fold improvement); high-confidence assignments reach 53.9\% accuracy while low-confidence cases score 0\%. The LLM still misclassifies the majority of substances. Applied to the tier~4/5/7 non-structure entries that make up the 37.5\% unlinked population (RQ1), the LLM abstains from classification far more often than for structure-defined substances, confirming that textual descriptions cannot substitute for structural information. The same embedding pipeline, applied directly to this non-structure population rather than the tier-1 benchmark, confirms the same failure from the other direction: of 12,522 candidate substance names, only 132 (1.1\%) pass even the permissive score$_1 > 0.80$ threshold, so the benchmark result is not an artefact of the evaluation set.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{knowledge_graph.pdf}
+	\caption{
+		Overview of the integrated knowledge graph: regulatory substances (SKOS concepts) are linked to structure-based identity (InChIKey), chemical classification (ChemOnt), and biological roles (ChEBI), with derived linkability tiers, embedding clusters, and an LLM-based SKOS crosswalk kept separate from (not merged into) the ChemOnt hierarchy.
+	}
+	\label{fig:kg}
+\end{figure}
 
 \begin{table}[h]
-    \centering
-    \caption{
-    	ChemOnt classification performance (direct-parent level). Ground truth: 28,204 ClassyFire-assigned substances~\cite{DjoumbouFeunang2016}.}
-    \label{tab:chemont}
-    \small
+    
     \begin{tabular}{lcccc}
         \toprule
         Model                & Hit@1  & Hit@3  & Hit@5  & Hit@10 \\
@@ -42,20 +47,18 @@ Table~\ref{tab:chemont} shows that, on the tier-1 (structure-linked) benchmark, 
         \bottomrule
         \multicolumn{5}{l}{\footnotesize\textsuperscript{†}LLM: single label; only Hit@1 is comparable across rows.}
     \end{tabular}
+    \centering
+        \caption{
+    	ChemOnt classification performance (direct-parent level). Ground truth: 28,204 ClassyFire-assigned substances~\cite{DjoumbouFeunang2016}.}
+    \label{tab:chemont}
 \end{table}
+
 
 \paragraph{Knowledge graph and SKOS crosswalk (C4, C5).}
 Figure~\ref{fig:kg} summarises the integrated knowledge graph: \textasciitilde{}17,500 regulatory substances (SKOS concepts) are linked to structure-based identity, chemical classification, and biological roles. This is fewer than the 20,909 tier-1-linked entries (RQ1) because names sharing one InChIKey collapse into a single concept.
 Structure-defined substances were integrated across lists, ChemOnt, and ChEBI, yielding \textasciitilde{}48,400 cross-domain links (40,644 list memberships, 7,794 ChEBI roles) and enabling composite priority scoring~\cite{Reif2010} infeasible on fragmented datasets.
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=\linewidth]{knowledge_graph.pdf}
-	\caption{
-		Overview of the integrated knowledge graph: regulatory substances (SKOS concepts) are linked to structure-based identity (InChIKey), chemical classification (ChemOnt), and biological roles (ChEBI), with derived linkability tiers, embedding clusters, and an LLM-based SKOS crosswalk kept separate from (not merged into) the ChemOnt hierarchy.
-	}
-	\label{fig:kg}
-\end{figure}
+
 
 LLM-based scope-mapping identifies 31.7\% of sampled non-structure entries as mappable to a ChemOnt node (vs.\ 0.8\% by pattern matching), yielding 304 high-confidence SKOS triples (285~\texttt{broadMatch}, 18~\texttt{exactMatch}, 1~\texttt{narrowMatch}).
 The dominance of \texttt{broadMatch} reflects that regulatory group entries typically define constrained subsets of ChemOnt classes (e.g.\ \textit{fatty acids, C16--22} $\subset$ \textit{Fatty acids and conjugates}), making scope machine-interpretable. The remaining 68\% of non-structure entries could not be reliably mapped.

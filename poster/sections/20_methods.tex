@@ -4,7 +4,7 @@
 We integrated 18~sources: six European Chemicals Agency (ECHA) obligation lists (Candidate~\cite{ECHA_CandidateList}, Authorisation, Restriction, POPs, EU~Positive, CLH), nine ECHA activity lists, REACH registrations~\cite{ECHA_REACHRegistrations}, the EU Pesticides Database, OSPAR priority chemicals, and a Flemish administrative substance list.
 Per entry, CAS, EC number~\cite{ECHA_EC_numbers}, and substance name were collected; substances were linked to InChIKey via PubChem~\cite{Kim2015}.
 Each entry was then assigned to one of seven tiers: tier~1 (direct InChIKey link), tiers~2--3 (partially resolvable), tier~4 (unresolved CAS), tier~5 (mixture or UVCB~\cite{Kutsarova2019}), tier~6 (administrative entry), tier~7 (no usable identifier).
-InChI extensions such as MInChI~\cite{Heller2015} support representation of some mixtures in principle, but are absent from current European regulatory datasets; tier~5 entries therefore resist structure-based linking.
+InChI extensions such as MInChI~\cite{Heller2015} support representation of some mixtures in principle, and computational methods exist to select representative constituent structures for UVCBs~\cite{Kutsarova2019}, but neither is reflected in the regulatory datasets studied here; tier~5 entries therefore resist structure-based linking as currently published.
 Bidirectional CAS--InChIKey mappings were analysed to assess identifier consistency~\cite{Akhondi2012}.
 
 \paragraph{Embedding- and LLM-based matching.}

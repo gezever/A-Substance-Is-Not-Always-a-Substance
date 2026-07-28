@@ -22,6 +22,7 @@ if command -v latexmk >/dev/null 2>&1; then
   latexmk -pdf -shell-escape -interaction=nonstopmode -file-line-error "$TEX_FILE"
   echo "Build finished: ${BASE_NAME}.pdf"
   cp "${BASE_NAME}.pdf" paper_Poster_24.pdf
+  zip  -j paper_24.zip paper_Poster_24.pdf AUTHOR-AGREEMENT_Poster_24.pdf poster/poster_24.pdf poster/poster_24_alt-text.txt
   exit 0
 fi
 
