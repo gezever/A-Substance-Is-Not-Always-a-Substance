@@ -20,7 +20,7 @@ The paper argues that interoperability must be addressed at the level of legisla
 ## Repository Structure
 
 ```
-R/                              Analysis pipeline (22 scripts)
+R/                              Analysis pipeline (23 scripts)
 bash/                           Shell scripts for RDF/SPARQL processing
 data/
   source/                       Raw downloaded regulatory datasets
@@ -33,7 +33,9 @@ data/
 output/
   figures/                      Generated plots (PDF, one per analysis)
   tables/                       Generated tables (CSV, one per analysis)
-paper/                          LaTeX source for the manuscript
+paper/                          LaTeX source for the (IOS Press book article) manuscript
+poster/                         LaTeX source for the SEMANTiCS 2026 poster paper (main.tex)
+                                 and the physical A0 poster (poster/poster.tex)
 ```
 
 ## Analysis Pipeline
@@ -54,6 +56,7 @@ Scripts are listed in execution order as defined in `run_all.R`. Dependencies ar
 | `02_import.R` | Import and harmonise raw data; resolve CAS/InChIKey via PubChem |
 | `03_analysis.R` | Analyses 1–3: substance identity and identifier consistency |
 | `04_entity_classification.R` | Analysis 4: entity type classification and linkability taxonomy |
+| `04_ceurart_entity_classification.R` | Poster-paper variant of `04_entity_classification.R`; produces the vertical entity-type/linkability figure (`Analysis_4bd_v_Entity_type_and_linkability_vertical.pdf`) used in the SEMANTiCS 2026 poster paper (see [Paper and Poster](#paper-and-poster)) |
 | `05_overlap_lists.R` | Analysis 5: overlap between regulatory lists (UpSet plots) |
 | `06_coverage_linking.R` | Analysis 6: coverage of structure-based linking per source |
 | `07_network_visualisation.R` | Analysis 7: bipartite substance ↔ list network |
@@ -288,13 +291,29 @@ install.packages("reticulate")
 
 Models are downloaded automatically from HuggingFace on first use and cached locally by `sentence-transformers`.
 
-## Paper
+## Paper and Poster
 
-The manuscript source is in `paper/`. See [`paper/README.md`](paper/README.md) for build instructions (requires TinyTeX and the LaTeX Workshop VS Code extension).
+The full manuscript source is in `paper/`. See [`paper/README.md`](paper/README.md) for build instructions (requires TinyTeX and the LaTeX Workshop VS Code extension).
 
 ```bash
 ./paper/scripts/build_pdf.sh
 ```
+
+A shorter companion submission was made to the SEMANTiCS 2026 Posters, Demos,
+Blue Sky, and Tutorials track:
+
+- **Poster paper** (CEUR-WS style, `ceurart` class): source in `poster/`, see
+  [`poster/SKILL.md`](poster/SKILL.md) for build instructions;
+  built PDF: [`poster/main.pdf`](poster/main.pdf).
+  ```bash
+  ./poster/scripts/build_pdf.sh
+  ```
+- **Physical A0 poster**: source in `poster/poster/poster.tex` (requires
+  LuaTeX and the Flanders Art Sans font); built PDF:
+  [`poster/poster/poster.pdf`](poster/poster/poster.pdf).
+  ```bash
+  ./poster/poster/scripts/build_pdf.sh
+  ```
 
 ## License
 
