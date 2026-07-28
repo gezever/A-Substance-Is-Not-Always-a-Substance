@@ -21,7 +21,7 @@ Integration of 18 sources yielded 41,813 records. Applying the seven-tier taxono
 \paragraph{CAS number reliability (RQ2).}
 70.0\% of structure-resolved InChIKeys appear in only a single source, making CAS-based cross-dataset linking fundamentally insufficient as a shared key. Ambiguity compounds this: 195 InChIKeys are each associated with more than one CAS number (up to seven), while 4 CAS numbers resolve to two distinct InChIKeys~\cite{Akhondi2012,Williams2011Quality}; for example, CAS~26471-62-5 (toluene diisocyanate) maps to two positional isomers with different InChIKeys across sources. Even for structure-defined substances, then, a flat CAS number cannot substitute for a structure-based identifier: the same semantic gap that leaves non-structure entities unlinked entirely (RQ1).
 
-\paragraph{Failure of semantic approaches (RQ3).}
+\paragraph{Failure of embedding- and LLM-based approaches (RQ3).}
 Table~\ref{tab:chemont} shows that, on the tier-1 (structure-linked) benchmark, embedding-based matching fails: the best model (\texttt{all-MiniLM-L6-v2}) achieves Hit@1 of 5.75\%, meaning the correct ChemOnt class is retrieved in fewer than 1 in 17 attempts; all others score below 1\%. Claude Sonnet~4.6 reaches Hit@1~$= 39.2\%$ (seven-fold improvement); high-confidence assignments reach 53.9\% accuracy while low-confidence cases score 0\%. The LLM still misclassifies the majority of substances. Applied to the tier~4/5/7 non-structure entries that make up the 37.5\% unlinked population (RQ1), the LLM abstains from classification far more often than for structure-defined substances, confirming that textual descriptions cannot substitute for structural information.
 
 \begin{table}[h]
@@ -52,7 +52,7 @@ Structure-defined substances were integrated across lists, ChemOnt, and ChEBI, y
 	\centering
 	\includegraphics[width=\linewidth]{knowledge_graph.pdf}
 	\caption{
-		Overview of the integrated knowledge graph: regulatory substances (SKOS concepts) are linked to structure-based identity (InChIKey), chemical classification (ChemOnt), and biological roles (ChEBI), with derived linkability tiers, semantic clusters, and an LLM-based SKOS crosswalk kept separate from (not merged into) the ChemOnt hierarchy.
+		Overview of the integrated knowledge graph: regulatory substances (SKOS concepts) are linked to structure-based identity (InChIKey), chemical classification (ChemOnt), and biological roles (ChEBI), with derived linkability tiers, embedding clusters, and an LLM-based SKOS crosswalk kept separate from (not merged into) the ChemOnt hierarchy.
 	}
 	\label{fig:kg}
 \end{figure}
